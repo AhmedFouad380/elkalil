@@ -10,5 +10,9 @@ class SeService extends Model
     use HasFactory;
 
     protected  $table = 'se_service';
+    protected $fillable = [
+        'title',
 
+
+    ];
 }

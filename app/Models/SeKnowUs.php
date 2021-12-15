@@ -11,4 +11,9 @@ class SeKnowUs extends Model
 
     protected  $table = 'se_know_us';
 
+    protected $fillable = [
+        'title',
+
+
+    ];
 }

@@ -11,4 +11,15 @@ class UserChatPermission extends Model
 
     protected  $table = 'user_chat_permissions';
 
+    protected $fillable = [
+        'reciever_id',
+        'level_id',
+        'project_id',
+        'is_read',
+        'type',
+        'created_at',
+        'updated_at',
+
+
+    ];
 }

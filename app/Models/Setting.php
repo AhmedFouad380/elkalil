@@ -11,4 +11,26 @@ class Setting extends Model
 
     protected  $table = 'settings';
 
+    protected $fillable = [
+        'title',
+        'description',
+        'logo',
+        'phone1',
+        'phone2',
+        'address1',
+        'address2',
+        'email1',
+        'email2',
+        'website',
+        'twitter',
+        'instagram',
+        'snapchat',
+        'facebook',
+        'priceTemplate',
+        'sms_limit',
+        'sms_used',
+        'contractTemplate',
+
+
+    ];
 }

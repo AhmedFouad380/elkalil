@@ -10,4 +10,12 @@ class Branche extends Model
     use HasFactory;
 
     protected  $table = 'branche';
+    protected $fillable = [
+        'title',
+        'phone',
+        'state',
+        'address',
+    ];
+
+
 }

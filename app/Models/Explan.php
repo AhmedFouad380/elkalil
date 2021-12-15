@@ -10,5 +10,14 @@ class Explan extends Model
     use HasFactory;
 
     protected  $table = 'explan';
+    protected $fillable = [
+        'title',
+        'comments',
+        'date',
+        'time',
+        'emp_id',
+        'emp_name',
+        'project_id',
 
+    ];
 }

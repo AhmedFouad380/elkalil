@@ -10,4 +10,20 @@ class Client extends Model
     use HasFactory;
     protected  $table = 'clients';
 
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'password',
+        'user_group',
+        'date',
+        'branche',
+        'state',
+        'address',
+        'ref_code',
+        'is_active',
+        'firebase_type',
+        'token_id',
+        'msg',
+    ];
 }

@@ -11,4 +11,11 @@ class ProjectPaid extends Model
 
     protected  $table = 'paid';
 
+    protected $fillable = [
+        'project_id',
+        'paid',
+        'paid_down',
+        'paid_term',
+
+    ];
 }

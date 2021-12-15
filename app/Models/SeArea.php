@@ -11,4 +11,9 @@ class SeArea extends Model
 
     protected  $table = 'se_area';
 
+    protected $fillable = [
+        'title',
+
+
+    ];
 }

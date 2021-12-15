@@ -9,5 +9,9 @@ class inboxFile extends Model
 {
     use HasFactory;
     protected  $table = 'inbox_file';
+    protected $fillable = [
+        'mail_id',
+        'file',
 
+    ];
 }

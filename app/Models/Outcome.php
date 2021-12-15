@@ -11,4 +11,13 @@ class Outcome extends Model
 
     protected  $table = 'outcomes';
 
+    protected $fillable = [
+        'project_id',
+        'project_name',
+        'date',
+        'amount',
+        'details',
+        'type',
+
+    ];
 }

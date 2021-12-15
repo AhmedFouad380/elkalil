@@ -10,5 +10,8 @@ class SeDuration extends Model
     use HasFactory;
 
     protected  $table = 'se_duration';
+    protected $fillable = [
+        'title',
 
+    ];
 }

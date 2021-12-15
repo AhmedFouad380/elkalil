@@ -10,4 +10,12 @@ class Level extends Model
     use HasFactory;
     protected  $table = 'level';
 
+    protected $fillable = [
+        'title',
+        'percent',
+        'contract_id',
+        'type',
+        'sort',
+
+    ];
 }

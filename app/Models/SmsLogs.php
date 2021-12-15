@@ -10,4 +10,14 @@ class SmsLogs extends Model
     use HasFactory;
     protected  $table = 'smslogs';
 
+    protected $fillable = [
+        'type',
+        'user_id',
+        'description',
+        'sms_count',
+        'created_at',
+        'updated_at',
+
+
+    ];
 }

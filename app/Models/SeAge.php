@@ -11,4 +11,9 @@ class SeAge extends Model
 
     protected  $table = 'se_age';
 
+    protected $fillable = [
+        'title',
+
+
+    ];
 }

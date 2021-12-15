@@ -11,4 +11,10 @@ class UserPermission extends Model
 
     protected  $table = 'user_permission';
 
+    protected $fillable = [
+        'level_id ',
+        'project_id ',
+        'emp_id ',
+
+    ];
 }

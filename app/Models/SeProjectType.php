@@ -9,5 +9,9 @@ class SeProjectType extends Model
 {
     use HasFactory;
     protected  $table = 'se_project_type';
+    protected $fillable = [
+        'title',
 
+
+    ];
 }

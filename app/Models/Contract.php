@@ -10,4 +10,11 @@ class Contract extends Model
     use HasFactory;
     protected  $table = 'contact';
 
+    protected $fillable = [
+        'title',
+        'price',
+        'template',
+        'pdf',
+        'color',
+    ];
 }

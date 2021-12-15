@@ -11,4 +11,18 @@ class UserGroup extends Model
 
     protected  $table = 'user_group';
 
+    protected $fillable = [
+        'title',
+        'type',
+        'is_client_order',
+        'is_contracting',
+        'is_projects',
+        'is_report',
+        'is_financial',
+        'is_settings',
+        'is_progressTime',
+
+
+
+    ];
 }

@@ -11,4 +11,15 @@ class ProjectContract extends Model
 
     protected  $table = 'project_contract';
 
+    protected $fillable = [
+        'project_id',
+        'contract_id',
+        'title',
+        'price',
+        'template',
+        'pdf',
+        'color',
+
+
+    ];
 }

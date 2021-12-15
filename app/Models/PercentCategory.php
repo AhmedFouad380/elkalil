@@ -11,4 +11,9 @@ class PercentCategory extends Model
 
     protected  $table = 'percent_category';
 
+    protected $fillable = [
+        'name',
+
+
+    ];
 }
