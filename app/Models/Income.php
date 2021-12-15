@@ -19,4 +19,9 @@ class Income extends Model
         'details',
         'type',
     ];
+
+    public function Project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
 }

@@ -14,4 +14,9 @@ class inboxFile extends Model
         'file',
 
     ];
+
+    public function inbox()
+    {
+        return $this->belongsTo(inbox::class, 'mail_id');
+    }
 }

@@ -18,4 +18,9 @@ class Level extends Model
         'sort',
 
     ];
+
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class, 'contract_id');
+    }
 }

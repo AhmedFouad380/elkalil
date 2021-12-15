@@ -33,4 +33,21 @@ class inbox extends Model
     ];
 
 
+    public function Project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function Level()
+    {
+        return $this->belongsTo(Level::class, 'level_id');
+    }
+
+    public function files()
+    {
+        return $this->hasMany(inboxFile::class, 'mail_id');
+    }
+
+
+
 }

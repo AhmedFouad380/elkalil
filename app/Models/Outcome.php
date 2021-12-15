@@ -20,4 +20,9 @@ class Outcome extends Model
         'type',
 
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
 }

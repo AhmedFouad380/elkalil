@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
-    protected  $table = 'clients';
+
+    protected $table = 'clients';
 
     protected $fillable = [
         'name',
@@ -26,4 +27,14 @@ class Client extends Model
         'token_id',
         'msg',
     ];
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state');
+    }
+
+    public function branche()
+    {
+        return $this->belongsTo(Branche::class, 'branche');
+    }
 }

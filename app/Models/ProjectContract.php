@@ -22,4 +22,15 @@ class ProjectContract extends Model
 
 
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function contract()
+    {
+        return $this->belongsTo(Project::class, 'contract_id');
+    }
+
 }

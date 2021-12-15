@@ -20,6 +20,14 @@ class UserChatPermission extends Model
         'created_at',
         'updated_at',
 
-
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id');
+    }
 }

@@ -18,4 +18,9 @@ class ProjectPaid extends Model
         'paid_term',
 
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
 }

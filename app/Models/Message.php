@@ -21,4 +21,13 @@ class Message extends Model
         'created_at',
     ];
 
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id');
+    }
 }
