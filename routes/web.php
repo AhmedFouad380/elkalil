@@ -14,10 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin/dashboard');
+});
+Route::get('/public_setting', function () {
+    return view('admin/setting/public_setting');
+});
+Route::get('/employee_setting', function () {
+    return view('admin/setting/employee_setting');
 });
 Route::get('/login', function () {
-    return view('login');
+    return view('auth/login');
 });
 
 Route::post('login',[\App\Http\Controllers\AuthController::class,'login']);
