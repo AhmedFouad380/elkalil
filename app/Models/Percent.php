@@ -17,4 +17,9 @@ class Percent extends Model
         'project_phone',
         'img',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(PercentCategory::class, 'cat_id');
+    }
 }

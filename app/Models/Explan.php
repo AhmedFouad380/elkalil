@@ -20,4 +20,9 @@ class Explan extends Model
         'project_id',
 
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(User::class, 'emp_id');
+    }
 }

@@ -25,4 +25,14 @@ class LevelDetails extends Model
         'sort',
 
     ];
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state');
+    }
 }

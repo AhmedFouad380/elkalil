@@ -12,6 +12,5 @@ class State extends Model
 
     protected $fillable = [
         'title',
-
     ];
 }

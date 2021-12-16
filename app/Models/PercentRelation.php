@@ -15,4 +15,9 @@ class PercentRelation extends Model
         'img',
 
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
 }

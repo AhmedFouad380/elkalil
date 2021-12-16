@@ -9,23 +9,23 @@ class ProjectLevelDetails extends Model
 {
     use HasFactory;
 
-    protected  $table = 'project_level_details';
+    protected $table = 'project_level_details';
 
     protected $fillable = [
         'title',
         'percent',
         'level_id',
-        'type',
+        'state',
         'project_id',
+        'emp_id',
+        'type',
         'pdf',
         'id_pdf',
         'comment',
-        'state',
         'values',
         'question_type',
         'answer',
         'otherAnswer',
-        'emp_id',
         'date',
         'client_view',
         'sort',
@@ -34,4 +34,24 @@ class ProjectLevelDetails extends Model
 
 
     ];
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(User::class, 'emp_id');
+    }
 }

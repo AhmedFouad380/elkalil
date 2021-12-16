@@ -14,19 +14,45 @@ class ProjectLevels extends Model
         'title',
         'percent',
         'contract_id',
-        'type',
-        'project_id',
         'project_contract_id',
+        'project_id',
+        'level_id',
+        'created_by',
+        'emp_id',
+        'type',
         'percent',
         'progress',
-        'level_id',
         'notification',
         'client_view',
         'progress_time',
-        'emp_id',
         'auto_complete',
-        'created_by', 
         'sort',
 
     ];
+
+
+
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class, 'contract_id');
+    }
+
+    public function project_contract()
+    {
+        return $this->belongsTo(ProjectContract::class, 'project_contract_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id');
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(User::class, 'emp_id');
+    }
 }

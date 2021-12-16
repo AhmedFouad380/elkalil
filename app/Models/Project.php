@@ -15,13 +15,13 @@ class Project extends Model
         'email',
         'services',
         'country',
-        'state',
+        'state',//
         'know_us',
         'project_type',
         'area',
         'duration',
         'plan',
-        'client_id',
+        'client_id',//
         'date',
         'lat',
         'lng',
@@ -47,4 +47,19 @@ class Project extends Model
         'is_created',
 
     ];
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

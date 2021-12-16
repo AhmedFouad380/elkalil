@@ -9,7 +9,7 @@ class Branche extends Model
 {
     use HasFactory;
 
-    protected  $table = 'branche';
+    protected $table = 'branche';
     protected $fillable = [
         'title',
         'phone',
@@ -17,5 +17,9 @@ class Branche extends Model
         'address',
     ];
 
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state');
+    }
 
 }

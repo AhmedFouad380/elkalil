@@ -13,7 +13,5 @@ class PercentCategory extends Model
 
     protected $fillable = [
         'name',
-
-
     ];
 }

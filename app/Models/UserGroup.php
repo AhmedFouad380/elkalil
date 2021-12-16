@@ -22,7 +22,5 @@ class UserGroup extends Model
         'is_settings',
         'is_progressTime',
 
-
-
     ];
 }
