@@ -11,7 +11,7 @@ class AuthController extends Controller
 
         if($user = User::where('phone',$request->phone)->where('password',sha1($request->password))->first()){
             Auth::login($user);
-            return redirect('/AdminPanel');
+            return redirect('/');
         }else{
             return back()->with('message','Failed');
         }
