@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'users';
-
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -47,6 +47,11 @@ class User extends Authenticatable
     public function state()
     {
         return $this->belongsTo(State::class, 'state');
+    }
+
+    public function userGroup()
+    {
+        return $this->belongsTo(UserGroup::class, 'users_group');
     }
 
     /**

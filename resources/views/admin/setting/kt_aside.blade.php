@@ -6,13 +6,13 @@
         <div class="hover-scroll-overlay-y my-5 my-lg-6" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu" data-kt-scroll-offset="{lg: '25px'}">
             <!--begin::Menu-->
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
-                <div class="menu-item">
+                <div class="menu-item ">
                     <div class="menu-content pb-2">
                         <span class="menu-section text-muted text-uppercase fs-8 ls-1">الاعدادات</span>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link" href="../../demo16/dist/index.html">
+                <div class="menu-item @if(Request::segment(1) == "public_setting") text-active-primary active @endif">
+                    <a class="menu-link" href="{{url('public_setting')}}">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                                 <span class="svg-icon svg-icon-2">
@@ -25,10 +25,10 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                        <span class="menu-title">الاعدادات العامة</span>
+                        <span class="menu-title  @if(Request::segment(1) == "public_setting") text-active-primary active @endif">الاعدادات العامة</span>
                     </a>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item @if(Request::segment(1) == "employee_setting") text-active-primary active @endif">
                     <a class="menu-link" href="../../demo16/dist/landing.html">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
@@ -41,7 +41,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                        <span class="menu-title">الموظفين والادوار</span>
+                        <span class="menu-title @if(Request::segment(1) == "employee_setting") text-active-primary active @endif">الموظفين والادوار</span>
                     </a>
                 </div>
                 <div class="menu-item">

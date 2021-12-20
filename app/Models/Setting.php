@@ -9,7 +9,8 @@ class Setting extends Model
 {
     use HasFactory;
 
-    protected  $table = 'settings';
+    protected $table = 'settings';
+    public $timestamps = false;
 
     protected $fillable = [
         'title',
@@ -33,4 +34,13 @@ class Setting extends Model
 
 
     ];
+
+    public function setLogoAttribute($image)
+    {
+        if (is_file($image)) {
+            $imageFields = upload($image);
+            $this->attributes['logo'] = $imageFields;
+        }
+
+    }
 }
