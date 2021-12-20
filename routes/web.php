@@ -26,6 +26,9 @@ Route::get('/employee_setting', function () {
 Route::get('/login', function () {
     return view('auth/login');
 });
+Route::get('/request', function () {
+    return view('auth/request');
+});
 
 
 Route::post('login',[AuthController::class,'login']);
