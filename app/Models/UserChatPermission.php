@@ -10,7 +10,7 @@ class UserChatPermission extends Model
     use HasFactory;
 
     protected  $table = 'user_chat_permissions';
-
+    public $timestamps = false;
     protected $fillable = [
         'reciever_id',
         'level_id',

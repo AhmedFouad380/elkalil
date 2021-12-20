@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +19,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin/dashboard');
 });
-Route::get('/public_setting', function () {
-    return view('admin/setting/public_setting');
-});
+
+
+Route::get('public_setting', [SettingsController::class, 'Settings']);
+Route::post('edit_setting', [SettingsController::class, 'editSettings']);
+
+
 Route::get('/employee_setting', function () {
     return view('admin/setting/employee_setting');
 });
+
+//employee settings
+Route::get('employee_setting', [UsersController::class, 'index']);
+Route::get('employee_datatable', [UsersController::class, 'datatable'])->name('employee.datatable.data');
+Route::get('delete-user', [UsersController::class, 'destroy']);
+Route::get('get-branch/{id}', [UsersController::class, 'getBranch']);
+Route::get('delete-user', [UsersController::class, 'destroy']);
+Route::post('store-employee', [UsersController::class, 'store']);
+Route::get('employee-edit/{id}', [UsersController::class, 'edit']);
+
+//end employee settings
+
 Route::get('/login', function () {
     return view('auth/login');
 });
@@ -29,4 +47,5 @@ Route::get('/request', function () {
     return view('auth/request');
 });
 
-Route::post('login',[\App\Http\Controllers\AuthController::class,'login']);
+
+Route::post('login', [AuthController::class, 'login']);
