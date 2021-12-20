@@ -357,22 +357,22 @@
                                                 </div>
                                                 <div class="fv-row mb-7">
                                                     <!--begin::Label-->
-                                                    <label class="required fw-bold fs-6 mb-2">الرقم السري</label>
+                                                    <label class="required fw-bold fs-6 mb-2">كلمة المرور</label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="password" name="password"
                                                            class="form-control form-control-solid mb-3 mb-lg-0"
-                                                           placeholder="الرقم السري" value="" required/>
+                                                           placeholder="كلمة المرور" value="" required/>
                                                     <!--end::Input-->
                                                 </div>
                                                 <div class="fv-row mb-7">
                                                     <!--begin::Label-->
-                                                    <label class="required fw-bold fs-6 mb-2">تأكيد الرقم السري</label>
+                                                    <label class="required fw-bold fs-6 mb-2">تأكيد كلمة المرور</label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input type="password" name="password_confirmation"
                                                            class="form-control form-control-solid mb-3 mb-lg-0"
-                                                           placeholder="تأكيد الرقم السري" value="" required/>
+                                                           placeholder="تأكيد كلمة المرور" value="" required/>
                                                     <!--end::Input-->
                                                 </div>
                                                 <!--end::Input group-->
@@ -388,11 +388,9 @@
                                                 </div>
                                                 <!--end::Input group-->
                                                 <div class="fv-row mb-7">
-                                                    <label for="exampleFormControlInput1" class="form-label">نوع
-                                                        الموظف</label>
+                                                    <label for="exampleFormControlInput1" class="form-label">صلاحية قائمة المشروعات</label>
                                                     <select class="form-control form-control-solid mb-3 mb-lg-0"
                                                             name="jop_type" aria-label="" required>
-                                                        <option value="">اختر نوع الموظف</option>
                                                         <option value="1">مشروع محدد</option>
                                                         <option value="2">فرع محدد</option>
                                                         <option value="3">كل الفروع</option>
@@ -404,7 +402,7 @@
                                                         الموظف</label>
                                                     <select class="form-control form-control-solid mb-3 mb-lg-0"
                                                             name="users_group" aria-label="" required>
-                                                        <option value="">اختر الصلاحية</option>
+                                                        <option value="">اختر اسم الوظيفة / الصلاحية</option>
                                                         @foreach(\App\Models\UserGroup::all() as $user_group)
                                                             <option
                                                                 value="{{$user_group->id}}">{{$user_group->title}}</option>
@@ -414,10 +412,10 @@
                                                 <!--end::Input group-->
                                                 <div class="fv-row mb-7">
                                                     <label for="exampleFormControlInput1"
-                                                           class="form-label">المدينة</label>
+                                                           class="form-label">المنطقة</label>
                                                     <select class="form-control form-control-solid mb-3 mb-lg-0"
                                                             name="state" aria-label="" required id="state">
-                                                        <option value="">اختر المدينة</option>
+                                                        <option value="">اختر المنطقة</option>
                                                         @foreach(\App\Models\State::all() as $state)
                                                             <option value="{{$state->id}}">{{$state->title}}</option>
                                                         @endforeach
@@ -438,7 +436,7 @@
                                                 <div class="fv-row mb-7">
                                                     <div
                                                         class="form-check form-switch form-check-custom form-check-solid">
-                                                        <label class="form-check-label" for="flexSwitchDefault">نشط
+                                                        <label class="form-check-label" for="flexSwitchDefault">مفعل
                                                             ؟</label>
                                                         <input class="form-check-input" name="is_active" type="hidden"
                                                                value="0" id="flexSwitchDefault"/>
@@ -493,6 +491,7 @@
                                 </div>
                             </th>
                             <th class="min-w-125px">الموظف</th>
+                            <th class="min-w-125px">الوظيفة</th>
                             <th class="min-w-125px">الصلاحية</th>
                             <th class="min-w-125px">مفعل</th>
                             <th class=" min-w-100px">الاجراءات</th>
@@ -501,8 +500,6 @@
                         </thead>
                         <!--end::Table head-->
                         <!--begin::Table body-->
-
-
 
 
                     <!--end::Table body-->
@@ -548,6 +545,7 @@
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                     {data: 'name', name: 'name', "searchable": true, "orderable": true},
+                    {data: 'jop_type', name: 'jop_type', "searchable": true, "orderable": true},
                     {data: 'users_group', name: 'users_group', "searchable": true, "orderable": true},
                     {data: 'is_active', name: 'is_active', "searchable": true, "orderable": true},
                     {data: 'actions', name: 'actions', "searchable": false, "orderable": false},

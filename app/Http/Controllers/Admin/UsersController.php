@@ -58,13 +58,22 @@ class UsersController extends Controller
             })
             ->editColumn('users_group', function ($row) {
                 return $row->userGroup ? $row->userGroup->title : '';
+            })->editColumn('jop_type', function ($row) {
+               if ($row->jop_type == 1){
+                   return '<div class="badge badge-light-success fw-bolder">مشروع محدد</div>';
+               }elseif($row->jop_type == 2){
+                   return '<div class="badge badge-light-info fw-bolder"> فرع محدد</div>';
+               }else{
+                   return '<div class="badge badge-light-danger fw-bolder">كل الفروع</div>';
+
+               }
             })
             ->addColumn('actions', function ($row) {
                 $actions = ' <a href="' . url("employee-edit/" . $row->id) . '" class="btn btn-active-light-info">تعديل</a>';
                 return $actions;
 
             })
-            ->rawColumns(['actions', 'checkbox', 'name', 'users_group', 'is_active'])
+            ->rawColumns(['actions', 'checkbox', 'name', 'users_group', 'is_active', 'jop_type'])
             ->make();
 
     }
