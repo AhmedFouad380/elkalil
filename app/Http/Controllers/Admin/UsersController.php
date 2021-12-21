@@ -29,9 +29,16 @@ class UsersController extends Controller
 
     public function datatable(Request $request)
     {
+        $data = User::orderBy('id', 'asc');
 
-        $data = User::orderBy('id', 'asc')->get();
+        if ($request->has('users_group') && $request->users_group !=null && !empty($request->users_group)){
+            $data = $data->where('users_group',$request->users_group);
+        }
+        if ($request->has('jop_type') && $request->jop_type !=null && !empty($request->jop_type)){
+            $data = $data->where('jop_type',$request->jop_type);
+        }
 
+        $data = $data->get();
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
