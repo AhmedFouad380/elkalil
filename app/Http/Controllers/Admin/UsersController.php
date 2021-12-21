@@ -24,7 +24,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('admin.setting.employee_setting');
+        return view('admin.setting.employee.employee_setting');
     }
 
     public function datatable(Request $request)
@@ -59,14 +59,14 @@ class UsersController extends Controller
             ->editColumn('users_group', function ($row) {
                 return $row->userGroup ? $row->userGroup->title : '';
             })->editColumn('jop_type', function ($row) {
-               if ($row->jop_type == 1){
-                   return '<div class="badge badge-light-success fw-bolder">مشروع محدد</div>';
-               }elseif($row->jop_type == 2){
-                   return '<div class="badge badge-light-info fw-bolder"> فرع محدد</div>';
-               }else{
-                   return '<div class="badge badge-light-danger fw-bolder">كل الفروع</div>';
+                if ($row->jop_type == 1) {
+                    return '<div class="badge badge-light-success fw-bolder">مشروع محدد</div>';
+                } elseif ($row->jop_type == 2) {
+                    return '<div class="badge badge-light-info fw-bolder"> فرع محدد</div>';
+                } else {
+                    return '<div class="badge badge-light-danger fw-bolder">كل الفروع</div>';
 
-               }
+                }
             })
             ->addColumn('actions', function ($row) {
                 $actions = ' <a href="' . url("employee-edit/" . $row->id) . '" class="btn btn-active-light-info">تعديل</a>';
@@ -156,7 +156,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = User::findOrFail($id);
+        return view('admin.setting.employee.edit_employee', compact('employee'));
     }
 
     /**
@@ -166,9 +167,43 @@ class UsersController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $data = $this->validate(request(), [
+            'name' => 'required|string',
+            'id' => 'required|exists:users,id',
+            'email' => 'required|email|unique:users,email,'.$request->id,
+//            'password' => 'nullable|confirmed',
+            'phone' => 'required|unique:users,phone,'.$request->id,
+            'jop_type' => 'required|in:1,2,3',
+            'users_group' => 'required|exists:users_group,id',
+            'branche' => 'required|exists:branche,id',
+            'state' => 'required|exists:state,id',
+            'address' => 'required|string',
+            'is_active' => 'nullable|string',
+
+        ]);
+
+
+        if ($request->password && $request->password != "" && $request->password !=null) {
+            $data['password'] = sha1($request->password);
+        }
+
+        $user = User::whereId($request->id)->update($data);
+
+
+        if ($request->jop_type == 2) {
+            $projects = Project::where('state', $request->state)->get();
+            foreach ($projects as $project) {
+                $levels = ProjectLevels::where('project_id', $project->id)->get();
+                foreach ($levels as $level) {
+                    $dataChatPermission = array('reciever_id' => $request->id, 'type' => 0, 'project_id' => $project->id, 'level_id' => $level->id, 'is_read' => 1);
+                    UserChatPermission::create($dataChatPermission);
+                }
+            }
+        }
+
+        return redirect(url('employee_setting'))->with('message', 'تم التعديل بنجاح ');
     }
 
     /**
