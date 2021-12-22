@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectPaid extends Model
 {
     use HasFactory;
-
-    protected  $table = 'paid';
+    public $timestamps = false;
+    protected  $table = 'project_paid';
 
     protected $fillable = [
         'project_id',

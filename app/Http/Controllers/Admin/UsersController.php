@@ -51,7 +51,7 @@ class UsersController extends Controller
             ->editColumn('name', function ($row) {
                 $name = '';
                 $name .= ' <span class="text-gray-800 text-hover-primary mb-1">' . $row->name . '</span>
-                                   <br> <span>' . $row->email . '</span>';
+                                   <br> <small class="text-gray-600">' . $row->email . '</small>';
                 return $name;
             })->editColumn('is_active', function ($row) {
 

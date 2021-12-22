@@ -8,7 +8,7 @@
     "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
     "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
     "sInfoPostFix":  "",
-    "sSearch":       "ابحث:",
+    "sSearch":       "",
     "sUrl":          "",
     "oPaginate": {
         "sFirst":    "الأول",
