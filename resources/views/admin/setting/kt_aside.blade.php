@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class="menu-item @if(Request::segment(1) == "employee_setting") text-active-primary active @endif">
-                    <a class="menu-link" href="../../demo16/dist/landing.html">
+                    <a class="menu-link" href="/employee_setting">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
                                 <span class="svg-icon svg-icon-2">

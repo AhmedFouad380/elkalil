@@ -38,6 +38,8 @@ Route::get('get-branch/{id}', [UsersController::class, 'getBranch']);
 Route::get('delete-user', [UsersController::class, 'destroy']);
 Route::post('store-employee', [UsersController::class, 'store']);
 Route::get('employee-edit/{id}', [UsersController::class, 'edit']);
+Route::post('update-employee', [UsersController::class, 'update']);
+
 
 //end employee settings
 

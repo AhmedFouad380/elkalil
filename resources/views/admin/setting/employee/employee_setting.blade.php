@@ -14,6 +14,10 @@
                 padding-right: 30px;
             }
         }
+
+        .select2-container .select2-selection--single .select2-selection__clear {
+            padding-right: 355px;
+        }
     </style>
 @endsection
 
@@ -98,40 +102,54 @@
                                 <!--end::Separator-->
                                 <!--begin::Content-->
                                 <div class="px-7 py-5" data-kt-user-table-filter="form">
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <label class="form-label fs-6 fw-bold">الصلاحيات:</label>
-                                        <select class="form-select form-select-solid fw-bolder" data-kt-select2="true"
-                                                data-placeholder="اختر" data-allow-clear="true"
-                                                data-kt-user-table-filter="role" data-hide-search="true">
-                                            <option></option>
-                                            <option value="Administrator">مدير</option>
-                                            <option value="Analyst">موظف</option>
-                                        </select>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <label class="form-label fs-6 fw-bold">مفعل ؟:</label>
-                                        <select class="form-select form-select-solid fw-bolder" data-kt-select2="true"
-                                                data-placeholder="اختر" data-allow-clear="true"
-                                                data-kt-user-table-filter="two-step" data-hide-search="true">
-                                            <option></option>
-                                            <option value="Enabled">نعم</option>
-                                        </select>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Actions-->
-                                    <div class="d-flex justify-content-end">
-                                        <button type="reset"
-                                                class="btn btn-light btn-active-light-primary fw-bold me-2 px-6"
-                                                data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">اغلاق
-                                        </button>
-                                        <button type="submit" class="btn btn-primary fw-bold px-6"
-                                                data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">بحث
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
+                                    <form action="{{url('employee_setting')}}" method="get">
+                                        <!--begin::Input group-->
+                                        <div class="mb-10">
+                                            <label class="form-label fs-6 fw-bold">الصلاحيات:</label>
+                                            <select class="form-select form-select-solid fw-bolder"
+                                                    data-kt-select2="true"
+                                                    data-placeholder="اختر" data-allow-clear="true"
+                                                    data-kt-user-table-filter="role" data-hide-search="true"
+                                                    name="users_group">
+                                                <option></option>
+                                                @foreach(\App\Models\UserGroup::all() as $user_group)
+                                                    <option @if(old('users_group') == $user_group->id) selected @endif
+                                                    value="{{$user_group->id}}">{{$user_group->title}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10">
+                                            <label class="form-label fs-6 fw-bold">صلاحية قائمة المشروعات :</label>
+                                            <select class="form-select form-select-solid fw-bolder"
+                                                    data-kt-select2="true"
+                                                    data-placeholder="اختر" data-allow-clear="true"
+                                                    data-kt-user-table-filter="two-step" data-hide-search="true"
+                                                    name="jop_type">
+                                                <option></option>
+                                                <option @if(old('jop_type') == 1) selected @endif value="1">مشروع محدد
+                                                </option>
+                                                <option @if(old('jop_type') == 2) selected @endif value="2">فرع محدد
+                                                </option>
+                                                <option @if(old('jop_type') == 3) selected @endif value="3">كل الفروع
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Actions-->
+                                        <div class="d-flex justify-content-end">
+                                            <button type="reset"
+                                                    class="btn btn-light btn-active-light-primary fw-bold me-2 px-6"
+                                                    data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">اغلاق
+                                            </button>
+                                            <button type="submit" class="btn btn-primary fw-bold px-6"
+                                                    data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">بحث
+                                            </button>
+                                        </div>
+                                        <!--end::Actions-->
+                                    </form>
                                 </div>
                                 <!--end::Content-->
                             </div>
@@ -311,8 +329,8 @@
                                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                         <!--begin::Form-->
                                         <form id="" class="form" method="post" action="{{url('store-employee')}}">
-                                            @csrf
-                                            <!--begin::Scroll-->
+                                        @csrf
+                                        <!--begin::Scroll-->
                                             <div class="d-flex flex-column scroll-y me-n7 pe-7"
                                                  id="kt_modal_add_user_scroll" data-kt-scroll="true"
                                                  data-kt-scroll-activate="{default: false, lg: true}"
@@ -388,7 +406,8 @@
                                                 </div>
                                                 <!--end::Input group-->
                                                 <div class="fv-row mb-7">
-                                                    <label for="exampleFormControlInput1" class="form-label">صلاحية قائمة المشروعات</label>
+                                                    <label for="exampleFormControlInput1" class="form-label">صلاحية
+                                                        قائمة المشروعات</label>
                                                     <select class="form-control form-control-solid mb-3 mb-lg-0"
                                                             name="jop_type" aria-label="" required>
                                                         <option value="1">مشروع محدد</option>
@@ -440,8 +459,10 @@
                                                             ؟</label>
                                                         <input class="form-check-input" name="is_active" type="hidden"
                                                                value="0" id="flexSwitchDefault"/>
-                                                        <input class="form-check-input form-control form-control-solid mb-3 mb-lg-0" name="is_active" type="checkbox"
-                                                               value="1" id="flexSwitchDefault" checked/>
+                                                        <input
+                                                            class="form-check-input form-control form-control-solid mb-3 mb-lg-0"
+                                                            name="is_active" type="checkbox"
+                                                            value="1" id="flexSwitchDefault" checked/>
                                                     </div>
                                                 </div>
                                                 <!--end::Input group-->
@@ -502,7 +523,7 @@
                         <!--begin::Table body-->
 
 
-                    <!--end::Table body-->
+                        <!--end::Table body-->
                     </table>
                     <!--end::Table-->
                 </div>
@@ -541,7 +562,18 @@
                     // {extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
 
                 ],
-                ajax: "{{ route('employee.datatable.data') }}",
+                ajax: {
+                    url: '{{ route('employee.datatable.data') }}',
+                    data: {
+                        @if(Request::get('users_group'))
+                        users_group: {{ Request::get('users_group') }}
+                        ,
+                        @endif
+                            @if(Request::get('jop_type'))
+                        jop_type:{{Request::get('jop_type') }}
+                        @endif
+                    }
+                },
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                     {data: 'name', name: 'name', "searchable": true, "orderable": true},
@@ -553,6 +585,7 @@
                 ]
             });
         });
+
 
         $("#delete").on("click", function () {
 
@@ -618,5 +651,32 @@
             }
         });
     </script>
+    <?php
+    $message = session()->get("message");
+    ?>
+
+    @if( session()->has("message"))
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+
+            toastr.success("نجاح", "{{$message}}");
+        </script>
+
+    @endif
 @endsection
 
