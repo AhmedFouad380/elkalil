@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin/dashboard');
 });
+Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
 
 
 Route::get('public_setting', [SettingsController::class, 'Settings']);
