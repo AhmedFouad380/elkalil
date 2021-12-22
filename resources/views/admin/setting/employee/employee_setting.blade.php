@@ -504,6 +504,7 @@
                         <!--begin::Table head-->
                         <thead>
                         <!--begin::Table row-->
+
                         <tr class="text-start text-muted fw-bolder fs-5 text-uppercase gs-0">
                             <th class="w-10px pe-2">
                                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
@@ -511,6 +512,7 @@
                                            data-kt-check-target="#users_table .form-check-input" value="1"/>
                                 </div>
                             </th>
+
                             <th class="min-w-125px">الموظف</th>
                             <th class="min-w-125px">الوظيفة</th>
                             <th class="min-w-125px">الصلاحية</th>
@@ -548,6 +550,7 @@
             var table = $('#users_table').DataTable({
                 processing: true,
                 serverSide: true,
+                "aaSorting": [],
                 "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
                 lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
                 "language": {
@@ -575,7 +578,8 @@
                     }
                 },
                 columns: [
-                    {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
+                    {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": true},
+
                     {data: 'name', name: 'name', "searchable": true, "orderable": true},
                     {data: 'jop_type', name: 'jop_type', "searchable": true, "orderable": true},
                     {data: 'users_group', name: 'users_group', "searchable": true, "orderable": true},
