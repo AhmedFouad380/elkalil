@@ -1,4 +1,4 @@
-@extends('admin.layouts.master-without-nav') 
+@extends('admin.layouts.master-without-nav')
 
 @section('css')
 @endsection
@@ -15,8 +15,8 @@
         <!--begin::Wrapper-->
         <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
             <!--begin::Form-->
-            <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="#">
-                <!--begin::Heading-->
+            <form class="form w-100" novalidate="novalidate" id="" method="post" action="{{url('login')}}">
+                <!--begin::Heading-->@csrf
                 <div class="text-center mb-10">
                     <!--begin::Logo-->
                     <a href="../../demo16/dist/index.html" class="mb-12">
@@ -31,10 +31,10 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-10">
                     <!--begin::Label-->
-                    <label class="form-label fs-6 fw-bolder text-dark">اسم المستخدم</label>
+                    <label class="form-label fs-6 fw-bolder text-dark">رقم الجوال</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" />
+                    <input class="form-control form-control-lg form-control-solid" name="phone" type="number" autocomplete="off" />
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin/dashboard');
 });
+Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
 
 
 
@@ -42,9 +43,11 @@ Route::post('update-employee', [UsersController::class, 'update']);
 Route::get('/login', function () {
     return view('auth/login');
 });
-Route::get('/request', function () {
+
+Route::get('/quest', function () {
     return view('auth/request');
-});
+});;
+Route::post('/quest', 'App\Http\Controllers\Front\PageController@store_quest')->name('create_quest.submit');
 
 
 Route::post('login', [AuthController::class, 'login']);
