@@ -30,12 +30,11 @@ class UsersController extends Controller
     public function datatable(Request $request)
     {
         $data = User::orderBy('id', 'asc');
-
-        if ($request->has('users_group') && $request->users_group !=null && !empty($request->users_group)){
-            $data = $data->where('users_group',$request->users_group);
+        if ($request->has('users_group') && $request->users_group != null && !empty($request->users_group)) {
+            $data = $data->where('users_group', $request->users_group);
         }
-        if ($request->has('jop_type') && $request->jop_type !=null && !empty($request->jop_type)){
-            $data = $data->where('jop_type',$request->jop_type);
+        if ($request->has('jop_type') && $request->jop_type != null && !empty($request->jop_type)) {
+            $data = $data->where('jop_type', $request->jop_type);
         }
 
         $data = $data->get();
@@ -46,15 +45,14 @@ class UsersController extends Controller
                                     <input class="form-check-input" type="checkbox" value="' . $row->id . '" />
                                 </div>';
                 return $checkbox;
-
             })
             ->editColumn('name', function ($row) {
                 $name = '';
                 $name .= ' <span class="text-gray-800 text-hover-primary mb-1">' . $row->name . '</span>
                                    <br> <span>' . $row->email . '</span>';
                 return $name;
-            })->editColumn('is_active', function ($row) {
-
+            })
+            ->editColumn('is_active', function ($row) {
                 $is_active = '<div class="badge badge-light-success fw-bolder">مفعل</div>';
                 $not_active = '<div class="badge badge-light-danger fw-bolder">غير مفعل</div>';
                 if ($row->is_active == 1) {
@@ -179,9 +177,9 @@ class UsersController extends Controller
         $data = $this->validate(request(), [
             'name' => 'required|string',
             'id' => 'required|exists:users,id',
-            'email' => 'required|email|unique:users,email,'.$request->id,
+            'email' => 'required|email|unique:users,email,' . $request->id,
 //            'password' => 'nullable|confirmed',
-            'phone' => 'required|unique:users,phone,'.$request->id,
+            'phone' => 'required|unique:users,phone,' . $request->id,
             'jop_type' => 'required|in:1,2,3',
             'users_group' => 'required|exists:users_group,id',
             'branche' => 'required|exists:branche,id',
@@ -192,7 +190,7 @@ class UsersController extends Controller
         ]);
 
 
-        if ($request->password && $request->password != "" && $request->password !=null) {
+        if ($request->password && $request->password != "" && $request->password != null) {
             $data['password'] = sha1($request->password);
         }
 

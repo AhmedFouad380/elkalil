@@ -21,13 +21,10 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('public_setting', [SettingsController::class, 'Settings']);
 Route::post('edit_setting', [SettingsController::class, 'editSettings']);
 
-
-Route::get('/employee_setting', function () {
-    return view('admin/setting/employee_setting');
-});
 
 //employee settings
 Route::get('employee_setting', [UsersController::class, 'index']);
