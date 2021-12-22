@@ -46946,7 +46946,7 @@ label.rating-label:hover ~ .rating-label > .svg-icon svg:hover [fill]:not(.perma
   display: none;
 }
 .stepper.stepper-pills .stepper-item.current:last-child .stepper-label .stepper-title, .stepper.stepper-pills .stepper-item.completed .stepper-label .stepper-title {
-  color: #A1A5B7;
+  color: #181c32;
 }
 .stepper.stepper-pills .stepper-item.current:last-child .stepper-label .stepper-desc, .stepper.stepper-pills .stepper-item.completed .stepper-label .stepper-desc {
   color: #7e8299;
