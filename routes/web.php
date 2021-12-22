@@ -25,8 +25,10 @@ Route::get('/employee_setting', function () {
 Route::get('/login', function () {
     return view('auth/login');
 });
-Route::get('/request', function () {
+
+Route::get('/quest', function () {
     return view('auth/request');
-});
+});;
+Route::post('/quest', 'App\Http\Controllers\Front\PageController@store_quest')->name('create_quest.submit');
 
 Route::post('login',[\App\Http\Controllers\AuthController::class,'login']);
