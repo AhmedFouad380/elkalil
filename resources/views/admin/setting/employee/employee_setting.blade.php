@@ -45,11 +45,11 @@
         @include('admin.setting.kt_aside')
 
         <div class="content flex-row-fluid" id="kt_content">
-
             <!--begin::Card-->
             <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
+
                     <!--begin::Table-->
                     <table class="table align-middle table-row-dashed fs-4 gy-5" id="users_table">
                         <!--begin::Table head-->
@@ -83,7 +83,6 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card-->
-
         </div>
         <!--end::Post-->
     </div>
@@ -99,8 +98,8 @@
                 serverSide: true,
                 autoWidth: false,
                 responsive: true,
-                "aaSorting": [],
-                "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button'B> r>> <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+                aaSorting: [],
+                "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button'B> r>>  <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
                  lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
                 "language": {
                     search: '<i class="fa fa-eye" aria-hidden="true"></i>',
@@ -127,8 +126,7 @@
                     }
                 },
                 columns: [
-                    {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": true},
-
+                    {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                     {data: 'name', name: 'name', "searchable": true, "orderable": true},
                     {data: 'jop_type', name: 'jop_type', "searchable": true, "orderable": true},
                     {data: 'users_group', name: 'users_group', "searchable": true, "orderable": true},
@@ -146,53 +144,6 @@
         });
 
 
-        $("#delete").on("click", function () {
-
-            var dataList = [];
-            $("input:checkbox:checked").each(function (index) {
-                dataList.push($(this).val())
-            })
-            console.log(dataList);
-            if (dataList.length > 0) {
-                Swal.fire({
-                    title: "تحذير.هل انت متأكد؟!",
-                    text: "",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#f64e60",
-                    confirmButtonText: "نعم",
-                    cancelButtonText: "لا",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                }).then(function (result) {
-                    if (result.value) {
-                        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                        $.ajax({
-                            url: '{{url("delete-user")}}',
-                            type: "get",
-                            data: {'id': dataList, _token: CSRF_TOKEN},
-                            dataType: "JSON",
-                            success: function (data) {
-                                if (data.message == "Success") {
-                                    $("input:checkbox:checked").parents("tr").remove();
-                                    Swal.fire("نجاح", "تم الحذف بنجاح", "success");
-                                    // location.reload();
-                                } else {
-                                    Swal.fire("نأسف", "حدث خطأ ما اثناء الحذف", "error");
-                                }
-                            },
-                            fail: function (xhrerrorThrown) {
-                                Swal.fire("نأسف", "حدث خطأ ما اثناء الحذف", "error");
-                            }
-                        });
-                        // result.dismiss can be 'cancel', 'overlay',
-                        // 'close', and 'timer'
-                    } else if (result.dismiss === 'cancel') {
-                        Swal.fire("ألغاء", "تم الالغاء", "error");
-                    }
-                });
-            }
-        });
     </script>
     <script>
         $("#state").change(function () {
