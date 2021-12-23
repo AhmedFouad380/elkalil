@@ -128,7 +128,7 @@
                             </div>
                             <!--end::Input group-->
                             <div class="fv-row mb-7">
-                                <label for="exampleFormControlInput1" class="form-label">صلاحية قائمة المشروعات</label>
+                                <label for="exampleFormControlInput1" class="form-label" >صلاحية قائمة المشروعات</label>
                                 <select class="form-control form-control-solid mb-3 mb-lg-0"
                                         name="jop_type" aria-label="" required>
                                     <option @if($employee->jop_type == 1) selected @endif value="1">مشروع محدد</option>

@@ -45,16 +45,17 @@
         @include('admin.setting.kt_aside')
 
         <div class="content flex-row-fluid" id="kt_content">
-
             <!--begin::Card-->
             <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
+
                     <!--begin::Table-->
                     <table class="table align-middle table-row-dashed fs-4 gy-5" id="users_table">
                         <!--begin::Table head-->
                         <thead>
                         <!--begin::Table row-->
+
                         <tr class="text-start text-muted fw-bolder fs-5 text-uppercase gs-0">
                             <th class="w-10px pe-2">
                                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
@@ -62,6 +63,7 @@
                                            data-kt-check-target="#users_table .form-check-input" value="1"/>
                                 </div>
                             </th>
+
                             <th class="min-w-125px">الموظف</th>
                             <th class="min-w-125px">الوظيفة</th>
                             <th class="min-w-125px">الصلاحية</th>
@@ -81,7 +83,6 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card-->
-
         </div>
         <!--end::Post-->
     </div>
@@ -97,9 +98,9 @@
                 serverSide: true,
                 autoWidth: false,
                 responsive: true,
-                "aaSorting": [],
-                "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button'B> r>> <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
-                lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
+                aaSorting: [],
+                "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button'B> r>>  <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+                 lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
                 "language": {
                     search: '<i class="fa fa-eye" aria-hidden="true"></i>',
                     searchPlaceholder: 'بحث سريع',

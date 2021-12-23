@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
 });
 
+
 Route::get('public_setting', [SettingsController::class, 'Settings']);
 Route::post('edit_setting', [SettingsController::class, 'editSettings']);
 

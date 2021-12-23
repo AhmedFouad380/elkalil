@@ -1,4 +1,4 @@
-<div class="dt-buttons flex-wrap"> 
+<div class="dt-buttons flex-wrap">
 <!--begin::Filter-->
 <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
 data-bs-target="#kt_modal_filter">
@@ -123,7 +123,6 @@ data-bs-target="#kt_modal_filter">
 <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
 data-bs-target="#kt_modal_add_user">
 <i class="bi bi-plus-circle-fill fs-2x"></i>
-
 </button>
 
 <!--end::Add user-->
@@ -384,3 +383,51 @@ data-bs-target="#kt_modal_add_user">
      });
  </script>
 
+<script>
+    $("#delete").on("click", function () {
+        var dataList = [];
+        $("input:checkbox:checked").each(function (index) {
+            dataList.push($(this).val())
+        })
+        console.log(dataList);
+        if (dataList.length > 0) {
+            Swal.fire({
+                title: "تحذير.هل انت متأكد؟!",
+                text: "",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#f64e60",
+                confirmButtonText: "نعم",
+                cancelButtonText: "لا",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }).then(function (result) {
+                if (result.value) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        url: '{{url("delete-user")}}',
+                        type: "get",
+                        data: {'id': dataList, _token: CSRF_TOKEN},
+                        dataType: "JSON",
+                        success: function (data) {
+                            if (data.message == "Success") {
+                                $("input:checkbox:checked").parents("tr").remove();
+                                Swal.fire("نجاح", "تم الحذف بنجاح", "success");
+                                // location.reload();
+                            } else {
+                                Swal.fire("نأسف", "حدث خطأ ما اثناء الحذف", "error");
+                            }
+                        },
+                        fail: function (xhrerrorThrown) {
+                            Swal.fire("نأسف", "حدث خطأ ما اثناء الحذف", "error");
+                        }
+                    });
+                    // result.dismiss can be 'cancel', 'overlay',
+                    // 'close', and 'timer'
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire("ألغاء", "تم الالغاء", "error");
+                }
+            });
+        }
+    });
+</script>
