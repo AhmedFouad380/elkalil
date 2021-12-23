@@ -8,7 +8,7 @@
 
 @section('content')
 <!--begin::Authentication - Sign-in -->
-<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-cover" style="background-image: url({{asset('admin/assets/media/illustrations/sketchy-1/14-2.png')}}">
+<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-cover" style="background-image: url({{asset('admin/assets/media/illustrations/sketchy-1/14-2.jpeg')}}">
 
     <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 

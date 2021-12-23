@@ -58,7 +58,8 @@ class PageController extends Controller
             $client_data['token_id'] = "";
             $client_data['msg'] = "";
             $client = Client::create($client_data);
-            
+
+            $client_id = $client->id ;
         } else {
             if ($check_phone != null) {
                 $client_id = $check_phone->id ;
@@ -102,7 +103,7 @@ class PageController extends Controller
 
         $contract = ProjectContract::create($contract_default);
 
-        $project_other_data['project_id'] = $project->id;
+        $project_paid_data['project_id'] = $project->id;
         $project_paid = ProjectPaid::create($project_paid_data);
 
         $explan_data['project_id'] = $project->id;
