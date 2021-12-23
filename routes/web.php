@@ -15,12 +15,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/', function () {
-    return view('admin/dashboard');
+    Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
 });
-Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
-
 
 Route::get('public_setting', [SettingsController::class, 'Settings']);
 Route::post('edit_setting', [SettingsController::class, 'editSettings']);
@@ -45,7 +43,7 @@ Route::post('update-employee', [UsersController::class, 'update']);
 
 Route::get('/login', function () {
     return view('auth/login');
-});
+})->name('login');
 
 Route::get('/quest', function () {
     return view('auth/request');
@@ -54,3 +52,4 @@ Route::post('/quest', 'App\Http\Controllers\Front\PageController@store_quest')->
 
 
 Route::post('login', [AuthController::class, 'login']);
+Route::get('logout', [AuthController::class, 'logout']);

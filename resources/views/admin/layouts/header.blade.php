@@ -1,4 +1,4 @@
-<!--begin::Header-->
+    <!--begin::Header-->
 <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
     <!--begin::Container-->
     <div class="container-xxl sabi d-flex flex-grow-1 flex-stack">
@@ -21,7 +21,7 @@
                 <img alt="Logo" src="{{asset('admin/assets/media/logos/logo-2.png')}}" class="h-25px h-lg-60px" />
             </a>
             <!--end::Logo-->
-            
+
         </div>
         <!--end::Header Logo-->
         <!--begin::Topbar-->
@@ -593,9 +593,9 @@
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
+                                    <div class="fw-bolder d-flex align-items-center fs-5">{{Auth::user()->name}}
                                     <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-                                    <a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                    <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{Auth::user()->phone}}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -733,7 +733,7 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="../../demo16/dist/authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign Out</a>
+                            <a href="{{url('logout')}}" class="menu-link px-5">Sign Out</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->

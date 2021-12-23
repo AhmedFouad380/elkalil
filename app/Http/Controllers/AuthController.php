@@ -16,4 +16,14 @@ class AuthController extends Controller
             return back()->with('message','Failed');
         }
     }
+
+    public function logout(Request $request){
+
+        if(Auth::check()){
+            Auth::logout();
+            return redirect('/login');
+        }else{
+            return redirect('/login');
+        }
+    }
 }
