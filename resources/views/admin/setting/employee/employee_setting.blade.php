@@ -142,8 +142,6 @@
                 dataType: 'html'
             });
         });
-
-
     </script>
     <script>
         $("#state").change(function () {
