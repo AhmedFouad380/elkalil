@@ -383,3 +383,19 @@
         }
     });
 </script>
+<script>
+    $("#state").change(function () {
+        var wahda = $(this).val();
+
+        if (wahda != '') {
+            $.get("{{ URL::to('/get-branch')}}" + '/' + wahda, function ($data) {
+                var outs = "";
+                $.each($data, function (title, id) {
+                    console.log(title)
+                    outs += '<option value="' + id + '">' + title + '</option>'
+                });
+                $('#branche').html(outs);
+            });
+        }
+    });
+</script>
