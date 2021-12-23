@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SmsLogs extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected  $table = 'smslogs';
 
     protected $fillable = [

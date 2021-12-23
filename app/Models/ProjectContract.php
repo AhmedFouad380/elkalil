@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectContract extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected  $table = 'project_contract';
 
     protected $fillable = [

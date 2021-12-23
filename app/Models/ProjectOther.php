@@ -10,6 +10,7 @@ class ProjectOther extends Model
     use HasFactory;
 
     protected  $table = 'project_other';
+    public $timestamps = false;
     protected $fillable = [
         'project_id','age','work_time','project_type2','family_num','type','living','living_features',
         'living_negatives','child_play','hobby','light_color','sleeping','future','travel','happy','party',

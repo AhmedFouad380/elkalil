@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Explan extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected  $table = 'explan';
     protected $fillable = [
         'title',
