@@ -334,7 +334,6 @@
 
 
 <script type="text/javascript">
-
     $("#delete").on("click", function () {
 
         var dataList = [];
