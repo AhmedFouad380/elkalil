@@ -1,11 +1,7 @@
-<<<<<<< HEAD
     <!--begin::Header-->
-<div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
-=======
 <!--begin::Header-->
 <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
      data-kt-sticky-offset="{default: '200px', lg: '300px'}">
->>>>>>> 05d3ab0edfae21be8acfc2b5dd759d683f156db9
     <!--begin::Container-->
     <div class="container-xxl sabi d-flex flex-grow-1 flex-stack">
         <!--begin::Header Logo-->
@@ -853,12 +849,8 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-<<<<<<< HEAD
                             <a href="{{url('logout')}}" class="menu-link px-5">Sign Out</a>
-=======
-                            <a href="../../demo16/dist/authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign
-                                Out</a>
->>>>>>> 05d3ab0edfae21be8acfc2b5dd759d683f156db9
+
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->
