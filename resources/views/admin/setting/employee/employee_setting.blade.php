@@ -135,7 +135,6 @@
 
                 ]
             });
-
             $.ajax({
                 url: "{{ URL::to('/add-button')}}",
                 success: function (data) { $('.add_button').append(data); },
@@ -143,12 +142,9 @@
             });
         });
     </script>
-
-
     <?php
     $message = session()->get("message");
     ?>
-
     @if( session()->has("message"))
         <script>
             toastr.options = {
@@ -167,7 +163,6 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             };
-
             toastr.success("نجاح", "{{$message}}");
         </script>
 

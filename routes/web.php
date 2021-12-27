@@ -19,23 +19,22 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
-});
 
 
-Route::get('public_setting', [SettingsController::class, 'Settings']);
-Route::post('edit_setting', [SettingsController::class, 'editSettings']);
-
+    Route::get('public_setting', [SettingsController::class, 'Settings']);
+    Route::post('edit_setting', [SettingsController::class, 'editSettings']);
 
 //employee settings
-Route::get('employee_setting', [UsersController::class, 'index']);
-Route::get('employee_datatable', [UsersController::class, 'datatable'])->name('employee.datatable.data');
-Route::get('delete-user', [UsersController::class, 'destroy']);
-Route::get('get-branch/{id}', [UsersController::class, 'getBranch']);
-Route::get('delete-user', [UsersController::class, 'destroy']);
-Route::post('store-employee', [UsersController::class, 'store']);
-Route::get('employee-edit/{id}', [UsersController::class, 'edit']);
-Route::post('update-employee', [UsersController::class, 'update']);
-Route::get('/add-button', function () {return view('admin/setting/employee/button');});
+    Route::get('employee_setting', [UsersController::class, 'index']);
+    Route::get('employee_datatable', [UsersController::class, 'datatable'])->name('employee.datatable.data');
+    Route::get('delete-user', [UsersController::class, 'destroy']);
+    Route::get('get-branch/{id}', [UsersController::class, 'getBranch']);
+    Route::post('store-employee', [UsersController::class, 'store']);
+    Route::get('employee-edit/{id}', [UsersController::class, 'edit']);
+    Route::post('update-employee', [UsersController::class, 'update']);
+    Route::get('/add-button', function () {return view('admin/setting/employee/button');});
+
+});
 
 //end employee settings
 
