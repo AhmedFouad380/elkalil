@@ -8,17 +8,6 @@
 @endsection
 
 @section('style')
-    <style>
-        @media (min-width: 992px) {
-            .aside-me .content {
-                padding-right: 30px;
-            }
-        }
-
-        .select2-container .select2-selection--single .select2-selection__clear {
-            padding-right: 355px;
-        }
-    </style>
 @endsection
 
 @section('breadcrumb')
@@ -41,8 +30,6 @@
 @section('content')
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
-
-        @include('admin.setting.kt_aside')
 
         <div class="content flex-row-fluid" id="kt_content">
             <!--begin::Card-->
