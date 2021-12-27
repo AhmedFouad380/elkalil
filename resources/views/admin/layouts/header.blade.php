@@ -1,4 +1,4 @@
-    <!--begin::Header-->
+<!--begin::Header-->
 <!--begin::Header-->
 <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
      data-kt-sticky-offset="{default: '200px', lg: '300px'}">
@@ -694,8 +694,10 @@
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
                                     <div class="fw-bolder d-flex align-items-center fs-5">{{Auth::user()->name}}
-                                    <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-                                    <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{Auth::user()->phone}}</a>
+                                        <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
+                                    </div>
+                                    <a href="#"
+                                       class="fw-bold text-muted text-hover-primary fs-7">{{Auth::user()->phone}}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -1165,17 +1167,27 @@
                 <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
                      class="menu-item menu-lg-down-accordion me-lg-1">
                     <span
-                        class="menu-link @if(Request::segment(1) == "public_setting" ||Request::segment(1) == "employee_setting" ||Request::segment(1) == "employee-edit" ) active @endif py-3">
+                        class="menu-link @if(Request::segment(1) == "public_setting" ||
+                        Request::segment(1) == "employee_setting" ||
+                        Request::segment(1) == "employee-edit" ||
+                         Request::segment(1) == "permission_setting" ||
+                         Request::segment(1) == "edit-permission"||
+                          Request::segment(1) == "client_setting" ||
+                         Request::segment(1) == "client-edit" ||
+                          Request::segment(1) == "percent-category_setting" ||
+                         Request::segment(1) == "edit-percent-category"
+                         ) active @endif py-3">
                         <span class="menu-title">الاعدادات</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </span>
                     <div
                         class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
 
-                        <div  data-kt-menu-placement="right-start"
+                        <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
                             <a href="/employee_setting">
-                            <span class="menu-link @if(Request::segment(1) == "employee_setting") active @endif py-3">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "employee_setting" || Request::segment(1) == "employee-edit" ) active @endif py-3">
                                 <span class="menu-icon ">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -1198,20 +1210,20 @@
 
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title  @if(Request::segment(1) == "employee_setting") text-active-primary active @endif ">
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "employee_setting"|| Request::segment(1) == "employee-edit") text-active-primary active @endif ">
 
                                         الموظفين والادوار
-
                                       </span>
                             </span>
                             </a>
                         </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                        <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
-
-                                <span class="menu-icon">
-
+                            <a href="/permission_setting">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "permission_setting" ||Request::segment(1) == "edit-permission") active @endif py-3">
+                                <span class="menu-icon ">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -1230,10 +1242,17 @@
                                                   fill="black"/>
                                         </svg>
                                     </span>
+
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">الدخول والصلاحيات</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "permission_setting"  ||Request::segment(1) == "edit-permission") text-active-primary active @endif ">
+
+                                        الدخول والصلاحيات
+
+                                      </span>
                             </span>
+                            </a>
                         </div>
                         <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
@@ -1316,10 +1335,12 @@
                                 <span class="menu-title">اعدادات المراحل </span>
                             </span>
                         </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                        <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
-                                <span class="menu-icon">
+                            <a href="/employee_setting">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "client_setting" || Request::segment(1) == "client-edit" ) active @endif py-3">
+                                <span class="menu-icon ">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -1338,12 +1359,18 @@
                                                   fill="black"/>
                                         </svg>
                                     </span>
+
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">قائمة العملاء </span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "client_setting"|| Request::segment(1) == "client-edit") text-active-primary active @endif ">
+
+                                        قائمة العملاء
+                                      </span>
                             </span>
+                            </a>
                         </div>
-                        <div  data-kt-menu-placement="right-start"
+                        <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
                             <a href="/public_setting">
                             <span class="menu-link @if(Request::segment(1) == "public_setting") active @endif py-3">
@@ -1368,13 +1395,15 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title  @if(Request::segment(1) == "public_setting") text-active-primary active @endif">اعدادات عامة </span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "public_setting") text-active-primary active @endif">اعدادات عامة </span>
                             </span>
                             </a>
                         </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                        <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
+                            <a href="/percent-category_setting">
+                            <span class="menu-link @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-category") active @endif py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -1396,8 +1425,10 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">تصنيف الشركات </span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-category") text-active-primary active @endif">تصنيف الشركات </span>
                             </span>
+                            </a>
                         </div>
                         <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">

@@ -11,7 +11,7 @@
                         <span class="menu-section text-muted text-uppercase fs-8 ls-1">الاعدادات</span>
                     </div>
                 </div>
-                <div class="menu-item @if(Request::segment(1) == "public_setting") text-active-primary active @endif">
+                <div class="menu-item @if(Request::segment(1) == "public_setting" ) text-active-primary active @endif">
                     <a class="menu-link" href="{{url('public_setting')}}">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -28,7 +28,7 @@
                         <span class="menu-title  @if(Request::segment(1) == "public_setting") text-active-primary active @endif">الاعدادات العامة</span>
                     </a>
                 </div>
-                <div class="menu-item @if(Request::segment(1) == "employee_setting") text-active-primary active @endif">
+                <div class="menu-item @if(Request::segment(1) == "employee_setting" || Request::segment(1) == "employee-edit") text-active-primary active @endif">
                     <a class="menu-link" href="/employee_setting">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
@@ -41,11 +41,11 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                        <span class="menu-title @if(Request::segment(1) == "employee_setting") text-active-primary active @endif">الموظفين والادوار</span>
+                        <span class="menu-title @if(Request::segment(1) == "employee_setting" || Request::segment(1) == "employee-edit") text-active-primary active @endif">الموظفين والادوار</span>
                     </a>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link" href="../../demo16/dist/landing.html">
+                <div class="menu-item @if(Request::segment(1) == "permission_setting" ||Request::segment(1) == "edit-permission") text-active-primary active @endif">
+                    <a class="menu-link" href="/permission_setting">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
                                 <span class="svg-icon svg-icon-2">
@@ -57,7 +57,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                        <span class="menu-title">الدخول والصلاحيات</span>
+                        <span class="menu-title @if(Request::segment(1) == "permission_setting" ||Request::segment(1) == "edit-permission") text-active-primary active @endif">الدخول والصلاحيات</span>
                     </a>
                 </div>
                 <div class="menu-item">
@@ -108,8 +108,8 @@
                         <span class="menu-title">اعدادات المراحل</span>
                     </a>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link" href="../../demo16/dist/landing.html">
+                <div class="menu-item @if(Request::segment(1) == "client_setting" || Request::segment(1) == "client-edit") text-active-primary active @endif">
+                    <a class="menu-link" href="/client_setting">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
                                 <span class="svg-icon svg-icon-2">
@@ -121,11 +121,11 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                        <span class="menu-title">قائمة العملاء</span>
+                        <span class="menu-title @if(Request::segment(1) == "client_setting" || Request::segment(1) == "client-edit") text-active-primary active @endif">قائمة العملاء</span>
                     </a>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link" href="../../demo16/dist/landing.html">
+                <div class="menu-item @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-category") text-active-primary active @endif">
+                    <a class="menu-link" href="/percent-category_setting">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
                                 <span class="svg-icon svg-icon-2">
@@ -137,7 +137,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                        <span class="menu-title">تصنيف الشركات</span>
+                        <span class="menu-title @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-categoryt") text-active-primary active @endif">تصنيف الشركات</span>
                     </a>
                 </div>
                 <div class="menu-item">
