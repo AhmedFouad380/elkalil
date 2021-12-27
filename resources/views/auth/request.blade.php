@@ -165,7 +165,7 @@
                                 <label class="form-label required mb-3">البريـد الالكتـروني  :</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="email" placeholder="ادخل البريـد الالكتـروني" value="" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="email" placeholder="ادخل البريـد الالكتـروني" value="" autocomplete="nope" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->

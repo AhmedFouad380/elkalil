@@ -50,3 +50,11 @@ Route::get('success_msg', [PageController::class, 'success_msg']);
 
 Route::post('login', [AuthController::class, 'login']);
 Route::get('logout', [AuthController::class, 'logout']);
+
+Route::get('/table', function () {
+    return view('admin/table');
+});
+
+Route::get('/projects', function () {
+    return view('admin/projects');
+});

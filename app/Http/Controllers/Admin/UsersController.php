@@ -74,7 +74,7 @@ class UsersController extends Controller
                 }
             })
             ->addColumn('actions', function ($row) {
-                $actions = ' <a href="' . url("employee-edit/" . $row->id) . '" class="btn btn-active-light-info">تعديل</a>';
+                $actions = ' <a href="' . url("employee-edit/" . $row->id) . '" class="btn btn-active-light-info"><i class="bi bi-pencil-fill"></i> تعديل </a>';
                 return $actions;
 
             })
