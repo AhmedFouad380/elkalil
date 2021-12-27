@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/login', function () {
+    return view('auth/login');
+})->name('login');
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
@@ -39,9 +43,6 @@ Route::get('/add-button', function () {return view('admin/setting/employee/butto
 
 //end employee settings
 
-Route::get('/login', function () {
-    return view('auth/login');
-})->name('login');
 
 Route::get('/quest', function () {
     return view('auth/request');
