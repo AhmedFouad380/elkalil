@@ -3,27 +3,33 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Percent;
 use App\Models\PercentCategory;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class PercentCategoryController extends Controller
+class PercentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('admin.setting.PercentCategory.index');
+        return view('admin.setting.Percent.index', compact('id'));
+    }
+
+    public function button($id)
+    {
+        return view('admin/setting/Percent/button', compact('id'));
     }
 
     public function datatable(Request $request)
     {
-        $data = PercentCategory::orderBy('id', 'asc');
+        $data = Percent::where('cat_id', $request->id)->orderBy('id', 'asc');
 
         $data = $data->get();
         return Datatables::of($data)
@@ -33,24 +39,20 @@ class PercentCategoryController extends Controller
                                     <input class="form-check-input" type="checkbox" value="' . $row->id . '" />
                                 </div>';
                 return $checkbox;
-            })->addColumn('percent', function ($row) {
-                $users_count = '';
-                $users_count .= ' <span class="text-light-info-800 text-hover-primary mb-1">';
-                $users_count .= '<a href="' . url("percent-setting/" . $row->id) . '" class="btn btn-active-light-info"><i class="bi bi-eye"></i> ' . $row->percent->count() . '</span>' . ' </a>';
-                return $users_count;
             })
-            ->editColumn('name', function ($row) {
-                $name = ' <span class="text-gray-800 text-hover-primary mb-1">' . $row->name . '</span>';
+            ->editColumn('com_name', function ($row) {
+                $name = ' <span class="text-gray-800 text-hover-primary mb-1">' . $row->com_name . '</span>';
                 return $name;
+            })
+            ->addColumn('percent_group', function ($row) {
+                return $row->category ? $row->category->name : '';
             })
             ->addColumn('actions', function ($row) {
                 $actions = '';
-                $actions .= ' <a href="' . url("edit-percent-category/" . $row->id) . '" class="btn btn-active-light-info"><i class="bi bi-pencil-fill"></i> تعديل </a>';
-
+                $actions .= ' <a href="' . url("edit-percent/" . $row->id) . '" class="btn btn-active-light-info"><i class="bi bi-pencil-fill"></i> تعديل </a>';
                 return $actions;
-
             })
-            ->rawColumns(['actions', 'checkbox', 'name', 'percent'])
+            ->rawColumns(['actions', 'checkbox', 'com_name'])
             ->make();
 
     }
@@ -65,12 +67,12 @@ class PercentCategoryController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate(request(), [
-            'name' => 'required|string',
-
-
+            'com_name' => 'required|string',
+            'percent' => 'required|numeric|max:100',
+            'cat_id' => 'required|exists:percent_category,id',
         ]);
 
-        PercentCategory::create($data);
+        Percent::create($data);
         return redirect()->back()->with('message', 'تم الاضافة بنجاح ');
 
     }
@@ -94,8 +96,8 @@ class PercentCategoryController extends Controller
      */
     public function edit($id)
     {
-        $permission = PercentCategory::findOrFail($id);
-        return view('admin.setting.PercentCategory.edit', compact('permission'));
+        $permission = Percent::findOrFail($id);
+        return view('admin.setting.Percent.edit', compact('permission'));
 
     }
 
@@ -108,12 +110,15 @@ class PercentCategoryController extends Controller
      */
     public function update(Request $request)
     {
+
         $data = $this->validate(request(), [
-            'name' => 'required|string',
-            'id' => 'required|exists:percent_category,id',
+            'com_name' => 'required|string',
+            'percent' => 'required|numeric|max:100',
+            'cat_id' => 'required|exists:percent_category,id',
+            'id' => 'required|exists:percent,id',
         ]);
-        $user = PercentCategory::whereId($request->id)->update($data);
-        return redirect(url('percent-category_setting'))->with('message', 'تم التعديل بنجاح ');
+        $user = Percent::whereId($request->id)->update($data);
+        return redirect(url('percent-setting/'.$request->cat_id))->with('message', 'تم التعديل بنجاح ');
 
     }
 
@@ -126,7 +131,7 @@ class PercentCategoryController extends Controller
     public function destroy(Request $request)
     {
         try {
-            PercentCategory::whereIn('id', $request->id)->delete();
+            Percent::whereIn('id', $request->id)->delete();
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed']);
         }

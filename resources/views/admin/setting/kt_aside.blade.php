@@ -63,8 +63,7 @@
                             class="menu-title @if(Request::segment(1) == "employee_setting" || Request::segment(1) == "employee-edit") text-active-primary active @endif">الموظفين والادوار</span>
                     </a>
                 </div>
-                <div
-                    class="menu-item @if(Request::segment(1) == "permission_setting" ||Request::segment(1) == "edit-permission") text-active-primary active @endif">
+                <div  class="menu-item @if(Request::segment(1) == "permission_setting" ||Request::segment(1) == "edit-permission") text-active-primary active @endif">
                     <a class="menu-link" href="/permission_setting">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
@@ -88,8 +87,8 @@
                             class="menu-title @if(Request::segment(1) == "permission_setting" ||Request::segment(1) == "edit-permission") text-active-primary active @endif">الدخول والصلاحيات</span>
                     </a>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link" href="../../demo16/dist/landing.html">
+                <div class="menu-item @if(Request::segment(1) == "percent-setting" ||Request::segment(1) == "edit-percent") text-active-primary active @endif">
+                    <a class="menu-link" href="/percent-category_setting">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
                                 <span class="svg-icon svg-icon-2">
@@ -108,7 +107,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                        <span class="menu-title">خصومات الشركات</span>
+                        <span class="menu-title @if(Request::segment(1) == "percent-setting" ||Request::segment(1) == "edit-percent") text-active-primary active @endif">خصومات الشركات</span>
                     </a>
                 </div>
                 <div class="menu-item">

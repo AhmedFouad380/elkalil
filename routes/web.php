@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\Admin\PercentCategoryController;
+use App\Http\Controllers\Admin\PercentController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UsersController;
@@ -75,6 +76,17 @@ Route::group(['middleware' => ['auth']], function () {
 //Messaging
     Route::get('messages', [MessagesController::class, 'index']);
     Route::get('messages_datatable', [MessagesController::class, 'datatable'])->name('messages.datatable.data');
+
+
+//percent setting
+    Route::get('percent-setting/{id}', [PercentController::class, 'index']);
+    Route::get('percent-datatable', [PercentController::class, 'datatable'])->name('Percent.datatable.data');
+    Route::get('delete-percent', [PercentController::class, 'destroy']);
+    Route::post('store-percent', [PercentController::class, 'store']);
+    Route::get('edit-percent/{id}', [PercentController::class, 'edit']);
+    Route::post('update-percent', [PercentController::class, 'update']);
+    Route::get('add-percent-button/{id}', [PercentController::class, 'button']);
+
 
 });
 

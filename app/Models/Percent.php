@@ -9,6 +9,7 @@ class Percent extends Model
 {
     use HasFactory;
     protected  $table = 'percent';
+    public $timestamps = false;
     protected $fillable = [
         'com_name',
         'percent',
