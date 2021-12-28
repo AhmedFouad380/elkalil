@@ -56,6 +56,10 @@ Route::get('/table', function () {
     return view('admin/table');
 });
 
+Route::get('/table-view', function () {
+    return view('admin/table-view');
+});
+
 Route::get('/projects', function () {
     return view('admin/projects');
 });

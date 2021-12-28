@@ -32934,7 +32934,7 @@ textarea.form-control-lg {
 }
 
 .text-gray-400 {
-  color: #ffffff !important;
+  color: #7e8299 !important;
 }
 
 .text-hover-gray-400 {
@@ -32945,15 +32945,15 @@ textarea.form-control-lg {
 }
 .text-hover-gray-400:hover {
   transition: color 0.2s ease, background-color 0.2s ease;
-  color: #ffffff !important;
+  color: #7e8299 !important;
 }
 .text-hover-gray-400:hover i {
   transition: color 0.2s ease, background-color 0.2s ease;
-  color: #ffffff !important;
+  color: #7e8299 !important;
 }
 .text-hover-gray-400:hover .svg-icon svg [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
-  fill: #ffffff;
+  fill: #7e8299;
 }
 .text-hover-gray-400:hover .svg-icon svg:hover [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
@@ -32967,15 +32967,15 @@ textarea.form-control-lg {
 }
 .text-active-gray-400.active {
   transition: color 0.2s ease, background-color 0.2s ease;
-  color: #ffffff !important;
+  color: #7e8299 !important;
 }
 .text-active-gray-400.active i {
   transition: color 0.2s ease, background-color 0.2s ease;
-  color: #ffffff !important;
+  color: #7e8299 !important;
 }
 .text-active-gray-400.active .svg-icon svg [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
-  fill: #ffffff;
+  fill: #7e8299;
 }
 .text-active-gray-400.active .svg-icon svg:hover [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
