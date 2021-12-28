@@ -34,8 +34,10 @@ class Client extends Model
         return $this->belongsTo(State::class, 'state');
     }
 
-    public function branche()
+    public function getbranche()
     {
-        return $this->belongsTo(Branche::class, 'branche');
+        return $this->belongsTo(Branche::class, 'branche')->withDefault(
+            ['title'=>'لا يوجد']
+        );
     }
 }

@@ -23,4 +23,9 @@ class UserGroup extends Model
         'is_progressTime',
 
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'users_group');
+    }
 }
