@@ -23,6 +23,8 @@ Route::get('/login', function () {
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
+    Route::get('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
+
 });
 
 
@@ -40,6 +42,19 @@ Route::post('store-employee', [UsersController::class, 'store']);
 Route::get('employee-edit/{id}', [UsersController::class, 'edit']);
 Route::post('update-employee', [UsersController::class, 'update']);
 Route::get('/add-button', function () {return view('admin/setting/employee/button');});
+
+
+//Requests settings
+Route::get('Requests', [\App\Http\Controllers\Admin\RequestsController::class, 'index']);
+Route::get('Requests_datatable', [\App\Http\Controllers\Admin\RequestsController::class, 'datatable'])->name('Requests.datatable.data');
+Route::get('delete-user', [\App\Http\Controllers\Admin\RequestsController::class, 'destroy']);
+Route::get('get-branch/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'getBranch']);
+Route::get('delete-user', [\App\Http\Controllers\Admin\RequestsController::class, 'destroy']);
+Route::post('store-employee', [\App\Http\Controllers\Admin\RequestsController::class, 'store']);
+Route::get('employee-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
+Route::post('update-employee', [\App\Http\Controllers\Admin\RequestsController::class, 'update']);
+Route::get('/add-button', function () {return view('admin/setting/employee/button');});
+
 
 //end employee settings
 

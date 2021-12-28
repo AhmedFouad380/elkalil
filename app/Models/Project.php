@@ -58,7 +58,9 @@ class Project extends Model
     {
         return $this->belongsTo(Client::class, 'client_id');
     }
-
+    public function projectContract(){
+        return $this->hasOne(ProjectContract::class , 'project_id');
+    }
     public function created_by()
     {
         return $this->belongsTo(User::class, 'created_by');
