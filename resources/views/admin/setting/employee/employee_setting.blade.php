@@ -142,6 +142,7 @@
             });
         });
     </script>
+
     <?php
     $message = session()->get("message");
     ?>

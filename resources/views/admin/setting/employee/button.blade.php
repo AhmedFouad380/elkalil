@@ -117,6 +117,7 @@
         <!--end::Modal dialog-->
     </div>
     <!--end::Modal - Add task-->
+<<<<<<< HEAD
 
     <!--end::Filter-->
     <!--begin::Add user-->
@@ -128,6 +129,21 @@
     <!--end::Add user-->
     <button id="delete" class="btn btn-light-danger me-3 font-weight-bolder">
         <i class="bi bi-trash-fill fs-2x"></i>
+=======
+
+    <!--end::Filter-->
+    <!--begin::Add user-->
+    <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
+            data-bs-target="#kt_modal_add_user">
+        <i class="bi bi-plus-circle-fill fs-2x"></i>
+
+    </button>
+
+    <!--end::Add user-->
+    <button id="delete" class="btn btn-light-danger me-3 font-weight-bolder">
+        <i class="bi bi-trash-fill fs-2x"></i>
+
+>>>>>>> 826f1a7aa28360df6d5d246ab979cd95caa40090
     </button>
 
     <!--begin::Modal - Add task-->
@@ -329,9 +345,16 @@
     <!--end::Modal - Add task-->
 </div>
 
+<<<<<<< HEAD
 <script type="text/javascript">
 
+=======
+
+
+<script type="text/javascript">
+>>>>>>> 826f1a7aa28360df6d5d246ab979cd95caa40090
     $("#delete").on("click", function () {
+
         var dataList = [];
         $("input:checkbox:checked").each(function (index) {
             dataList.push($(this).val())
@@ -378,7 +401,10 @@
         }
     });
 </script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 826f1a7aa28360df6d5d246ab979cd95caa40090
 <script>
     $("#state").change(function () {
         var wahda = $(this).val();

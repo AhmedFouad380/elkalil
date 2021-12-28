@@ -21,23 +21,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< HEAD
 Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
 
-Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
-    Route::get('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
-
-});
-=======
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('public_setting', [SettingsController::class, 'Settings']);
     Route::post('edit_setting', [SettingsController::class, 'editSettings']);
+    Route::get('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
 
 //employee settings
     Route::get('employee_setting', [UsersController::class, 'index']);
@@ -50,7 +43,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/add-button', function () {
         return view('admin/setting/employee/button');
     });
->>>>>>> 23927eb76fc7999f4b12fae7194804a5c0a10368
 
 //    permission Settings
     Route::get('permission_setting', [PermissionController::class, 'index']);
@@ -100,37 +92,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update-percent', [PercentController::class, 'update']);
     Route::get('add-percent-button/{id}', [PercentController::class, 'button']);
 
+//Requests settings
+    Route::get('Requests', [\App\Http\Controllers\Admin\RequestsController::class, 'index']);
+    Route::get('Requests_datatable', [\App\Http\Controllers\Admin\RequestsController::class, 'datatable'])->name('Requests.datatable.data');
+    Route::get('delete-user', [\App\Http\Controllers\Admin\RequestsController::class, 'destroy']);
+    Route::get('get-branch/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'getBranch']);
+    Route::get('delete-user', [\App\Http\Controllers\Admin\RequestsController::class, 'destroy']);
+    Route::post('store-employee', [\App\Http\Controllers\Admin\RequestsController::class, 'store']);
+    Route::get('employee-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
+    Route::post('update-employee', [\App\Http\Controllers\Admin\RequestsController::class, 'update']);
+    Route::get('/add-button', function () {return view('admin/setting/employee/button');});
 
 });
 
-<<<<<<< HEAD
-//employee settings
-Route::get('employee_setting', [UsersController::class, 'index']);
-Route::get('employee_datatable', [UsersController::class, 'datatable'])->name('employee.datatable.data');
-Route::get('delete-user', [UsersController::class, 'destroy']);
-Route::get('get-branch/{id}', [UsersController::class, 'getBranch']);
-Route::get('delete-user', [UsersController::class, 'destroy']);
-Route::post('store-employee', [UsersController::class, 'store']);
-Route::get('employee-edit/{id}', [UsersController::class, 'edit']);
-Route::post('update-employee', [UsersController::class, 'update']);
-Route::get('/add-button', function () {return view('admin/setting/employee/button');});
 
 
-//Requests settings
-Route::get('Requests', [\App\Http\Controllers\Admin\RequestsController::class, 'index']);
-Route::get('Requests_datatable', [\App\Http\Controllers\Admin\RequestsController::class, 'datatable'])->name('Requests.datatable.data');
-Route::get('delete-user', [\App\Http\Controllers\Admin\RequestsController::class, 'destroy']);
-Route::get('get-branch/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'getBranch']);
-Route::get('delete-user', [\App\Http\Controllers\Admin\RequestsController::class, 'destroy']);
-Route::post('store-employee', [\App\Http\Controllers\Admin\RequestsController::class, 'store']);
-Route::get('employee-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
-Route::post('update-employee', [\App\Http\Controllers\Admin\RequestsController::class, 'update']);
-Route::get('/add-button', function () {return view('admin/setting/employee/button');});
 
-
-//end employee settings
-=======
->>>>>>> 23927eb76fc7999f4b12fae7194804a5c0a10368
 
 
 Route::get('/quest', function () {
