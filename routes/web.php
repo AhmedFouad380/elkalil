@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ClientsController;
+use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\Admin\PercentCategoryController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -19,11 +20,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
-
-
     Route::get('public_setting', [SettingsController::class, 'Settings']);
     Route::post('edit_setting', [SettingsController::class, 'editSettings']);
 
@@ -39,7 +38,6 @@ Route::group(['middleware' => 'auth'], function () {
         return view('admin/setting/employee/button');
     });
 
-
 //    permission Settings
     Route::get('permission_setting', [PermissionController::class, 'index']);
     Route::get('permission_datatable', [PermissionController::class, 'datatable'])->name('permission.datatable.data');
@@ -50,7 +48,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/add-permission-button', function () {
         return view('admin/setting/UserPermission/button');
     });
-
 
 //client settings
     Route::get('client_setting', [ClientsController::class, 'index']);
@@ -63,8 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('admin/setting/clients/button');
     });
 
-
-//    permission Settings
+//percent category setting
     Route::get('percent-category_setting', [PercentCategoryController::class, 'index']);
     Route::get('percent-category_datatable', [PercentCategoryController::class, 'datatable'])->name('percentcategry.datatable.data');
     Route::get('delete-percent-category', [PercentCategoryController::class, 'destroy']);
@@ -76,9 +72,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
+//Messaging
+    Route::get('messages', [MessagesController::class, 'index']);
+    Route::get('messages_datatable', [MessagesController::class, 'datatable'])->name('messages.datatable.data');
+
 });
 
-//end employee settings
 
 Route::get('/login', function () {
     return view('auth/login');
