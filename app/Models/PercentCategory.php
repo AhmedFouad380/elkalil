@@ -14,4 +14,9 @@ class PercentCategory extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function percent()
+    {
+        return $this->hasMany(Percent::class, 'cat_id');
+    }
 }

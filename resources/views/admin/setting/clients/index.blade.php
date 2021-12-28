@@ -32,7 +32,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">الموظفين والادوار</li>
+        <li class="breadcrumb-item text-gray-500">قائمة العملاء</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -64,9 +64,9 @@
                                 </div>
                             </th>
 
-                            <th class="min-w-125px">الموظف</th>
-                            <th class="min-w-125px">الوظيفة</th>
-                            <th class="min-w-125px">الصلاحية</th>
+                            <th class="min-w-125px">العميل</th>
+                            <th class="min-w-125px">رقم الجوال</th>
+                            <th class="min-w-125px">الفرع</th>
                             <th class="min-w-125px">مفعل</th>
                             <th class=" min-w-100px">الاجراءات</th>
                         </tr>
@@ -114,29 +114,23 @@
 
                 ],
                 ajax: {
-                    url: '{{ route('employee.datatable.data') }}',
+                    url: '{{ route('client.datatable.data') }}',
                     data: {
-                        @if(Request::get('users_group'))
-                        users_group: {{ Request::get('users_group') }}
-                        ,
-                        @endif
-                            @if(Request::get('jop_type'))
-                        jop_type:{{Request::get('jop_type') }}
-                        @endif
+
                     }
                 },
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                     {data: 'name', name: 'name', "searchable": true, "orderable": true},
-                    {data: 'jop_type', name: 'jop_type', "searchable": true, "orderable": true},
-                    {data: 'users_group', name: 'users_group', "searchable": true, "orderable": true},
+                    {data: 'phone', name: 'phone', "searchable": true, "orderable": true},
+                    {data: 'branche', name: 'branche', "searchable": true, "orderable": true},
                     {data: 'is_active', name: 'is_active', "searchable": true, "orderable": true},
                     {data: 'actions', name: 'actions', "searchable": false, "orderable": false},
 
                 ]
             });
             $.ajax({
-                url: "{{ URL::to('/add-button')}}",
+                url: "{{ URL::to('/add-client-button')}}",
                 success: function (data) { $('.add_button').append(data); },
                 dataType: 'html'
             });
