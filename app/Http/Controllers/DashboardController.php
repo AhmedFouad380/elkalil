@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Contract;
 use App\Models\Events;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use Auth;
 class DashboardController extends Controller
 {
@@ -33,16 +32,6 @@ class DashboardController extends Controller
         $data->save();
 
         return redirect('/')->with('message','Success');
-=======
-use Illuminate\Support\Facades\Auth;
-
-class DashboardController extends Controller
-{
-    public function index()
-    {
-
-        return view('admin/dashboard');
->>>>>>> 23927eb76fc7999f4b12fae7194804a5c0a10368
 
     }
 }

@@ -911,13 +911,13 @@
                     </a>
                 </div>
                 <div class="menu-item menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3" href="../../demo16/dist/index.html">
+                    <a class="menu-link py-3" href="{{url('Requests')}}">
                         <span class="menu-title">طلبات العملاء الجدد</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>
                 <div class="menu-item menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3" href="../../demo16/dist/index.html">
+                    <a class="menu-link py-3" href="{{url('Contracts')}}">
                         <span class="menu-title">التعاقدات</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>

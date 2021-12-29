@@ -12,7 +12,7 @@
 @endsection
 
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">طلبات العملاء الجدد</h1>
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">التعاقدات</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -22,7 +22,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">طلبات العملاء الجدد </li>
+        <li class="breadcrumb-item text-gray-500">التعاقدات </li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -102,7 +102,7 @@
 
                 ],
                 ajax: {
-                    url: '{{ route('Requests.datatable.data') }}',
+                    url: '{{ route('Contracts.datatable.data') }}',
                     data: {
                         @if(Request::get('users_group'))
                         users_group: {{ Request::get('users_group') }}
@@ -124,7 +124,7 @@
             });
 
             $.ajax({
-                url: "{{ URL::to('/add-Requests-button')}}",
+                url: "{{ URL::to('/add-Contracts-button')}}",
                 success: function (data) { $('.add_button').append(data); },
                 dataType: 'html'
             });

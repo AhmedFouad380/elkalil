@@ -51,7 +51,7 @@ class Project extends Model
 
     public function state()
     {
-        return $this->belongsTo(State::class, 'state');
+        return $this->belongsTo(State::class, 'state','id');
     }
 
     public function client()
@@ -60,6 +60,9 @@ class Project extends Model
     }
     public function projectContract(){
         return $this->hasOne(ProjectContract::class , 'project_id');
+    }
+    public function projectPaid(){
+        return $this->hasOne(ProjectPaid::class , 'project_id');
     }
     public function created_by()
     {

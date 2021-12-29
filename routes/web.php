@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('public_setting', [SettingsController::class, 'Settings']);
     Route::post('edit_setting', [SettingsController::class, 'editSettings']);
-    Route::get('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
+    Route::post('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
 
 //employee settings
     Route::get('employee_setting', [UsersController::class, 'index']);
@@ -95,13 +95,25 @@ Route::group(['middleware' => ['auth']], function () {
 //Requests settings
     Route::get('Requests', [\App\Http\Controllers\Admin\RequestsController::class, 'index']);
     Route::get('Requests_datatable', [\App\Http\Controllers\Admin\RequestsController::class, 'datatable'])->name('Requests.datatable.data');
-    Route::get('delete-user', [\App\Http\Controllers\Admin\RequestsController::class, 'destroy']);
-    Route::get('get-branch/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'getBranch']);
-    Route::get('delete-user', [\App\Http\Controllers\Admin\RequestsController::class, 'destroy']);
-    Route::post('store-employee', [\App\Http\Controllers\Admin\RequestsController::class, 'store']);
-    Route::get('employee-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
-    Route::post('update-employee', [\App\Http\Controllers\Admin\RequestsController::class, 'update']);
-    Route::get('/add-button', function () {return view('admin/setting/employee/button');});
+    Route::post('updateLocation', [\App\Http\Controllers\Admin\RequestsController::class, 'updateLocation'])->name('updateLocation');
+    Route::get('RejectProject', [\App\Http\Controllers\Admin\RequestsController::class, 'RejectProject'])->name('RejectProject');
+    Route::get('AcceptProject', [\App\Http\Controllers\Admin\RequestsController::class, 'AcceptProject'])->name('AcceptProject');
+    Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
+
+    Route::get('Contracts', [\App\Http\Controllers\Admin\ContractsController::class, 'index']);
+    Route::get('Contracts_datatable', [\App\Http\Controllers\Admin\ContractsController::class, 'datatable'])->name('Contracts.datatable.data');
+    Route::get('ConfirmProject', [\App\Http\Controllers\Admin\ContractsController::class, 'ConfirmProject'])->name('ConfirmProject');
+    Route::get('Contracts-edit/{id}', [\App\Http\Controllers\Admin\ContractsController::class, 'edit']);
+    Route::post('UpdateProjectContract', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectContract'])->name('UpdateProjectContract');
+
+
+    Route::get('/add-Requests-button', function () {
+        return view('admin/Requests/button');
+    });
+
+    // Explan
+
+    Route::post('Add_explan', [\App\Http\Controllers\Admin\ExplanController::class, 'Add_explan'])->name('Add_explan');
 
 });
 

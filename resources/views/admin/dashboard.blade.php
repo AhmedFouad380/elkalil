@@ -138,7 +138,7 @@
                     </div>
                     <div class="col-lg-6 mb-5 mb-lg-10">
                         <!--begin::Tiles Widget 5-->
-                        <a href="#" class="card bg-dark h-150px">
+                        <a href="{{url('Requests')}}" class="card bg-dark h-150px">
                             <!--begin::Body-->
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -887,13 +887,11 @@
             <div class="card-header">
                 <h3 class="card-title align-items-start flex-column">
                     <span class="card-label fw-bolder text-dark">My Calendar</span>
-                    <span class="text-muted mt-1 fw-bold fs-7">Preview monthly events</span>
+{{--                    <span class="text-muted mt-1 fw-bold fs-7">Preview monthly events</span>--}}
                 </h3>
                 <div class="card-toolbar">
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#exampleModal">
-                                انشاء حدث
-                    </button>
+                    <a href="#" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">انشاء حدث</a>
+
                 </div>
             </div>
             <!--end::Card header-->
@@ -910,49 +908,71 @@
     </div>
     <!--end::Post-->
 </div>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="kt_modal_new_card" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
         <div class="modal-content">
+            <!--begin::Modal header-->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.createEvent')}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <!--begin::Modal title-->
+                <h2>اضافة حدث</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                            </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
             </div>
-            <form action="{{url('store_event')}}" method="post">
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                <form action="{{url('store_event')}}" method="post">
 
-                <div class="modal-body">
-                    @csrf
-                    <div class="form-group">
-                        <label> العنوان</label>
-                        <input type="text" name="title" class="form-control">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label> العنوان</label>
+                            <input type="text" name="title" class="form-control">
+
+                        </div>
+                        <div class="form-group">
+                            <label> التاريخ</label>
+                            <input type="date" name="date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label> الوقت</label>
+                            <input type="time" name="time" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label> الوصف</label>
+                            <textarea name="description" class="form-control" rows="6"></textarea>
+                        </div>
 
                     </div>
-                    <div class="form-group">
-                        <label> التاريخ</label>
-                        <input type="date" name="date" class="form-control">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">الغاء</button>
+                        <button type="submit" class="btn btn-primary">حفظ</button>
                     </div>
-                    <div class="form-group">
-                        <label> الوقت</label>
-                        <input type="time" name="time" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label> الوصف</label>
-                        <textarea name="description" class="form-control" rows="6"></textarea>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">{{__('lang.Close')}}</button>
-                    <button type="submit" class="btn btn-primary">{{__('lang.save')}}</button>
-                </div>
-            </form>
+                </form>
+                <!--end::Form-->
+            </div>[
+            <!--end::Modal body-->
         </div>
+        <!--end::Modal content-->
     </div>
+    <!--end::Modal dialog-->
 </div>
+
 
 @endsection
 
@@ -1157,7 +1177,7 @@
                     s = e.clone().add(1, "day").format("YYYY-MM-DD"),
                     r = document.getElementById("kt_calendar_widget_1");
                 new FullCalendar.Calendar(r, {
-                    headerToolbar: { left: "prev,next ", center: "title,description", right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth" },
+                    headerToolbar: { left: "prev,next today ", center: "title,description", right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth" },
                     height: 800,
                     contentHeight: 780,
                     aspectRatio: 3,
@@ -1188,5 +1208,34 @@
             }
         })();
     </script>
+
+    <?php
+    $message = session()->get("message");
+    ?>
+
+    @if( session()->has("message"))
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+
+            toastr.success("نجاح", "{{$message}}");
+        </script>
+
+    @endif
+
 @endsection
 
