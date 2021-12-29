@@ -186,7 +186,8 @@
                                 <div class="d-flex flex-column">
                                     @inject('Project','App\Models\Project')
                                     <div class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Project->where('confirm',1)->where('progress','!=',100)->count()}}</div>
-                                    <div class="text-white  fs-6" style="font-size: 12px!important"> المشاريع المفعلة  </div>
+                                    <div class="text-white  fs-6" style="font-size: 12px!important"> التعاقدات و المتابعه  </div>
+                                    <div class="text-white  fs-6" style="font-size: 10px!important"> المشاريع المفعلة  </div>
                                 </div>
                             </div>
                             <!--end::Body-->
@@ -213,7 +214,8 @@
                                 <div class="d-flex flex-column">
                                     @inject('Project','App\Models\Project')
                                     <div class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Project->where('confirm',0)->count()}}</div>
-                                    <div class="text-white  fs-6" style="font-size: 12px!important"> المشاريع غير المفعلة  </div>
+                                    <div class="text-white  fs-6" style="font-size: 12px!important"> التعاقدات و المتابعه  </div>
+                                    <div class="text-white  fs-6" style="font-size: 10px!important"> المشاريع غير المفعلة  </div>
                                 </div>
                             </div>
                             <!--end::Body-->
@@ -356,7 +358,6 @@
                                 <!--begin::Header-->
                                <form method="get">
                                 <div class="px-7 py-5">
-                                    <div class="fs-5 text-dark fw-bolder">تغير العقد</div>
                                 </div>
                                 <!--end::Header-->
                                 <!--begin::Menu separator-->
@@ -367,7 +368,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-10">
                                         <!--begin::Label-->
-                                        <label class="form-label fw-bold">العفود:</label>
+                                        <label class="form-label fw-bold">انواع العقود  </label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
                                         <div>

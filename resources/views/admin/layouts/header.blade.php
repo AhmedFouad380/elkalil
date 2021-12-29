@@ -923,7 +923,7 @@
                     </a>
                 </div>
                 <div class="menu-item menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3" href="../../demo16/dist/index.html">
+                    <a class="menu-link py-3" href="{{url('/projects')}}">
                         <span class="menu-title">قائمة المشاريع</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>

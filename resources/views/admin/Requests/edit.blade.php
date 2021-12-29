@@ -356,7 +356,7 @@
                 <!--begin::Sidebar-->
                 <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-350px mb-10 order-1 order-lg-2">
                     <!--begin::Card-->
-                    <div class="card card-flush pt-3 mb-0" data-kt-sticky="true" data-kt-sticky-name="subscription-summary" data-kt-sticky-offset="{default: false, lg: '200px'}" data-kt-sticky-width="{lg: '300px', xl: '350px'}" data-kt-sticky-left="auto" data-kt-sticky-top="150px" data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
+                    <div class="card card-flush pt-3 mb-0" >
                         <!--begin::Card header-->
                         <div class="card-header">
                             <!--begin::Card title-->
