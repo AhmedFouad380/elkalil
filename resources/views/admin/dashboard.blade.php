@@ -407,8 +407,8 @@
                                 @inject('levels','App\Models\Level')
                                 @inject('ProjectLevels','App\Models\ProjectLevels')
                                 @foreach($levels->where('contract_id',$contract->id)->where('percent','!=',0)->get() as $key => $level)
-                                    @if($key < 5 )
-                                <div class="col">
+                                    @if($key < 6 )
+                                <div class="col-2">
                                     <div class="d-flex align-items-center me-2">
                                         <div class="symbol symbol-50px me-3">
                                             <div class="symbol-label bg-light-danger">
@@ -450,8 +450,8 @@
                             <!--begin::Row-->
                             <div class="row g-0">
                                 @foreach($levels->where('contract_id',$contract->id)->where('percent','!=',0)->get() as $key => $level)
-                                    @if($key >= 5 )
-                                        <div class="col">
+                                    @if($key >= 6 )
+                                        <div class="col-2">
                                             <div class="d-flex align-items-center me-2">
                                                 <div class="symbol symbol-50px me-3">
                                                     <div class="symbol-label bg-light-danger">
@@ -1151,7 +1151,7 @@
                             crosshairs: { show: !1, position: "front", stroke: { color: s, width: 1, dashArray: 3 } },
                             tooltip: { enabled: !0, formatter: void 0, offsetY: 0, style: { fontSize: "12px" } },
                         },
-                        yaxis: { min: 0, max: 60, labels: { show: !1, style: { colors: o, fontSize: "12px" } } },
+                        yaxis: { min: 0, max: 200, labels: { show: !1, style: { colors: o, fontSize: "12px" } } },
                         states: { normal: { filter: { type: "none", value: 0 } }, hover: { filter: { type: "none", value: 0 } }, active: { allowMultipleDataPointsSelection: !1, filter: { type: "none", value: 0 } } },
                         tooltip: {
                             style: { fontSize: "12px" },
