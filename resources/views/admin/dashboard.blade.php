@@ -1115,7 +1115,7 @@
             var e = document.querySelectorAll(".mixed-widget-6-chart");
             [].slice.call(e).map(function (e) {
                 var t = parseInt(KTUtil.css(e, "height"));
-                if (e) {
+                    if (e) {
                     var a = e.getAttribute("data-kt-chart-color"),
                         o = KTUtil.getCssVariableValue("--bs-gray-800"),
                         s = KTUtil.getCssVariableValue("--bs-gray-300"),
@@ -1151,7 +1151,7 @@
                             crosshairs: { show: !1, position: "front", stroke: { color: s, width: 1, dashArray: 3 } },
                             tooltip: { enabled: !0, formatter: void 0, offsetY: 0, style: { fontSize: "12px" } },
                         },
-                        yaxis: { min: 0, max: 60, labels: { show: !1, style: { colors: o, fontSize: "12px" } } },
+                        yaxis: { min: 0, max: 200, labels: { show: !1, style: { colors: o, fontSize: "12px" } } },
                         states: { normal: { filter: { type: "none", value: 0 } }, hover: { filter: { type: "none", value: 0 } }, active: { allowMultipleDataPointsSelection: !1, filter: { type: "none", value: 0 } } },
                         tooltip: {
                             style: { fontSize: "12px" },
