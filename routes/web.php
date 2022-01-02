@@ -142,3 +142,19 @@ Route::get('/table-view', function () {
 Route::get('/projects', function () {
     return view('admin/projects');
 });
+
+Route::get('/project-details', function () {
+    return view('admin/project_details');
+});
+
+Route::get('/project-details2', function () {
+    return view('admin/project_details2');
+});
+
+Route::get('/inbox', function () {
+    return view('admin/inbox');
+});
+
+Route::get('/reply', function () {
+    return view('admin/reply');
+});

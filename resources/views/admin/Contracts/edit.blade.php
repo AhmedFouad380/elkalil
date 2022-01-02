@@ -1282,6 +1282,9 @@
             }
 
         });
+        $("#search_input").onkeydown(function (event) {
+        var input = document.getElementById('search_input');
+        });
         if (document.getElementById('us1')) {
             var content;
             var latitude = {{!empty($data->lat) ? $data->lat: '24.69670448385797'}};
