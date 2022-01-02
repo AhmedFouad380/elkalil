@@ -1178,7 +1178,9 @@
                          Request::segment(1) == "edit-percent-category"||
                          Request::segment(1) == "messages"||
                          Request::segment(1) == "percent-setting"||
-                         Request::segment(1) == "edit-percent"
+                         Request::segment(1) == "edit-percent" ||
+                         Request::segment(1) == "contract_setting"||
+                         Request::segment(1) == "edit-contract"
                          ) active @endif py-3">
                         <span class="menu-title">الاعدادات</span>
                         <span class="menu-arrow d-lg-none"></span>
@@ -1293,10 +1295,12 @@
                             </span>
                             </a>
                         </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                        <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
-                                <span class="menu-icon">
+                            <a href="/contract_setting">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "contract_setting" ||Request::segment(1) == "edit-contract") active @endif py-3">
+                                <span class="menu-icon ">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -1315,10 +1319,17 @@
                                                   fill="black"/>
                                         </svg>
                                     </span>
+
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">انواع التعاقددات</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "contract_setting"  ||Request::segment(1) == "edit-contract") text-active-primary active @endif ">
+
+                                        انواع التعاقدات
+
+                                      </span>
                             </span>
+                            </a>
                         </div>
                         <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">

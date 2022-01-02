@@ -110,8 +110,8 @@
                         <span class="menu-title @if(Request::segment(1) == "percent-setting" ||Request::segment(1) == "edit-percent") text-active-primary active @endif">خصومات الشركات</span>
                     </a>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link" href="../../demo16/dist/landing.html">
+                <div class="menu-item @if(Request::segment(1) == "contract_setting" ||Request::segment(1) == "edit-contract") text-active-primary active @endif">
+                    <a class="menu-link" href="/contract_setting">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
                                 <span class="svg-icon svg-icon-2">
@@ -130,9 +130,10 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                        <span class="menu-title">انواع التعاقددات</span>
+                        <span class="menu-title @if(Request::segment(1) == "contract_setting" ||Request::segment(1) == "edit-contract") text-active-primary active @endif">انواع التعاقدات</span>
                     </a>
                 </div>
+
                 <div class="menu-item">
                     <a class="menu-link" href="../../demo16/dist/landing.html">
                             <span class="menu-icon">

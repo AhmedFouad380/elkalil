@@ -23,20 +23,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< HEAD
-=======
 Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
 
-Route::group(['middleware' => ['auth']], function () {
->>>>>>> dd80c67bc8f1779a98ec956d7a2fe133927aaee9
 
-Route::middleware('guest')->group(function () {
-    Route::get('/login', function () {
+     Route::get('/login', function () {
         return view('auth/login');
     })->name('login');
-});
 
 Route::get('/quest', function () {
     return view('auth/request');
@@ -61,12 +55,10 @@ Route::middleware('auth_user')->group(function () {
     Route::get('/home', [DashboardController::class, 'index']);
     Route::get('public_setting', [SettingsController::class, 'Settings']);
     Route::post('edit_setting', [SettingsController::class, 'editSettings']);
-<<<<<<< HEAD
-=======
+
     Route::post('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
 
->>>>>>> dd80c67bc8f1779a98ec956d7a2fe133927aaee9
-//employee settings
+    //employee settings
     Route::get('employee_setting', [UsersController::class, 'index']);
     Route::get('employee_datatable', [UsersController::class, 'datatable'])->name('employee.datatable.data');
     Route::get('delete-user', [UsersController::class, 'destroy']);
@@ -129,8 +121,6 @@ Route::middleware('auth_user')->group(function () {
     Route::post('update-percent', [PercentController::class, 'update']);
     Route::get('add-percent-button/{id}', [PercentController::class, 'button']);
 
-<<<<<<< HEAD
-=======
 //Requests settings
     Route::get('Requests', [\App\Http\Controllers\Admin\RequestsController::class, 'index']);
     Route::get('Requests_datatable', [\App\Http\Controllers\Admin\RequestsController::class, 'datatable'])->name('Requests.datatable.data');
@@ -157,10 +147,6 @@ Route::middleware('auth_user')->group(function () {
 });
 
 
-
-
-
-
 Route::get('/quest', function () {
     return view('auth/request');
 });
@@ -180,7 +166,6 @@ Route::get('/table-view', function () {
 
 Route::get('/projects', function () {
     return view('admin/projects');
->>>>>>> dd80c67bc8f1779a98ec956d7a2fe133927aaee9
 });
 
 Route::get('/project-details', function () {
