@@ -8,21 +8,11 @@
 @endsection
 
 @section('style')
-    <style>
-        @media (min-width: 992px) {
-            .aside-me .content {
-                padding-right: 30px;
-            }
-        }
 
-        .select2-container .select2-selection--single .select2-selection__clear {
-            padding-right: 355px;
-        }
-    </style>
 @endsection
 
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">الاعدادات</h1>
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">التعاقدات</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -32,7 +22,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">الموظفين والادوار</li>
+        <li class="breadcrumb-item text-gray-500">التعاقدات </li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -42,7 +32,6 @@
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
 
-        @include('admin.setting.kt_aside')
 
         <div class="content flex-row-fluid" id="kt_content">
             <!--begin::Card-->
@@ -64,10 +53,9 @@
                                 </div>
                             </th>
 
-                            <th class="min-w-125px">الموظف</th>
-                            <th class="min-w-125px">الوظيفة</th>
-                            <th class="min-w-125px">الصلاحية</th>
-                            <th class="min-w-125px">مفعل</th>
+                            <th class="min-w-125px">اسم العميل</th>
+                            <th class="min-w-125px">تاريخ الطلب</th>
+                            <th class="min-w-125px">نوع المشروع</th>
                             <th class=" min-w-100px">الاجراءات</th>
                         </tr>
                         <!--end::Table row-->
@@ -100,7 +88,7 @@
                 responsive: true,
                 aaSorting: [],
                 "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button'B> r>>  <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
-                 lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
+                lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
                 "language": {
                     search: '<i class="fa fa-eye" aria-hidden="true"></i>',
                     searchPlaceholder: 'بحث سريع',
@@ -114,7 +102,7 @@
 
                 ],
                 ajax: {
-                    url: '{{ route('employee.datatable.data') }}',
+                    url: '{{ route('Contracts.datatable.data') }}',
                     data: {
                         @if(Request::get('users_group'))
                         users_group: {{ Request::get('users_group') }}
@@ -128,24 +116,26 @@
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                     {data: 'name', name: 'name', "searchable": true, "orderable": true},
-                    {data: 'jop_type', name: 'jop_type', "searchable": true, "orderable": true},
-                    {data: 'users_group', name: 'users_group', "searchable": true, "orderable": true},
-                    {data: 'is_active', name: 'is_active', "searchable": true, "orderable": true},
+                    {data: 'date', name: 'date', "searchable": true, "orderable": true},
+                    {data: 'type', name: 'type', "searchable": true, "orderable": true},
                     {data: 'actions', name: 'actions', "searchable": false, "orderable": false},
 
                 ]
             });
+
             $.ajax({
-                url: "{{ URL::to('/add-button')}}",
+                url: "{{ URL::to('/add-Contracts-button')}}",
                 success: function (data) { $('.add_button').append(data); },
                 dataType: 'html'
             });
         });
     </script>
 
+
     <?php
     $message = session()->get("message");
     ?>
+
     @if( session()->has("message"))
         <script>
             toastr.options = {
@@ -164,6 +154,7 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             };
+
             toastr.success("نجاح", "{{$message}}");
         </script>
 

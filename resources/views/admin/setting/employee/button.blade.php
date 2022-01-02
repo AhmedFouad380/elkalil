@@ -128,6 +128,7 @@
     <!--end::Add user-->
     <button id="delete" class="btn btn-light-danger me-3 font-weight-bolder">
         <i class="bi bi-trash-fill fs-2x"></i>
+
     </button>
 
     <!--begin::Modal - Add task-->
@@ -331,7 +332,9 @@
 
 <script type="text/javascript">
 
+
     $("#delete").on("click", function () {
+
         var dataList = [];
         $("input:checkbox:checked").each(function (index) {
             dataList.push($(this).val())
@@ -378,7 +381,6 @@
         }
     });
 </script>
-
 <script>
     $("#state").change(function () {
         var wahda = $(this).val();

@@ -23,6 +23,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+<<<<<<< HEAD
+=======
+Route::get('/login', function () {
+    return view('auth/login');
+})->name('login');
+
+Route::group(['middleware' => ['auth']], function () {
+>>>>>>> dd80c67bc8f1779a98ec956d7a2fe133927aaee9
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
@@ -53,6 +61,11 @@ Route::middleware('auth_user')->group(function () {
     Route::get('/home', [DashboardController::class, 'index']);
     Route::get('public_setting', [SettingsController::class, 'Settings']);
     Route::post('edit_setting', [SettingsController::class, 'editSettings']);
+<<<<<<< HEAD
+=======
+    Route::post('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
+
+>>>>>>> dd80c67bc8f1779a98ec956d7a2fe133927aaee9
 //employee settings
     Route::get('employee_setting', [UsersController::class, 'index']);
     Route::get('employee_datatable', [UsersController::class, 'datatable'])->name('employee.datatable.data');
@@ -116,4 +129,72 @@ Route::middleware('auth_user')->group(function () {
     Route::post('update-percent', [PercentController::class, 'update']);
     Route::get('add-percent-button/{id}', [PercentController::class, 'button']);
 
+<<<<<<< HEAD
+=======
+//Requests settings
+    Route::get('Requests', [\App\Http\Controllers\Admin\RequestsController::class, 'index']);
+    Route::get('Requests_datatable', [\App\Http\Controllers\Admin\RequestsController::class, 'datatable'])->name('Requests.datatable.data');
+    Route::post('updateLocation', [\App\Http\Controllers\Admin\RequestsController::class, 'updateLocation'])->name('updateLocation');
+    Route::get('RejectProject', [\App\Http\Controllers\Admin\RequestsController::class, 'RejectProject'])->name('RejectProject');
+    Route::get('AcceptProject', [\App\Http\Controllers\Admin\RequestsController::class, 'AcceptProject'])->name('AcceptProject');
+    Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
+
+    Route::get('Contracts', [\App\Http\Controllers\Admin\ContractsController::class, 'index']);
+    Route::get('Contracts_datatable', [\App\Http\Controllers\Admin\ContractsController::class, 'datatable'])->name('Contracts.datatable.data');
+    Route::get('ConfirmProject', [\App\Http\Controllers\Admin\ContractsController::class, 'ConfirmProject'])->name('ConfirmProject');
+    Route::get('Contracts-edit/{id}', [\App\Http\Controllers\Admin\ContractsController::class, 'edit']);
+    Route::post('UpdateProjectContract', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectContract'])->name('UpdateProjectContract');
+
+
+    Route::get('/add-Requests-button', function () {
+        return view('admin/Requests/button');
+    });
+
+    // Explan
+
+    Route::post('Add_explan', [\App\Http\Controllers\Admin\ExplanController::class, 'Add_explan'])->name('Add_explan');
+
+});
+
+
+
+
+
+
+Route::get('/quest', function () {
+    return view('auth/request');
+});
+Route::post('/quest', 'App\Http\Controllers\Front\PageController@store_quest')->name('create_quest.submit');
+Route::get('success_msg', [PageController::class, 'success_msg']);
+
+Route::post('login', [AuthController::class, 'login']);
+Route::get('logout', [AuthController::class, 'logout']);
+
+Route::get('/table', function () {
+    return view('admin/table');
+});
+
+Route::get('/table-view', function () {
+    return view('admin/table-view');
+});
+
+Route::get('/projects', function () {
+    return view('admin/projects');
+>>>>>>> dd80c67bc8f1779a98ec956d7a2fe133927aaee9
+});
+
+Route::get('/project-details', function () {
+    return view('admin/project_details');
+});
+
+Route::get('/project-details2', function () {
+    return view('admin/project_details2');
+});
+
+Route::get('/inbox', function () {
+    return view('admin/inbox');
+});
+
+Route::get('/reply', function () {
+    return view('admin/reply');
 });
