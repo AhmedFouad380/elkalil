@@ -21,6 +21,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
+        <li class="breadcrumb-item text-gray-500">طلبات العملاء الجدد</li>
         <li class="breadcrumb-item text-gray-500">بيانات المشروع</li>
         <!--end::Item-->
     </ul>

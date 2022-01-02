@@ -884,7 +884,7 @@ var KTWidgets = {
                     if (e) {
                         var a = e.getAttribute("data-kt-chart-color"),
                             o = {
-                                labels: ["Total Orders"],
+                                labels: [""],
                                 series: [75],
                                 chart: { fontFamily: "inherit", height: t, type: "radialBar", offsetY: 0 },
                                 plotOptions: {
@@ -902,7 +902,7 @@ var KTWidgets = {
                                                 offsetY: -40,
                                                 show: !0,
                                                 formatter: function (e) {
-                                                    return "8,346";
+                                                    return "75 %";
                                                 },
                                             },
                                         },

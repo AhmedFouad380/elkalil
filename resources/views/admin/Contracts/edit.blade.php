@@ -21,6 +21,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
+        <li class="breadcrumb-item text-gray-500">التعاقدات  </li>
         <li class="breadcrumb-item text-gray-500">بيانات المشروع</li>
         <!--end::Item-->
     </ul>
@@ -1280,6 +1281,9 @@
                 // locationNameInput: $('#address'),
             }
 
+        });
+        $("#search_input").onkeydown(function (event) {
+        var input = document.getElementById('search_input');
         });
         if (document.getElementById('us1')) {
             var content;

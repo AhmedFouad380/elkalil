@@ -50,9 +50,9 @@
 
                             <div class="col-2">
                                 <select name="country" class="form-select form-select-lg form-select-solid" data-placeholder="مراحل المشروع ..." data-allow-clear="true" data-hide-search="true">
-                                    <option value=""> مراحل المشروع</option>
-                                    <option value="مرحلة ما قبل التصميم">مرحلة ما قبل التصميم </option>
-                                    <option value="مرحلة التصميم">مرحلة التصميم</option>
+                                    <option value="">نوع التعاقد</option>
+                                    <option value="قياسي"> قياسي </option>
+                                    <option value="مميز"> مميز</option>
                                 </select>
                             </div>
 
