@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\ContractTypesController;
+use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\LevelDetailsController;
 use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\Admin\PercentCategoryController;
 use App\Http\Controllers\Admin\PercentController;
@@ -108,6 +110,29 @@ Route::middleware('auth_user')->group(function () {
     Route::get('/add-contract-button', function () {
         return view('admin/setting/ContractCategory/button');
     });
+
+
+
+//Level setting
+    Route::get('level-setting/{id}', [LevelController::class, 'index']);
+    Route::get('level-datatable', [LevelController::class, 'datatable'])->name('Level.datatable.data');
+    Route::get('delete-level', [LevelController::class, 'destroy']);
+    Route::post('store-level', [LevelController::class, 'store']);
+    Route::get('edit-level/{id}', [LevelController::class, 'edit']);
+    Route::post('update-level', [LevelController::class, 'update']);
+    Route::get('add-level-button/{id}', [LevelController::class, 'button']);
+
+
+
+//Level details setting
+    Route::get('level-details-setting/{id}', [LevelDetailsController::class, 'index']);
+    Route::get('level-details-datatable', [LevelDetailsController::class, 'datatable'])->name('Level.details.datatable.data');
+    Route::get('delete-details-level', [LevelDetailsController::class, 'destroy']);
+    Route::post('store-details-level', [LevelDetailsController::class, 'store']);
+    Route::get('edit-details-level/{id}', [LevelDetailsController::class, 'edit']);
+    Route::post('update-details-level', [LevelDetailsController::class, 'update']);
+    Route::get('add-level-details-button/{id}', [LevelDetailsController::class, 'button']);
+
 //Messaging
     Route::get('messages', [MessagesController::class, 'index']);
     Route::get('messages_datatable', [MessagesController::class, 'datatable'])->name('messages.datatable.data');

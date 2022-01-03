@@ -5,7 +5,6 @@
           type="text/css"/>
     <link href="{{ URL::asset('admin/assets/plugins/custom/prismjs/prismjs.bundle.css')}}" rel="stylesheet"
           type="text/css"/>
-
 @endsection
 
 @section('style')
@@ -33,12 +32,12 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">انواع التعاقدات</li>
+        <li class="breadcrumb-item text-gray-500">اعدادت المراحل</li>
+        <li class="breadcrumb-item text-gray-500">اعدادت المراحل الداخلية</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
 @endsection
-
 @section('content')
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
@@ -66,19 +65,19 @@
                             </th>
 
                             <th class="min-w-125px">الاسم</th>
-                            <th class="min-w-125px">اللون</th>
-                            <th class="min-w-125px">عدد المراحل</th>
-                            <th class=" min-w-100px">الاجراءات</th>
+                            <th class="min-w-125px">النسبة</th>
+                            <th class="min-w-125px">المرحلة</th>
+                            <th class=" min-w-125px">الاجراءات</th>
                         </tr>
                         <!--end::Table row-->
                         </thead>
                         <!--end::Table head-->
                         <!--begin::Table body-->
 
-
                         <!--end::Table body-->
                     </table>
                     <!--end::Table-->
+
                 </div>
                 <!--end::Card body-->
             </div>
@@ -90,12 +89,6 @@
 
 @section('script')
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/documentation/documentation.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/documentation/search.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/documentation/editors/ckeditor/classic.js')}}"></script>
-
 
     <script type="text/javascript">
         $(function () {
@@ -118,30 +111,27 @@
                         className: 'btn btn-light-primary me-3',
                         text: '<i class="bi bi-printer-fill fs-2x"></i>'
                     },
-                    // {extend: 'pdf', className: 'btn btn-raised btn-danger', text: 'PDF'},
                     {
                         extend: 'excel',
                         className: 'btn btn-light-primary me-3',
                         text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'
                     },
-                    // {extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
 
                 ],
                 ajax: {
-                    url: '{{ route('contract.datatable.data') }}',
-                    data: {}
+                    url: '{{ route('Level.details.datatable.data') }}',
+                    data: {id: {{ $id }} }
                 },
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                     {data: 'title', name: 'title', "searchable": true, "orderable": true},
-                    {data: 'color', name: 'color', "searchable": true, "orderable": true},
-                    {data: 'Levels', name: 'Levels', "searchable": true, "orderable": true},
+                    {data: 'percent', name: 'percent', "searchable": true, "orderable": true},
+                    {data: 'level', name: 'level', "searchable": true, "orderable": true},
                     {data: 'actions', name: 'actions', "searchable": false, "orderable": false},
-
                 ]
             });
             $.ajax({
-                url: "{{ URL::to('/add-contract-button')}}",
+                url: "{{ URL::to('/add-level-details-button/'.$id)}}",
                 success: function (data) {
                     $('.add_button').append(data);
                 },
@@ -174,7 +164,5 @@
         </script>
 
     @endif
-
-
 @endsection
 

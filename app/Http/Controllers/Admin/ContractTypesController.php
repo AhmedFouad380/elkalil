@@ -35,6 +35,12 @@ class ContractTypesController extends Controller
                                 </div>';
                 return $checkbox;
             })
+            ->addColumn('Levels', function ($row) {
+                $users_count = '';
+                $users_count .= ' <span class="text-light-info-800 text-hover-primary mb-1">';
+                $users_count .= '<a href="' . url("level-setting/" . $row->id) . '" class="btn btn-active-light-info"><i class="bi bi-eye"></i> ' . $row->Levels->count() . '</span>' . ' </a>';
+                return $users_count;
+            })
             ->editColumn('title', function ($row) {
                 $name = ' <span class="text-gray-800 text-hover-primary mb-1">' . $row->title . '</span>';
                 return $name;
@@ -49,7 +55,7 @@ class ContractTypesController extends Controller
                 return $actions;
 
             })
-            ->rawColumns(['actions', 'checkbox', 'title', 'color'])
+            ->rawColumns(['actions', 'checkbox', 'title', 'color','Levels'])
             ->make();
 
     }

@@ -693,7 +693,8 @@
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bolder d-flex align-items-center fs-5">{{Auth::user() ? Auth::user()->name : ""}}
+                                    <div
+                                        class="fw-bolder d-flex align-items-center fs-5">{{Auth::user() ? Auth::user()->name : ""}}
                                         <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
                                     </div>
                                     <a href="#"
@@ -1180,7 +1181,11 @@
                          Request::segment(1) == "percent-setting"||
                          Request::segment(1) == "edit-percent" ||
                          Request::segment(1) == "contract_setting"||
-                         Request::segment(1) == "edit-contract"
+                         Request::segment(1) == "edit-contract" ||
+                         Request::segment(1) == "level-setting" ||
+                          Request::segment(1) == "edit-level"||
+                          Request::segment(1) == "level-details-setting"||
+                          Request::segment(1) == "edit-details-level"
                          ) active @endif py-3">
                         <span class="menu-title">الاعدادات</span>
                         <span class="menu-arrow d-lg-none"></span>
@@ -1331,10 +1336,12 @@
                             </span>
                             </a>
                         </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                        <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
-                                <span class="menu-icon">
+                            <a href="/contract_setting">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "level-setting" || Request::segment(1) == "edit-level"|| Request::segment(1) == "level-details-setting"|| Request::segment(1) == "edit-details-level") active @endif py-3">
+                                <span class="menu-icon ">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -1353,12 +1360,19 @@
                                                   fill="black"/>
                                         </svg>
                                     </span>
+
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">اعدادات المراحل </span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "level-setting" || Request::segment(1) == "edit-level"|| Request::segment(1) == "level-details-setting"|| Request::segment(1) == "edit-details-level") text-active-primary active @endif ">
+
+                                        اعدادات المراحل
+
+                                      </span>
                             </span>
+                            </a>
                         </div>
-                        <div data-kt-menu-placement="right-start"
+                         <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
                             <a href="/employee_setting">
                             <span
@@ -1426,7 +1440,8 @@
                         <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
                             <a href="/percent-category_setting">
-                            <span class="menu-link @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-category") active @endif py-3">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-category") active @endif py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">

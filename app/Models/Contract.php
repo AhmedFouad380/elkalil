@@ -19,4 +19,9 @@ class Contract extends Model
         'pdf',
         'color',
     ];
+
+    public function Levels()
+    {
+        return $this->hasMany(Level::class, 'contract_id');
+    }
 }
