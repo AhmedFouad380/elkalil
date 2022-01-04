@@ -90,7 +90,7 @@ class PageController extends Controller
         $project_data['is_contract'] = 0;
 
         $project = Project::create($project_data);
-        
+
         $project_other_data['project_id'] = $project->id;
         $project_other = ProjectOther::create($project_other_data);
 
@@ -115,7 +115,7 @@ class PageController extends Controller
         $explan = Explan::create($explan_data);
 
         $message = "عملينا العزيز ، تم تسجيل البيانات الخاصة بكم وسيتم التواصل معكم خلال 48 ساعة ، شاكرين انتظاركم" ;
-        
+
         $ch = curl_init();
         $url = "http://basic.unifonic.com/rest/SMS/messages";
         curl_setopt($ch, CURLOPT_URL,$url);
@@ -130,10 +130,10 @@ class PageController extends Controller
 
             $setting_data = Setting::where('id', 1)->update([
                 'sms_used' => 2 + $setting->sms_used
-            ]); 
-            
+            ]);
+
             $description = 'ارسال رسالة تسجيل مشروع جديد للعميل رقم '.$phone;
-            
+
             $sms_data['type'] = 2;
             $sms_data['user_id'] = $client_id;
             $sms_data['description'] = $description;
@@ -148,7 +148,7 @@ class PageController extends Controller
                  ->where('users_group.is_client_order', 1);
         })
         ->get();
-        
+
         foreach($users as $user){
             if($user->token_id != null){
                 $token = $user->token_id; // push token
@@ -182,15 +182,35 @@ class PageController extends Controller
                 curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
                 $result = curl_exec($ch );
                 curl_close( $ch );
-                
+
             }
         }
-        
+
         return redirect('/success_msg')->with('msg', 'Success');
     }
 
     public function success_msg () {
-        return view('front.success_msg'); 
+        return view('front.success_msg');
     }
+
+    public function Get_Levels(Request $request){
+
+        $contract = Contract::find($request->id);
+
+        return view('admin.dashboardModel',compact('contract'));
+    }
+    public function getMoney(Request $request){
+
+            $data = $request;
+        return view('admin.dashboardTotalContract',compact('data'));
+    }
+
+    public function contractName(Request $request){
+
+        $contract = Contract::find($request->id);
+
+return $contract->title;
+    }
+
 
 }

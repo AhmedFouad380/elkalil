@@ -25,7 +25,7 @@ Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['admin']], function () {
 
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('public_setting', [SettingsController::class, 'Settings']);
@@ -119,7 +119,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-
+Route::get('Get_Levels',[PageController::class ,'Get_Levels']);
+Route::get('contractName',[PageController::class ,'contractName']);
+Route::get('getMoney',[PageController::class ,'getMoney']);
 
 
 Route::get('/quest', function () {

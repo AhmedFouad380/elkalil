@@ -49,7 +49,11 @@
                             <!--begin::Card title-->
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
-                                <a href="#" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">تعديل البيانات</a>
+
+                                <a href="#" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card2">اشعار مراجعه</a>
+
+                                <a href="#"  style="margin: 10px;" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">تعديل البيانات</a>
+
                             </div>
                             <!--end::Card toolbar-->
                         </div>
@@ -493,9 +497,12 @@
                                         <div class="d-flex flex-wrap py-5">
                                             <!--begin::Col-->
                                             <div class="flex-equal me-5">
-                                                <button data-id="{{$data->id}}" class=" ConfirmProject btn btn-light-success me-3 font-weight-bolder">
+                                                <a href="#" class="btn btn-light-success" data-bs-toggle="modal" data-bs-target="#kt_modal_confirmProject">
                                                     <i class="bi bi-check-circle fs-2x"></i> تفعيل
-                                                </button>
+
+                                                    </a>
+
+
 
                                                 <button type="button" data-id="{{$data->id}}" class=" RejectProject btn btn-light-danger me-3">
                                                     <i class="bi bi-x-octagon fs-2x"></i> رفـض
@@ -515,74 +522,6 @@
                                 <div class="separator separator-dashed"></div>
 
                                 <!--end::Option-->
-                                <div class="py-1">
-                                    <!--begin::Header-->
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <!--begin::Toggle-->
-                                        <div class="d-flex align-items-center collapsible toggle collapsed" data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_26">
-                                            <!--begin::Arrow-->
-                                            <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2">
-                                                <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                                                </svg>
-                                            </span>
-                                                <!--end::Svg Icon-->
-                                                <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                <span class="svg-icon toggle-off svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                                                </svg>
-                                            </span>
-                                                <!--end::Svg Icon-->
-                                            </div>
-                                            <!--end::Arrow-->
-                                            <!--begin::Logo-->
-                                            <img src="assets/media/svg/card-logos/visa.svg" class="w-40px me-3" alt="" />
-                                            <!--end::Logo-->
-                                            <!--begin::Summary-->
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center fw-bolder">اشعار مراجعه</div>
-                                                <div class="text-muted"></div>
-                                            </div>
-                                            <!--end::Summary-->
-                                        </div>
-                                        <!--end::Toggle-->
-                                        <!--begin::Input-->
-                                        <div class="d-flex my-3 ms-9">
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Header-->
-                                    <!--begin::Body-->
-                                    <div id="kt_create_new_payment_method_26" class="collapse fs-6 ps-10">
-                                        <!--begin::Details-->
-                                        <div class="d-flex flex-wrap py-5">
-                                            <!--begin::Col-->
-                                            <div class="flex-equal me-5">
-                                                <a href="https://alkhalilsys.com/admins/page/quest2/{{$data->id}}"  target="_blank" class="btn btn-light-primary me-3 font-weight-bolder">
-                                                    <i class="bi bi-eye fs-2x"></i> رؤية
-                                                </a>
-
-                                                <button type="button" class="btn btn-light-danger me-3">
-                                                    <i class="bi bi-envelope fs-2x"></i> ارسال
-                                                </button>
-                                            </div>
-                                            <!--end::Col-->
-                                            <!--begin::Col-->
-                                            <div class="flex-equal">
-
-                                            </div>
-                                            <!--end::Col-->
-                                        </div>
-                                        <!--end::Details-->
-                                    </div>
-                                    <!--end::Body-->
-                                </div>
                                 <!--end::Option-->
                                 <div class="separator separator-dashed"></div>
 
@@ -923,6 +862,130 @@
             </div>
             <!--end::Modal - New Product-->
             <!--begin::Modal - New Card-->
+            <div class="modal fade" id="kt_modal_confirmProject" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header">
+                            <!--begin::Modal title-->
+                            <h2>تفعيل المشروع</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                            </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form id="kt_modal_new_card_form" class="form" action="#">
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">: تاريخ التفعيل</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <input type="date"  id="confirmDate"  required class="form-control form-control-solid" placeholder="" value="{{$data->client->name}}" name="title" />
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-15">
+                                    <button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">الغاء</button>
+                                    <button type="button" data-id="{{$data->id}}" id="ConfirmProject" class=" ConfirmProject btn btn-primary">
+                                        <span class="indicator-label">حفظ</span>
+                                        <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+            <div class="modal fade" id="kt_modal_new_card2" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header">
+                            <!--begin::Modal title-->
+                            <h2>اشعار المراجعه</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                            </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form id="kt_modal_new_card_form" class="form" action="#">
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">: اسم العميل</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <input type="text"  disabled required class="form-control form-control-solid" placeholder="" value="{{$data->client->name}}" name="title" />
+                                    <input type="hidden"  disabled required class="form-control form-control-solid" placeholder="" value="{{$data->client->id}}" name="id" />
+                                </div>
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">الرسالة :</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <textarea rows="5" name="note"></textarea>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-15">
+                                    <button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">الغاء</button>
+                                    <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                        <span class="indicator-label">حفظ</span>
+                                        <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+
             <div class="modal fade" id="kt_modal_new_card" tabindex="-1" aria-hidden="true">
                 <!--begin::Modal dialog-->
                 <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -1360,8 +1423,9 @@
             document.getElementById('paid_down').value=paid_down
 
         })
-        $(".ConfirmProject").on("click", function () {
-            var id=$(this).data('id')
+        $("#ConfirmProject").on("click", function () {
+            var id =$(this).data('id')
+            var date =$('#confirmDate').val()
             if (id) {
                 Swal.fire({
                     title: "هل انت متاكد من قبول المشروع",
@@ -1379,27 +1443,36 @@
                         $.ajax({
                             url: '{{url("ConfirmProject")}}',
                             type: "get",
-                            data: {'id': id},
+                            data: {'id': id,'date':date},
                             dataType: "JSON",
                             success: function (data) {
                                 if (data.message == "Success") {
                                     Swal.fire("نجح", "تمت قبول المشروع بنجاح", "success");
+                                    $('#kt_modal_confirmProject').modal('hide');
+
                                     setTimeout(reload, 7000)
                                     function reload() {
                                         window.location.href = "{{url('/Requests')}}"
                                     }
                                 } else {
                                     Swal.fire("عفوا! ", "حدث خطأ", "error");
+                                    $('#kt_modal_confirmProject').modal('hide');
+
                                 }
                             },
                             fail: function (xhrerrorThrown) {
                                 Swal.fire("عفوا! ", "حدث خطأ", "error");
+                                $('#kt_modal_confirmProject').modal('hide');
+
                             }
                         });
                         // result.dismiss can be 'cancel', 'overlay',
                         // 'close', and 'timer'
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire("عفوا!", "تم الغاء العملية", "error");
+                        $('#kt_modal_confirmProject').modal('hide');
+
+
                     }
                 });
             }
@@ -1427,10 +1500,13 @@
                             dataType: "JSON",
                             success: function (data) {
                                 if (data.message == "Success") {
+                                    $('#kt_menu_61a08bf50cf89').hide();
+
                                     Swal.fire("نجح", "تمت رفض المشروع بنجاح", "success");
+
                                     setTimeout(reload, 7000)
                                     function reload() {
-                                        window.location.href = "{{url('/Requests')}}"
+                                        window.location.href = "{{url('/Contracts')}}"
                                     }
                                 } else {
                                     Swal.fire("عفوا! ", "حدث خطأ", "error");

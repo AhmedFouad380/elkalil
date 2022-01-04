@@ -104,12 +104,17 @@
                 ajax: {
                     url: '{{ route('Requests.datatable.data') }}',
                     data: {
-                        @if(Request::get('users_group'))
-                        users_group: {{ Request::get('users_group') }}
+
+                        @if(Request::get('view'))
+                        view: {{ Request::get('view') }}
                         ,
                         @endif
-                            @if(Request::get('jop_type'))
-                        jop_type:{{Request::get('jop_type') }}
+                        @if(Request::get('from'))
+                        from: {{ Request::get('from') }}
+                        ,
+                        @endif
+                            @if(Request::get('to'))
+                        to:{{Request::get('to') }}
                         @endif
                     }
                 },
