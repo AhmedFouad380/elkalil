@@ -54,10 +54,14 @@
                     <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
                     <!--end::Input-->
                     <br>
-                    <p href="#" class="link-danger fs-6 fw-bolder">
-                        تذكرني ؟
-                        <input class="" type="checkbox">
-                    </p>
+                    <div class="mb-3 fv-row">
+                        <div class="form-check form-check-custom form-check-solid">
+                            <input class="form-check-input" type="checkbox" value="" id="flexRadioDefault121"/>
+                            <label class="form-check-label" for="flexRadioDefault121">
+                                تذكرني ؟
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Actions-->
