@@ -53,6 +53,11 @@
                     <!--begin::Input-->
                     <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
                     <!--end::Input-->
+                    <br>
+                    <p href="#" class="link-danger fs-6 fw-bolder">
+                        تذكرني ؟
+                        <input class="" type="checkbox">
+                    </p>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Actions-->
@@ -64,7 +69,7 @@
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
                     <!--end::Submit button-->
-                    <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
+                    <div class="text-center text-muted text-uppercase fw-bolder mb-5">او</div>
                     <a href="{{url('/quest')}}" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
                         <img alt="Logo" src="{{asset('admin/assets/media/svg/misc/infography.svg')}}" class="h-20px me-3" />الاستبيان المبدئي</a>
                 </div>

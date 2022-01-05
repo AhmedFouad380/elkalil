@@ -204,21 +204,21 @@
         <!--begin::Row-->
         <div class="row g-6 g-xl-9 mb-6 mb-xl-9">
             <!--begin::Col-->
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <!--begin::Card-->
-                <div class="card h-100 flex-center bg-light-primary border-primary border border-dashed p-8">
-                    <!--begin::Image-->
-                    <img src="assets/media/svg/files/upload.svg" class="mb-5" alt="" />
-                    <!--end::Image-->
-                    <!--begin::Link-->
-                    <a href="#" class="text-hover-primary fs-5 fw-bolder mb-2">ارفع مرفق</a>
-                    <!--end::Link-->
-                    <!--begin::Description-->
-                    <div class="fs-7 fw-bold text-gray-400">اسحب واترك الملف هنا</div>
-                    <!--end::Description-->
-                </div>
-                <!--end::Card-->
-            </div>
+{{--            <div class="col-md-6 col-lg-4 col-xl-3">--}}
+{{--                <!--begin::Card-->--}}
+{{--                <div class="card h-100 flex-center bg-light-primary border-primary border border-dashed p-8">--}}
+{{--                    <!--begin::Image-->--}}
+{{--                    <img src="assets/media/svg/files/upload.svg" class="mb-5" alt="" />--}}
+{{--                    <!--end::Image-->--}}
+{{--                    <!--begin::Link-->--}}
+{{--                    <a href="#" class="text-hover-primary fs-5 fw-bolder mb-2">ارفع مرفق</a>--}}
+{{--                    <!--end::Link-->--}}
+{{--                    <!--begin::Description-->--}}
+{{--                    <div class="fs-7 fw-bold text-gray-400">اسحب واترك الملف هنا</div>--}}
+{{--                    <!--end::Description-->--}}
+{{--                </div>--}}
+{{--                <!--end::Card-->--}}
+{{--            </div>--}}
             <!--end::Col-->
             <!--begin::Col-->
             <div class="col-md-6 col-lg-4 col-xl-3">
@@ -409,7 +409,7 @@
                 <!--end::Card-->
             </div>
             <!--end::Col-->
-            
+
         </div>
         <!--end:Row-->
 

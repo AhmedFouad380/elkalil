@@ -209,7 +209,7 @@ Route::get('/project-details2', function () {
     return view('admin/project_details2');
 });
 
-Route::get('/project-details3', function () {
+    Route::get('/project-details3', function () {
     return view('admin/project_details3');
 });
 
