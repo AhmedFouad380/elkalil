@@ -49,7 +49,7 @@ class Project extends Model
 
     ];
 
-    public function state()
+    public function State()
     {
         return $this->belongsTo(State::class, 'state','id');
     }
