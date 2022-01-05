@@ -284,7 +284,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit = 'K')
 function upload($file)
 {
     $image = "https://alkhalilsys.com/images/" . time() . uniqid() . '.' . $file->getClientOriginalExtension();
-    $file->move('uploads', $image);
+    $file->move(public_path('uploads'), $image);
     return $image;
 }
 
