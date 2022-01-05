@@ -19,7 +19,7 @@
             <div class="page d-flex flex-row flex-column-fluid">
                 <!--begin::Wrapper-->
                 <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                    
+
                     @include('admin.layouts.header')
 
                     <!--begin::Toolbar-->
@@ -559,7 +559,7 @@
 
         @include('admin.layouts.footer-script')
         <!--end::Main-->
-        
+
     </body>
     <!--end::Body-->
 </html>

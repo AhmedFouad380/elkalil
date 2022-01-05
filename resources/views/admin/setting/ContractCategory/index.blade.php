@@ -5,14 +5,25 @@
           type="text/css"/>
     <link href="{{ URL::asset('admin/assets/plugins/custom/prismjs/prismjs.bundle.css')}}" rel="stylesheet"
           type="text/css"/>
+
 @endsection
 
 @section('style')
+    <style>
+        @media (min-width: 992px) {
+            .aside-me .content {
+                padding-right: 30px;
+            }
+        }
 
+        .select2-container .select2-selection--single .select2-selection__clear {
+            padding-right: 355px;
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">التعاقدات</h1>
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">الاعدادات</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -22,7 +33,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">التعاقدات </li>
+        <li class="breadcrumb-item text-gray-500">انواع التعاقدات</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -32,6 +43,7 @@
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
 
+        @include('admin.setting.kt_aside')
 
         <div class="content flex-row-fluid" id="kt_content">
             <!--begin::Card-->
@@ -53,11 +65,9 @@
                                 </div>
                             </th>
 
-                            <th class="min-w-125px">اسم العميل</th>
-                            <th class="min-w-125px">تاريخ الطلب</th>
-                            <th class="min-w-125px">نوع المشروع</th>
-                            <th class="min-w-125px">نسبة الانجاز</th>
-                            <th class="min-w-125px">النوع</th>
+                            <th class="min-w-125px">الاسم</th>
+                            <th class="min-w-125px">اللون</th>
+                            <th class="min-w-125px">عدد المراحل</th>
                             <th class=" min-w-100px">الاجراءات</th>
                         </tr>
                         <!--end::Table row-->
@@ -80,6 +90,12 @@
 
 @section('script')
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{ URL::asset('admin/assets/plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
+    <script src="{{ URL::asset('admin/assets/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
+    <script src="{{ URL::asset('admin/assets/js/custom/documentation/documentation.js')}}"></script>
+    <script src="{{ URL::asset('admin/assets/js/custom/documentation/search.js')}}"></script>
+    <script src="{{ URL::asset('admin/assets/js/custom/documentation/editors/ckeditor/classic.js')}}"></script>
+
 
     <script type="text/javascript">
         $(function () {
@@ -97,48 +113,45 @@
                     "url": "{{ url('admin/assets/ar.json') }}"
                 },
                 buttons: [
-                    {extend: 'print', className: 'btn btn-light-primary me-3', text: '<i class="bi bi-printer-fill fs-2x"></i>'},
+                    {
+                        extend: 'print',
+                        className: 'btn btn-light-primary me-3',
+                        text: '<i class="bi bi-printer-fill fs-2x"></i>'
+                    },
                     // {extend: 'pdf', className: 'btn btn-raised btn-danger', text: 'PDF'},
-                    {extend: 'excel', className: 'btn btn-light-primary me-3', text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'},
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-light-primary me-3',
+                        text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'
+                    },
                     // {extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
 
                 ],
                 ajax: {
-                    url: '{{ route('Contracts.datatable.data') }}',
-                    data: {
-                        @if(Request::get('users_group'))
-                        users_group: {{ Request::get('users_group') }}
-                        ,
-                        @endif
-                            @if(Request::get('jop_type'))
-                        jop_type:{{Request::get('jop_type') }}
-                        @endif
-                    }
+                    url: '{{ route('contract.datatable.data') }}',
+                    data: {}
                 },
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
-                    {data: 'name', name: 'name', "searchable": true, "orderable": true},
-                    {data: 'date', name: 'date', "searchable": true, "orderable": true},
-                    {data: 'type', name: 'type', "searchable": true, "orderable": true},
-                    {data: 'progress', name: 'progress', "searchable": true, "orderable": true},
-                    {data: 'confirm', name: 'confirm', "searchable": true, "orderable": true},
+                    {data: 'title', name: 'title', "searchable": true, "orderable": true},
+                    {data: 'color', name: 'color', "searchable": true, "orderable": true},
+                    {data: 'Levels', name: 'Levels', "searchable": true, "orderable": true},
                     {data: 'actions', name: 'actions', "searchable": false, "orderable": false},
+
                 ]
             });
-
             $.ajax({
-                url: "{{ URL::to('/add-Contracts-button')}}",
-                success: function (data) { $('.add_button').append(data); },
+                url: "{{ URL::to('/add-contract-button')}}",
+                success: function (data) {
+                    $('.add_button').append(data);
+                },
                 dataType: 'html'
             });
         });
     </script>
-
-
     <?php
     $message = session()->get("message");
     ?>
-
     @if( session()->has("message"))
         <script>
             toastr.options = {
@@ -157,10 +170,11 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             };
-
             toastr.success("نجاح", "{{$message}}");
         </script>
 
     @endif
+
+
 @endsection
 

@@ -693,11 +693,12 @@
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bolder d-flex align-items-center fs-5">{{Auth::user()->name}}
+                                    <div
+                                        class="fw-bolder d-flex align-items-center fs-5">{{Auth::user() ? Auth::user()->name : ""}}
                                         <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
                                     </div>
                                     <a href="#"
-                                       class="fw-bold text-muted text-hover-primary fs-7">{{Auth::user()->phone}}</a>
+                                       class="fw-bold text-muted text-hover-primary fs-7">{{Auth::user() ? Auth::user()->phone : ""}}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -1050,7 +1051,13 @@
                          Request::segment(1) == "edit-percent-category"||
                          Request::segment(1) == "messages"||
                          Request::segment(1) == "percent-setting"||
-                         Request::segment(1) == "edit-percent"
+                         Request::segment(1) == "edit-percent" ||
+                         Request::segment(1) == "contract_setting"||
+                         Request::segment(1) == "edit-contract" ||
+                         Request::segment(1) == "level-setting" ||
+                          Request::segment(1) == "edit-level"||
+                          Request::segment(1) == "level-details-setting"||
+                          Request::segment(1) == "edit-details-level"
                          ) active @endif py-3">
                         <span class="menu-title">الاعدادات</span>
                         <span class="menu-arrow d-lg-none"></span>
@@ -1165,10 +1172,12 @@
                             </span>
                             </a>
                         </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                        <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
-                                <span class="menu-icon">
+                            <a href="/contract_setting">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "contract_setting" ||Request::segment(1) == "edit-contract") active @endif py-3">
+                                <span class="menu-icon ">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -1187,39 +1196,55 @@
                                                   fill="black"/>
                                         </svg>
                                     </span>
+
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">انواع التعاقددات</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "contract_setting"  ||Request::segment(1) == "edit-contract") text-active-primary active @endif ">
+
+                                        انواع التعاقدات
+
+                                      </span>
                             </span>
-                        </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
-                                <span class="menu-icon">
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
-                                    <span class="svg-icon svg-icon-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24" fill="none">
-                                            <path
-                                                d="M11.2929 2.70711C11.6834 2.31658 12.3166 2.31658 12.7071 2.70711L15.2929 5.29289C15.6834 5.68342 15.6834 6.31658 15.2929 6.70711L12.7071 9.29289C12.3166 9.68342 11.6834 9.68342 11.2929 9.29289L8.70711 6.70711C8.31658 6.31658 8.31658 5.68342 8.70711 5.29289L11.2929 2.70711Z"
-                                                fill="black"/>
-                                            <path
-                                                d="M11.2929 14.7071C11.6834 14.3166 12.3166 14.3166 12.7071 14.7071L15.2929 17.2929C15.6834 17.6834 15.6834 18.3166 15.2929 18.7071L12.7071 21.2929C12.3166 21.6834 11.6834 21.6834 11.2929 21.2929L8.70711 18.7071C8.31658 18.3166 8.31658 17.6834 8.70711 17.2929L11.2929 14.7071Z"
-                                                fill="black"/>
-                                            <path opacity="0.3"
-                                                  d="M5.29289 8.70711C5.68342 8.31658 6.31658 8.31658 6.70711 8.70711L9.29289 11.2929C9.68342 11.6834 9.68342 12.3166 9.29289 12.7071L6.70711 15.2929C6.31658 15.6834 5.68342 15.6834 5.29289 15.2929L2.70711 12.7071C2.31658 12.3166 2.31658 11.6834 2.70711 11.2929L5.29289 8.70711Z"
-                                                  fill="black"/>
-                                            <path opacity="0.3"
-                                                  d="M17.2929 8.70711C17.6834 8.31658 18.3166 8.31658 18.7071 8.70711L21.2929 11.2929C21.6834 11.6834 21.6834 12.3166 21.2929 12.7071L18.7071 15.2929C18.3166 15.6834 17.6834 15.6834 17.2929 15.2929L14.7071 12.7071C14.3166 12.3166 14.3166 11.6834 14.7071 11.2929L17.2929 8.70711Z"
-                                                  fill="black"/>
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </span>
-                                <span class="menu-title">اعدادات المراحل </span>
-                            </span>
+                            </a>
                         </div>
                         <div data-kt-menu-placement="right-start"
+                             class="menu-item menu-lg-down-accordion">
+                            <a href="/contract_setting">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "level-setting" || Request::segment(1) == "edit-level"|| Request::segment(1) == "level-details-setting"|| Request::segment(1) == "edit-details-level") active @endif py-3">
+                                <span class="menu-icon ">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none">
+                                            <path
+                                                d="M11.2929 2.70711C11.6834 2.31658 12.3166 2.31658 12.7071 2.70711L15.2929 5.29289C15.6834 5.68342 15.6834 6.31658 15.2929 6.70711L12.7071 9.29289C12.3166 9.68342 11.6834 9.68342 11.2929 9.29289L8.70711 6.70711C8.31658 6.31658 8.31658 5.68342 8.70711 5.29289L11.2929 2.70711Z"
+                                                fill="black"/>
+                                            <path
+                                                d="M11.2929 14.7071C11.6834 14.3166 12.3166 14.3166 12.7071 14.7071L15.2929 17.2929C15.6834 17.6834 15.6834 18.3166 15.2929 18.7071L12.7071 21.2929C12.3166 21.6834 11.6834 21.6834 11.2929 21.2929L8.70711 18.7071C8.31658 18.3166 8.31658 17.6834 8.70711 17.2929L11.2929 14.7071Z"
+                                                fill="black"/>
+                                            <path opacity="0.3"
+                                                  d="M5.29289 8.70711C5.68342 8.31658 6.31658 8.31658 6.70711 8.70711L9.29289 11.2929C9.68342 11.6834 9.68342 12.3166 9.29289 12.7071L6.70711 15.2929C6.31658 15.6834 5.68342 15.6834 5.29289 15.2929L2.70711 12.7071C2.31658 12.3166 2.31658 11.6834 2.70711 11.2929L5.29289 8.70711Z"
+                                                  fill="black"/>
+                                            <path opacity="0.3"
+                                                  d="M17.2929 8.70711C17.6834 8.31658 18.3166 8.31658 18.7071 8.70711L21.2929 11.2929C21.6834 11.6834 21.6834 12.3166 21.2929 12.7071L18.7071 15.2929C18.3166 15.6834 17.6834 15.6834 17.2929 15.2929L14.7071 12.7071C14.3166 12.3166 14.3166 11.6834 14.7071 11.2929L17.2929 8.70711Z"
+                                                  fill="black"/>
+                                        </svg>
+                                    </span>
+
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "level-setting" || Request::segment(1) == "edit-level"|| Request::segment(1) == "level-details-setting"|| Request::segment(1) == "edit-details-level") text-active-primary active @endif ">
+
+                                        اعدادات المراحل
+
+                                      </span>
+                            </span>
+                            </a>
+                        </div>
+                         <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
                             <a href="/employee_setting">
                             <span
@@ -1287,7 +1312,8 @@
                         <div data-kt-menu-placement="right-start"
                              class="menu-item menu-lg-down-accordion">
                             <a href="/percent-category_setting">
-                            <span class="menu-link @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-category") active @endif py-3">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-category") active @endif py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">

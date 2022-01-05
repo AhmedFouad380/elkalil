@@ -12,7 +12,7 @@
     <img src="{{asset('admin/assets/media/illustrations/sketchy-1/18.png')}}" alt="" class="mw-100 mb-10 h-lg-450px" />
     <!--end::Illustration-->
     <!--begin::Message-->
-    <h1 class="fw-bold mb-10" style="color: #A3A3C7">عفوا هناك خطأ ما !</h1>
+    <h1 class="fw-bold mb-10" style="color: #A3A3C7">تحت التطوير !</h1>
     <!--end::Message-->
     <!--begin::Link-->
     <a href="javascript:;" onclick="goBack()" class="btn btn-danger">للرجوع للرئيسية</a>

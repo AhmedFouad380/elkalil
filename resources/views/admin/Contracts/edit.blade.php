@@ -1210,7 +1210,7 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form method="post" class="form" action="{{url('UpdateProjectContract')}}">
+                            <form method="post" class="form" action="{{url('UpdateProjectPaid')}}">
                             @csrf
                             <!--begin::Input group-->
                                 <div class="d-flex flex-column mb-7 fv-row">
@@ -1243,6 +1243,27 @@
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
+                                    <div class="d-flex flex-column fv-row mb-7 " id="questions" style="display: none">
+                                        <div class="row">
+                                            <!--begin::Label-->
+                                            <label> الدفعات</label>
+                                            <br>
+                                            <div class="col-3">
+                                                <button type="button" id="add-question"
+                                                        class="btn btn-light-primary me-3">
+                                                    <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="number" name="values[]"
+                                                       class="form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                       placeholder=""/>
+                                            </div>
+                                        </div>
+
+                                        <!--end::Input-->
+                                    </div>
+
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
@@ -1276,7 +1297,29 @@
         CKEDITOR.replace( 'editor1' );
         CKEDITOR.replace( 'editor2' );
     </script>
+<script>
+    $("#add-question").on("click", function () {
+        $("#questions").append('<div class="row">' +
+            '                                            <div class="col-3">' +
+            '                                             </div>' +
+            '                                            <div class="col-6">' +
+            '                                                <input type="number" name="values[]"' +
+            '                                                       class="form-control col-6 form-control-solid mb-3 mb-lg-0"' +
+            '                                                       placeholder=""/>' +
+            '                                            </div>' +
+            '                                            <div class="col-3">' +
+            '                                                     <button type="button"' +
+            '                                                        class="btn btn-light-danger me-3 delete_question">' +
+            '                                                    <i class="bi bi-trash-fill fs-2x fs-2x"></i>' +
+            '                                                </button>' +
+            '                                             </div>' +
+            '                                        </div>');
+    });
 
+    $(document).on('click', '.delete_question', function () {
+        $(this).parent().parent().remove();
+    });
+</script>
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script>
         (function () {

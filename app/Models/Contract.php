@@ -10,6 +10,7 @@ class Contract extends Model
     use HasFactory;
 
     protected $table = 'contract';
+    public $timestamps = false;
 
     protected $fillable = [
         'title',
@@ -18,4 +19,9 @@ class Contract extends Model
         'pdf',
         'color',
     ];
+
+    public function Levels()
+    {
+        return $this->hasMany(Level::class, 'contract_id');
+    }
 }

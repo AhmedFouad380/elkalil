@@ -61,6 +61,9 @@ class Project extends Model
     public function projectContract(){
         return $this->hasOne(ProjectContract::class , 'project_id');
     }
+    public function assginUsers(){
+        return $this->belongsToMany(User::class,'user_permission','project_id','emp_id')->distinct();
+    }
     public function projectPaid(){
         return $this->hasOne(ProjectPaid::class , 'project_id');
     }

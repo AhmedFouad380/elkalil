@@ -714,7 +714,6 @@
                 url: "{{url('getMoney')}}",
                 data: {"to":to,"from":from},
                 success: function (data) {
-                    alert(1);
                     $("#MoneyData").html(data)
                 }
             })

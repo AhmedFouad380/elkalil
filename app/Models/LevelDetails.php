@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class LevelDetails extends Model
 {
     use HasFactory;
-    protected  $table = 'level_details';
 
+    protected $table = 'level_details';
+    public $timestamps = false;
     protected $fillable = [
         'title',
         'level_id',

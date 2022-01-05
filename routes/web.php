@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\ClientsController;
+use App\Http\Controllers\Admin\ContractTypesController;
+use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\LevelDetailsController;
 use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\Admin\PercentCategoryController;
 use App\Http\Controllers\Admin\PercentController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -24,15 +28,36 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
+Route::post('login', [AuthController::class, 'login']);
 
+
+
+Route::get('/quest', function () {
+    return view('auth/request');
+});
+Route::post('/quest', 'App\Http\Controllers\Front\PageController@store_quest')->name('create_quest.submit');
+Route::get('success_msg', [PageController::class, 'success_msg']);
+
+Route::get('logout', [AuthController::class, 'logout']);
+
+Route::get('/table', function () {
+    return view('admin/table');
+});
+
+Route::get('/projects', function () {
+    return view('admin/projects');
+});
 Route::group(['middleware' => ['admin']], function () {
 
-    Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
+
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/home', [DashboardController::class, 'index']);
     Route::get('public_setting', [SettingsController::class, 'Settings']);
     Route::post('edit_setting', [SettingsController::class, 'editSettings']);
+
     Route::post('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
 
-//employee settings
+    //employee settings
     Route::get('employee_setting', [UsersController::class, 'index']);
     Route::get('employee_datatable', [UsersController::class, 'datatable'])->name('employee.datatable.data');
     Route::get('delete-user', [UsersController::class, 'destroy']);
@@ -43,7 +68,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/add-button', function () {
         return view('admin/setting/employee/button');
     });
-
 //    permission Settings
     Route::get('permission_setting', [PermissionController::class, 'index']);
     Route::get('permission_datatable', [PermissionController::class, 'datatable'])->name('permission.datatable.data');
@@ -54,7 +78,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/add-permission-button', function () {
         return view('admin/setting/UserPermission/button');
     });
-
 //client settings
     Route::get('client_setting', [ClientsController::class, 'index']);
     Route::get('client_datatable', [ClientsController::class, 'datatable'])->name('client.datatable.data');
@@ -65,7 +88,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/add-client-button', function () {
         return view('admin/setting/clients/button');
     });
-
 //percent category setting
     Route::get('percent-category_setting', [PercentCategoryController::class, 'index']);
     Route::get('percent-category_datatable', [PercentCategoryController::class, 'datatable'])->name('percentcategry.datatable.data');
@@ -76,12 +98,41 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/add-percent-category-button', function () {
         return view('admin/setting/PercentCategory/button');
     });
+    Route::get('contract_setting', [ContractTypesController::class, 'index']);
+    Route::get('contract_datatable', [ContractTypesController::class, 'datatable'])->name('contract.datatable.data');
+    Route::get('delete-contract', [ContractTypesController::class, 'destroy']);
+    Route::post('store-contract', [ContractTypesController::class, 'store']);
+    Route::get('edit-contract/{id}', [ContractTypesController::class, 'edit']);
+    Route::post('update-contract', [ContractTypesController::class, 'update']);
+    Route::get('/add-contract-button', function () {
+        return view('admin/setting/ContractCategory/button');
+    });
 
+
+
+//Level setting
+    Route::get('level-setting/{id}', [LevelController::class, 'index']);
+    Route::get('level-datatable', [LevelController::class, 'datatable'])->name('Level.datatable.data');
+    Route::get('delete-level', [LevelController::class, 'destroy']);
+    Route::post('store-level', [LevelController::class, 'store']);
+    Route::get('edit-level/{id}', [LevelController::class, 'edit']);
+    Route::post('update-level', [LevelController::class, 'update']);
+    Route::get('add-level-button/{id}', [LevelController::class, 'button']);
+
+
+
+//Level details setting
+    Route::get('level-details-setting/{id}', [LevelDetailsController::class, 'index']);
+    Route::get('level-details-datatable', [LevelDetailsController::class, 'datatable'])->name('Level.details.datatable.data');
+    Route::get('delete-details-level', [LevelDetailsController::class, 'destroy']);
+    Route::post('store-details-level', [LevelDetailsController::class, 'store']);
+    Route::get('edit-details-level/{id}', [LevelDetailsController::class, 'edit']);
+    Route::post('update-details-level', [LevelDetailsController::class, 'update']);
+    Route::get('add-level-details-button/{id}', [LevelDetailsController::class, 'button']);
 
 //Messaging
     Route::get('messages', [MessagesController::class, 'index']);
     Route::get('messages_datatable', [MessagesController::class, 'datatable'])->name('messages.datatable.data');
-
 
 //percent setting
     Route::get('percent-setting/{id}', [PercentController::class, 'index']);
@@ -100,11 +151,17 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('AcceptProject', [\App\Http\Controllers\Admin\RequestsController::class, 'AcceptProject'])->name('AcceptProject');
     Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
 
+    Route::get('projects', [\App\Http\Controllers\Admin\ProjectController::class, 'index']);
+    Route::post('store-project', [\App\Http\Controllers\Admin\ProjectController::class, 'store']);
+    Route::get('project_details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'project_details']);
+    Route::get('level_Details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'level_Details']);
+
     Route::get('Contracts', [\App\Http\Controllers\Admin\ContractsController::class, 'index']);
     Route::get('Contracts_datatable', [\App\Http\Controllers\Admin\ContractsController::class, 'datatable'])->name('Contracts.datatable.data');
     Route::get('ConfirmProject', [\App\Http\Controllers\Admin\ContractsController::class, 'ConfirmProject'])->name('ConfirmProject');
     Route::get('Contracts-edit/{id}', [\App\Http\Controllers\Admin\ContractsController::class, 'edit']);
     Route::post('UpdateProjectContract', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectContract'])->name('UpdateProjectContract');
+    Route::post('UpdateProjectPaid', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectPaid'])->name('UpdateProjectContract');
 
 
     Route::get('/add-Requests-button', function () {
@@ -141,13 +198,9 @@ Route::get('/table-view', function () {
     return view('admin/table-view');
 });
 
-Route::get('/projects', function () {
-    return view('admin/projects');
-});
-
-Route::get('/project-details', function () {
-    return view('admin/project_details');
-});
+//Route::get('/project-details/{id}', function () {
+//    return view('admin/project_details');
+//});
 
 Route::get('/project-details2', function () {
     return view('admin/project_details2');

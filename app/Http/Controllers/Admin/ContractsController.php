@@ -8,8 +8,10 @@ use App\Models\Contract;
 use App\Models\Explan;
 use App\Models\inbox;
 use App\Models\inboxFile;
+use App\Models\Income;
 use App\Models\Project;
 use App\Models\ProjectContract;
+use App\Models\ProjectPaid;
 use App\Models\SmsLogs;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,7 +41,13 @@ class ContractsController extends Controller
                 $name .= ' <span class="text-gray-800 text-hover-primary mb-1">' . $row->name . '</span>
                                    <br> <small class="text-gray-600">' . $row->email . '</small>';
                 return $name;
-            })
+            })->editColumn('confirm', function ($row) {
+    if ($row->confirm == 1) {
+        return '<div class="badge badge-light-success fw-bolder"> مفعل</div>';
+    } else {
+        return '<div class="badge badge-light-info fw-bolder"> غير مفعل</div>';
+    }
+})
             ->editColumn('date', function ($row) {
                 return \Carbon\Carbon::parse($row->date)->format('Y-m-d H:i');
 
@@ -53,7 +61,7 @@ class ContractsController extends Controller
                 return $actions;
 
             })
-            ->rawColumns(['actions', 'checkbox', 'name', 'date', 'type'])
+            ->rawColumns(['actions', 'checkbox', 'name', 'date', 'type','confirm'])
             ->make();
 
     }
@@ -79,7 +87,35 @@ class ContractsController extends Controller
 
         return back()->with('message','Success');
     }
+    public function UpdateProjectPaid(Request $request){
+        $data = ProjectPaid::where('project_id',$request->id)->first();
 
+        if(isset($request->paid)){
+            $data->paid=$request->paid;
+        }
+        if(isset($request->paid_down)){
+            $data->paid_down=$request->paid_down;
+        }
+        if(isset($request->paid_term)){
+            $data->paid_term=$request->paid_term;
+        }
+        $data->save();
+        if(isset($request->values)){
+            foreach($request->values as $val){
+                $Income = new Income();
+                $Income->amount=$val;
+                $Income->project_id=$request->id;
+                $Income->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
+                $Income->created_at=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
+                $Income->project_id=$request->id;
+                $Income->type=1;
+                $Income->project_name=Project::find($request->id)->name;
+                $Income->save();
+            }
+        }
+        return back()->with('message','Success');
+
+    }
     public function ConfirmProject(Request $request){
 
         $Project = Project::find($request->project_id);
