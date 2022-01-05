@@ -440,7 +440,7 @@
                                         <!--end::Label-->
                                         <!--begin::Input-->
                                         <div>
-                                            <select  id="idContract" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_61a08bf50cf89" data-allow-clear="true">
+                                            <select  id="idContract" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true">
                                             @inject('contracts','App\Models\Contract')
                                                 @foreach($contracts->where('id','!=',1)->get() as $cont)
                                                     <option @if($cont->id == $contract->id) selected @endif value="{{$cont->id}}"> {{$cont->title}}</option>
