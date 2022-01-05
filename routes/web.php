@@ -176,6 +176,9 @@ Route::get('/quest', function () {
     return view('auth/request');
 });
 Route::post('/quest', 'App\Http\Controllers\Front\PageController@store_quest')->name('create_quest.submit');
+
+Route::get('/quest2/{client_id}/{emp_id?}', [PageController::class, 'quest2']);
+Route::post('/quest2', 'App\Http\Controllers\Front\PageController@store_quest2')->name('create_quest.submit');
 Route::get('success_msg', [PageController::class, 'success_msg']);
 
 Route::post('login', [AuthController::class, 'login']);
@@ -199,6 +202,29 @@ Route::get('/project-details', function () {
 
 Route::get('/project-details2', function () {
     return view('admin/project_details2');
+});
+
+Route::get('/project-details3', function () {
+    return view('admin/project_details3');
+});
+
+Route::get('/project-details4', function () {
+    return view('admin/project_details4');
+});
+
+Route::get('/project-details5', function () {
+    return view('admin/project_details5');
+});
+
+Route::get('/project-details6', function () {
+    return view('admin/project_details6');
+});
+
+Route::get('/project-details7', function () {
+    return view('admin/project_details7');
+});
+Route::get('/project-details8', function () {
+    return view('admin/project_details8');
 });
 
 Route::get('/inbox', function () {

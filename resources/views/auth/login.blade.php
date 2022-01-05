@@ -46,7 +46,7 @@
                         <label class="form-label fw-bolder text-dark fs-6 mb-0">كلمة المرور</label>
                         <!--end::Label-->
                         <!--begin::Link-->
-                        <a href="../../demo16/dist/authentication/layouts/basic/password-reset.html" class="link-danger fs-6 fw-bolder">نسيت كلمة المرور ؟</a>
+                        <a href="#" class="link-danger fs-6 fw-bolder">نسيت كلمة المرور ؟</a>
                         <!--end::Link-->
                     </div>
                     <!--end::Wrapper-->
@@ -64,6 +64,9 @@
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
                     <!--end::Submit button-->
+                    <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
+                    <a href="{{url('/quest')}}" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
+                        <img alt="Logo" src="{{asset('admin/assets/media/svg/misc/infography.svg')}}" class="h-20px me-3" />الاستبيان المبدئي</a>
                 </div>
                 <!--end::Actions-->
             </form>
