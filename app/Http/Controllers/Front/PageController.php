@@ -29,6 +29,7 @@ class PageController extends Controller
     {
     }
 
+    
 
     public function store_quest(Request $request)
     {
@@ -186,6 +187,20 @@ class PageController extends Controller
             }
         }
 
+        return redirect('/success_msg')->with('msg', 'Success');
+    }
+
+    public function quest2($client_id,$emp_id = null)
+    {
+        $query['project'] = Project::find($client_id);
+        $query['p_other'] = ProjectOther::where('project_id', $client_id)->get()->first();
+        return view('auth.request2', $query);
+    }
+
+    public function store_quest2(Request $request)
+    {
+
+        // dd($request->all());
         return redirect('/success_msg')->with('msg', 'Success');
     }
 
