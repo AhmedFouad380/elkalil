@@ -125,6 +125,20 @@
                                 </div>
 
                             </div>
+                            <div class="fv-row mb-7 row">
+                                <!--begin::Label-->
+                                <label class="required fw-bold fs-6 mb-2 col-3">عدد الايام المتوقعة لتسليم
+                                    المرحلة</label>
+                                <!--end::Label-->
+                                <div class="col-6">
+                                    <!--begin::Input-->
+                                    <input type="number" name="progress_time"
+                                           class="form-control form-control-solid mb-3 mb-lg-0"
+                                           placeholder="عدد الايام" value="{{$permission->progress_time}}" required/>
+
+                                </div>
+
+                            </div>
 
 
                         </div>

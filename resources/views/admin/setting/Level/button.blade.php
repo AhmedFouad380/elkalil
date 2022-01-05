@@ -106,6 +106,18 @@
 
                                 <!--end::Input-->
                             </div>
+                            <div class="fv-row mb-7">
+                                <!--begin::Label-->
+                                <label class="required fw-bold fs-6 mb-2">عدد الايام المتوقعة لتسليم المرحلة</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="number" name="progress_time"
+                                       class="form-control form-control-solid mb-3 mb-lg-0"
+                                       placeholder="عدد الايام" value="{{old('progress_time')}}"  required/>
+
+
+                                <!--end::Input-->
+                            </div>
 
 
                         </div>
