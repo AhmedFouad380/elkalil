@@ -52,12 +52,13 @@
                             <div class="d-flex flex-column">
                                 <!--begin::Status-->
                                 <div class="d-flex align-items-center mb-1">
-                                    <a href="#" class="text-gray-800 text-hover-primary fs-2 fw-bolder me-3">مشروع فيلا الساحل</a>
-                                    <span class="badge badge-light-success me-auto">عقد قياسي </span>
+                                    <a href="#" class="text-gray-800 text-hover-primary fs-2 fw-bolder me-3">{{$data->name}}</a>
+                                    @inject('Contract','App\Models\Contract')
+                                    <span class="badge badge-light-success me-auto">{{$Contract->findOrFail($data->projectContract->contract_id)->title}} </span>
                                 </div>
                                 <!--end::Status-->
                                 <!--begin::Description-->
-                                <div class="d-flex flex-wrap fw-bold mb-4 fs-5 text-gray-400">اسم مالك المشروع</div>
+                                <div class="d-flex flex-wrap fw-bold mb-4 fs-5 text-gray-400">{{$data->client->name}}</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Details-->
@@ -71,7 +72,7 @@
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fs-4 fw-bolder">29 Jan, 2021</div>
+                                        <div class="fs-4 fw-bolder">{{$data->confirm_date}}</div>
                                     </div>
                                     <!--end::Number-->
                                     <!--begin::Label-->
@@ -103,7 +104,7 @@
                                             </svg>
                                         </span>
                                         <!--end::Svg Icon-->
-                                        <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="15000" data-kt-countup-prefix="SAR">0</div>
+                                        <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{$data->projectPaid->paid}}" data-kt-countup-prefix="SAR">0</div>
                                     </div>
                                     <!--end::Number-->
                                     <!--begin::Label-->
@@ -116,30 +117,25 @@
                             <!--begin::Users-->
                             <div class="symbol-group symbol-hover mb-3">
                                 <!--begin::User-->
-                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Michael Eberon">
-                                    <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-12.jpg')}}" />
-                                </div>
-                                <!--end::User-->
-                                <!--begin::User-->
-                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Michelle Swanston">
-                                    <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-13.jpg')}}" />
-                                </div>
-                                <!--end::User-->
-                                <!--begin::User-->
-                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Francis Mitcham">
-                                    <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-5.jpg')}}" />
-                                </div>
-                                <!--end::User-->
-                                <!--begin::User-->
-                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Melody Macy">
-                                    <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-3.jpg')}}" />
-                                </div>
-                                <!--end::User-->
-                                <!--begin::User-->
-                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Barry Walter">
-                                    <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-7.jpg')}}" />
-                                </div>
-                                <!--end::User-->
+                                @if(count($data->assginUsers) > 0)
+                                    @foreach($data->assginUsers as $emp)
+                                        @if(isset($emp->image))
+                                            <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
+                                                <img alt="Pic" src="{{$emp-image}}" />
+                                            </div>
+                                        @else
+                                            <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
+                                                <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-2.jpg')}}" />
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="">
+                                        <div style=" height: 35px"></div>
+                                    </div>
+                            @endif
+
+                            <!--end::User-->
                                 <!--begin::All users-->
                                 <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
                                     <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bolder" data-bs-toggle="tooltip" data-bs-trigger="hover" title="رؤية العاملين على المشروع">+</span>
@@ -160,7 +156,7 @@
                     <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="#">مراحل المشروع</a>
+                            <a class="nav-link text-active-primary me-6 active" href="#">مراحل المشروع</a>
                         </li>
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
@@ -180,7 +176,7 @@
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6 active" href="#">ملفات المشروع</a>
+                            <a class="nav-link text-active-primary me-6" href="#">ملفات المشروع</a>
                         </li>
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
@@ -202,216 +198,47 @@
         <!--end::Navbar-->
 
         <!--begin::Row-->
-        <div class="row g-6 g-xl-9 mb-6 mb-xl-9">
-            <!--begin::Col-->
-{{--            <div class="col-md-6 col-lg-4 col-xl-3">--}}
-{{--                <!--begin::Card-->--}}
-{{--                <div class="card h-100 flex-center bg-light-primary border-primary border border-dashed p-8">--}}
-{{--                    <!--begin::Image-->--}}
-{{--                    <img src="assets/media/svg/files/upload.svg" class="mb-5" alt="" />--}}
-{{--                    <!--end::Image-->--}}
-{{--                    <!--begin::Link-->--}}
-{{--                    <a href="#" class="text-hover-primary fs-5 fw-bolder mb-2">ارفع مرفق</a>--}}
-{{--                    <!--end::Link-->--}}
-{{--                    <!--begin::Description-->--}}
-{{--                    <div class="fs-7 fw-bold text-gray-400">اسحب واترك الملف هنا</div>--}}
-{{--                    <!--end::Description-->--}}
-{{--                </div>--}}
-{{--                <!--end::Card-->--}}
-{{--            </div>--}}
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <!--begin::Card-->
-                <div class="card h-100">
-                    <!--begin::Card body-->
-                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                        <!--begin::Name-->
-                        <a href="#" class="text-gray-800 text-hover-primary d-flex flex-column">
-                            <!--begin::Image-->
-                            <div class="symbol symbol-60px mb-5">
-                                <img src="{{ URL::asset('admin/assets/media/svg/files/pdf.svg')}}" alt="" />
-                            </div>
-                            <!--end::Image-->
+        <div class="row g-6 g-xl-9">
+            @foreach($levels as $level)
+            <div class="col-md-6 col-xl-4">
+                <div class="card card-xl-stretch mb-xl-8">
+                    <!--begin::Body-->
+                    <div class="card-body pt-5">
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-stack">
                             <!--begin::Title-->
-                            <div class="fs-5 fw-bolder mb-2">تصميم مبدئي </div>
+                                <h4 class="fw-bolder text-gray-800 m-0">مرحلة</h4>
                             <!--end::Title-->
-                        </a>
-                        <!--end::Name-->
-                        <!--begin::Description-->
-                        <div class="fs-7 fw-bold text-gray-400">منذ 3 ايام</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Card body-->
-                </div>
-                <!--end::Card-->
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <!--begin::Card-->
-                <div class="card h-100">
-                    <!--begin::Card body-->
-                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                        <!--begin::Name-->
-                        <a href="#" class="text-gray-800 text-hover-primary d-flex flex-column">
-                            <!--begin::Image-->
-                            <div class="symbol symbol-60px mb-5">
-                                <img src="{{ URL::asset('admin/assets/media/svg/files/doc.svg')}}" alt="" />
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Chart-->
+                        <div class="d-flex flex-center w-100">
+                            <div class="mixed-widget-17-chart{{$level->id}}" data-kt-chart-color="primary" style="height: 300px"></div>
+                        </div>
+                        <!--end::Chart-->
+                        <!--begin::Content-->
+                        <div class="text-center w-100 position-relative z-index-1" style="margin-top: -130px">
+                            <!--begin::Text-->
+                            <p class="fw-bold fs-4 text-gray-400 mb-3">
+                                {{$level->title}}</p>
+                            @if($level->auto_complete == 1)
+                                <p class="text-gray-400 mb-3">تم استكمال المرحلة من قبل مدير المشروع</p>
+                            @endif
+                            <!--end::Text-->
+                            <!--begin::Action-->
+                            <div class="mb-9 mb-xxl-1">
+                                <a href='{{url('level_Details',$level->id)}}' class="btn btn-danger fw-bold">التفاصيل</a>
                             </div>
-                            <!--end::Image-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fw-bolder mb-2">تصميم نهائي</div>
-                            <!--end::Title-->
-                        </a>
-                        <!--end::Name-->
-                        <!--begin::Description-->
-                        <div class="fs-7 fw-bold text-gray-400">منذ 3 ايام</div>
-                        <!--end::Description-->
+                            <!--ed::Action-->
+                        </div>
+                        <!--end::Content-->
                     </div>
-                    <!--end::Card body-->
+                    <!--end::Body-->
                 </div>
-                <!--end::Card-->
             </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <!--begin::Card-->
-                <div class="card h-100">
-                    <!--begin::Card body-->
-                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                        <!--begin::Name-->
-                        <a href="#" class="text-gray-800 text-hover-primary d-flex flex-column">
-                            <!--begin::Image-->
-                            <div class="symbol symbol-60px mb-5">
-                                <img src="{{ URL::asset('admin/assets/media/svg/files/css.svg')}}" alt="" />
-                            </div>
-                            <!--end::Image-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fw-bolder mb-2">تصميم نهائي</div>
-                            <!--end::Title-->
-                        </a>
-                        <!--end::Name-->
-                        <!--begin::Description-->
-                        <div class="fs-7 fw-bold text-gray-400">منذ 3 اشهر</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Card body-->
-                </div>
-                <!--end::Card-->
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <!--begin::Card-->
-                <div class="card h-100">
-                    <!--begin::Card body-->
-                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                        <!--begin::Name-->
-                        <a href="#" class="text-gray-800 text-hover-primary d-flex flex-column">
-                            <!--begin::Image-->
-                            <div class="symbol symbol-60px mb-5">
-                                <img src="{{ URL::asset('admin/assets/media/svg/files/ai.svg')}}" alt="" />
-                            </div>
-                            <!--end::Image-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fw-bolder mb-2">تصميم نهائي</div>
-                            <!--end::Title-->
-                        </a>
-                        <!--end::Name-->
-                        <!--begin::Description-->
-                        <div class="fs-7 fw-bold text-gray-400">منذ 5 ايام</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Card body-->
-                </div>
-                <!--end::Card-->
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <!--begin::Card-->
-                <div class="card h-100">
-                    <!--begin::Card body-->
-                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                        <!--begin::Name-->
-                        <a href="#" class="text-gray-800 text-hover-primary d-flex flex-column">
-                            <!--begin::Image-->
-                            <div class="symbol symbol-60px mb-5">
-                                <img src="{{ URL::asset('admin/assets/media/svg/files/pdf.svg')}}" alt="" />
-                            </div>
-                            <!--end::Image-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fw-bolder mb-2">تصميم مبدئي </div>
-                            <!--end::Title-->
-                        </a>
-                        <!--end::Name-->
-                        <!--begin::Description-->
-                        <div class="fs-7 fw-bold text-gray-400">منذ 3 ايام</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Card body-->
-                </div>
-                <!--end::Card-->
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <!--begin::Card-->
-                <div class="card h-100">
-                    <!--begin::Card body-->
-                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                        <!--begin::Name-->
-                        <a href="#" class="text-gray-800 text-hover-primary d-flex flex-column">
-                            <!--begin::Image-->
-                            <div class="symbol symbol-60px mb-5">
-                                <img src="{{ URL::asset('admin/assets/media/svg/files/doc.svg')}}" alt="" />
-                            </div>
-                            <!--end::Image-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fw-bolder mb-2">تصميم نهائي</div>
-                            <!--end::Title-->
-                        </a>
-                        <!--end::Name-->
-                        <!--begin::Description-->
-                        <div class="fs-7 fw-bold text-gray-400">منذ 3 ايام</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Card body-->
-                </div>
-                <!--end::Card-->
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <!--begin::Card-->
-                <div class="card h-100">
-                    <!--begin::Card body-->
-                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                        <!--begin::Name-->
-                        <a href="#" class="text-gray-800 text-hover-primary d-flex flex-column">
-                            <!--begin::Image-->
-                            <div class="symbol symbol-60px mb-5">
-                                <img src="{{ URL::asset('admin/assets/media/svg/files/css.svg')}}" alt="" />
-                            </div>
-                            <!--end::Image-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fw-bolder mb-2">تصميم نهائي</div>
-                            <!--end::Title-->
-                        </a>
-                        <!--end::Name-->
-                        <!--begin::Description-->
-                        <div class="fs-7 fw-bold text-gray-400">منذ 3 اشهر</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Card body-->
-                </div>
-                <!--end::Card-->
-            </div>
-            <!--end::Col-->
-
+            @endforeach
         </div>
-        <!--end:Row-->
+        <!--end::Row-->
 
     </div>
     <!--end::Post-->
@@ -420,8 +247,98 @@
 
 @section('script')
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>
+{{--    <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>--}}
+    @foreach($levels as $level)
+        @if($level->auto_complete == 1)
 
+            <script>
+            (function () {
+                var e = document.querySelectorAll(".mixed-widget-17-chart{{$level->id}}");
+                [].slice.call(e).map(function (e) {
+                    var t = parseInt(KTUtil.css(e, "height"));
+                    if (e) {
+                        var a = e.getAttribute("data-kt-chart-color"),
+                            o = {
+                                labels: [""],
+                                series: [100],
+                                chart: { fontFamily: "inherit", height: t, type: "radialBar", offsetY: 0 },
+                                plotOptions: {
+                                    radialBar: {
+                                        startAngle: -90,
+                                        endAngle: 90,
+                                        hollow: { margin: 0, size: "55%" },
+                                        dataLabels: {
+                                            showOn: "always",
+                                            name: { show: !0, fontSize: "12px", fontWeight: "700", offsetY: -5, color: KTUtil.getCssVariableValue("--bs-gray-500") },
+                                            value: {
+                                                color: KTUtil.getCssVariableValue("--bs-gray-900"),
+                                                fontSize: "24px",
+                                                fontWeight: "600",
+                                                offsetY: -40,
+                                                show: !0,
+                                                formatter: function (e) {
+                                                    return  "100 %";
+                                                },
+                                            },
+                                        },
+                                        track: { background: KTUtil.getCssVariableValue("--bs-gray-300"), strokeWidth: "100%" },
+                                    },
+                                },
+                                colors: [KTUtil.getCssVariableValue("--bs-" + a)],
+                                stroke: { lineCap: "round" },
+                            };
+                        new ApexCharts(e, o).render();
+                    }
+                });
+            })()
+
+        </script>
+
+@else
+<script>
+    (function () {
+        var e = document.querySelectorAll(".mixed-widget-17-chart{{$level->id}}");
+        [].slice.call(e).map(function (e) {
+            var t = parseInt(KTUtil.css(e, "height"));
+            if (e) {
+                var a = e.getAttribute("data-kt-chart-color"),
+                    o = {
+                        labels: [""],
+                        series: [{{$level->progress}}],
+                        chart: { fontFamily: "inherit", height: t, type: "radialBar", offsetY: 0 },
+                        plotOptions: {
+                            radialBar: {
+                                startAngle: -90,
+                                endAngle: 90,
+                                hollow: { margin: 0, size: "55%" },
+                                dataLabels: {
+                                    showOn: "always",
+                                    name: { show: !0, fontSize: "12px", fontWeight: "700", offsetY: -5, color: KTUtil.getCssVariableValue("--bs-gray-500") },
+                                    value: {
+                                        color: KTUtil.getCssVariableValue("--bs-gray-900"),
+                                        fontSize: "24px",
+                                        fontWeight: "600",
+                                        offsetY: -40,
+                                        show: !0,
+                                        formatter: function (e) {
+                                            return  "{{$level->progress}}  %";
+                                        },
+                                    },
+                                },
+                                track: { background: KTUtil.getCssVariableValue("--bs-gray-300"), strokeWidth: "100%" },
+                            },
+                        },
+                        colors: [KTUtil.getCssVariableValue("--bs-" + a)],
+                        stroke: { lineCap: "round" },
+                    };
+                new ApexCharts(e, o).render();
+            }
+        });
+    })()
+
+</script>
+@endif
+    @endforeach
     <script type="text/javascript">
         $(function () {
             var table = $('#users_table').DataTable({

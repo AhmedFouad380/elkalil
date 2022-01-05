@@ -28,11 +28,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
+Route::post('login', [AuthController::class, 'login']);
 
 
-     Route::get('/login', function () {
-        return view('auth/login');
-    })->name('login');
 
 Route::get('/quest', function () {
     return view('auth/request');
@@ -40,7 +38,6 @@ Route::get('/quest', function () {
 Route::post('/quest', 'App\Http\Controllers\Front\PageController@store_quest')->name('create_quest.submit');
 Route::get('success_msg', [PageController::class, 'success_msg']);
 
-Route::post('login', [AuthController::class, 'login']);
 Route::get('logout', [AuthController::class, 'logout']);
 
 Route::get('/table', function () {
@@ -50,8 +47,8 @@ Route::get('/table', function () {
 Route::get('/projects', function () {
     return view('admin/projects');
 });
+Route::group(['middleware' => ['admin']], function () {
 
-Route::middleware('auth_user')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/home', [DashboardController::class, 'index']);
@@ -154,11 +151,17 @@ Route::middleware('auth_user')->group(function () {
     Route::get('AcceptProject', [\App\Http\Controllers\Admin\RequestsController::class, 'AcceptProject'])->name('AcceptProject');
     Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
 
+    Route::get('projects', [\App\Http\Controllers\Admin\ProjectController::class, 'index']);
+    Route::post('store-project', [\App\Http\Controllers\Admin\ProjectController::class, 'store']);
+    Route::get('project_details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'project_details']);
+    Route::get('level_Details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'level_Details']);
+
     Route::get('Contracts', [\App\Http\Controllers\Admin\ContractsController::class, 'index']);
     Route::get('Contracts_datatable', [\App\Http\Controllers\Admin\ContractsController::class, 'datatable'])->name('Contracts.datatable.data');
     Route::get('ConfirmProject', [\App\Http\Controllers\Admin\ContractsController::class, 'ConfirmProject'])->name('ConfirmProject');
     Route::get('Contracts-edit/{id}', [\App\Http\Controllers\Admin\ContractsController::class, 'edit']);
     Route::post('UpdateProjectContract', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectContract'])->name('UpdateProjectContract');
+    Route::post('UpdateProjectPaid', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectPaid'])->name('UpdateProjectContract');
 
 
     Route::get('/add-Requests-button', function () {
@@ -170,6 +173,12 @@ Route::middleware('auth_user')->group(function () {
     Route::post('Add_explan', [\App\Http\Controllers\Admin\ExplanController::class, 'Add_explan'])->name('Add_explan');
 
 });
+
+
+
+Route::get('Get_Levels',[PageController::class ,'Get_Levels']);
+Route::get('contractName',[PageController::class ,'contractName']);
+Route::get('getMoney',[PageController::class ,'getMoney']);
 
 
 Route::get('/quest', function () {
@@ -192,19 +201,15 @@ Route::get('/table-view', function () {
     return view('admin/table-view');
 });
 
-Route::get('/projects', function () {
-    return view('admin/projects');
-});
-
-Route::get('/project-details', function () {
-    return view('admin/project_details');
-});
+//Route::get('/project-details/{id}', function () {
+//    return view('admin/project_details');
+//});
 
 Route::get('/project-details2', function () {
     return view('admin/project_details2');
 });
 
-Route::get('/project-details3', function () {
+    Route::get('/project-details3', function () {
     return view('admin/project_details3');
 });
 

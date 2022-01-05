@@ -18,7 +18,20 @@ class RequestsController extends Controller
 
     public function datatable(Request $request)
     {
-        $data = Project::where('is_accepted',2)->orderBy('id', 'asc')->get();;
+        $data = Project::where('is_accepted',2);
+
+        if(isset($request->view)){
+            $data->where('view',$request->view);
+            print_r('a');die();
+
+        }
+        if(isset($request->from)){
+            $data->whereDate('date','>=',$request->from);
+        }
+        if(isset($request->to)){
+            $data->whereDate('date','<=',$request->to);
+        }
+        $data->orderBy('id', 'desc')->get();
         return Datatables::of($data)
                 ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
@@ -42,7 +55,7 @@ class RequestsController extends Controller
                 return Contract::find($row->projectContract->contract_id)->title;
             })
             ->addColumn('actions', function ($row) {
-                $actions = ' <a href="' . url("Requests-edit/" . $row->id) . '" class="btn btn-active-light-info"><i class="bi bi-pencil-fill"></i> تعديل </a>';
+                $actions = ' <a href="' . url("Requests-edit/" . $row->id) . '" class="btn btn-active-light-info"><i class="bi bi-pencil-fill"></i> عرض </a>';
                 return $actions;
 
             })

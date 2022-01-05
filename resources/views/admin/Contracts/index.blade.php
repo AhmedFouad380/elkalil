@@ -56,6 +56,8 @@
                             <th class="min-w-125px">اسم العميل</th>
                             <th class="min-w-125px">تاريخ الطلب</th>
                             <th class="min-w-125px">نوع المشروع</th>
+                            <th class="min-w-125px">نسبة الانجاز</th>
+                            <th class="min-w-125px">النوع</th>
                             <th class=" min-w-100px">الاجراءات</th>
                         </tr>
                         <!--end::Table row-->
@@ -118,8 +120,9 @@
                     {data: 'name', name: 'name', "searchable": true, "orderable": true},
                     {data: 'date', name: 'date', "searchable": true, "orderable": true},
                     {data: 'type', name: 'type', "searchable": true, "orderable": true},
+                    {data: 'progress', name: 'progress', "searchable": true, "orderable": true},
+                    {data: 'confirm', name: 'confirm', "searchable": true, "orderable": true},
                     {data: 'actions', name: 'actions', "searchable": false, "orderable": false},
-
                 ]
             });
 

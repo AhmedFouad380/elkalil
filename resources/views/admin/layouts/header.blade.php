@@ -709,13 +709,13 @@
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="../../demo16/dist/account/overview.html" class="menu-link px-5">My Profile</a>
+                            <a href="../../demo16/dist/account/overview.html" class="menu-link px-5">الصفحة الشخصية</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
                             <a href="../../demo16/dist/pages/projects/list.html" class="menu-link px-5">
-                                <span class="menu-text">My Projects</span>
+                                <span class="menu-text">مشاريعي</span>
                                 <span class="menu-badge">
                                     <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
                                 </span>
@@ -723,135 +723,20 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-                            <a href="#" class="menu-link px-5">
-                                <span class="menu-title">My Subscription</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <!--begin::Menu sub-->
-                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo16/dist/account/referrals.html"
-                                       class="menu-link px-5">Referrals</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo16/dist/account/billing.html" class="menu-link px-5">Billing</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo16/dist/account/statements.html"
-                                       class="menu-link px-5">Payments</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo16/dist/account/statements.html"
-                                       class="menu-link d-flex flex-stack px-5">Statements
-                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                           title="View your statements"></i></a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu separator-->
-                                <div class="separator my-2"></div>
-                                <!--end::Menu separator-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <div class="menu-content px-3">
-                                        <label class="form-check form-switch form-check-custom form-check-solid">
-                                            <input class="form-check-input w-30px h-20px" type="checkbox" value="1"
-                                                   checked="checked" name="notifications"/>
-                                            <span class="form-check-label text-muted fs-7">Notifications</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu sub-->
-                        </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                            <a href="../../demo16/dist/account/statements.html" class="menu-link px-5">My Statements</a>
-                        </div>
+
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->
-                        <div class="separator my-2"></div>
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-                            <a href="#" class="menu-link px-5">
-                                <span class="menu-title position-relative">Language
-                                <span
-                                    class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-                                <img class="w-15px h-15px rounded-1 ms-2"
-                                     src="{{asset('admin/assets/media/flags/united-states.svg')}}"
-                                     alt=""/></span></span>
-                            </a>
-                            <!--begin::Menu sub-->
-                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo16/dist/account/settings.html"
-                                       class="menu-link d-flex px-5 active">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1"
-                                             src="{{asset('admin/assets/media/flags/united-states.svg')}}" alt=""/>
-                                    </span>English</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo16/dist/account/settings.html" class="menu-link d-flex px-5">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1" src="{{asset('admin/assets/media/flags/spain.svg')}}"
-                                             alt=""/>
-                                    </span>Spanish</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo16/dist/account/settings.html" class="menu-link d-flex px-5">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1" src="{{asset('admin/assets/media/flags/germany.svg')}}"
-                                             alt=""/>
-                                    </span>German</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo16/dist/account/settings.html" class="menu-link d-flex px-5">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1" src="{{asset('admin/assets/media/flags/japan.svg')}}"
-                                             alt=""/>
-                                    </span>Japanese</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo16/dist/account/settings.html" class="menu-link d-flex px-5">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1" src="{{asset('admin/assets/media/flags/france.svg')}}"
-                                             alt=""/>
-                                    </span>French</a>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu sub-->
-                        </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5 my-1">
-                            <a href="../../demo16/dist/account/settings.html" class="menu-link px-5">Account
-                                Settings</a>
-                        </div>
+
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{url('logout')}}" class="menu-link px-5">Sign Out</a>
+                            <a href="{{url('logout')}}" class="menu-link px-5">تسجيل الخروج</a>
 
                         </div>
                         <!--end::Menu item-->
@@ -859,19 +744,6 @@
                         <div class="separator my-2"></div>
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                            <div class="menu-content px-5">
-                                <label
-                                    class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"
-                                    for="kt_user_menu_dark_mode_toggle">
-                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode"
-                                           id="kt_user_menu_dark_mode_toggle"
-                                           data-kt-url="../../demo16/dist/index.html"/>
-                                    <span class="pulse-ring ms-n1"></span>
-                                    <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
-                                </label>
-                            </div>
-                        </div>
                         <!--end::Menu item-->
                     </div>
                     <!--end::Menu-->
@@ -898,32 +770,32 @@
             <div
                 class="menu menu-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch flex-grow-1"
                 id="#kt_header_menu" data-kt-menu="true">
-                <div class="menu-item here show menu-lg-down-accordion me-lg-1">
+                <div class="menu-item  @if(Request::segment(1) == '') here show @endif  menu-lg-down-accordion me-lg-1">
                     <a class="menu-link  py-3"
                        href="/">
-                        <span class="menu-title active">لوحة القيادة</span>
+                        <span class="menu-title ">لوحة القيادة</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>
-                <div class="menu-item menu-lg-down-accordion me-lg-1">
+                <div class="menu-item   @if(Request::segment(1) == 'Inbox') here show @endif menu-lg-down-accordion me-lg-1">
                     <a class="menu-link py-3" href="../../demo16/dist/index.html">
                         <span class="menu-title">البريد الوارد</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>
-                <div class="menu-item menu-lg-down-accordion me-lg-1">
+                <div class="menu-item  @if(Request::segment(1) == 'Requests') here show @endif  menu-lg-down-accordion me-lg-1">
                     <a class="menu-link py-3" href="{{url('Requests')}}">
                         <span class="menu-title">طلبات العملاء الجدد</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>
-                <div class="menu-item menu-lg-down-accordion me-lg-1">
+                <div class="menu-item @if(Request::segment(1) == 'Contracts') here show @endif menu-lg-down-accordion me-lg-1">
                     <a class="menu-link py-3" href="{{url('Contracts')}}">
                         <span class="menu-title">التعاقدات</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>
-                <div class="menu-item menu-lg-down-accordion me-lg-1">
+                <div class="menu-item @if(Request::segment(1) == 'projects') here show @endif menu-lg-down-accordion me-lg-1">
                     <a class="menu-link py-3" href="{{url('/projects')}}">
                         <span class="menu-title">قائمة المشاريع</span>
                         <span class="menu-arrow d-lg-none"></span>

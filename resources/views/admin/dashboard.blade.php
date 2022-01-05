@@ -251,22 +251,90 @@
                         <div class="px-9 pt-7 card-rounded h-275px w-100 bg-info">
                             <!--begin::Heading-->
                             <div class="d-flex flex-stack">
-                                <h3 class="m-0 text-white fw-bolder fs-3">اجمالي دخل المشاريع حسب العقود</h3>
+                                <div class="card-toolbar">
+                                    <!--begin::Menu-->
+                                    <button type="button" class="btn btn-sm btn-light btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+                                        <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
+                                            <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                            <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                            <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                        </g>
+                                    </svg>
+                                </span>
+                                        <!--end::Svg Icon-->
+                                    </button>
+                                    <!--begin::Menu 1-->
+                                    <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_61a08bf50cf89">
+                                        <!--begin::Header-->
+                                        <form >
+                                            <div class="px-7 py-5">
+                                            </div>
+                                            <!--end::Header-->
+                                            <!--begin::Menu separator-->
+                                            <div class="separator border-gray-200"></div>
+                                            <!--end::Menu separator-->
+                                            <!--begin::Form-->
+                                            <div class="px-7 py-5">
+                                                <!--begin::Input group-->
+                                                <div class="mb-10">
+                                                    <!--begin::Label-->
+                                                    <label class="form-label fw-bold">من  </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <div>
+                                                        <input type="date" id="to" class="form-control">
+                                                    </div>
+                                                    <!--end::Input-->
+                                                </div>
+                                                <div class="mb-10">
+                                                    <!--begin::Label-->
+                                                    <label class="form-label fw-bold">الى  </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <div>
+                                                      <input type="date" id="from" class="form-control">
+                                                    </div>
+                                                    <!--end::Input-->
+                                                </div>
+
+                                                <!--end::Input group-->
+                                                <!--begin::Actions-->
+                                                <div class="d-flex justify-content-end">
+                                                    <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">الغاء</button>
+                                                    <button type="button" class="btn btn-sm btn-primary" id="getMoney" data-kt-menu-dismiss="true">بحث</button>
+                                                </div>
+                                                <!--end::Actions-->
+                                            </div>
+                                        </form>
+
+                                        <!--end::Form-->
+                                    </div>
+                                    <!--end::Menu 1-->
+                                    <!--end::Menu-->
+                                </div>
+
                             </div>
                             <!--end::Heading-->
                             <!--begin::Balance-->
                             <div class="d-flex text-center flex-column text-white pt-8">
-                                <span class="fw-bold fs-7">اجمالي دخل المشاريع  </span>
-                                @inject('income','App\Models\Income')
-                                <span class="fw-bolder fs-2x pt-1">{{$income->sum('amount')}} ر.س</span>
+                                <span class="fw-bold " style="font-size: 20px; ">اجمالي دخل المشاريع حسب العقود  </span>
                             </div>
+
                             <!--end::Balance-->
                         </div>
                         <!--end::Header-->
                         <!--begin::Items-->
-                        <div class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1" style="margin-top: -100px">
+                        <div  id="MoneyData"  class="bg-body shadow-sm card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1" style="margin-top: -100px">
                             <!--begin::Item-->
-
+                            <div class="d-flex text-center flex-column text-white pt-8">
+                                <span class="fw-bold fs-7" style="color:#000">اجمالي دخل المشاريع  </span>
+                                @inject('income','App\Models\Income')
+                                <span class="fw-bolder fs-2x pt-1" style="color:#000">{{$income->sum('amount')}} ر.س</span>
+                            </div>
                         @inject('contracts','App\Models\Contract')
                         @inject('ProjectContract','App\Models\ProjectContract')
                         <!--end::Item-->
@@ -292,12 +360,12 @@
                                         <!--begin::Title-->
                                         <div class="mb-1 pe-3 flex-grow-1">
                                             <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">{{$Contract->title}}</a>
-                                            <div class="text-gray-400 fw-bold fs-7"> ( {{$ProjectContract->where('contract_id',$Contract->id)->count() }} ) </div>
+                                        <div class="text-gray-400 fw-bold fs-7"> ( {{$ProjectContract->where('contract_id','!=',1)->where('contract_id',$Contract->id)->count() }} ) </div>
                                         </div>
                                         <!--end::Title-->
                                         <!--begin::Label-->
                                         <div class="d-flex align-items-center">
-                                            <div class="fw-bolder fs-5 text-gray-800 pe-1">{{$ProjectContract->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id')->sum('amount')}}</div>
+                                            <div class="fw-bolder fs-5 text-gray-800 pe-1">{{$ProjectContract->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}</div>
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr065.svg-->
                                             <span class="svg-icon svg-icon-5 svg-icon-success ms-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -335,7 +403,7 @@
                     <div class="card-header border-0 py-5">
                         <h3 class="card-title align-items-start flex-column">
                             <span class="card-label fw-bolder fs-3 mb-1">ملخص المشاريع حسب المراحل</span>
-                            <span class="text-muted fw-bold fs-7">{{$contract->title}}</span>
+                            <span class="text-muted fw-bold fs-7" id="contractName">{{$contract->title}}</span>
                         </h3>
                         <div class="card-toolbar">
                             <!--begin::Menu-->
@@ -356,7 +424,7 @@
                             <!--begin::Menu 1-->
                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_61a08bf50cf89">
                                 <!--begin::Header-->
-                               <form method="get">
+                               <form >
                                 <div class="px-7 py-5">
                                 </div>
                                 <!--end::Header-->
@@ -372,7 +440,7 @@
                                         <!--end::Label-->
                                         <!--begin::Input-->
                                         <div>
-                                            <select  name="id" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_61a08bf50cf89" data-allow-clear="true">
+                                            <select  id="idContract" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true">
                                             @inject('contracts','App\Models\Contract')
                                                 @foreach($contracts->where('id','!=',1)->get() as $cont)
                                                     <option @if($cont->id == $contract->id) selected @endif value="{{$cont->id}}"> {{$cont->title}}</option>
@@ -385,7 +453,7 @@
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-end">
                                         <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">الغاء</button>
-                                        <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">بحث</button>
+                                        <button type="button" class="btn btn-sm btn-primary" id="getLevel" data-kt-menu-dismiss="true">بحث</button>
                                     </div>
                                     <!--end::Actions-->
                                 </div>
@@ -403,12 +471,11 @@
                         <!--begin::Stats-->
                         <div class="card-px pt-5 pb-10 flex-grow-1">
                             <!--begin::Row-->
-                            <div class="row g-0 mt-5 mb-10">
+                            <div class="row g-0 mt-5 mb-10" id="items">
                                 @inject('levels','App\Models\Level')
                                 @inject('ProjectLevels','App\Models\ProjectLevels')
                                 @foreach($levels->where('contract_id',$contract->id)->where('percent','!=',0)->get() as $key => $level)
-                                    @if($key < 6 )
-                                <div class="col-2">
+                                <div class="col-2" style="margin-bottom: 30px">
                                     <div class="d-flex align-items-center me-2">
                                         <div class="symbol symbol-50px me-3">
                                             <div class="symbol-label bg-light-danger">
@@ -433,13 +500,12 @@
                                         }
                                         ?>
                                         <div>
-                                            <div class="fs-4 text-dark fw-bolder">{{round($total,2)}} %</div>
+                                            <div class="fs-4 text-dark fw-bolder">{{round($total,1)}} </div>
                                             <div class="fs-7 text-muted fw-bold">{{$level->title}}</div>
                                         </div>
                                         <!--end::Title-->
                                     </div>
                                 </div>
-                                    @endif
                                 @endforeach
                                 <!--begin::Col-->
                                 <!--end::Col-->
@@ -448,42 +514,6 @@
                             </div>
                             <!--end::Row-->
                             <!--begin::Row-->
-                            <div class="row g-0">
-                                @foreach($levels->where('contract_id',$contract->id)->where('percent','!=',0)->get() as $key => $level)
-                                    @if($key >= 6 )
-                                        <div class="col-2">
-                                            <div class="d-flex align-items-center me-2">
-                                                <div class="symbol symbol-50px me-3">
-                                                    <div class="symbol-label bg-light-danger">
-                                                        <span class="svg-icon svg-icon-1 svg-icon-danger">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="black" />
-                                                        <path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="black" />
-                                                    </svg>
-                                                </span>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                                $countProjectLevels = $ProjectLevels->where('level_id',$level->id)->count();
-                                                $sumProjectLevels = $ProjectLevels->where('level_id',$level->id)->sum('progress');
-                                                if($countProjectLevels == 0){
-                                                    $total = 0;
-                                                }else{
-                                                    $ProjectLevelPercent =  0 ? 0 : ($level->percent * $countProjectLevels);
-                                                    $total = ($sumProjectLevels * 100 ) / $ProjectLevelPercent ;
-                                                }                                                ?>
-                                                <div>
-                                                    <div class="fs-4 text-dark fw-bolder">{{$total}} %</div>
-                                                    <div class="fs-7 text-muted fw-bold">{{$level->title}}</div>
-                                                </div>
-                                                <!--end::Title-->
-                                            </div>
-                                        </div>
-                                @endif
-                            @endforeach
-
-                            <!--end::Col-->
-                            </div>
                             <!--end::Row-->
                         </div>
                         <!--end::Stats-->
@@ -499,388 +529,68 @@
         </div>
         <!--end::Row-->
 
-        <!--begin::Row-->
-{{--        <div class="row g-5 g-xl-8">--}}
-{{--            <!--begin::Col-->--}}
-{{--            <div class="col-xl-4">--}}
-{{--                <!--begin::Mixed Widget 14-->--}}
-{{--                <div class="card card-xxl-stretch mb-5 mb-xl-8" style="background-color: #F7D9E3">--}}
-{{--                    <!--begin::Body-->--}}
-{{--                    <div class="card-body d-flex flex-column">--}}
-{{--                        <!--begin::Wrapper-->--}}
-{{--                        <div class="d-flex flex-column mb-7">--}}
-{{--                            <!--begin::Title-->--}}
-{{--                            <a href="#" class="text-dark text-hover-primary fw-bolder fs-3">Summary</a>--}}
-{{--                            <!--end::Title-->--}}
-{{--                        </div>--}}
-{{--                        <!--end::Wrapper-->--}}
-{{--                        <!--begin::Row-->--}}
-{{--                        <div class="row g-0">--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center mb-9 me-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs043.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path opacity="0.3" d="M22 8H8L12 4H19C19.6 4 20.2 4.39999 20.5 4.89999L22 8ZM3.5 19.1C3.8 19.7 4.4 20 5 20H12L16 16H2L3.5 19.1ZM19.1 20.5C19.7 20.2 20 19.6 20 19V12L16 8V22L19.1 20.5ZM4.9 3.5C4.3 3.8 4 4.4 4 5V12L8 16V2L4.9 3.5Z" fill="black" />--}}
-{{--                                                    <path d="M22 8L20 12L16 8H22ZM8 16L4 12L2 16H8ZM16 16L12 20L16 22V16ZM8 8L12 4L8 2V8Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">$50K</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Sales</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center mb-9 ms-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs046.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path d="M8 22C7.4 22 7 21.6 7 21V9C7 8.4 7.4 8 8 8C8.6 8 9 8.4 9 9V21C9 21.6 8.6 22 8 22Z" fill="black" />--}}
-{{--                                                    <path opacity="0.3" d="M4 15C3.4 15 3 14.6 3 14V6C3 5.4 3.4 5 4 5C4.6 5 5 5.4 5 6V14C5 14.6 4.6 15 4 15ZM13 19V3C13 2.4 12.6 2 12 2C11.4 2 11 2.4 11 3V19C11 19.6 11.4 20 12 20C12.6 20 13 19.6 13 19ZM17 16V5C17 4.4 16.6 4 16 4C15.4 4 15 4.4 15 5V16C15 16.6 15.4 17 16 17C16.6 17 17 16.6 17 16ZM21 18V10C21 9.4 20.6 9 20 9C19.4 9 19 9.4 19 10V18C19 18.6 19.4 19 20 19C20.6 19 21 18.6 21 18Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">$4,5K</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Revenue</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center me-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs022.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path opacity="0.3" d="M11.425 7.325C12.925 5.825 15.225 5.825 16.725 7.325C18.225 8.825 18.225 11.125 16.725 12.625C15.225 14.125 12.925 14.125 11.425 12.625C9.92501 11.225 9.92501 8.825 11.425 7.325ZM8.42501 4.325C5.32501 7.425 5.32501 12.525 8.42501 15.625C11.525 18.725 16.625 18.725 19.725 15.625C22.825 12.525 22.825 7.425 19.725 4.325C16.525 1.225 11.525 1.225 8.42501 4.325Z" fill="black" />--}}
-{{--                                                    <path d="M11.325 17.525C10.025 18.025 8.425 17.725 7.325 16.725C5.825 15.225 5.825 12.925 7.325 11.425C8.825 9.92498 11.125 9.92498 12.625 11.425C13.225 12.025 13.625 12.925 13.725 13.725C14.825 13.825 15.925 13.525 16.725 12.625C17.125 12.225 17.425 11.825 17.525 11.325C17.125 10.225 16.525 9.22498 15.625 8.42498C12.525 5.32498 7.425 5.32498 4.325 8.42498C1.225 11.525 1.225 16.625 4.325 19.725C7.425 22.825 12.525 22.825 15.625 19.725C16.325 19.025 16.925 18.225 17.225 17.325C15.425 18.125 13.225 18.225 11.325 17.525Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">40</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Tasks</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center ms-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs045.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path d="M2 11.7127L10 14.1127L22 11.7127L14 9.31274L2 11.7127Z" fill="black" />--}}
-{{--                                                    <path opacity="0.3" d="M20.9 7.91274L2 11.7127V6.81275C2 6.11275 2.50001 5.61274 3.10001 5.51274L20.6 2.01274C21.3 1.91274 22 2.41273 22 3.11273V6.61273C22 7.21273 21.5 7.81274 20.9 7.91274ZM22 16.6127V11.7127L3.10001 15.5127C2.50001 15.6127 2 16.2127 2 16.8127V20.3127C2 21.0127 2.69999 21.6128 3.39999 21.4128L20.9 17.9128C21.5 17.8128 22 17.2127 22 16.6127Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">$5.8M</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Sales</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                        </div>--}}
-{{--                        <!--end::Row-->--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <!--end::Mixed Widget 14-->--}}
-{{--            </div>--}}
-{{--            <!--end::Col-->--}}
-{{--            <!--begin::Col-->--}}
-{{--            <div class="col-xl-4">--}}
-{{--                <!--begin::Mixed Widget 14-->--}}
-{{--                <div class="card card-xxl-stretch mb-5 mb-xl-8" style="background-color: #CBF0F4">--}}
-{{--                    <!--begin::Body-->--}}
-{{--                    <div class="card-body d-flex flex-column">--}}
-{{--                        <!--begin::Wrapper-->--}}
-{{--                        <div class="d-flex flex-column mb-7">--}}
-{{--                            <!--begin::Title-->--}}
-{{--                            <a href="#" class="text-dark text-hover-primary fw-bolder fs-3">Summary</a>--}}
-{{--                            <!--end::Title-->--}}
-{{--                        </div>--}}
-{{--                        <!--end::Wrapper-->--}}
-{{--                        <!--begin::Row-->--}}
-{{--                        <div class="row g-0">--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center mb-9 me-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs043.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path opacity="0.3" d="M22 8H8L12 4H19C19.6 4 20.2 4.39999 20.5 4.89999L22 8ZM3.5 19.1C3.8 19.7 4.4 20 5 20H12L16 16H2L3.5 19.1ZM19.1 20.5C19.7 20.2 20 19.6 20 19V12L16 8V22L19.1 20.5ZM4.9 3.5C4.3 3.8 4 4.4 4 5V12L8 16V2L4.9 3.5Z" fill="black" />--}}
-{{--                                                    <path d="M22 8L20 12L16 8H22ZM8 16L4 12L2 16H8ZM16 16L12 20L16 22V16ZM8 8L12 4L8 2V8Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">$50K</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Sales</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center mb-9 ms-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs046.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path d="M8 22C7.4 22 7 21.6 7 21V9C7 8.4 7.4 8 8 8C8.6 8 9 8.4 9 9V21C9 21.6 8.6 22 8 22Z" fill="black" />--}}
-{{--                                                    <path opacity="0.3" d="M4 15C3.4 15 3 14.6 3 14V6C3 5.4 3.4 5 4 5C4.6 5 5 5.4 5 6V14C5 14.6 4.6 15 4 15ZM13 19V3C13 2.4 12.6 2 12 2C11.4 2 11 2.4 11 3V19C11 19.6 11.4 20 12 20C12.6 20 13 19.6 13 19ZM17 16V5C17 4.4 16.6 4 16 4C15.4 4 15 4.4 15 5V16C15 16.6 15.4 17 16 17C16.6 17 17 16.6 17 16ZM21 18V10C21 9.4 20.6 9 20 9C19.4 9 19 9.4 19 10V18C19 18.6 19.4 19 20 19C20.6 19 21 18.6 21 18Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">$4,5K</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Revenue</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center me-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs022.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path opacity="0.3" d="M11.425 7.325C12.925 5.825 15.225 5.825 16.725 7.325C18.225 8.825 18.225 11.125 16.725 12.625C15.225 14.125 12.925 14.125 11.425 12.625C9.92501 11.225 9.92501 8.825 11.425 7.325ZM8.42501 4.325C5.32501 7.425 5.32501 12.525 8.42501 15.625C11.525 18.725 16.625 18.725 19.725 15.625C22.825 12.525 22.825 7.425 19.725 4.325C16.525 1.225 11.525 1.225 8.42501 4.325Z" fill="black" />--}}
-{{--                                                    <path d="M11.325 17.525C10.025 18.025 8.425 17.725 7.325 16.725C5.825 15.225 5.825 12.925 7.325 11.425C8.825 9.92498 11.125 9.92498 12.625 11.425C13.225 12.025 13.625 12.925 13.725 13.725C14.825 13.825 15.925 13.525 16.725 12.625C17.125 12.225 17.425 11.825 17.525 11.325C17.125 10.225 16.525 9.22498 15.625 8.42498C12.525 5.32498 7.425 5.32498 4.325 8.42498C1.225 11.525 1.225 16.625 4.325 19.725C7.425 22.825 12.525 22.825 15.625 19.725C16.325 19.025 16.925 18.225 17.225 17.325C15.425 18.125 13.225 18.225 11.325 17.525Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">40</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Tasks</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center ms-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs045.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path d="M2 11.7127L10 14.1127L22 11.7127L14 9.31274L2 11.7127Z" fill="black" />--}}
-{{--                                                    <path opacity="0.3" d="M20.9 7.91274L2 11.7127V6.81275C2 6.11275 2.50001 5.61274 3.10001 5.51274L20.6 2.01274C21.3 1.91274 22 2.41273 22 3.11273V6.61273C22 7.21273 21.5 7.81274 20.9 7.91274ZM22 16.6127V11.7127L3.10001 15.5127C2.50001 15.6127 2 16.2127 2 16.8127V20.3127C2 21.0127 2.69999 21.6128 3.39999 21.4128L20.9 17.9128C21.5 17.8128 22 17.2127 22 16.6127Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">$5.8M</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Sales</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                        </div>--}}
-{{--                        <!--end::Row-->--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <!--end::Mixed Widget 14-->--}}
-{{--            </div>--}}
-{{--            <!--end::Col-->--}}
-{{--            <!--begin::Col-->--}}
-{{--            <div class="col-xl-4">--}}
-{{--                <!--begin::Mixed Widget 14-->--}}
-{{--                <div class="card card-xxl-stretch mb-5 mb-xl-8" style="background-color: #CBD4F4">--}}
-{{--                    <!--begin::Body-->--}}
-{{--                    <div class="card-body d-flex flex-column">--}}
-{{--                        <!--begin::Wrapper-->--}}
-{{--                        <div class="d-flex flex-column mb-7">--}}
-{{--                            <!--begin::Title-->--}}
-{{--                            <a href="#" class="text-dark text-hover-primary fw-bolder fs-3">Summary</a>--}}
-{{--                            <!--end::Title-->--}}
-{{--                        </div>--}}
-{{--                        <!--end::Wrapper-->--}}
-{{--                        <!--begin::Row-->--}}
-{{--                        <div class="row g-0">--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center mb-9 me-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs043.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path opacity="0.3" d="M22 8H8L12 4H19C19.6 4 20.2 4.39999 20.5 4.89999L22 8ZM3.5 19.1C3.8 19.7 4.4 20 5 20H12L16 16H2L3.5 19.1ZM19.1 20.5C19.7 20.2 20 19.6 20 19V12L16 8V22L19.1 20.5ZM4.9 3.5C4.3 3.8 4 4.4 4 5V12L8 16V2L4.9 3.5Z" fill="black" />--}}
-{{--                                                    <path d="M22 8L20 12L16 8H22ZM8 16L4 12L2 16H8ZM16 16L12 20L16 22V16ZM8 8L12 4L8 2V8Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">$50K</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Sales</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center mb-9 ms-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs046.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path d="M8 22C7.4 22 7 21.6 7 21V9C7 8.4 7.4 8 8 8C8.6 8 9 8.4 9 9V21C9 21.6 8.6 22 8 22Z" fill="black" />--}}
-{{--                                                    <path opacity="0.3" d="M4 15C3.4 15 3 14.6 3 14V6C3 5.4 3.4 5 4 5C4.6 5 5 5.4 5 6V14C5 14.6 4.6 15 4 15ZM13 19V3C13 2.4 12.6 2 12 2C11.4 2 11 2.4 11 3V19C11 19.6 11.4 20 12 20C12.6 20 13 19.6 13 19ZM17 16V5C17 4.4 16.6 4 16 4C15.4 4 15 4.4 15 5V16C15 16.6 15.4 17 16 17C16.6 17 17 16.6 17 16ZM21 18V10C21 9.4 20.6 9 20 9C19.4 9 19 9.4 19 10V18C19 18.6 19.4 19 20 19C20.6 19 21 18.6 21 18Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">$4,5K</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Revenue</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center me-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs022.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path opacity="0.3" d="M11.425 7.325C12.925 5.825 15.225 5.825 16.725 7.325C18.225 8.825 18.225 11.125 16.725 12.625C15.225 14.125 12.925 14.125 11.425 12.625C9.92501 11.225 9.92501 8.825 11.425 7.325ZM8.42501 4.325C5.32501 7.425 5.32501 12.525 8.42501 15.625C11.525 18.725 16.625 18.725 19.725 15.625C22.825 12.525 22.825 7.425 19.725 4.325C16.525 1.225 11.525 1.225 8.42501 4.325Z" fill="black" />--}}
-{{--                                                    <path d="M11.325 17.525C10.025 18.025 8.425 17.725 7.325 16.725C5.825 15.225 5.825 12.925 7.325 11.425C8.825 9.92498 11.125 9.92498 12.625 11.425C13.225 12.025 13.625 12.925 13.725 13.725C14.825 13.825 15.925 13.525 16.725 12.625C17.125 12.225 17.425 11.825 17.525 11.325C17.125 10.225 16.525 9.22498 15.625 8.42498C12.525 5.32498 7.425 5.32498 4.325 8.42498C1.225 11.525 1.225 16.625 4.325 19.725C7.425 22.825 12.525 22.825 15.625 19.725C16.325 19.025 16.925 18.225 17.225 17.325C15.425 18.125 13.225 18.225 11.325 17.525Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">40</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Tasks</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                            <!--begin::Col-->--}}
-{{--                            <div class="col-6">--}}
-{{--                                <div class="d-flex align-items-center ms-2">--}}
-{{--                                    <!--begin::Symbol-->--}}
-{{--                                    <div class="symbol symbol-40px me-3">--}}
-{{--                                        <div class="symbol-label bg-white bg-opacity-50">--}}
-{{--                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs045.svg-->--}}
-{{--                                            <span class="svg-icon svg-icon-1 svg-icon-dark">--}}
-{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">--}}
-{{--                                                    <path d="M2 11.7127L10 14.1127L22 11.7127L14 9.31274L2 11.7127Z" fill="black" />--}}
-{{--                                                    <path opacity="0.3" d="M20.9 7.91274L2 11.7127V6.81275C2 6.11275 2.50001 5.61274 3.10001 5.51274L20.6 2.01274C21.3 1.91274 22 2.41273 22 3.11273V6.61273C22 7.21273 21.5 7.81274 20.9 7.91274ZM22 16.6127V11.7127L3.10001 15.5127C2.50001 15.6127 2 16.2127 2 16.8127V20.3127C2 21.0127 2.69999 21.6128 3.39999 21.4128L20.9 17.9128C21.5 17.8128 22 17.2127 22 16.6127Z" fill="black" />--}}
-{{--                                                </svg>--}}
-{{--                                            </span>--}}
-{{--                                            <!--end::Svg Icon-->--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Symbol-->--}}
-{{--                                    <!--begin::Title-->--}}
-{{--                                    <div>--}}
-{{--                                        <div class="fs-5 text-dark fw-bolder lh-1">$5.8M</div>--}}
-{{--                                        <div class="fs-7 text-gray-600 fw-bold">Sales</div>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Title-->--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Col-->--}}
-{{--                        </div>--}}
-{{--                        <!--end::Row-->--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <!--end::Mixed Widget 14-->--}}
-{{--            </div>--}}
-{{--            <!--end::Col-->--}}
-{{--        </div>--}}
-        <!--end::Row-->
+        <div class="row g-5 g-xl-8">
+            <!--begin::Col-->
+            <div class="col-xl-12">
+                <!--begin::Mixed Widget 6-->
+                <div class="card card-xl-stretch mb-5 mb-xl-8">
+                    <!--begin::Beader-->
+                    <div class="card-header border-0 py-5">
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bolder fs-3 mb-1">ملخص المشاريع حسب المناطق</span>
+                        </h3>
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body p-0 d-flex flex-column">
+                        <!--begin::Stats-->
+                        <div class="card-px pt-5 pb-10 flex-grow-1">
+                            <!--begin::Row-->
+                            <div class="row g-0 mt-5 mb-10" id="items2">
+                                @inject('Project','App\Models\Project')
+                                @inject('State','App\Models\State')
+                                @foreach($State->all() as $key => $data)
+                                    <div class="col-2" style="margin-bottom: 30px">
+                                        <div class="d-flex align-items-center me-2">
+                                            <div class="symbol symbol-50px me-3">
+                                                <div class="symbol-label bg-light-danger">
+                                                <span class="svg-icon svg-icon-1 svg-icon-danger">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="black" />
+                                                        <path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="black" />
+                                                    </svg>
+                                                </span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="fs-4 text-dark fw-bolder">{{$Project->where('state',$data->id)->count()}}</div>
+                                                <div class="fs-7 text-muted fw-bold">{{$data->title}}</div>
+                                            </div>
+                                            <!--end::Title-->
+                                        </div>
+                                    </div>
+                            @endforeach
+                            <!--begin::Col-->
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Stats-->
+                        <!--begin::Chart-->
+{{--                        <div class="mixed-widget-6-chart card-rounded-bottom" data-kt-chart-color="danger" style="height: 150px"></div>--}}
+                        <!--end::Chart-->
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Mixed Widget 6-->
+            </div>
+            <!--end::Col-->
+        </div>
+
 
         <!--begin::Calendar Widget 1-->
         <div class="card">
@@ -992,6 +702,47 @@
     <script src="{{asset('admin/assets/js/custom/modals/create-project/files.js')}}"></script>
     <script src="{{asset('admin/assets/js/custom/modals/create-project/complete.js')}}"></script>
     <script src="{{asset('admin/assets/js/custom/modals/create-project/main.js')}}"></script>
+    <script>
+
+        $("#getMoney").click(function(){
+            var to=  $('#to').val();
+            var from=  $('#from').val();
+
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type: "GET",
+                url: "{{url('getMoney')}}",
+                data: {"to":to,"from":from},
+                success: function (data) {
+                    $("#MoneyData").html(data)
+                }
+            })
+
+        })
+
+        $("#getLevel").click(function(){
+            var id =  $('#idContract').val();
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type: "GET",
+                url: "{{url('Get_Levels')}}",
+                data: {"id":id},
+                success: function (data) {
+                    $("#items").html(data)
+                        $('#kt_menu_61a08bf50cf89').hide();
+                }
+            })
+
+            $.ajax({
+                type: "GET",
+                url: "{{url('contractName')}}",
+                data: {"id":id},
+                success: function (data) {
+                    $("#contractName").html(data)
+                }
+            })
+        })
+    </script>
     <script>
         (function () {
             var e,
@@ -1115,7 +866,7 @@
             var e = document.querySelectorAll(".mixed-widget-6-chart");
             [].slice.call(e).map(function (e) {
                 var t = parseInt(KTUtil.css(e, "height"));
-                if (e) {
+                    if (e) {
                     var a = e.getAttribute("data-kt-chart-color"),
                         o = KTUtil.getCssVariableValue("--bs-gray-800"),
                         s = KTUtil.getCssVariableValue("--bs-gray-300"),
