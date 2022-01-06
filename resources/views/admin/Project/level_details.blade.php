@@ -62,6 +62,11 @@
                                 <!--end::Description-->
                             </div>
                             <!--end::Details-->
+                            <!--begin::Actions-->
+                            <div class="d-flex mb-4">
+                                <a href="#" class="btn btn-sm btn-danger me-3">اكتمال نسبة المرحلة</a>
+                            </div>
+                            <!--end::Actions-->
                         </div>
                         <!--end::Head-->
                         <!--begin::Info-->
