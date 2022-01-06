@@ -36,6 +36,7 @@ class User extends Authenticatable
         'firebase_type',
         'token_id',
         'msg',
+        'code',
 
     ];
 
