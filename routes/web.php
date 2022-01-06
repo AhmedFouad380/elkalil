@@ -36,15 +36,6 @@ Route::get('/forget-password', function () {
 Route::post('forgetPassword', [AuthController::class, 'forgetPassword']);
 Route::post('checkCode', [AuthController::class, 'checkCode']);
 Route::post('updatePassword', [AuthController::class, 'updatePassword']);
-Route::get('updatePassword', [AuthController::class, 'updatePassword']);
-
-//
-//Route::get('/check-phone', function () {
-//    return view('auth/check-phone');
-//});
-//Route::get('/update-password', function () {
-//    return view('auth/update-password');
-//});
 
 
 Route::get('/quest', function () {
@@ -74,6 +65,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('edit_setting', [SettingsController::class, 'editSettings']);
 
     Route::post('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
+    Route::get('/projectState', [\App\Http\Controllers\DashboardController::class, 'projectState']);
 
     //employee settings
     Route::get('employee_setting', [UsersController::class, 'index']);
