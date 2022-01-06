@@ -34,7 +34,12 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
-
+        'public2' => [
+            'driver' => 'local',
+            'root' => 'images',
+            'url' => 'https://alkhalilsys.com/',
+            'visibility' => 'public',
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

@@ -41,7 +41,7 @@
                         <!--begin::Wrapper-->
                         <div class="row fv-row">
 
-                            <div class="col-3">
+                            <div class="col-5">
 
                             <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
                                     data-bs-target="#kt_modal_filter">
@@ -59,6 +59,7 @@
                                 <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
                                         data-bs-target="#kt_modal_add_user">
                                     <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                    اضافة مشروع جديد
                                 </button>
                             </div>
 

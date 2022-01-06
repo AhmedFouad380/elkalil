@@ -160,6 +160,11 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
 
     Route::get('projects', [\App\Http\Controllers\Admin\ProjectController::class, 'index']);
+    Route::post('store-new-level', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'store_level']);
+    Route::get('CompleteLevel', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'CompleteLevel']);
+    Route::get('edit-LevelDetails', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'edit_LevelDetails']);
+    Route::post('AnswerLevelDetails', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'AnswerLevelDetails']);
+
     Route::post('store-project', [\App\Http\Controllers\Admin\ProjectController::class, 'store']);
     Route::get('project_details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'project_details']);
     Route::get('level_Details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'level_Details']);

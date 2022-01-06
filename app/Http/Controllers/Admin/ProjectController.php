@@ -56,7 +56,7 @@ class ProjectController extends Controller
     }
 
     public function store(Request $request){
-        $data = $this->validate(request(), [
+         $this->validate(request(), [
             'name' => 'required|string',
             'client_id' => 'required',
             'country' => 'required|',
@@ -176,4 +176,5 @@ class ProjectController extends Controller
         return view('admin.Project.level_details',compact('data','level','levelDetails'));
 
     }
+
 }
