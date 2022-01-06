@@ -123,7 +123,8 @@
                             <!--begin::Budget-->
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
                                 <div class="fs-6 text-gray-800 fw-bolder">1 - 1 - 2022</div>
-                                <div class="fw-bold text-gray-400">تاريخ نهاية العقد</div>
+                                <div class="fw-bold text-gray-400">تاريخ التسليم المتوقع
+                                </div>
                             </div>
                             <!--end::Budget-->
                         </div>
@@ -543,7 +544,7 @@
                             <label class="required fw-bold fs-6 mb-2">نوع الموقع</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select name="address_type" class="form-control" >
+                            <select name="address_type" id="address_type"class="form-control" >
                                 <option value="1">اختيار من الخريطة </option>
                                 <option value="0">اضافة لينك </option>
                             </select>
@@ -571,12 +572,12 @@
                             <!--end::Input group-->
                         </div>
                         </div>
-                        <div class="fv-row mb-7" id="link">
+                        <div class="fv-row mb-7" id="link" style="display:none">
                             <!--begin::Label-->
                             <label class="required fw-bold fs-6 mb-2">رابط الموقع</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input name="" >
+                            <input name="address_link" class="form-control" type="text" >
                             <!--end::Input-->
                         </div>
                     </div>
@@ -690,7 +691,19 @@
 
 
     </script>
+    <script>
+        $('#address_type').on('change , click',function () {
+            if($(this).val() == 1){
+                document.getElementById("map").style.display = "block";
+                document.getElementById("link").style.display = "none";
 
+            }else{
+                document.getElementById("map").style.display = "none";
+                document.getElementById("link").style.display = "block";
+
+            }
+        })
+    </script>
     {{--    <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>--}}
     @foreach($data as $project)
 <script>

@@ -88,7 +88,7 @@
                                     </div>
                                     <!--end::Number-->
                                     <!--begin::Label-->
-                                    <div class="fw-bold fs-6 text-gray-400">تاريخ نهاية العقد</div>
+                                    <div class="fw-bold fs-6 text-gray-400">تاريخ التسليم المتوقع</div>
                                     <!--end::Label-->
                                 </div>
                                 <!--end::Stat-->
@@ -104,7 +104,7 @@
                                             </svg>
                                         </span>
                                         <!--end::Svg Icon-->
-                                        <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{$data->projectPaid->paid}}" data-kt-countup-prefix="SAR">0</div>
+                                        <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
                                     </div>
                                     <!--end::Number-->
                                     <!--begin::Label-->

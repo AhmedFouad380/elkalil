@@ -104,7 +104,7 @@
                                             </svg>
                                         </span>
                                         <!--end::Svg Icon-->
-                                        <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{$data->projectPaid->paid}}" data-kt-countup-prefix="SAR">0</div>
+                                        <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
                                     </div>
                                     <!--end::Number-->
                                     <!--begin::Label-->

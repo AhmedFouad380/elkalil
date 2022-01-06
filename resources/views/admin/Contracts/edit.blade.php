@@ -946,8 +946,9 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_new_card_form" class="form" action="#">
+                            <form id="kt_modal_new_card_form" class="form"  method="post" action="{{url('Send_revision')}}">
                                 <!--begin::Input group-->
+                                @csrf
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
@@ -955,8 +956,9 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="text"  disabled required class="form-control form-control-solid" placeholder="" value="{{$data->client->name}}" name="title" />
-                                    <input type="hidden"  disabled required class="form-control form-control-solid" placeholder="" value="{{$data->client->id}}" name="id" />
+                                    <input type="hidden"   required class="form-control form-control-solid" placeholder="" value="{{$data->client_id}}" name="client_id" />
                                 </div>
+                                <input type="hidden" name="project_id" value="{{$data->id}}" >
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
@@ -964,6 +966,11 @@
                                     </label>
                                     <!--end::Label-->
                                     <textarea rows="5" name="note"></textarea>
+
+                                    <p>
+                                        <input type="checkbox" value="1" name="type">
+                                        ارسالة رسالة نصية
+                                    </p>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
