@@ -289,17 +289,65 @@
     </div>
     <!--end::Post-->
 </div>
+                <!--begin::Form-->
+                <form id="" class="form" method="get">
+                @csrf
+                <!--begin::Scroll-->
+                    <!--end::Scroll-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                        </button>
+                        <button type="submit" class="btn btn-primary"
+                                data-kt-users-modal-action="submit">
+                            <span class="indicator-label">حفظ</span>
+                            <span class="indicator-progress">برجاء الانتظار
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+
 
 <div class="modal fade bs-edit-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content card card-outline-info">
-            <div class="modal-header card-header">
-                <h3 class="modal-title" id="myLargeModalLabel"></h3>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header" id="kt_modal_add_user_header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">اعدادات الفلتر</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary"
+                     data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                              transform="rotate(-45 6 17.3137)" fill="black"/>
+                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                              transform="rotate(45 7.41422 6)" fill="black"/>
+                    </svg>
+                </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
             </div>
-            <div class="modal-body">
-
-            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+</div>
         </div>
         <!-- /.modal-content -->
     </div>

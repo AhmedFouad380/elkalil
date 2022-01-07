@@ -182,7 +182,11 @@
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fs-4 fw-bolder">29 Jan, 2021</div>
+                                        @inject('ProjectLevels','App\Models\ProjectLevels')
+                                        <?php
+                                        $sum = $ProjectLevels->where('project_id',$data->id)->sum('progress_time');
+                                        ?>
+                                        <div class="fs-6 text-gray-800 fw-bolder">{{\Carbon\Carbon::parse($data->confirm_date)->addDays($sum)->format('Y-m-d')}}</div>
                                     </div>
                                     <!--end::Number-->
                                     <!--begin::Label-->

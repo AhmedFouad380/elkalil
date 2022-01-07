@@ -123,7 +123,11 @@
                             <!--end::Due-->
                             <!--begin::Budget-->
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
-                                <div class="fs-6 text-gray-800 fw-bolder">1 - 1 - 2022</div>
+                                @inject('ProjectLevels','App\Models\ProjectLevels')
+                                <?php
+                                $sum = $ProjectLevels->where('project_id',$project->id)->sum('progress_time');
+                                ?>
+                                <div class="fs-6 text-gray-800 fw-bolder">{{\Carbon\Carbon::parse($project->confirm_date)->addDays($sum)->format('Y-m-d')}}</div>
                                 <div class="fw-bold text-gray-400">تاريخ التسليم المتوقع
                                 </div>
                             </div>

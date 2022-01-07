@@ -68,6 +68,15 @@ class ProjectLevelController extends Controller
             $data->answer=$request->answer;
             $data->otherAnswer=$request->otherAnswer;
         }
+        if(isset($request->img)){
+            $imageName = time().'.'.$request->img->extension();
+            $path = "https://alkhalilsys.com/images/";
+//            $request->image->store('http://alkhalilsys.com/images/', $imageName);
+            Storage::disk('public2')->put('images', $imageName);
+            $data->img=$imageName;
+
+        }
+        $data->state = 1;
         $data->save();
         return back()->with('message', 'Success');
 
