@@ -29,16 +29,18 @@ Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
 Route::post('login', [AuthController::class, 'login']);
-Route::get('/check-phone', function () {
-    return view('auth/check-phone');
+
+Route::get('/forget-password', function () {
+    return view('auth/forget_password');
 });
-Route::get('/update-password', function () {
-    return view('auth/update-password');
-});
+Route::post('forgetPassword', [AuthController::class, 'forgetPassword']);
+Route::post('checkCode', [AuthController::class, 'checkCode']);
+Route::post('updatePassword', [AuthController::class, 'updatePassword']);
+
+
 Route::get('/quest', function () {
     return view('auth/request');
 });
-
 
 Route::get('/quest', function () {
     return view('auth/request');
@@ -57,13 +59,13 @@ Route::get('/projects', function () {
 });
 Route::group(['middleware' => ['admin']], function () {
 
-
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/home', [DashboardController::class, 'index']);
     Route::get('public_setting', [SettingsController::class, 'Settings']);
     Route::post('edit_setting', [SettingsController::class, 'editSettings']);
 
     Route::post('/store_event', [\App\Http\Controllers\DashboardController::class, 'store_event']);
+    Route::get('/projectState', [\App\Http\Controllers\DashboardController::class, 'projectState']);
 
     //employee settings
     Route::get('employee_setting', [UsersController::class, 'index']);
@@ -117,7 +119,6 @@ Route::group(['middleware' => ['admin']], function () {
     });
 
 
-
 //Level setting
     Route::get('level-setting/{id}', [LevelController::class, 'index']);
     Route::get('level-datatable', [LevelController::class, 'datatable'])->name('Level.datatable.data');
@@ -126,7 +127,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('edit-level/{id}', [LevelController::class, 'edit']);
     Route::post('update-level', [LevelController::class, 'update']);
     Route::get('add-level-button/{id}', [LevelController::class, 'button']);
-
 
 
 //Level details setting
@@ -189,10 +189,9 @@ Route::group(['middleware' => ['admin']], function () {
 });
 
 
-
-Route::get('Get_Levels',[PageController::class ,'Get_Levels']);
-Route::get('contractName',[PageController::class ,'contractName']);
-Route::get('getMoney',[PageController::class ,'getMoney']);
+Route::get('Get_Levels', [PageController::class, 'Get_Levels']);
+Route::get('contractName', [PageController::class, 'contractName']);
+Route::get('getMoney', [PageController::class, 'getMoney']);
 
 
 Route::get('/quest', function () {
@@ -223,7 +222,7 @@ Route::get('/project-details2', function () {
     return view('admin/project_details2');
 });
 
-    Route::get('/project-details3', function () {
+Route::get('/project-details3', function () {
     return view('admin/project_details3');
 });
 

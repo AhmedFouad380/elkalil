@@ -28,6 +28,13 @@ class DashboardController extends Controller
         }
     }
 
+    public function projectState(Request $request)
+    {
+        $from = $request->project_from;
+        $to = $request->project_to;
+        return view('admin.dashboardprojectStateModal', compact('from', 'to'));
+    }
+
     public function store_event(Request $request)
     {
 

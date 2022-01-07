@@ -22,7 +22,7 @@ class RequestsController extends Controller
 
         if(isset($request->view)){
             $data->where('view',$request->view);
-            print_r('a');die();
+
 
         }
         if(isset($request->from)){
@@ -52,7 +52,7 @@ class RequestsController extends Controller
             })
             ->addColumn('type', function ($row) {
 
-                return Contract::find($row->projectContract->contract_id)->title;
+                return Contract::find($row->projectContract->contract_id) ? Contract::find($row->projectContract->contract_id)->title : "-";
             })
             ->addColumn('actions', function ($row) {
                 $actions = ' <a href="' . url("Requests-edit/" . $row->id) . '" class="btn btn-active-light-info"><i class="bi bi-pencil-fill"></i> عرض </a>';

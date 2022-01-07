@@ -15,11 +15,12 @@
         <!--begin::Wrapper-->
         <div class="w-lg-550px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
             <!--begin::Form-->
-            <form class="form w-100" novalidate="novalidate" id="" method="post" action="#">
-                <!--begin::Heading-->@csrf
+            <form class="form w-100" novalidate="novalidate" id="" method="post" action="{{url('updatePassword')}}">
+                <!--begin::Heading-->
+                @csrf
                 <div class="text-center mb-10">
                     <!--begin::Logo-->
-                    <a href="../../demo16/dist/index.html" class="mb-12">
+                    <a href="/" class="mb-12">
                         <img alt="Logo" src="{{asset('admin/assets/media/logos/logo-dark.png')}}" class="h-150px" />
                     </a>
                     <!--end::Logo-->
@@ -37,6 +38,7 @@
                         <!--end::Label-->
                         <!--begin::Input wrapper-->
                         <div class="position-relative mb-3">
+                            <input type="hidden" name="id" value="{{$user->id}}">
                             <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password" autocomplete="off" />
                             <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
                                 <i class="bi bi-eye-slash fs-2"></i>
@@ -59,7 +61,7 @@
                 <!--begin::Input group=-->
                 <div class="fv-row mb-10">
                     <label class="form-label fw-bolder text-dark fs-6">تأكيد كلمة المرور</label>
-                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off" />
+                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password_confirmation" autocomplete="off" />
                 </div>
                 <!--end::Input group=-->
                 <!--begin::Actions-->

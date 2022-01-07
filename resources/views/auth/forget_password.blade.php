@@ -17,7 +17,8 @@
             <!--begin::Wrapper-->
             <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
                 <!--begin::Form-->
-                <form class="form w-100" novalidate="novalidate" id="" method="post" action="{{url('checkCode')}}">
+                <form class="form w-100"  id=""
+                      method="post" action="{{url('forgetPassword')}}">
                     <!--begin::Heading-->@csrf
                     <div class="text-center mb-10">
                         <!--begin::Logo-->
@@ -26,35 +27,20 @@
                         </a>
                         <!--end::Logo-->
                         <!--begin::Title-->
-                        <h1 class="text-danger mt-3">التحقق من الحساب</h1>
-                        <div class="text-dark fw-bold fs-5 mb-5">ادخل كود التحقق المرسل على جوالك</div>
+                        <h1 class="text-danger mt-3">استعادة كلمة المرور</h1>
+                        <div class="text-dark fw-bold fs-5 mb-5">ادخل رقم الجوال الخاص بك</div>
                         <!--end::Title-->
                     </div>
                     <!--begin::Heading-->
                     <!--begin::Section-->
                     <div class="mb-10 px-md-10">
                         <!--begin::Label-->
-                        <div class="fw-bolder text-start text-dark fs-6 mb-1 ms-1">ادخل الكود المكون من 4 ارقام</div>
+                        <div class="fw-bolder text-start text-dark fs-6 mb-1 ms-1">ادخل رقم الجوال</div>
                         <!--end::Label-->
                         <!--begin::Input group-->
                         <div class="d-flex flex-wrap flex-stack">
-                            <input type="hidden" name="id" value="{{$user->id}}" required>
-                            <input type="text" name="forth" data-inputmask="'mask': '9', 'placeholder': ''"
-                                   maxlength="1"
-                                   class="form-control form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
-                                   value=""/>
-                            <input type="text" name="third" data-inputmask="'mask': '9', 'placeholder': ''"
-                                   maxlength="1"
-                                   class="form-control form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
-                                   value=""/>
-                            <input type="text" name="second" data-inputmask="'mask': '9', 'placeholder': ''"
-                                   maxlength="1"
-                                   class="form-control form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
-                                   value=""/>
-                            <input type="text" name="first" data-inputmask="'mask': '9', 'placeholder': ''"
-                                   maxlength="1"
-                                   class="form-control form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
-                                   value=""/>
+                            <input class="form-control form-control-lg form-control-solid" type="number" placeholder=""
+                                   name="phone" required/>
                         </div>
                         <!--begin::Input group-->
                     </div>

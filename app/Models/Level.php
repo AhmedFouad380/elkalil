@@ -17,6 +17,7 @@ class Level extends Model
         'contract_id',
         'type',
         'sort',
+        'progress_time',
 
     ];
 

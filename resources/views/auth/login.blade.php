@@ -46,7 +46,7 @@
                         <label class="form-label fw-bolder text-dark fs-6 mb-0">كلمة المرور</label>
                         <!--end::Label-->
                         <!--begin::Link-->
-                        <a href="#" class="link-danger fs-6 fw-bolder">نسيت كلمة المرور ؟</a>
+                        <a href="/forget-password" class="link-danger fs-6 fw-bolder">نسيت كلمة المرور ؟</a>
                         <!--end::Link-->
                     </div>
                     <!--end::Wrapper-->
@@ -89,5 +89,24 @@
 
 @section('script')
     <script src="{{asset('admin/assets/js/custom/authentication/sign-in/general.js')}}"></script>
+
+
+    @if( session()->has("error"))
+        <?php
+        $e = session()->get("error");
+        ?>
+
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: "نجاح.",
+                text: "{{$e}} ",
+                type: "success",
+                timer: 5000,
+                showConfirmButton: false
+            });
+        </script>
+
+    @endif
 @endsection
 

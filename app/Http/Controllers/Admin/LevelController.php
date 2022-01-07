@@ -85,6 +85,7 @@ class LevelController extends Controller
             'contract_id' => 'required|exists:contract,id',
             'type' => 'required|in:1,2,3',
             'sort' => 'required|numeric',
+            'progress_time' => 'required|numeric',
 
         ]);
         $levels_percent = Level::where('contract_id', $request->contract_id)->sum('percent');
@@ -137,6 +138,7 @@ class LevelController extends Controller
             'contract_id' => 'required|exists:contract,id',
             'type' => 'required|in:1,2,3',
             'sort' => 'required|numeric',
+            'progress_time' => 'required|numeric',
         ]);
         $level_percents = Level::where('contract_id', $request->contract_id)->sum('percent');
         $level = Level::whereId($request->id)->first();
