@@ -65,7 +65,7 @@
                                 </div>
                             </th>
 
-                            <th class="min-w-125px">الاسم</th>
+                            <th class="min-w-125px">نوع التعاقد</th>
                             <th class="min-w-125px">اللون</th>
                             <th class="min-w-125px">عدد المراحل</th>
                             <th class=" min-w-100px">الاجراءات</th>
@@ -91,10 +91,8 @@
 @section('script')
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script src="{{ URL::asset('admin/assets/plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/documentation/documentation.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/documentation/search.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/documentation/editors/ckeditor/classic.js')}}"></script>
+    <script src="{{ URL::asset('admin/assets/plugins/custom/tinymce/tinymce.bundle.js')}}"></script>
+
 
 
     <script type="text/javascript">

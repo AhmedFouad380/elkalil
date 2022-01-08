@@ -97,13 +97,13 @@
 
                             <div class="fv-row mb-7 row">
                                 <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2 col-3">السعر</label>
+                                <label class="required fw-bold fs-6 mb-2 col-3">نموذج عرض السعر</label>
                                 <!--end::Label-->
-                                <div class="col-6">
+                                <div class="col-12">
                                     <!--begin::Input-->
-                                    <textarea name="price" id="kt_docs_ckeditor_classic">
-                                        {!! $permission->price !!}
 
+                                    <textarea id="kt_docs_tinymce_basic" name="price" class="tox-target">
+                                        {!! $permission->price !!}
                                     </textarea>
 
                                     <!--end::Input-->
@@ -112,16 +112,13 @@
 
                             <div class="fv-row mb-7 row">
                                 <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2 col-3">التصميم</label>
+                                <label class="required fw-bold fs-6 mb-2 col-3">نموذج العقد</label>
                                 <!--end::Label-->
-                                <div class="col-6">
+                                <div class="col-12">
                                     <!--begin::Input-->
-                                    <textarea name="template" id="kt_docs_ckeditor_classic2">
+                                    <textarea name="template" id="kt_docs_tinymce_basic2">
                                             {!! $permission->template !!}
                                     </textarea>
-
-                                    </textarea>
-
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -151,11 +148,7 @@
 
 @section('script')
 
-    <script src="{{ URL::asset('admin/assets/plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/documentation/documentation.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/documentation/search.js')}}"></script>
-    <script src="{{ URL::asset('admin/assets/js/custom/documentation/editors/ckeditor/classic.js')}}"></script>
+    <script src="{{ URL::asset('admin/assets/plugins/custom/tinymce/tinymce.bundle.js')}}"></script>
 
     <script>
         $("#state").change(function () {
@@ -177,23 +170,30 @@
 
 
     <script>
-        ClassicEditor
-            .create(document.querySelector('#kt_docs_ckeditor_classic2'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
+        var options = {selector: "#kt_docs_tinymce_basic"};
 
+        if (KTApp.isDarkMode()) {
+            options["skin"] = "oxide-dark";
+            options["content_css"] = "dark";
+        }
+
+        tinymce.init(options);
+
+    </script>
 
     <script>
-        $(document).ready(function () {
+        var options = {selector: "#kt_docs_tinymce_basic2"};
 
-            $('.ck-content').css("text-align", "right");
-        });
+        if (KTApp.isDarkMode()) {
+            options["skin"] = "oxide-dark";
+            options["content_css"] = "dark";
+        }
+
+        tinymce.init(options);
+
     </script>
+
+
 
 
 
