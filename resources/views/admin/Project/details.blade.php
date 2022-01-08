@@ -64,8 +64,101 @@
                             <!--end::Details-->
                             <!--begin::Actions-->
                             <div class="d-flex mb-4">
-                                <a href="#" class="btn btn-sm btn-danger me-3">اضافة مرحلة</a>
+                                <button type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal"
+                                        data-bs-target="#kt_modal_add_user">
+                                    اضافة مرحلة
+                                </button>
                             </div>
+
+                            <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+                                <!--begin::Modal dialog-->
+                                <div class="modal-dialog modal-dialog-centered mw-650px">
+                                    <!--begin::Modal content-->
+                                    <div class="modal-content">
+                                        <!--begin::Modal header-->
+                                        <div class="modal-header" id="kt_modal_add_user_header">
+                                            <!--begin::Modal title-->
+                                            <h2 class="fw-bolder">اضافة جديده</h2>
+                                            <!--end::Modal title-->
+                                            <!--begin::Close-->
+                                            <div class="btn btn-icon btn-sm btn-active-icon-primary"
+                                                 data-bs-dismiss="modal">
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                <span class="svg-icon svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                              transform="rotate(-45 6 17.3137)" fill="black"/>
+                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                              transform="rotate(45 7.41422 6)" fill="black"/>
+                    </svg>
+                </span>
+                                                <!--end::Svg Icon-->
+                                            </div>
+                                            <!--end::Close-->
+                                        </div>
+                                        <!--end::Modal header-->
+                                        <!--begin::Modal body-->
+                                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                            <!--begin::Form-->
+                                            <form id="" class="form" method="post" action="{{url('store-new-level')}}">
+                                            @csrf
+                                            <!--begin::Scroll-->
+                                                <div class="d-flex flex-column scroll-y me-n7 pe-7"
+                                                     id="kt_modal_add_user_scroll" data-kt-scroll="true"
+                                                     data-kt-scroll-activate="{default: false, lg: true}"
+                                                     data-kt-scroll-max-height="auto"
+                                                     data-kt-scroll-dependencies="#kt_modal_add_user_header"
+                                                     data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
+                                                     data-kt-scroll-offset="300px">
+
+                                                    <!--begin::Input group-->
+                                                    <div class="mb-10">
+                                                        <label class="form-label fs-6 fw-bold">اسم المرحلة</label>
+                                                        <input type="text" class="form-control form-control-lg form-control-solid" name="name" placeholder="" value="" autocomplete="nope" />
+                                                    </div>
+                                                    <div class="mb-10">
+                                                        <label class="form-label fs-6 fw-bold">نسبة المرحلة </label>
+                                                        <input type="number" class="form-control form-control-lg form-control-solid" name="percent" placeholder="" value="" autocomplete="nope" />
+                                                    </div>
+                                                    <input type="hidden" value="{{$data->id}}" name="project_id">
+                                                    <div class="fv-row mb-7">
+                                                        <!--begin::Label-->
+                                                        <label class="required fw-bold fs-6 mb-2">نوع المرحلة </label>
+                                                        <!--end::Label-->
+                                                        <!--begin::Input-->
+                                                        <select class="form-control" name="type">
+                                                            <option value="1">مرحلة تفاصيل داخلية</option>
+                                                            <option value="3">مرحلة مرفقات المشروع</option>
+                                                        </select>
+                                                        <!--end::Input-->
+                                                    </div>
+
+                                                                                                  </div>
+                                                <!--end::Scroll-->
+                                                <!--begin::Actions-->
+                                                <div class="text-center pt-15">
+                                                    <button type="reset" class="btn btn-light me-3"
+                                                            data-bs-dismiss="modal">ألغاء
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary"
+                                                            data-kt-users-modal-action="submit">
+                                                        <span class="indicator-label">حفظ</span>
+                                                        <span class="indicator-progress">برجاء الانتظار
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                    </button>
+                                                </div>
+                                                <!--end::Actions-->
+                                            </form>
+                                            <!--end::Form-->
+                                        </div>
+                                        <!--end::Modal body-->
+                                    </div>
+                                    <!--end::Modal content-->
+                                </div>
+                                <!--end::Modal dialog-->
+                            </div>
+
                             <!--end::Actions-->
                         </div>
                         <!--end::Head-->
@@ -89,11 +182,15 @@
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fs-4 fw-bolder">29 Jan, 2021</div>
+                                        @inject('ProjectLevels','App\Models\ProjectLevels')
+                                        <?php
+                                        $sum = $ProjectLevels->where('project_id',$data->id)->sum('progress_time');
+                                        ?>
+                                        <div class="fs-6 text-gray-800 fw-bolder">{{\Carbon\Carbon::parse($data->confirm_date)->addDays($sum)->format('Y-m-d')}}</div>
                                     </div>
                                     <!--end::Number-->
                                     <!--begin::Label-->
-                                    <div class="fw-bold fs-6 text-gray-400">تاريخ نهاية العقد</div>
+                                    <div class="fw-bold fs-6 text-gray-400">تاريخ التسليم المتوقع</div>
                                     <!--end::Label-->
                                 </div>
                                 <!--end::Stat-->
@@ -109,8 +206,9 @@
                                             </svg>
                                         </span>
                                         <!--end::Svg Icon-->
-                                        <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{$data->projectPaid ? $data->projectPaid->paid : 0}}" data-kt-countup-prefix="SAR">0</div>
-                                    </div>
+
+                                        <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
+                                     </div>
                                     <!--end::Number-->
                                     <!--begin::Label-->
                                     <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
@@ -145,6 +243,7 @@
                                 <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
                                     <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bolder" data-bs-toggle="tooltip" data-bs-trigger="hover" title="رؤية العاملين على المشروع">+</span>
                                 </a>
+
                                 <!--end::All users-->
                             </div>
                             <!--end::Users-->
@@ -164,20 +263,10 @@
                             <a class="nav-link text-active-primary me-6 active" href="#">مراحل المشروع</a>
                         </li>
                         <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="#">بيانات المشروع</a>
-                        </li>
+
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="#">العاملين على المشروع</a>
-                        </li>
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="#">المحادثات</a>
-                        </li>
+
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
                         <li class="nav-item">
@@ -190,8 +279,11 @@
                         </li>
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
+{{--                        </li>--}}
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>
+                            <a class="nav-link text-active-primary me-6" href="#">المحادثات</a>
                         </li>
                         <!--end::Nav item-->
                     </ul>
@@ -420,9 +512,6 @@
     </script>
 
 
-    <?php
-    $message = session()->get("message");
-    ?>
 
     @if( session()->has("message"))
         <script>
@@ -445,7 +534,33 @@
 
             toastr.success("نجاح", "{{$message}}");
         </script>
+@endif
+    <?php
+    $error_message = session()->get("error_message");
+    ?>
 
-    @endif
+        @if( session()->has("error_message"))
+            <script>
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                    toastr.error("{{$error_message}}" , "عفوا !" );
+            </script>
+
+        @endif
 @endsection
 

@@ -204,7 +204,7 @@
                                         <div class="d-flex flex-wrap py-5">
                                             <!--begin::Col-->
                                             <div class="flex-equal me-5">
-                                                <a href="https://alkhalilsys.com/admins/page/quest2/{{$data->id}}"  target="_blank" class="btn btn-light-primary me-3 font-weight-bolder">
+                                                <a href="{{url('quest2/'.$data->id.'/'.Auth::user()->id)}}"  target="_blank" class="btn btn-light-primary me-3 font-weight-bolder">
                                                     <i class="bi bi-eye fs-2x"></i> رؤية
                                                 </a>
 

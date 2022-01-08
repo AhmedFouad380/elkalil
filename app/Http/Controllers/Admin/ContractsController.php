@@ -12,6 +12,7 @@ use App\Models\Income;
 use App\Models\Project;
 use App\Models\ProjectContract;
 use App\Models\ProjectPaid;
+use App\Models\Setting;
 use App\Models\SmsLogs;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -71,18 +72,57 @@ class ContractsController extends Controller
         $explans = Explan::OrderBy('id','desc')->where('project_id',$id)->get();
         return view('admin.Contracts.edit',compact('data','explans'));
     }
+    public function UpdateClientData(Request $request){
+        $data = Project::find($request->id);
+        $data->name=$request->name;
+        $data->phone=$request->phone;
+        $data->save();
+        $client = Client::find($data->client_id);
+        $client->name=$request->name;
+        $client->phone=$request->phone;
+        $client->save();
 
+        $contract = ProjectContract::where('project_id',$request->id)->first();
+        $contract->contract_id=$request->contract_id;
+        $contract->save();
+
+        return back()->with('message','Success');
+
+    }
     public function UpdateProjectContract(Request $request){
 
         if(isset($request->price)){
             $data = ProjectContract::where('project_id',$request->id)->first();
             $data->price=$request->price;
             $data->save();
+
+            $d_explan = array(
+                'title' => 'تم تعديل عرض السعر',
+                'comments' => 'تم تعديل عرض السعر',
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'emp_id' => Auth::user()->id,
+                'emp_name' => Auth::user()->name,
+                'project_id' => $request->id
+            );
+            Explan::insert($d_explan);
+
         }
         if(isset($request->template)){
             $data = ProjectContract::where('project_id',$request->id)->first();
             $data->template=$request->template;
             $data->save();
+            $d_explan = array(
+                'title' => 'تم تعديل العقد',
+                'comments' => 'تم تعديل العقد',
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'emp_id' => Auth::user()->id,
+                'emp_name' => Auth::user()->name,
+                'project_id' => $request->id
+            );
+            Explan::insert($d_explan);
+
         }
 
         return back()->with('message','Success');
@@ -280,5 +320,110 @@ class ContractsController extends Controller
         return response()->json(['message' => 'Success']);
     }
 
+public function Send_revision(Request $request){
+
+
+    $project_id = $request->project_id;
+    $emp_id = $request->emp_id;
+    $client_id = $request->client_id;
+    $msg = $request->note;
+    $type = $request->type;
+    $Project = Project::find($project_id);
+    $client = Client::find($client_id);
+
+    if($type == 1 ){
+        $ch = curl_init();
+        $url = "http://basic.unifonic.com/rest/SMS/messages";
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=pm@uramit.com&password=uram123&msg=".$message."&sender=Bus-exc.&to=".$client->phone."&encoding=UTF8"); // define what you want to post
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=".$msg."&SenderID=ALKHALIL-GR&Recipient=".$client->phone."&encoding=UTF8&responseType=json"); // define what you want to post
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec ($ch);
+        curl_close ($ch);
+
+
+
+        $setting = Setting::find(1);
+        $setting->sms_used= 2 + $setting->sms_used;
+        $setting->save();
+
+        $description = 'ارسال رسالة اشعار مراجعه للعميل رقم    '.$client->phone;
+
+        $dataLog = array('type'=>2 , 'user_id'=> $client->id , 'description' => $description , 'sms_count' => 2);
+        SmsLogs::insert($dataLog);
+    }
+
+
+    $inbox = array(
+        'title' => ' تم ارسال اشعار مراجعه    ',
+        'comments' => $msg,
+        'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+        'time' => \Carbon\Carbon::now()->format('H:i:s'),
+        'sender_id' => Auth::user()->id,
+        'sender_name' => Auth::user()->name,
+        'recipient_id' => $client->id,
+        'recipient_name' => $client->name,
+        'project_id' => $Project->id,
+        'project_name' => $Project->name,
+        'updated_at' =>\Carbon\Carbon::now()
+
+    );
+    inbox::insert($inbox);
+
+    if($client->token_id != null){
+
+        // send fcm start
+        $token = $client->token_id; // push token
+
+
+        $title  = $Project->name;
+        $message = "  اشعار مراجعه جديد ";
+        $fields = array
+        (
+            'registration_ids'  => [$token],
+            'data'          => ['type'=>'3'],
+            'notification' => array(
+                'priority' => 'high',
+                'body' => $message,
+                'title' => $title,
+                'sound' => 'default',
+                'icon' => 'icon'
+            )
+        );
+        $API_ACCESS_KEY = 'AAAA7MITCVM:APA91bFxG1YuBa-5G6nYPwrn4KFrbKjtilNv-dlm5yXKOLJiGtMgdLSTCjYIY1i3M6Nf4au0r6b2mEL_MjfkGb1-haRJa-zZr1laU5uffby_y2n63IMaVgrh5u63aQRJZMnpJg-SAO5V';
+        $headers = array
+        (
+            'Authorization: key=' . $API_ACCESS_KEY,
+            'Content-Type: application/json'
+        );
+        $ch = curl_init();
+        curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+        curl_setopt( $ch,CURLOPT_POST, true );
+        curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+        curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+        curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+        curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+        $result = curl_exec($ch );
+        curl_close( $ch );
+
+        // send Fcm end
+
+
+    }
+
+    $d_explan = array(
+        'title' => 'تم ارسال  اشعار مراجعه',
+        'comments' => 'تم ارسال  اشعار مراجعه',
+        'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+        'time' => \Carbon\Carbon::now()->format('H:i:s'),
+        'emp_id' => Auth::user()->id,
+        'emp_name' => Auth::user()->name,
+        'project_id' => $request->project_id
+    );
+    Explan::insert($d_explan);
+    // end send Notification To  Users Same State
+    return back()->with('message','Success');
+}
 
 }

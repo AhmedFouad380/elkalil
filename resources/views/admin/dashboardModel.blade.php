@@ -15,18 +15,17 @@
             </div>
             <?php
 
-            $countProjectLevels = $ProjectLevels->where('level_id',$level->id)->count();
-            $sumProjectLevels =  0 ? 0 : $ProjectLevels->where('level_id',$level->id)->sum('progress');
-            if($countProjectLevels == 0){
-                $total = 0;
-            }else{
-                $ProjectLevelPercent =  0 ? 0 : ($level->percent * $countProjectLevels);
-
-                $total = ($sumProjectLevels * 100 ) / $ProjectLevelPercent ;
+            $countProjectLevels = $ProjectLevels->where('level_id',$level->id)->where('auto_complete','!=',1)->get();
+            $count = 0;
+            foreach ($countProjectLevels as $b) {
+                if($b->percent != $b->progress){
+                $count++;
+                }
             }
+
             ?>
             <div>
-                <div class="fs-4 text-dark fw-bolder">{{round($total,2)}} %</div>
+                <div class="fs-4 text-dark fw-bolder">{{$count}}</div>
                 <div class="fs-7 text-muted fw-bold">{{$level->title}}</div>
             </div>
             <!--end::Title-->

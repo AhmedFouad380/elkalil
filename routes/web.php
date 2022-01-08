@@ -160,17 +160,23 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
 
     Route::get('projects', [\App\Http\Controllers\Admin\ProjectController::class, 'index']);
+    Route::post('store-new-level', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'store_level']);
+    Route::get('CompleteLevel', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'CompleteLevel']);
+    Route::get('edit-LevelDetails', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'edit_LevelDetails']);
+    Route::post('AnswerLevelDetails', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'AnswerLevelDetails']);
+
     Route::post('store-project', [\App\Http\Controllers\Admin\ProjectController::class, 'store']);
     Route::get('project_details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'project_details']);
     Route::get('level_Details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'level_Details']);
 
     Route::get('Contracts', [\App\Http\Controllers\Admin\ContractsController::class, 'index']);
     Route::get('Contracts_datatable', [\App\Http\Controllers\Admin\ContractsController::class, 'datatable'])->name('Contracts.datatable.data');
-    Route::get('ConfirmProject', [\App\Http\Controllers\Admin\ContractsController::class, 'ConfirmProject'])->name('ConfirmProject');
+    Route::post('ConfirmProject', [\App\Http\Controllers\Admin\ContractsController::class, 'ConfirmProject'])->name('ConfirmProject');
     Route::get('Contracts-edit/{id}', [\App\Http\Controllers\Admin\ContractsController::class, 'edit']);
     Route::post('UpdateProjectContract', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectContract'])->name('UpdateProjectContract');
     Route::post('UpdateProjectPaid', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectPaid'])->name('UpdateProjectContract');
-
+    Route::post('Send_revision', [\App\Http\Controllers\Admin\ContractsController::class, 'Send_revision'])->name('Send_revision');
+    Route::post('UpdateClientData', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateClientData'])->name('UpdateClientData');
 
     Route::get('/add-Requests-button', function () {
         return view('admin/Requests/button');

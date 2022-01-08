@@ -10,6 +10,7 @@ class ProjectLevelDetails extends Model
     use HasFactory;
 
     protected $table = 'project_level_details';
+    public $timestamps = false;
 
     protected $fillable = [
         'title',

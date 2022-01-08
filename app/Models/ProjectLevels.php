@@ -9,6 +9,7 @@ class ProjectLevels extends Model
 {
     use HasFactory;
     protected  $table = 'project_levels';
+    public $timestamps = false;
 
     protected $fillable = [
         'title',

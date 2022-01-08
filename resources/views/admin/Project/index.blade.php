@@ -44,7 +44,7 @@
                         <!--begin::Wrapper-->
                         <div class="row fv-row">
 
-                            <div class="col-3">
+                            <div class="col-5">
 
                             <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
                                     data-bs-target="#kt_modal_filter">
@@ -62,6 +62,7 @@
                                 <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
                                         data-bs-target="#kt_modal_add_user">
                                     <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                    اضافة مشروع جديد
                                 </button>
                             </div>
 
@@ -125,8 +126,13 @@
                             <!--end::Due-->
                             <!--begin::Budget-->
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
-                                <div class="fs-6 text-gray-800 fw-bolder">1 - 1 - 2022</div>
-                                <div class="fw-bold text-gray-400">تاريخ نهاية العقد</div>
+                                @inject('ProjectLevels','App\Models\ProjectLevels')
+                                <?php
+                                $sum = $ProjectLevels->where('project_id',$project->id)->sum('progress_time');
+                                ?>
+                                <div class="fs-6 text-gray-800 fw-bolder">{{\Carbon\Carbon::parse($project->confirm_date)->addDays($sum)->format('Y-m-d')}}</div>
+                                <div class="fw-bold text-gray-400">تاريخ التسليم المتوقع
+                                </div>
                             </div>
                             <!--end::Budget-->
                         </div>
@@ -266,7 +272,7 @@
                         </div>
                         <div class="mb-10">
                             <label class="form-label fs-6 fw-bold">نوع التعاقد</label>
-                            <select name="country" class="form-select  form-control form-select-lg form-select-solid" data-placeholder="مراحل المشروع ..." data-allow-clear="true" data-hide-search="true">
+                            <select name="contract_id" class="form-select  form-control form-select-lg form-select-solid" data-placeholder="مراحل المشروع ..." data-allow-clear="true" data-hide-search="true">
                                 <option value="">اختر</option>
                                 @inject('Contracts','App\Models\Contract')
                                 @foreach($Contracts->all() as $Contract)
@@ -546,7 +552,7 @@
                             <label class="required fw-bold fs-6 mb-2">نوع الموقع</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select name="address_type" class="form-control" >
+                            <select name="address_type" id="address_type"class="form-control" >
                                 <option value="1">اختيار من الخريطة </option>
                                 <option value="0">اضافة لينك </option>
                             </select>
@@ -574,12 +580,12 @@
                             <!--end::Input group-->
                         </div>
                         </div>
-                        <div class="fv-row mb-7" id="link">
+                        <div class="fv-row mb-7" id="link" style="display:none">
                             <!--begin::Label-->
                             <label class="required fw-bold fs-6 mb-2">رابط الموقع</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input name="" >
+                            <input name="address_link" class="form-control" type="text" >
                             <!--end::Input-->
                         </div>
                     </div>
@@ -693,7 +699,19 @@
 
 
     </script>
+    <script>
+        $('#address_type').on('change , click',function () {
+            if($(this).val() == 1){
+                document.getElementById("map").style.display = "block";
+                document.getElementById("link").style.display = "none";
 
+            }else{
+                document.getElementById("map").style.display = "none";
+                document.getElementById("link").style.display = "block";
+
+            }
+        })
+    </script>
     {{--    <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>--}}
     @foreach($data as $project)
 <script>

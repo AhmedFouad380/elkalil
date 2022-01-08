@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\Contract;
 use App\Models\Level;
 use App\Models\LevelDetails;
 use App\Models\Project;
@@ -11,6 +12,7 @@ use App\Models\ProjectContract;
 use App\Models\ProjectLevelDetails;
 use App\Models\ProjectLevels;
 use App\Models\ProjectOther;
+use App\Models\User;
 use App\Models\UserChatPermission;
 use Illuminate\Http\Request;
 use Auth;
@@ -18,11 +20,24 @@ class ProjectController extends Controller
 {
     public  function  index(Request $request){
         if(Auth::user()->jop_type == 3){
-            $data = Project::orderBy('id','desc');
+            if(isset($request->contract_id)){
+            $data = Project::orderBy('projects.id','desc');
+            }else{
+                $data = Project::orderBy('id','desc');
+            }
         }elseif(Auth::user()->jop_type == 2 ){
-            $data = Project::orderBy('id','desc')->where('state',Auth::user()->state);
+
+            if(isset($request->contract_id)){
+                $data = Project::orderBy('projects.id','desc')->where('state',Auth::user()->state);
+            }else{
+                $data = Project::orderBy('id','desc')->where('state',Auth::user()->state);
+            }
         }elseif(Auth::user()->jop_type == 1){
-            $data = Project::orderBy('id','desc')->join('user_permission', 'user_permission.project_id = projects.id and user_permission.emp_id = '.Auth::user()->id, 'right');
+            if(isset($request->contract_id)){
+                $data = Project::orderBy('projects.id','desc')->join('user_permission', 'user_permission.project_id = projects.id and user_permission.emp_id = '.Auth::user()->id, 'right');
+            }else{
+                $data = Project::orderBy('id','desc')->join('user_permission', 'user_permission.project_id = projects.id and user_permission.emp_id = '.Auth::user()->id, 'right');
+            }
         }
 
         if(isset($request->name)){
@@ -33,11 +48,11 @@ class ProjectController extends Controller
             $data->where('phone',$request->phone);
         }
 
-        if(isset($request->state)){
-            $data->where('state',$request->state);
+        if(isset($request->country)){
+            $data->where('state',$request->country);
         }
         if(isset($request->contract_id)){
-            $data->join('project_contract','project_contract.project_id','projects.id')->where('project_contract.contract_id',$request->contract_id);
+            $data->leftJoin('project_contract','projects.id','=','project_contract.project_id')->where('project_contract.contract_id',$request->contract_id);
         }
         if(isset($request->from)){
             if($request->dateType == 1){
@@ -54,9 +69,9 @@ class ProjectController extends Controller
     }
 
     public function store(Request $request){
-        $data = $this->validate(request(), [
+         $this->validate(request(), [
             'name' => 'required|string',
-            'client_id' => 'required|unique:clients,id',
+            'client_id' => 'required',
             'country' => 'required|',
             'state' => 'required|',
             'project_type' => 'required|',
@@ -71,7 +86,7 @@ class ProjectController extends Controller
             try {
                 $client = Client::find($request->client_id);
                 $project = new Project();
-                $project->name=$request->projectName;
+                $project->name=$request->name;
                 $project->phone=$client->phone;
                 $project->email=$client->email;
                 $project->country=$request->country;
@@ -84,7 +99,8 @@ class ProjectController extends Controller
                 $project->is_accepted=1;
                 $project->confirm=1;
                 $project->is_created=1;
-                $project->address_type=1;
+                $project->address_type=$request->address_type;
+                $project->address_link=$request->address_link;
 
                 $project->client_id=$request->client_id;
                 $project->accept_date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
@@ -108,7 +124,7 @@ class ProjectController extends Controller
                 $contract->price=$con->price;
                 $contract->template=$con->template;
                 $contract->color=$con->color;
-                $contract->contract_id=$con->contract_id;
+                $contract->contract_id=$con->id;
                 $contract->save();
 
                 // Create ProjectLevels
@@ -118,18 +134,19 @@ class ProjectController extends Controller
                     $ProjectLevels->title=$level->title;
                     $ProjectLevels->percent=$level->percent;
                     $ProjectLevels->contract_id=$level->contract_id;
-                    $ProjectLevels->project_id=$level->title;
-                    $ProjectLevels->project_contract_id=$level->title;
+                    $ProjectLevels->project_id=$project->id;
+                    $ProjectLevels->project_contract_id=$contract->id;
                     $ProjectLevels->level_id=$level->id;
                     $ProjectLevels->sort=$level->sort;
-                    $ProjectLevels->progress=$level->progress;
+                    $ProjectLevels->progress_time=$level->progress_time;
                     $ProjectLevels->save();
                     //Create LevelDetails
                     $levelsDetails = LevelDetails::where('level_id',$level->id)->get();
                     foreach($levelsDetails as $de){
                         $ProjectLevelDetails = New ProjectLevelDetails();
+                        $ProjectLevelDetails->title=$de->title;
                         $ProjectLevelDetails->project_id=$project->id;
-                        $ProjectLevelDetails->level_id=$ProjectLevels->level_id;
+                        $ProjectLevelDetails->level_id=$ProjectLevels->id;
                         $ProjectLevelDetails->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
                         $ProjectLevelDetails->client_view=$de->client_view;
                         $ProjectLevelDetails->sort=$de->sort;
@@ -172,4 +189,5 @@ class ProjectController extends Controller
         return view('admin.Project.level_details',compact('data','level','levelDetails'));
 
     }
+
 }
