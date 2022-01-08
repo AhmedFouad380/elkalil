@@ -79,10 +79,10 @@
                             </div>
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">السعر</label>
+                                <label class="required fw-bold fs-6 mb-2">نموذج عرض السعر</label>
                                 <!--end::Label-->
                                 <div class="py-5">
-                        	<textarea name="price" id="kt_docs_ckeditor_classic">
+                        	<textarea name="price" id="kt_docs_tinymce_basic">
 
                                 </textarea>
                                 </div>
@@ -91,10 +91,10 @@
 
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">التصميم</label>
+                                <label class="required fw-bold fs-6 mb-2">نموذج العقد</label>
                                 <!--end::Label-->
                                 <div class="py-5">
-                        	<textarea name="template" id="kt_docs_ckeditor_classic2">
+                        	<textarea name="template" id="kt_docs_tinymce_basic2">
 
                                 </textarea>
                                 </div>
@@ -179,33 +179,31 @@
     });
 </script>
 
+
 <script>
-    ClassicEditor
-        .create(document.querySelector('#kt_docs_ckeditor_classic'))
-        .then(editor => {
-            console.log(editor);
-        })
-        .catch(error => {
-            console.error(error);
-        });
-</script>
-<script>
-    ClassicEditor
-        .create(document.querySelector('#kt_docs_ckeditor_classic2'))
-        .then(editor => {
-            console.log(editor);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    var options = {selector: "#kt_docs_tinymce_basic"};
+
+    if (KTApp.isDarkMode()) {
+        options["skin"] = "oxide-dark";
+        options["content_css"] = "dark";
+    }
+
+    tinymce.init(options);
+
 </script>
 
 <script>
-    $(document).ready(function () {
-        document.getElementsByClassName("ck-content").dir = "rtl";
+    var options = {selector: "#kt_docs_tinymce_basic2"};
 
-        // $('.ck-content').dir("rtl");
-    });
+    if (KTApp.isDarkMode()) {
+        options["skin"] = "oxide-dark";
+        options["content_css"] = "dark";
+    }
+
+    tinymce.init(options);
+
 </script>
+
+
 
 
