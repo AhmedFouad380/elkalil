@@ -72,18 +72,57 @@ class ContractsController extends Controller
         $explans = Explan::OrderBy('id','desc')->where('project_id',$id)->get();
         return view('admin.Contracts.edit',compact('data','explans'));
     }
+    public function UpdateClientData(Request $request){
+        $data = Project::find($request->id);
+        $data->name=$request->name;
+        $data->phone=$request->phone;
+        $data->save();
+        $client = Client::find($data->client_id);
+        $client->name=$request->name;
+        $client->phone=$request->phone;
+        $client->save();
 
+        $contract = ProjectContract::where('project_id',$request->id)->first();
+        $contract->contract_id=$request->contract_id;
+        $contract->save();
+
+        return back()->with('message','Success');
+
+    }
     public function UpdateProjectContract(Request $request){
 
         if(isset($request->price)){
             $data = ProjectContract::where('project_id',$request->id)->first();
             $data->price=$request->price;
             $data->save();
+
+            $d_explan = array(
+                'title' => 'تم تعديل عرض السعر',
+                'comments' => 'تم تعديل عرض السعر',
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'emp_id' => Auth::user()->id,
+                'emp_name' => Auth::user()->name,
+                'project_id' => $request->id
+            );
+            Explan::insert($d_explan);
+
         }
         if(isset($request->template)){
             $data = ProjectContract::where('project_id',$request->id)->first();
             $data->template=$request->template;
             $data->save();
+            $d_explan = array(
+                'title' => 'تم تعديل العقد',
+                'comments' => 'تم تعديل العقد',
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'emp_id' => Auth::user()->id,
+                'emp_name' => Auth::user()->name,
+                'project_id' => $request->id
+            );
+            Explan::insert($d_explan);
+
         }
 
         return back()->with('message','Success');

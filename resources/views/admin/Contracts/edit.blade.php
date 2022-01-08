@@ -204,7 +204,7 @@
                                         <div class="d-flex flex-wrap py-5">
                                             <!--begin::Col-->
                                             <div class="flex-equal me-5">
-                                                <a href="https://alkhalilsys.com/admins/page/quest2/{{$data->id}}"  target="_blank" class="btn btn-light-primary me-3 font-weight-bolder">
+                                                <a href="{{url('quest2/'.$data->id.'/'.Auth::user()->id)}}"  target="_blank" class="btn btn-light-primary me-3 font-weight-bolder">
                                                     <i class="bi bi-eye fs-2x"></i> رؤية
                                                 </a>
 
@@ -1020,7 +1020,8 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_new_card_form" class="form" action="#">
+                            <form id="kt_modal_new_card_form" class="form" action="{{url('UpdateClientData')}}" method="post">
+                                @csrf
                                 <!--begin::Input group-->
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
@@ -1029,6 +1030,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="text"  required class="form-control form-control-solid" placeholder="" value="{{$data->client->name}}" name="title" />
+                                    <input type="hidden"  required class="form-control form-control-solid" placeholder="" value="{{$data->id}}" name="id" />
                                 </div>
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->

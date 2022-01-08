@@ -269,7 +269,7 @@
                         </div>
                         <div class="mb-10">
                             <label class="form-label fs-6 fw-bold">نوع التعاقد</label>
-                            <select name="country" class="form-select  form-control form-select-lg form-select-solid" data-placeholder="مراحل المشروع ..." data-allow-clear="true" data-hide-search="true">
+                            <select name="contract_id" class="form-select  form-control form-select-lg form-select-solid" data-placeholder="مراحل المشروع ..." data-allow-clear="true" data-hide-search="true">
                                 <option value="">اختر</option>
                                 @inject('Contracts','App\Models\Contract')
                                 @foreach($Contracts->all() as $Contract)

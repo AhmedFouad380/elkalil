@@ -20,11 +20,24 @@ class ProjectController extends Controller
 {
     public  function  index(Request $request){
         if(Auth::user()->jop_type == 3){
-            $data = Project::orderBy('id','desc');
+            if(isset($request->contract_id)){
+            $data = Project::orderBy('projects.id','desc');
+            }else{
+                $data = Project::orderBy('id','desc');
+            }
         }elseif(Auth::user()->jop_type == 2 ){
-            $data = Project::orderBy('id','desc')->where('state',Auth::user()->state);
+
+            if(isset($request->contract_id)){
+                $data = Project::orderBy('projects.id','desc')->where('state',Auth::user()->state);
+            }else{
+                $data = Project::orderBy('id','desc')->where('state',Auth::user()->state);
+            }
         }elseif(Auth::user()->jop_type == 1){
-            $data = Project::orderBy('id','desc')->join('user_permission', 'user_permission.project_id = projects.id and user_permission.emp_id = '.Auth::user()->id, 'right');
+            if(isset($request->contract_id)){
+                $data = Project::orderBy('projects.id','desc')->join('user_permission', 'user_permission.project_id = projects.id and user_permission.emp_id = '.Auth::user()->id, 'right');
+            }else{
+                $data = Project::orderBy('id','desc')->join('user_permission', 'user_permission.project_id = projects.id and user_permission.emp_id = '.Auth::user()->id, 'right');
+            }
         }
 
         if(isset($request->name)){
@@ -35,11 +48,11 @@ class ProjectController extends Controller
             $data->where('phone',$request->phone);
         }
 
-        if(isset($request->state)){
-            $data->where('state',$request->state);
+        if(isset($request->country)){
+            $data->where('state',$request->country);
         }
         if(isset($request->contract_id)){
-            $data->join('project_contract','project_contract.project_id','projects.id')->where('project_contract.contract_id',$request->contract_id);
+            $data->leftJoin('project_contract','projects.id','=','project_contract.project_id')->where('project_contract.contract_id',$request->contract_id);
         }
         if(isset($request->from)){
             if($request->dateType == 1){

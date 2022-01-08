@@ -557,7 +557,7 @@
                     "hideMethod": "fadeOut"
                 };
 
-                toastr.success("نجاح", "{{$message}}");
+                    toastr.error("{{$error_message}}" , "عفوا !" );
             </script>
 
         @endif
