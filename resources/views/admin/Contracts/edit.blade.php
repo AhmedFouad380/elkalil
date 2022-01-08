@@ -8,6 +8,9 @@
 @endsection
 
 @section('style')
+<style>
+    .pac-container { z-index: 100000 !important; }
+</style>
 @endsection
 
 @section('breadcrumb')
@@ -1296,6 +1299,13 @@
     <script>
         CKEDITOR.replace( 'editor1' );
         CKEDITOR.replace( 'editor2' );
+        CKEDITOR.create( document.querySelector( '#editor1' ), {
+        toolbar: [
+            'heading', '|', 'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify'
+        ]
+    } )
+    .then(  )
+    .catch(  );
     </script>
 <script>
     $("#add-question").on("click", function () {
@@ -1388,9 +1398,7 @@
             }
 
         });
-        $("#search_input").onkeydown(function (event) {
-        var input = document.getElementById('search_input');
-        });
+
         if (document.getElementById('us1')) {
             var content;
             var latitude = {{!empty($data->lat) ? $data->lat: '24.69670448385797'}};

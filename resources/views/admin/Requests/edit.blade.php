@@ -8,6 +8,10 @@
 @endsection
 
 @section('style')
+
+<style>
+    .pac-container { z-index: 100000 !important; }
+</style>
 @endsection
 
 @section('breadcrumb')
