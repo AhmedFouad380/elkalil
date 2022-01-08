@@ -129,7 +129,11 @@ class ContractsController extends Controller
     }
     public function UpdateProjectPaid(Request $request){
         $data = ProjectPaid::where('project_id',$request->id)->first();
+        $total = $request->paid_down + $request->paid_term + array_sum($request->values);
 
+        if($request->paid < $total ){
+            return back()->with('error_message','عفوا اجمالي الدفعات اكبر من مبلغ التعاقد ');
+        }
         if(isset($request->paid)){
             $data->paid=$request->paid;
         }
