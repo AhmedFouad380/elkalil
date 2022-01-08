@@ -1292,11 +1292,32 @@
 @endsection
 
 @section('script')
-    <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+    <script src="{{ URL::asset('admin/assets/plugins/custom/tinymce/tinymce.bundle.js')}}"></script>
+
     <script>
-        CKEDITOR.replace( 'editor1' );
-        CKEDITOR.replace( 'editor2' );
+        var options = {selector: "#editor1"};
+
+        if (KTApp.isDarkMode()) {
+            options["skin"] = "oxide-dark";
+            options["content_css"] = "dark";
+        }
+
+        tinymce.init(options);
+
     </script>
+
+    <script>
+        var options = {selector: "#editor2"};
+
+        if (KTApp.isDarkMode()) {
+            options["skin"] = "oxide-dark";
+            options["content_css"] = "dark";
+        }
+
+        tinymce.init(options);
+
+    </script>
+
 <script>
     $("#add-question").on("click", function () {
         $("#questions").append('<div class="row">' +

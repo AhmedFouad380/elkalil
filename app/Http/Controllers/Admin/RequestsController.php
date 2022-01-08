@@ -18,12 +18,10 @@ class RequestsController extends Controller
 
     public function datatable(Request $request)
     {
-        $data = Project::where('is_accepted',2);
+        $data = Project::where('is_accepted',2)->orderBy('date', 'desc');
 
         if(isset($request->view)){
             $data->where('view',$request->view);
-
-
         }
         if(isset($request->from)){
             $data->whereDate('date','>=',$request->from);

@@ -27,7 +27,7 @@ class ContractsController extends Controller
 
     public function datatable(Request $request)
     {
-        $data = Project::where('is_accepted',1)->where('confirm',0)->orderBy('id', 'asc')->get();
+        $data = Project::where('is_accepted',1)->where('confirm',0)->orderBy('date', 'desc')->get();
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
