@@ -101,8 +101,7 @@
                                 <!--end::Label-->
                                 <div class="col-12">
                                     <!--begin::Input-->
-
-                                    <textarea id="kt_docs_tinymce_basic" name="price" class="tox-target">
+                                     <textarea id="kt_docs_tinymce_basic" name="price" class="tox-target">
                                         {!! $permission->price !!}
                                     </textarea>
 
@@ -183,6 +182,13 @@
 
     <script>
         var options = {selector: "#kt_docs_tinymce_basic2"};
+
+        if (KTApp.isDarkMode()) {
+            options["skin"] = "oxide-dark";
+            options["content_css"] = "dark";
+        }
+
+        tinymce.init(options);
 
         if (KTApp.isDarkMode()) {
             options["skin"] = "oxide-dark";

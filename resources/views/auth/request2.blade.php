@@ -94,7 +94,7 @@
             <!--begin::Wrapper-->
             <div class="w-lg-700px p-10 p-lg-15 mx-auto">
                 <!--begin::Form-->
-                <form action="{{ route('create_quest.submit') }}" method="post" class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
+                <form action="{{ route('create_quest2.submit') }}" method="post" class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
                     
                     <!--begin::Step 1-->
                     <div class="current" data-kt-stepper-element="content">
