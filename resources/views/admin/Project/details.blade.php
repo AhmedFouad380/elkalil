@@ -206,8 +206,9 @@
                                             </svg>
                                         </span>
                                         <!--end::Svg Icon-->
+
                                         <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
-                                    </div>
+                                     </div>
                                     <!--end::Number-->
                                     <!--begin::Label-->
                                     <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
