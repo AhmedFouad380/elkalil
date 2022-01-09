@@ -144,8 +144,9 @@ class ContractsController extends Controller
             $data->paid_term=$request->paid_term;
         }
         $data->save();
-        if(isset($request->values)){
+        if(isset($request->values) && array_sum($request->values) != 0){
             foreach($request->values as $val){
+                if($request->values != 0 ){
                 $Income = new Income();
                 $Income->amount=$val;
                 $Income->project_id=$request->id;
@@ -155,9 +156,22 @@ class ContractsController extends Controller
                 $Income->type=1;
                 $Income->project_name=Project::find($request->id)->name;
                 $Income->save();
+                }
             }
         }
+        // add explan
+        $d_explan = array(
+            'title' => 'تم تعديل المعلومات المالية ',
+            'comments' => 'تم تعديل المعلومات المالية',
+            'date' => \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d'),
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
+            'emp_id' => Auth::user()->id,
+            'emp_name' => Auth::user()->name,
+            'project_id' => $request->id
+        );
+        Explan::insert($d_explan);
         return back()->with('message','Success');
+
 
     }
     public function ConfirmProject(Request $request){

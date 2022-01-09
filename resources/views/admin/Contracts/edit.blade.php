@@ -1276,8 +1276,8 @@
                                                 </button>
                                             </div>
                                             <div class="col-6">
-                                                <input type="number" name="values[]"
-                                                       class="form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                <input type="number" value="0" name="values[]"
+                                                       class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
                                                        placeholder=""/>
                                             </div>
                                         </div>
@@ -1382,7 +1382,7 @@
                         <!--begin::Modal header-->
                         <div class="modal-header">
                             <!--begin::Modal title-->
-                            <h2>  ارسال المعلومات المالية</h2>
+                            <h2>  ارسال العقد</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -1450,7 +1450,7 @@
                         <!--begin::Modal header-->
                         <div class="modal-header">
                             <!--begin::Modal title-->
-                            <h2>  ارسال المعلومات المالية</h2>
+                            <h2>  ارسال عرض السعر</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -1518,7 +1518,7 @@
                         <!--begin::Modal header-->
                         <div class="modal-header">
                             <!--begin::Modal title-->
-                            <h2>  ارسال المعلومات المالية</h2>
+                            <h2>  ارسال استبيان المشاريع</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -1619,8 +1619,8 @@
             '                                            <div class="col-3">' +
             '                                             </div>' +
             '                                            <div class="col-6">' +
-            '                                                <input type="number" name="values[]"' +
-            '                                                       class="form-control col-6 form-control-solid mb-3 mb-lg-0"' +
+            '                                                <input value="0" type="number" name="values[]"' +
+            '                                                       class="values form-control col-6 form-control-solid mb-3 mb-lg-0"' +
             '                                                       placeholder=""/>' +
             '                                            </div>' +
             '                                            <div class="col-3">' +
@@ -1767,9 +1767,17 @@
 
     <script>
         $("#paid_down").on("click , change, keyup", function () {
+            var totalPrice = 0;
+            var sum = [];
+
+            $(".values").each(function (index) {
+                sum.push($(this).val())
+                totalPrice += Number($(this).val());
+            })
+
             var paid_down = $(this).val();
             var paid = $('#paid').val();
-            var paid_term = paid - paid_down;
+            var paid_term = paid - paid_down - totalPrice;
             document.getElementById('paid_term').value=paid_term
 
         })
@@ -1778,6 +1786,29 @@
             var paid = $('#paid').val();
             var paid_down = paid - paid_term;
             document.getElementById('paid_down').value=paid_down
+
+        })
+
+        function simpleArraySum(ar) {
+            var sum = 0;
+            for (var i = 0; i < ar.length; i++) {
+                sum += ar[i];
+            }
+            return sum;
+        }
+        $(".values").on("click , change, keyup", function () {
+            var sum = [];
+            var totalPrice = 0;
+
+            $(".values").each(function (index) {
+                sum.push($(this).val())
+                totalPrice += Number($(this).val());
+            })
+
+            var paid_down = $('#paid_down').val();
+            var paid = $('#paid').val();
+            var paid_term = paid - paid_down - totalPrice ;
+            document.getElementById('paid_term').value=paid_term
 
         })
         $("#ConfirmProject").on("click", function () {
