@@ -430,4 +430,363 @@ public function Send_revision(Request $request){
     return back()->with('message','Success');
 }
 
+public function Send_paid(Request $request){
+
+        $paid = ProjectPaid::where('project_id',$request->project_id)->first();
+    $Project = Project::find($request->project_id);
+        $client = Client::find($Project->client_id);
+    $msg = "عزيزي العميل ، نرحب بكم في شركة الخليل ، برجاء سداد الدفعة المقدمة من المشروع الخاص بكم بقيمة "
+        . $paid->paid_down.
+        " ريال ".
+
+        "والمتابعة على (تطبيق عملاء الخليل) بعد السداد علما بأن قيمة العقد : "
+        .$paid->paid. " ريال ";
+
+    if($request->type == 1) {
+
+
+            $ch = curl_init();
+            $url = "http://basic.unifonic.com/rest/SMS/messages";
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            //curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=m.hegazy@uramit.com&password=Uramit@123123&msg=".$msg."&sender=ALKHALIL-GR&to=".$client->phone."&encoding=UTF8"); // define what you want to post
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=".$msg."&SenderID=ALKHALIL-GR&Recipient=".$client->phone."&encoding=UTF8&responseType=json"); // define what you want to post
+
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $output = curl_exec ($ch);
+            curl_close ($ch);
+
+
+            $setting = Setting::find(1);
+            $setting->sms_used= 2 + $setting->sms_used;
+            $setting->save();
+
+            $description = 'ارسال رسالة اشعار المعلومات المالية للعقد للعميل رقم    '.$client->phone;
+
+            $dataLog = array('type'=>2 , 'user_id'=> $client->id , 'description' => $description , 'sms_count' => 2);
+            SmsLogs::insert($dataLog);
+
+
+
+        }
+        elseif ($request->type == 2){
+
+            $inbox = array(
+                'title' => 'اشعار المعلومات المالية للعقد ',
+                'comments' => $msg,
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'sender_id' => Auth::user()->id,
+                'sender_name' => Auth::user()->name,
+                'recipient_id' => $client->id,
+                'recipient_name' => $client->name,
+                'project_id' => $Project->id,
+                'project_name' => $Project->name,
+                'updated_at' =>\Carbon\Carbon::now()
+
+            );
+            inbox::insert($inbox);
+
+    }elseif($request->type == 3){
+
+
+        $ch = curl_init();
+        $url = "http://basic.unifonic.com/rest/SMS/messages";
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=m.hegazy@uramit.com&password=Uramit@123123&msg=".$msg."&sender=ALKHALIL-GR&to=".$client->phone."&encoding=UTF8"); // define what you want to post
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=".$msg."&SenderID=ALKHALIL-GR&Recipient=".$client->phone."&encoding=UTF8&responseType=json"); // define what you want to post
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec ($ch);
+        curl_close ($ch);
+
+
+        $setting = Setting::find(1);
+        $setting->sms_used= 2 + $setting->sms_used;
+        $setting->save();
+
+        $description = 'ارسال رسالة اشعار المعلومات المالية للعقد للعميل رقم    '.$client->phone;
+
+        $dataLog = array('type'=>2 , 'user_id'=> $client->id , 'description' => $description , 'sms_count' => 2);
+        SmsLogs::insert($dataLog);
+
+
+        $inbox = array(
+            'title' => 'اشعار المعلومات المالية للعقد ',
+            'comments' => $msg,
+            'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
+            'sender_id' => Auth::user()->id,
+            'sender_name' => Auth::user()->name,
+            'recipient_id' => $client->id,
+            'recipient_name' => $client->name,
+            'project_id' => $Project->id,
+            'project_name' => $Project->name,
+            'updated_at' =>\Carbon\Carbon::now()
+
+        );
+        inbox::insert($inbox);
+    }
+    $d_explan = array(
+        'title' => 'اشعار المعلومات المالية للعقد ',
+        'comments' => 'تم ارسال اشعار  المعلومات المالية للعقد ',
+        'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+        'time' => \Carbon\Carbon::now()->format('H:i:s'),
+        'emp_id' => Auth::user()->id,
+        'emp_name' => Auth::user()->name,
+        'project_id' => $request->project_id
+    );
+    Explan::insert($d_explan);
+
+    return back()->with('message','Success');
+
+}
+
+    public function Send_template(Request $request){
+
+        $Project = Project::find($request->project_id);
+        $client = Client::find($Project->client_id);
+        $Message = 'عزيزي العميل ، نرحب بكم في شركة الخليل ، , ونفيدكم بان العقد الخاص بكم جاهز على تطبيق عملاء الخليل ';
+
+
+        if($request->type == 1 || $request->type == 3 ) {
+
+
+
+            $ch = curl_init();
+            $url = "http://basic.unifonic.com/rest/SMS/messages";
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=".$Message."&SenderID=ALKHALIL-GR&Recipient=".$client->phone."&encoding=UTF8&responseType=json"); // define what you want to post
+            //curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=fetoh@koof-ksa.com&password=fetoh000000&msg=".$Message."&sender=ALKHALIL-GR&to=".$user->phone."&encoding=UTF8"); // define what you want to post
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $output = curl_exec ($ch);
+            curl_close ($ch);
+
+
+            $setting = Setting::find(1);
+            $setting->sms_used= 1 + $setting->sms_used;
+            $setting->save();
+
+            $description = ' تم ارسال بيانات العقد للعميل'.$client->phone;
+
+            $dataLog = array('type'=>2 , 'user_id'=> $client->id , 'description' => $description , 'sms_count' => 1);
+            SmsLogs::insert($dataLog);
+
+
+
+        }
+        elseif ($request->type == 2 || $request->type == 3){
+
+            $inbox = array(
+                'title' => ' ارسال بيانات العقد ',
+                'comments' => $Message,
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'sender_id' => Auth::user()->id,
+                'sender_name' => Auth::user()->name,
+                'recipient_id' => $client->id,
+                'recipient_name' => $client->name,
+                'project_id' => $Project->id,
+                'project_name' => $Project->name,
+                'updated_at' =>\Carbon\Carbon::now()
+
+            );
+            inbox::insert($inbox);
+
+        }
+        $d_explan = array(
+            'title' => 'تم ارسال بيانات العقد ',
+            'comments' => 'تم ارسال بيانات العقد ',
+            'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
+            'emp_id' => Auth::user()->id,
+            'emp_name' => Auth::user()->name,
+            'project_id' => $request->project_id
+        );
+        Explan::insert($d_explan);
+
+        return back()->with('message','Success');
+
+    }
+
+
+
+    public function Send_price(Request $request){
+
+        $Project = Project::find($request->project_id);
+        $client = Client::find($Project->client_id);
+        $Message = 'عزيزي العميل ، نرحب بكم في شركة الخليل ، , ونفيدكم بان عرض السعر الخاص بكم جاهز على تطبيق عملاء الخليل ';
+
+
+        if($request->type == 1 || $request->type == 3 ) {
+
+
+
+            $ch = curl_init();
+            $url = "http://basic.unifonic.com/rest/SMS/messages";
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=".$Message."&SenderID=ALKHALIL-GR&Recipient=".$client->phone."&encoding=UTF8&responseType=json"); // define what you want to post
+            //curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=fetoh@koof-ksa.com&password=fetoh000000&msg=".$Message."&sender=ALKHALIL-GR&to=".$user->phone."&encoding=UTF8"); // define what you want to post
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $output = curl_exec ($ch);
+            curl_close ($ch);
+
+
+            $setting = Setting::find(1);
+            $setting->sms_used= 1 + $setting->sms_used;
+            $setting->save();
+
+            $description = ' تم ارسال بيانات عرض السعر للعميل رقم '.$client->phone;
+
+            $dataLog = array('type'=>2 , 'user_id'=> $client->id , 'description' => $description , 'sms_count' => 1);
+            SmsLogs::insert($dataLog);
+
+
+
+        }
+        elseif ($request->type == 2 || $request->type == 3){
+
+            $inbox = array(
+                'title' => '  بيانات عرض السعر ',
+                'comments' => $Message,
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'sender_id' => Auth::user()->id,
+                'sender_name' => Auth::user()->name,
+                'recipient_id' => $client->id,
+                'recipient_name' => $client->name,
+                'project_id' => $Project->id,
+                'project_name' => $Project->name,
+                'updated_at' =>\Carbon\Carbon::now()
+
+            );
+            inbox::insert($inbox);
+
+        }
+        $d_explan = array(
+            'title' => 'تم ارسال بيانات عرض السعر ',
+            'comments' => 'تم ارسال بيانات عرض السعر ',
+            'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
+            'emp_id' => Auth::user()->id,
+            'emp_name' => Auth::user()->name,
+            'project_id' => $request->project_id
+        );
+        Explan::insert($d_explan);
+
+        return back()->with('message','Success');
+
+    }
+    public function Send_quest(Request $request){
+
+        $Project = Project::find($request->project_id);
+        $client = Client::find($Project->client_id);
+        $link = 'http://alkhalilsys.com/admins/page/quest2/'.$Project->id;
+        $Message = 'عزيزي العميل ، نرجو استكمال بيانات استبيان المشروع عن طريق الرابط التالي  : ' .$link ;
+
+
+        if($request->type == 1 || $request->type == 3 ) {
+
+
+
+            $ch = curl_init();
+            $url = "http://basic.unifonic.com/rest/SMS/messages";
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=".$Message."&SenderID=ALKHALIL-GR&Recipient=".$client->phone."&encoding=UTF8&responseType=json"); // define what you want to post
+            //curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=fetoh@koof-ksa.com&password=fetoh000000&msg=".$Message."&sender=ALKHALIL-GR&to=".$user->phone."&encoding=UTF8"); // define what you want to post
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $output = curl_exec ($ch);
+            curl_close ($ch);
+
+
+            $setting = Setting::find(1);
+            $setting->sms_used= 2 + $setting->sms_used;
+            $setting->save();
+
+            $description = 'ارسال رسالة استكمال بيانات استبيان المشروع للعميل رقم    '.$client->phone;
+
+            $dataLog = array('type'=>2 , 'user_id'=> $client->id , 'description' => $description , 'sms_count' => 2);
+            SmsLogs::insert($dataLog);
+
+
+
+        }
+        elseif ($request->type == 2 || $request->type == 3){
+
+            $inbox = array(
+                'title' => 'اشعار ارسال  استبيان المشروع للعميل',
+                'comments' => $Message,
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'sender_id' => Auth::user()->id,
+                'sender_name' => Auth::user()->name,
+                'recipient_id' => $client->id,
+                'recipient_name' => $client->name,
+                'project_id' => $Project->id,
+                'project_name' => $Project->name,
+                'updated_at' =>\Carbon\Carbon::now()
+
+            );
+            inbox::insert($inbox);
+
+        }
+        $d_explan = array(
+            'title' => 'تم ارسال  استبيان المشروع للعميل',
+            'comments' => 'اشعار ارسال  استبيان المشروع للعميل',
+            'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
+            'emp_id' => Auth::user()->id,
+            'emp_name' => Auth::user()->name,
+            'project_id' => $request->project_id
+        );
+        Explan::insert($d_explan);
+
+
+        // send fcm start
+        if($client->token_id) {
+
+            $token = $client->token_id; // push token
+
+
+            $title = $Project->name;
+            $message = " اشعار استكمال استبيان المشروع  ";
+
+            $fields = array
+            (
+                'registration_ids' => [$token],
+                'data' => ['type' => '3'],
+                'notification' => array(
+                    'priority' => 'high',
+                    'body' => $message,
+                    'title' => $title,
+                    'sound' => 'default',
+                    'icon' => 'icon'
+                )
+            );
+            $API_ACCESS_KEY = 'AAAA7MITCVM:APA91bFxG1YuBa-5G6nYPwrn4KFrbKjtilNv-dlm5yXKOLJiGtMgdLSTCjYIY1i3M6Nf4au0r6b2mEL_MjfkGb1-haRJa-zZr1laU5uffby_y2n63IMaVgrh5u63aQRJZMnpJg-SAO5V';
+            $headers = array
+            (
+                'Authorization: key=' . $API_ACCESS_KEY,
+                'Content-Type: application/json'
+            );
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+            $result = curl_exec($ch);
+            curl_close($ch);
+        }
+        // send Fcm end
+        return back()->with('message','Success');
+
+    }
+
+
 }

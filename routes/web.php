@@ -176,6 +176,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('UpdateProjectContract', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectContract'])->name('UpdateProjectContract');
     Route::post('UpdateProjectPaid', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectPaid'])->name('UpdateProjectContract');
     Route::post('Send_revision', [\App\Http\Controllers\Admin\ContractsController::class, 'Send_revision'])->name('Send_revision');
+    Route::post('Send_paid', [\App\Http\Controllers\Admin\ContractsController::class, 'Send_paid'])->name('Send_paid');
+    Route::post('Send_price', [\App\Http\Controllers\Admin\ContractsController::class, 'Send_price'])->name('Send_price');
+    Route::post('Send_template', [\App\Http\Controllers\Admin\ContractsController::class, 'Send_template'])->name('Send_template');
+    Route::post('Send_quest', [\App\Http\Controllers\Admin\ContractsController::class, 'Send_quest'])->name('Send_quest');
     Route::post('UpdateClientData', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateClientData'])->name('UpdateClientData');
 
     Route::get('/add-Requests-button', function () {

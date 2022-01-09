@@ -210,10 +210,9 @@
                                                 <a href="{{url('quest2/'.$data->id.'/'.Auth::user()->id)}}"  target="_blank" class="btn btn-light-primary me-3 font-weight-bolder">
                                                     <i class="bi bi-eye fs-2x"></i> رؤية
                                                 </a>
-
-                                                <button type="button" class="btn btn-light-danger me-3">
+                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_send_quest" class="btn btn-light-danger me-3 font-weight-bolder">
                                                     <i class="bi bi-envelope fs-2x"></i> ارسال
-                                                </button>
+                                                </a>
                                             </div>
                                             <!--end::Col-->
                                             <!--begin::Col-->
@@ -283,9 +282,11 @@
                                                     <i class="bi bi-eye fs-2x"></i> رؤية
                                                 </a>
 
-                                                <button type="button" class="btn btn-light-danger me-3">
+
+                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_send_price" class="btn btn-light-danger me-3 font-weight-bolder">
                                                     <i class="bi bi-envelope fs-2x"></i> ارسال
-                                                </button>
+                                                </a>
+
                                             </div>
                                             <!--end::Col-->
                                             <!--begin::Col-->
@@ -356,10 +357,10 @@
                                                 </a>
 
 
-
-                                                <button type="button" class="btn btn-light-danger me-3">
+                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_send_templete" class="btn btn-light-danger me-3 font-weight-bolder">
                                                     <i class="bi bi-envelope fs-2x"></i> ارسال
-                                                </button>
+                                                </a>
+
                                             </div>
                                             <!--end::Col-->
                                             <!--begin::Col-->
@@ -431,9 +432,11 @@
                                                     <i class="bi bi-eye fs-2x"></i> رؤية
                                                 </a>
 
-                                                <button type="button" class="btn btn-light-danger me-3">
+                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_send_paid" class="btn btn-light-danger me-3 font-weight-bolder">
                                                     <i class="bi bi-envelope fs-2x"></i> ارسال
-                                                </button>
+                                                </a>
+
+
                                             </div>
                                             <!--end::Col-->
                                             <!--begin::Col-->
@@ -1303,6 +1306,279 @@
                 </div>
                 <!--end::Modal dialog-->
             </div>
+            <div class="modal fade" id="kt_modal_send_paid" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header">
+                            <!--begin::Modal title-->
+                            <h2>  ارسال المعلومات المالية</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                            </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form method="post" class="form" action="{{url('Send_paid')}}">
+                            @csrf
+                            <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">: ارسال </span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <select name="type" class="form-control" >
+                                        <option value="1" > رساله نصية</option>
+                                        <option  value="2" > البريد الوارد</option>
+                                        <option  value="3" > الاثنين معا</option>
+                                    </select>
+                                    <input type="hidden" name="project_id" value="{{$data->id}}">
+
+                                </div>
+
+
+
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-15">
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    </button>
+                                    <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                        <span class="indicator-label">حفظ</span>
+                                        <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+            <div class="modal fade" id="kt_modal_send_templete" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header">
+                            <!--begin::Modal title-->
+                            <h2>  ارسال المعلومات المالية</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                            </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form method="post" class="form" action="{{url('Send_template')}}">
+                            @csrf
+                            <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">: ارسال </span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <select name="type" class="form-control" >
+                                        <option value="1" > رساله نصية</option>
+                                        <option  value="2" > البريد الوارد</option>
+                                        <option  value="3" > الاثنين معا</option>
+                                    </select>
+                                    <input type="hidden" name="project_id" value="{{$data->id}}">
+
+                                </div>
+
+
+
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-15">
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    </button>
+                                    <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                        <span class="indicator-label">حفظ</span>
+                                        <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+            <div class="modal fade" id="kt_modal_send_price" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header">
+                            <!--begin::Modal title-->
+                            <h2>  ارسال المعلومات المالية</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                            </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form method="post" class="form" action="{{url('Send_price')}}">
+                            @csrf
+                            <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">: ارسال </span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <select name="type" class="form-control" >
+                                        <option value="1" > رساله نصية</option>
+                                        <option  value="2" > البريد الوارد</option>
+                                        <option  value="3" > الاثنين معا</option>
+                                    </select>
+                                    <input type="hidden" name="project_id" value="{{$data->id}}">
+
+                                </div>
+
+
+
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-15">
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    </button>
+                                    <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                        <span class="indicator-label">حفظ</span>
+                                        <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+            <div class="modal fade" id="kt_modal_send_quest" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header">
+                            <!--begin::Modal title-->
+                            <h2>  ارسال المعلومات المالية</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                            </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form method="post" class="form" action="{{url('Send_quest')}}">
+                            @csrf
+                            <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">: ارسال </span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <select name="type" class="form-control" >
+                                        <option value="1" > رساله نصية</option>
+                                        <option  value="2" > البريد الوارد</option>
+                                        <option  value="3" > الاثنين معا</option>
+                                    </select>
+                                    <input type="hidden" name="project_id" value="{{$data->id}}">
+
+                                </div>
+
+
+
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-15">
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    </button>
+                                    <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                        <span class="indicator-label">حفظ</span>
+                                        <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+
             <!--end::Modal - New Card-->
             <!--end::Modals-->
         </div>
