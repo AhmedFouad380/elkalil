@@ -511,6 +511,9 @@
         });
     </script>
 
+    <?php
+    $message = session()->get("message");
+    ?>
 
 
     @if( session()->has("message"))

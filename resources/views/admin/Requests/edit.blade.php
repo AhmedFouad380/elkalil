@@ -527,8 +527,8 @@
                             <!--begin::Modal footer-->
                             <div class="modal-footer flex-center">
                                 <!--begin::Button-->
-                                <button type="reset" id="kt_modal_add_product_cancel" class="btn btn-light me-3">الغاء</button>
-                                <!--end::Button-->
+                                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                </button>                                <!--end::Button-->
                                 <!--begin::Button-->
                                 <button type="submit" id="kt_modal_add_product_submit" class="btn btn-primary">
                                     <span class="indicator-label">حفظ</span>
@@ -615,8 +615,8 @@
                             <!--begin::Modal footer-->
                             <div class="modal-footer flex-center">
                                 <!--begin::Button-->
-                                <button type="reset" id="kt_modal_add_product_cancel" class="btn btn-light me-3">الغاء</button>
-                                <!--end::Button-->
+                                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                </button>                                <!--end::Button-->
                                 <!--begin::Button-->
                                 <button type="submit" id="kt_modal_add_product_submit" class="btn btn-primary">
                                     <span class="indicator-label">حفظ</span>
@@ -694,7 +694,8 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">الغاء</button>
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    </button>
                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
                                         <span class="indicator-progress">Please wait...
