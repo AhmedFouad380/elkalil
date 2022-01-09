@@ -38,7 +38,7 @@ class Setting extends Model
     public function setLogoAttribute($image)
     {
         if (is_file($image)) {
-            $imageFields = upload($image);
+            $imageFields = upload_multiple($image,'images');
             $this->attributes['logo'] = $imageFields;
         }
 
