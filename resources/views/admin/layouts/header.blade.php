@@ -238,7 +238,7 @@
                                 <!--end::Items-->
                                 <!--begin::View more-->
                                 <div class="py-3 text-center border-top">
-                                    <a href="../../demo16/dist/pages/profile/activity.html"
+                                    <a href="/inbox"
                                        class="btn btn-color-gray-600 btn-active-color-primary">عرض الكل
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                                         <span class="svg-icon svg-icon-5">
@@ -317,7 +317,7 @@
                             <!--end:Item-->
                             <!--begin:Item-->
                             <div class="col-6">
-                                <a href="/inbox2"
+                                <a href="/inbox"
                                    class="d-flex flex-column flex-center h-100 p-6 bg-hover-light border-bottom">
                                     <!--begin::Svg Icon | path: icons/duotune/communication/com010.svg-->
                                     <span class="svg-icon svg-icon-3x svg-icon-primary mb-2">
@@ -494,8 +494,8 @@
                     </a>
                 </div>
                 <div
-                    class="menu-item   @if(Request::segment(1) == 'Inbox') here show @endif menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3" href="../../demo16/dist/index.html">
+                    class="menu-item   @if(Request::segment(1) == 'inbox' || Request::segment(1) == 'reply' ) here show @endif menu-lg-down-accordion me-lg-1">
+                    <a class="menu-link py-3" href="/inbox">
                         <span class="menu-title">البريد الوارد</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>

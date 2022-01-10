@@ -94,7 +94,7 @@
                                 <label class="required fw-bold fs-6 mb-2">نموذج العقد</label>
                                 <!--end::Label-->
                                 <div class="py-5">
-                        	<textarea name="template" id="kt_docs_tinymce_basic2">
+                        	    <textarea name="template" id="kt_docs_tinymce_basic2">
 
                                 </textarea>
                                 </div>

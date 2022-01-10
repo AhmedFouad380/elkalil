@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\ContractTypesController;
+use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\LevelDetailsController;
 use App\Http\Controllers\Admin\MessagesController;
@@ -190,6 +191,10 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::post('Add_explan', [\App\Http\Controllers\Admin\ExplanController::class, 'Add_explan'])->name('Add_explan');
 
+
+    Route::get('inbox', [InboxController::class, 'index'])->name('inbox');
+    Route::get('reply/{id}', [InboxController::class, 'show'])->name('reply');
+
 });
 
 
@@ -244,10 +249,3 @@ Route::get('/project-details8', function () {
     return view('admin/project_details8');
 });
 
-Route::get('/inbox', function () {
-    return view('admin/inbox');
-});
-
-Route::get('/reply', function () {
-    return view('admin/reply');
-});

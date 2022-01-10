@@ -48,6 +48,12 @@ class inbox extends Model
         return $this->hasMany(inboxFile::class, 'mail_id');
     }
 
+    public function replies()
+    {
+        return $this->hasMany(inbox::class, 'sub');
+    }
+
+
 
 
 }
