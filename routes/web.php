@@ -158,12 +158,20 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('RejectProject', [\App\Http\Controllers\Admin\RequestsController::class, 'RejectProject'])->name('RejectProject');
     Route::get('AcceptProject', [\App\Http\Controllers\Admin\RequestsController::class, 'AcceptProject'])->name('AcceptProject');
     Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
+    // Projects
 
     Route::get('projects', [\App\Http\Controllers\Admin\ProjectController::class, 'index']);
+    Route::get('projectFiles/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectFiles']);
+    Route::get('projectExplan/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectExplan']);
+        Route::get('projectEmployes/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectEmployes']);
+
     Route::post('store-new-level', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'store_level']);
+    Route::post('store-new-levelDetail', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'store_new_levelDetail']);
     Route::get('CompleteLevel', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'CompleteLevel']);
     Route::get('edit-LevelDetails', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'edit_LevelDetails']);
     Route::post('AnswerLevelDetails', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'AnswerLevelDetails']);
+    Route::post('Store_ProgressTime', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'Store_ProgressTime']);
+
 
     Route::post('store-project', [\App\Http\Controllers\Admin\ProjectController::class, 'store']);
     Route::get('project_details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'project_details']);
@@ -250,4 +258,28 @@ Route::get('/inbox', function () {
 
 Route::get('/reply', function () {
     return view('admin/reply');
+});
+
+
+Route::get('/project_details2', function () {
+    return view('admin/project_details2');
+});
+Route::get('/project_details3', function () {
+    return view('admin/project_details3');
+});
+Route::get('/project_details4', function () {
+    return view('admin/project_details4');
+});
+Route::get('/project_details5', function () {
+    return view('admin/project_details5');
+});
+Route::get('/project_details6', function () {
+    return view('admin/project_details6');
+});
+Route::get('/project_details7', function () {
+    return view('admin/project_details7');
+});
+
+Route::get('/project_details8', function () {
+    return view('admin/project_details8');
 });

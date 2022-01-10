@@ -24,7 +24,7 @@
             <a href="{{ url('/projects') }}" class="text-gray-600 text-hover-primary">المشاريع</a>
         </li>
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">تفاصيل المشروع</li>
+        <li class="breadcrumb-item text-gray-500">مراحل المشروع</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -240,7 +240,7 @@
 
                             <!--end::User-->
                                 <!--begin::All users-->
-                                <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
+                                <a href="{{url('projectEmployes',$data->id)}}" class="symbol symbol-35px symbol-circle" >
                                     <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bolder" data-bs-toggle="tooltip" data-bs-trigger="hover" title="رؤية العاملين على المشروع">+</span>
                                 </a>
 
@@ -260,7 +260,7 @@
                     <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6 active" href="#">مراحل المشروع</a>
+                            <a class="nav-link text-active-primary me-6 active" href="{{url('project_details',$data->id)}}">مراحل المشروع</a>
                         </li>
                         <!--end::Nav item-->
 
@@ -270,12 +270,12 @@
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="#">ملفات المشروع</a>
+                            <a class="nav-link text-active-primary me-6" href="{{url('projectFiles',$data->id)}}">ملفات المشروع</a>
                         </li>
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="#">الشروحات</a>
+                            <a class="nav-link text-active-primary me-6" href="{{url('projectExplan',$data->id)}}">الشروحات</a>
                         </li>
                         <!--end::Nav item-->
                         <!--begin::Nav item-->

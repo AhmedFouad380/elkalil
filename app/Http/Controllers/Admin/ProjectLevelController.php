@@ -55,28 +55,72 @@ class ProjectLevelController extends Controller
 
         $data = ProjectLevelDetails::find($request->id);
         if($data->question_type == 1 || $data->question_type == 2 ){
+
             $data->answer=$request->answer;
+
         }elseif($data->question_type == 3){
+
             $data->asnwer=implode('|',$request->answer);
+
         }elseif($data->question_type == 4){
+
             $imageName = time().'.'.$request->answer->extension();
-            $path = "https://alkhalilsys.com/images/";
-//            $request->image->store('http://alkhalilsys.com/images/', $imageName);
-            Storage::disk('public2')->put('images', $imageName);
-            $data->answer=$imageName;
-        }elseif($data->question_type == 5){
-            $data->answer=$request->answer;
-            $data->otherAnswer=$request->otherAnswer;
-        }
-        if(isset($request->img)){
-            $imageName = time().'.'.$request->img->extension();
             $path = "https://alkhalilsys.com/images/";
 //            $request->image->store('http://alkhalilsys.com/images/', $imageName);
             Storage::disk('public2')->put('images', $imageName);
             $data->img=$imageName;
 
+        }elseif($data->question_type == 5){
+
+            $data->answer=$request->answer;
+            $data->otherAnswer=$request->otherAnswer;
+
+        }
+        if(isset($request->img)){
+
+            $imageName = time().'.'.$request->img->extension();
+            $path = "https://alkhalilsys.com/images/";
+//            $request->image->store('http://alkhalilsys.com/images/', $imageName);
+            Storage::disk('public2')->put('images', $imageName);
+            $data->pdf=$imageName;
+
         }
         $data->state = 1;
+        $data->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
+
+        $data->save();
+        return back()->with('message', 'Success');
+
+    }
+    public function store_new_levelDetail(Request $request){
+
+        $LastDetails = ProjectLevelDetails::where('level_id',$request->level_id)->OrderBy('id','desc')->first();
+        $level = ProjectLevels::find($request->level_id);
+        $totalPercent = ProjectLevelDetails::where('level_id',$request->level_id)->sum('percent');
+        $total = $totalPercent + $request->percent;
+        if($total > $level->percent){
+            return back()->with('error_message', 'عفوا نسبة المرحلة اكبر من المسموح به ');
+        }
+        $data = new ProjectLevelDetails();
+        $data->title=$request->name;
+        $data->type=1;
+        $data->percent=$request->percent;
+        $data->is_pdf=$request->is_pdf;
+        $data->level_id=$request->level_id;
+        $data->project_id=$request->project_id;
+        $data->UserAdded=1;
+        $data->emp_id=Auth::user()->id;
+        $data->sort=$LastDetails->sort + 1 ;
+        $data->save();
+
+        return back()->with('message', 'Success');
+
+    }
+
+    public function Store_ProgressTime(Request $request){
+
+        $data = ProjectLevels::find($request->level_id);
+        $data->progress_time=$request->progress_time;
         $data->save();
         return back()->with('message', 'Success');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Contract;
+use App\Models\Explan;
 use App\Models\Level;
 use App\Models\LevelDetails;
 use App\Models\Project;
@@ -147,7 +148,7 @@ class ProjectController extends Controller
                         $ProjectLevelDetails->title=$de->title;
                         $ProjectLevelDetails->project_id=$project->id;
                         $ProjectLevelDetails->level_id=$ProjectLevels->id;
-                        $ProjectLevelDetails->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
+//                        $ProjectLevelDetails->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
                         $ProjectLevelDetails->client_view=$de->client_view;
                         $ProjectLevelDetails->sort=$de->sort;
                         $ProjectLevelDetails->question_type=$de->question_type;
@@ -186,8 +187,32 @@ class ProjectController extends Controller
         $data = Project::find($level->project_id);
 
         $levelDetails= ProjectLevelDetails::where('level_id',$id)->get();
-        return view('admin.Project.level_details',compact('data','level','levelDetails'));
+        return view('admin.Project.level_details',compact('data','level','levelDetails','id'));
 
     }
 
+    public function projectFiles($id){
+
+        $data = Project::find($id);
+
+        $files = ProjectLevelDetails::where('project_id',$id)->where('img','!=',null)->get();
+        return view('admin.Project.projectFiles',compact('data','id','files'));
+    }
+
+    public function projectExplan($id){
+
+        $data = Project::find($id);
+
+        $explans = Explan::where('project_id',$id)->OrderBy('id','desc')->get();
+        return view('admin.Project.explans',compact('data','id','explans'));
+
+    }
+
+    public function projectEmployes($id){
+
+        $data = Project::find($id);
+
+        return view('admin.Project.employes',compact('data','id'));
+
+    }
 }
