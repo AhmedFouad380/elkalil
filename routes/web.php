@@ -164,7 +164,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('projects', [\App\Http\Controllers\Admin\ProjectController::class, 'index']);
     Route::get('projectFiles/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectFiles']);
     Route::get('projectExplan/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectExplan']);
-        Route::get('projectEmployes/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectEmployes']);
+    Route::get('projectEmployes/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectEmployes']);
+    Route::get('assign_users/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'assign_users']);
+    Route::post('assgin_new_user', [\App\Http\Controllers\Admin\ProjectController::class, 'assgin_new_user']);
+    Route::get('remove_assign_user', [\App\Http\Controllers\Admin\ProjectController::class, 'remove_assign_user']);
 
     Route::post('store-new-level', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'store_level']);
     Route::post('store-new-levelDetail', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'store_new_levelDetail']);

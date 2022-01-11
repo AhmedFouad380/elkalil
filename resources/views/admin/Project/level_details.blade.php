@@ -189,9 +189,9 @@
                         {{--                        <li class="nav-item">--}}
                         {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
                         {{--                        </li>--}}
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="#">المحادثات</a>
-                        </li>
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link text-active-primary me-6" href="#">المحادثات</a>--}}
+{{--                        </li>--}}
                         <!--end::Nav item-->
                     </ul>
                     <!--end::Nav links-->
@@ -217,7 +217,7 @@
                             اضافة تعديلات
                         </button>
 
-                        <a href="#" class="btn btn-sm btn-danger me-5">
+                        <a href="{{url('assign_users',$level->id)}}" class="btn btn-sm btn-danger me-5">
                             مشرفي المرحلة
                         </a>
                         <a href="#" class="btn btn-sm btn-danger me-5">

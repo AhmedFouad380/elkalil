@@ -33,6 +33,9 @@ class ProjectLevels extends Model
 
 
 
+    public function assginUsers(){
+        return $this->belongsToMany(User::class,'user_permission','level_id','emp_id')->distinct();
+    }
     public function contract()
     {
         return $this->belongsTo(Contract::class, 'contract_id');

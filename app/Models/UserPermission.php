@@ -10,6 +10,8 @@ class UserPermission extends Model
     use HasFactory;
 
     protected  $table = 'user_permission';
+    public $timestamps = false;
+
 //    pivot table (emp - level)
 
     protected $fillable = [

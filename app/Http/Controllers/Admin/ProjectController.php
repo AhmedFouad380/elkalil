@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Contract;
 use App\Models\Explan;
+use App\Models\inbox;
 use App\Models\Level;
 use App\Models\LevelDetails;
 use App\Models\Project;
@@ -15,6 +16,7 @@ use App\Models\ProjectLevels;
 use App\Models\ProjectOther;
 use App\Models\User;
 use App\Models\UserChatPermission;
+use App\Models\UserPermission;
 use Illuminate\Http\Request;
 use Auth;
 class ProjectController extends Controller
@@ -213,6 +215,147 @@ class ProjectController extends Controller
         $data = Project::find($id);
 
         return view('admin.Project.employes',compact('data','id'));
+
+    }
+    public function assign_users($id){
+
+        $level = ProjectLevels::find($id);
+
+        $data = Project::find($level->project_id);
+
+
+        return view('admin.Project.assign_users',compact('data','id','level'));
+    }
+
+    public function assgin_new_user(Request $request){
+        $this->validate(request(), [
+            'level_id' => 'required',
+            'project_id' => 'required',
+            'emp_id' => 'required',
+
+        ]);
+        $Project = Project::find($request->project_id);
+        $client = User::find($request->emp_id);
+        if(UserPermission::where('emp_id',$request->emp_id)->where('level_id',$request->level_id)->count() > 0){
+            return back()->with('error_message','هذا المستخدم موجود بالفعل ');
+        }
+        $data = new UserPermission();
+        $data->level_id=$request->level_id;
+        $data->project_id=$request->project_id;
+        $data->emp_id=$request->emp_id;
+        $data->save();
+
+        $chat = new UserChatPermission();
+        $chat->reciever_id=$request->emp_id;
+        $chat->type=0;
+        $chat->level_id=$request->level_id;
+        $data->project_id=$request->project_id;
+        $data->save();
+
+
+        $inbox = array(
+            'title' => " تم تكليفك بالاعمال في المشروع   ",
+            'comments' => 'تم تكليفك بالاعمال في مشروع' . $Project->name,
+            'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
+            'sender_id' => \Illuminate\Support\Facades\Auth::user()->id,
+            'sender_name' => Auth::user()->name,
+            'recipient_id' => $client->id,
+            'recipient_name' => $client->name,
+            'project_id' => $Project->id,
+            'project_name' => $Project->name,
+            'updated_at' =>\Carbon\Carbon::now(),
+            'empl' =>2
+
+        );
+        inbox::insert($inbox);
+
+
+        $d_explan = array(
+            'title' => 'تم تعيين موظف للمشروع ',
+            'comments' => 'تم تعيين موظف للمشروع ',
+        'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+        'time' => \Carbon\Carbon::now()->format('H:i:s'),
+        'emp_id' => Auth::user()->id,
+        'emp_name' => Auth::user()->name,
+        'project_id' => $request->project_id
+        );
+        Explan::insert($d_explan);
+
+
+            // send fcm start
+        if($client->token_id) {
+
+        $token = $client->token_id; // push token
+
+
+        $title = $Project->name;
+            $message = " تم تكليفك بالاعمال في المشروع   ";
+
+        $fields = array
+        (
+        'registration_ids' => [$token],
+        'data' => ['type' => '3'],
+        'notification' => array(
+        'priority' => 'high',
+        'body' => $message,
+        'title' => $title,
+        'sound' => 'default',
+        'icon' => 'icon'
+        )
+        );
+        $API_ACCESS_KEY = 'AAAA7MITCVM:APA91bFxG1YuBa-5G6nYPwrn4KFrbKjtilNv-dlm5yXKOLJiGtMgdLSTCjYIY1i3M6Nf4au0r6b2mEL_MjfkGb1-haRJa-zZr1laU5uffby_y2n63IMaVgrh5u63aQRJZMnpJg-SAO5V';
+        $headers = array
+        (
+        'Authorization: key=' . $API_ACCESS_KEY,
+        'Content-Type: application/json'
+        );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        $result = curl_exec($ch);
+        curl_close($ch);
+        }
+        // send Fcm end
+        return back()->with('message','Success');
+
+
+
+}
+    public function remove_assign_user(Request $request){
+
+        $this->validate(request(), [
+            'level_id' => 'required',
+            'project_id' => 'required',
+            'emp_id' => 'required',
+
+        ]);
+        $Project = Project::find($request->project_id);
+        $client = User::find($request->emp_id);
+        try{
+         UserPermission::where('emp_id',$request->emp_id)->where('level_id',$request->level_id)->delete();
+         UserChatPermission::where('reciever_id',$request->emp_id)->where('level_id',$request->level_id)->delete();
+
+            $d_explan = array(
+                'title' => 'تم الغاء تكليف موظف للمشروع ',
+                'comments' => 'تم الغاء تكليف الموظف   '  . $client->name ,
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'emp_id' => Auth::user()->id,
+                'emp_name' => Auth::user()->name,
+                'project_id' => $request->project_id
+            );
+            Explan::insert($d_explan);
+
+        } catch (Throwable $e) {
+            return back()->with('error_message','عفوا حذث خطأ');
+
+        }
+        return response()->json(['message' => 'Success']);
 
     }
 }
