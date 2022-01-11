@@ -257,13 +257,6 @@ Route::get('/project-details8', function () {
     return view('admin/project_details8');
 });
 
-Route::get('/inbox', function () {
-    return view('admin/inbox');
-});
-
-Route::get('/reply', function () {
-    return view('admin/reply');
-});
 
 
 Route::get('/project_details2', function () {
