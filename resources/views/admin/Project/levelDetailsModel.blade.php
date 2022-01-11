@@ -180,7 +180,7 @@
     @endif
         <!--end: Wizard Actions-->
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اللغاء</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
         <button type="submit" class="btn btn-primary">حفظ</button>
     </div>
 </form>

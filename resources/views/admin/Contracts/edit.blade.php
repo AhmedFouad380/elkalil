@@ -1714,10 +1714,10 @@
             navigator.geolocation.getCurrentPosition(loadMap);
 
             function loadMap(location) {
-                if (location.coords) {
-                    latitude = location.coords.latitude;
-                    longitude = location.coords.longitude;
-                }
+                // if (location.coords) {
+                //     latitude = location.coords.latitude;
+                //     longitude = location.coords.longitude;
+                // }
                 var myLatlng = new google.maps.LatLng(latitude, longitude);
                 var mapOptions = {
                     zoom: 8,
@@ -1743,7 +1743,9 @@
                 });
 
                 marker = new google.maps.Marker({
-                    map: map
+                        map: map,
+                        position: myLatlng,
+                        title: "{{$data->name}}",
                 });
             }
         }

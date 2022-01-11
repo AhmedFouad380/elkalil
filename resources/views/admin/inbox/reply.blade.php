@@ -176,6 +176,7 @@
                             <!--end::Message accordion-->
                             {{-- start replies --}}
                             @foreach($inbox->replies as $reply)
+
                                 <div class="separator my-6"></div>
                                 <!--begin::Message accordion-->
                                 <div data-kt-inbox-message="message_wrapper">

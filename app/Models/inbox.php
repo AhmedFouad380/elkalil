@@ -50,6 +50,7 @@ class inbox extends Model
 
     public function replies()
     {
+
         return $this->hasMany(inbox::class, 'sub');
     }
 

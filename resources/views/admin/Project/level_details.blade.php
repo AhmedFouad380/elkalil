@@ -258,7 +258,7 @@
                                     <td>
 
                                         <div class="d-flex align-items-center">
-                                            <a href="#" data-id="{{$details->id}}" class=" edit-Advert text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</a>
+                                            <button  data-id="{{$details->id}}"  class="btn  edit-Advert text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
                                         </div>
                                     </td>
                                     <td>
