@@ -55,9 +55,12 @@ class InboxController extends Controller
     {
         $inbox = inbox::with(['replies', 'files'])->where('id',$id)->firstOrFail();
         if (Auth::id() == $inbox->recipient_id) {
-            $inbox->view;
+            $inbox->view=1;
             $inbox->save();
         }
+        $inbox_replies = inbox::where('sub',$id)->update([
+            'view'=>1
+        ]);
         return view('admin.inbox.reply', compact('inbox'));
     }
 
