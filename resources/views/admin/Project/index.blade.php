@@ -82,6 +82,95 @@
             @inject('contract','App\Models\Contract')
 
         @foreach($data as $project)
+            @if($project->confirm_date > \Carbon\Carbon::now()->format('Y-m-d'))
+                    <div class="col-md-6 col-xl-4">
+                        <!--begin::Card-->
+                        <a  class="card border-hover-primary">
+                            <!--begin::Card header-->
+                            <div class="card-header border-0 pt-9">
+                                <!--begin::Card Title-->
+                                <div class="card-title m-0">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-50px w-50px bg-light">
+                                        <img src="{{ URL::asset('admin/assets/media/svg/brand-logos/plurk.svg')}}" alt="image" class="p-3" />
+                                    </div>
+                                    <!--end::Avatar-->
+                                </div>
+                                <!--end::Car Title-->
+                                <!--begin::Card toolbar-->
+                                <div class="card-toolbar">
+                                    <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">{{$contract->find($project->projectContract->contract_id)->title}}</span>
+                                </div>
+                                <!--end::Card toolbar-->
+                            </div>
+                            <!--end:: Card header-->
+                            <!--begin:: Card body-->
+                            <div class="card-body p-9">
+                                <!--begin::Name-->
+                                <div class="fs-3 fw-bolder text-dark">{{$project->name}}  ( لم يتم بدا المشروع بعد) </div>
+                                <!--end::Name-->
+                                <!--begin::Description-->
+                                <p class="text-gray-400 fw-bold fs-5 mt-1 mb-7">{{$project->client->name}}</p>
+                                <!--end::Description-->
+                                <!--begin::Progress-->
+                                <div class="flex-grow-1">
+                                    <div class="mixed-widget-4-chart{{$project->id}}" data-kt-chart-color="primary" style="height: 200px"></div>
+                                </div>
+                                <!--end::Progress-->
+                                <!--begin::Info-->
+                                <div class="d-flex flex-wrap mb-5">
+                                    <!--begin::Due-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                                        <div class="fs-6 text-gray-800 fw-bolder">{{$project->confirm_date}}</div>
+                                        <div class="fw-bold text-gray-400">تاريخ بداية العقد</div>
+                                    </div>
+                                    <!--end::Due-->
+                                    <!--begin::Budget-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                                        @inject('ProjectLevels','App\Models\ProjectLevels')
+                                        <?php
+                                        $sum = $ProjectLevels->where('project_id',$project->id)->sum('progress_time');
+                                        ?>
+                                        <div class="fs-6 text-gray-800 fw-bolder">{{\Carbon\Carbon::parse($project->confirm_date)->addDays($sum)->format('Y-m-d')}}</div>
+                                        <div class="fw-bold text-gray-400">تاريخ التسليم المتوقع
+                                        </div>
+                                    </div>
+                                    <!--end::Budget-->
+                                </div>
+                                <!--end::Info-->
+                                <!--begin::Users-->
+                                <div class="symbol-group symbol-hover">
+                                    <!--begin::User-->
+                                    @if(count($project->assginUsers) > 0)
+                                        @foreach($project->assginUsers as $emp)
+                                            @if(isset($emp->image))
+                                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
+                                                    <img alt="Pic" src="{{$emp-image}}" />
+                                                </div>
+                                            @else
+                                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
+                                                    <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-2.jpg')}}" />
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="">
+                                            <div style=" height: 35px"></div>
+                                        </div>
+                                @endif
+                                <!--begin::User-->
+                                    <!--begin::User-->
+
+                                    <!--begin::User-->
+                                </div>
+                                <!--end::Users-->
+                            </div>
+                            <!--end:: Card body-->
+                        </a>
+                        <!--end::Card-->
+                    </div>
+
+                @else
             <div class="col-md-6 col-xl-4">
                 <!--begin::Card-->
                 <a href="{{url('project_details',$project->id)}}" class="card border-hover-primary">
@@ -168,6 +257,7 @@
                 </a>
                 <!--end::Card-->
             </div>
+                @endif
             <!--end::Col-->
 
 

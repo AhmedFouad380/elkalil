@@ -64,7 +64,7 @@ class ProjectLevelController extends Controller
 
         }elseif($data->question_type == 4){
 
-            $imageName = time().'.'.$request->answer->extension();
+            $imageName = time().'.'.$request->img->extension();
             $path = "https://alkhalilsys.com/images/";
 //            $request->image->store('http://alkhalilsys.com/images/', $imageName);
             Storage::disk('public2')->put('images', $imageName);
@@ -76,9 +76,9 @@ class ProjectLevelController extends Controller
             $data->otherAnswer=$request->otherAnswer;
 
         }
-        if(isset($request->img)){
+        if(isset($request->pdf)){
 
-            $imageName = time().'.'.$request->img->extension();
+            $imageName = time().'.'.$request->pdf->extension();
             $path = "https://alkhalilsys.com/images/";
 //            $request->image->store('http://alkhalilsys.com/images/', $imageName);
             Storage::disk('public2')->put('images', $imageName);

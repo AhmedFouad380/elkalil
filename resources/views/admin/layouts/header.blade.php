@@ -310,7 +310,7 @@
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
-                                    <span class="fs-5 fw-bold text-gray-800 mb-0">التعاقدات</span>
+                                    <span class="fs-5 fw-bold text-gray-800 mb-0">التعاقدات </span>
                                     <span class="fs-7 text-gray-400"></span>
                                 </a>
                             </div>
@@ -510,7 +510,7 @@
                 <div
                     class="menu-item @if(Request::segment(1) == 'Contracts') here show @endif menu-lg-down-accordion me-lg-1">
                     <a class="menu-link py-3" href="{{url('Contracts')}}">
-                        <span class="menu-title">التعاقدات</span>
+                        <span class="menu-title"> التعاقدات و المتابعة</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>

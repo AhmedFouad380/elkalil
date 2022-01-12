@@ -176,7 +176,7 @@ class ContractsController extends Controller
     }
     public function ConfirmProject(Request $request){
 
-        $Project = Project::find($request->project_id);
+        $Project = Project::find($request->id);
         $Project->confirm_date=$request->date;
         $Project->confirm=1;
         $Project->save();
@@ -189,7 +189,7 @@ class ContractsController extends Controller
             'time' => \Carbon\Carbon::now()->format('H:i:s'),
             'emp_id' => Auth::user()->id,
             'emp_name' => Auth::user()->name,
-            'project_id' => $request->project_id
+            'project_id' => $request->id
         );
         Explan::insert($d_explan);
 

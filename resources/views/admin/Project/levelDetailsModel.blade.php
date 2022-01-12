@@ -1,6 +1,9 @@
-<link rel="stylesheet" href="{{asset('dashboard/dropify/dist/css/dropify.min.css')}}">
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />o
+<style>
+    .dropify-wrapper{
+        line-height: 46px!important;
+    }
+</style>
 <form class="px-10" novalidate="novalidate" id="kt_form2" method="post" action="{{url('AnswerLevelDetails')}}"
       enctype="multipart/form-data">
 @csrf
@@ -64,40 +67,19 @@
             <!--begin::Col-->
             <div class="col-lg-8">
                 <!--begin::Image input-->
-                <div class="image-input image-input-outline" data-kt-image-input="true"
-                     style="background-image: url({{ URL::asset('admin/assets/media/avatars/blank.png')}})">
-                    <!--begin::Preview existing avatar-->
-                    <div class="image-input-wrapper w-125px h-125px"
-                        ></div>
-                    <!--end::Preview existing avatar-->
-                    <!--begin::Label-->
-                    <label
-                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                        title="Change avatar">
-                        <i class="bi bi-pencil-fill fs-7"></i>
-                        <!--begin::Inputs-->
-                        <input type="file" name="answer" accept=".png, .jpg, .jpeg"/>
-                        <input type="hidden" name="avatar_remove"/>
-                        <!--end::Inputs-->
-                    </label>
-                    <!--end::Label-->
-                    <!--begin::Cancel-->
-                    <span
-                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                        title="Cancel avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                    <!--end::Cancel-->
-                    <!--begin::Remove-->
-                    <span
-                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                        title="Remove avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                    <!--end::Remove-->
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title"></h4>
+                            <div class="controls">
+                                <input type="file" id="input-file-now" class="dropify"  name="img" data-default-file="" required data-validation-required-message="{{trans('word.This field is required')}}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Image input-->
+                    <!--begin::Hint-->
+                {{--                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>--}}
+                <!--end::Hint-->
                 </div>
                 <!--end::Image input-->
                 <!--begin::Hint-->
@@ -127,48 +109,21 @@
 
         @if($data->is_pdf == 1 )
 
+
         <div class="mb-10">
             <!--begin::Label-->
             <label class="col-lg-4 col-form-label fw-bold fs-6">المرفق</label>
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-8">
-                <!--begin::Image input-->
-                <div class="image-input image-input-outline" data-kt-image-input="true"
-                     style="background-image: url({{ URL::asset('admin/assets/media/avatars/blank.png')}})">
-                    <!--begin::Preview existing avatar-->
-                    <div class="image-input-wrapper w-125px h-125px"
-                    ></div>
-                    <!--end::Preview existing avatar-->
-                    <!--begin::Label-->
-                    <label
-                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                        title="Change avatar">
-                        <i class="bi bi-pencil-fill fs-7"></i>
-                        <!--begin::Inputs-->
-                        <input type="file" name="img" accept=".png, .jpg, .jpeg"/>
-                        <input type="hidden" name="avatar_remove"/>
-                        <!--end::Inputs-->
-                    </label>
-                    <!--end::Label-->
-                    <!--begin::Cancel-->
-                    <span
-                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                        title="Cancel avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                    <!--end::Cancel-->
-                    <!--begin::Remove-->
-                    <span
-                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                        title="Remove avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                    <!--end::Remove-->
-                </div>
+                        <div class="card">
+                            <div class="card-block">
+                                <h4 class="card-title"></h4>
+                                <div class="controls">
+                                    <input type="file" id="input-file-now" multiple class="dropify"  name="pdf[]" data-default-file="" required data-validation-required-message="{{trans('word.This field is required')}}"/>
+                                </div>
+                            </div>
+                        </div>
                 <!--end::Image input-->
                 <!--begin::Hint-->
             {{--                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>--}}
@@ -186,9 +141,7 @@
 </form>
 
 
-<script src="{{asset('dashboard/assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
-<script src="{{asset('dashboard/assets/js/pages/features/miscellaneous/dropify.min.js')}}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!--begin::Page scripts(used by this page) -->
 <script>
     $('#kt_select4').select2({

@@ -183,7 +183,7 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::get('Contracts', [\App\Http\Controllers\Admin\ContractsController::class, 'index']);
     Route::get('Contracts_datatable', [\App\Http\Controllers\Admin\ContractsController::class, 'datatable'])->name('Contracts.datatable.data');
-    Route::post('ConfirmProject', [\App\Http\Controllers\Admin\ContractsController::class, 'ConfirmProject'])->name('ConfirmProject');
+    Route::get('ConfirmProject', [\App\Http\Controllers\Admin\ContractsController::class, 'ConfirmProject'])->name('ConfirmProject');
     Route::get('Contracts-edit/{id}', [\App\Http\Controllers\Admin\ContractsController::class, 'edit']);
     Route::post('UpdateProjectContract', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectContract'])->name('UpdateProjectContract');
     Route::post('UpdateProjectPaid', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateProjectPaid'])->name('UpdateProjectContract');

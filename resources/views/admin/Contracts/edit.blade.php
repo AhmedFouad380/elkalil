@@ -1842,7 +1842,7 @@
 
                                     setTimeout(reload, 7000)
                                     function reload() {
-                                        window.location.href = "{{url('/Requests')}}"
+                                        window.location.href = "{{url('/Contracts')}}"
                                     }
                                 } else {
                                     Swal.fire("عفوا! ", "حدث خطأ", "error");
