@@ -77,12 +77,15 @@ class ProjectLevelController extends Controller
 
         }
         if(isset($request->pdf)){
-
-            $imageName = time().'.'.$request->pdf->extension();
-            $path = "https://alkhalilsys.com/images/";
+            $files = [];
+            foreach($request->pdf as $file) {
+                $imageName = time() . '.' . $file->extension();
+                $path = "https://alkhalilsys.com/images/";
 //            $request->image->store('http://alkhalilsys.com/images/', $imageName);
-            Storage::disk('public2')->put('images', $imageName);
-            $data->pdf=$imageName;
+                Storage::disk('public2')->put('images', $imageName);
+                $files[]=$imageName;
+            }
+            $data->pdf=$files;
 
         }
         $data->state = 1;
@@ -105,7 +108,12 @@ class ProjectLevelController extends Controller
         $data->title=$request->name;
         $data->type=1;
         $data->percent=$request->percent;
+        if($request->is_pdf == 1){
         $data->is_pdf=$request->is_pdf;
+        }else{
+            $data->is_pdf=0;
+
+        }
         $data->level_id=$request->level_id;
         $data->project_id=$request->project_id;
         $data->UserAdded=1;

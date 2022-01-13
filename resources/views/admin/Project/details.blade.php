@@ -24,7 +24,7 @@
             <a href="{{ url('/projects') }}" class="text-gray-600 text-hover-primary">المشاريع</a>
         </li>
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">مراحل المشروع</li>
+        <li class="breadcrumb-item text-gray-500">{{$data->name}}</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -63,13 +63,15 @@
                             </div>
                             <!--end::Details-->
                             <!--begin::Actions-->
+                            @if(Auth::user()->jop_type != 1)
+
                             <div class="d-flex mb-4">
                                 <button type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal"
                                         data-bs-target="#kt_modal_add_user">
                                     اضافة مرحلة
                                 </button>
                             </div>
-
+                            @endif
                             <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
                                 <!--begin::Modal dialog-->
                                 <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -282,9 +284,6 @@
 {{--                        <li class="nav-item">--}}
 {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
 {{--                        </li>--}}
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="#">المحادثات</a>
-                        </li>
                         <!--end::Nav item-->
                     </ul>
                     <!--end::Nav links-->

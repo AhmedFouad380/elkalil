@@ -59,11 +59,13 @@
                                     </span>
                                 <!--end::Svg Icon-->الفلتر
                             </button>
+                                @if(Auth::user()->jop_type != 1)
                                 <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
                                         data-bs-target="#kt_modal_add_user">
                                     <i class="bi bi-plus-circle-fill fs-2x"></i>
                                     اضافة مشروع جديد
                                 </button>
+                                @endif
                             </div>
 
                         </div>
@@ -375,11 +377,11 @@
                         <div class="mb-10">
                             <label class="form-label fs-6 fw-bold">المناطق</label>
 
-                            <select name="country" class="form-select form-control form-select-lg form-select-solid" data-placeholder="مراحل المشروع ..." data-allow-clear="true" data-hide-search="true">
+                            <select name="country"   @if(Auth::user()->jop_type == 2 ) disabled @endif  class="form-select form-control form-select-lg form-select-solid" data-placeholder="مراحل المشروع ..." data-allow-clear="true" data-hide-search="true">
                                 <option value=""> اختر</option>
                                 @inject('states','App\Models\State')
                                 @foreach($states->all() as $state)
-                                <option value="{{$state->id}}">{{$state->title}}</option>
+                                <option @if(Auth::user()->jop_type == 2 && Auth::user()->state == $state->id) selected @endif value="{{$state->id}}">{{$state->title}}</option>
                                 @endforeach
                             </select>
                         </div>

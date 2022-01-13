@@ -62,13 +62,14 @@
                                     <!--end::Description-->
                                 </div>
                                 <!--end::Details-->
+                                @if(Auth::user()->jop_type != 1 )
                                 <!--begin::Actions--> <div class="d-flex mb-4">
                                     <button type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal"
                                             data-bs-target="#kt_modal_add_user">
                                         اضافة مشرف
                                     </button>
                                 </div>
-
+                                @endif
                                 <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
                                     <!--begin::Modal dialog-->
                                     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -323,7 +324,7 @@
                                     <!--end::Name-->
                                     <br>
                                     <!--begin::Position-->
-                                    @if(Auth::user()->jop_type == 3 )
+                                    @if(Auth::user()->jop_type != 1 )
                                         <a class="delete-user" data-id="{{$level->id}}" data-emp_id="{{$emp->id}}" data-project="{{$data->id}}">     <div class="fw-bold text-danger text-danger-400 mb-6 "  > حذف الموظف  </div> </a>
                                     @endif
                                 <!--end::Position-->
