@@ -5,6 +5,8 @@
           type="text/css"/>
     <link href="{{ URL::asset('admin/assets/plugins/custom/prismjs/prismjs.bundle.css')}}" rel="stylesheet"
           type="text/css"/>
+    <link href="{{ URL::asset('admin/assets/plugins/knockout/knockout-file-bindings.css')}}" rel="stylesheet"
+    type="text/css"/>
 @endsection
 
 @section('style')
@@ -204,36 +206,39 @@
                     <!--end::Nav wrapper-->
                 </div>
             </div>
-            <!--end::Navbar-->
+        </div>
+        <!--end::Navbar-->
 
-            <!--begin::Row-->
-            <div class="row g-6 g-xl-9">
-                <div class="card mb-5">
-                    <!--begin::Header-->
-                    <div class="card-header border-0 pt-5">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bolder fs-3 mb-1">{{$level->title}}</span>
-                            <span class="text-muted mt-1 fw-bold fs-7"></span>
-                        </h3>
-                        <div class="card-toolbar">
+        <!--begin::Row-->
+        <div class="row g-6 g-xl-9">
+            <div class="card mb-5">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1">{{$level->title}}</span>
+                        <span class="text-muted mt-1 fw-bold fs-7"></span>
+                    </h3>
+                    <div class="card-toolbar">
+                        @if(Auth::user()->jop_type != 1)
+                        <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
+                                data-bs-target="#kt_modal_add_user">
+                                <i class="bi bi-plus-circle-fill fs-2x"></i>
+                            اضافة تعديلات
+                        </button>
+                        @endif
+                        <a href="{{url('assign_users',$level->id)}}" class="btn btn-sm btn-light-danger me-5">
+                            <i class="bi bi-person-workspace fs-2x"></i>
+                            مشرفي المرحلة
+                        </a>
 
-                            @if(Auth::user()->jop_type != 1)
+                        @if(Auth::user()->jop_type != 1)
+                        <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
+                                data-bs-target="#kt_modal_add_user2">
+                                <i class="bi bi-calendar-check-fill fs-2x"></i>
+                            وقت المرحلة
+                        </button>
+                        @endif
 
-                            <button type="button" class="btn btn-sm btn-danger me-5" data-bs-toggle="modal"
-                                    data-bs-target="#kt_modal_add_user">
-                                اضافة تعديلات
-                            </button>
-                            @endif
-                            <a href="{{url('assign_users',$level->id)}}" class="btn btn-sm btn-danger me-5">
-                                مشرفي المرحلة
-                            </a>
-                                @if(Auth::user()->jop_type != 1)
-                            <button type="button" class="btn btn-sm btn-danger me-5" data-bs-toggle="modal"
-                                    data-bs-target="#kt_modal_add_user2">
-                                وقت المرحلة
-                            </button>
-                            @endif
-                        </div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
@@ -355,13 +360,11 @@
                             </div>
                             <input type="hidden" value="{{$id}}" name="level_id">
                             <input type="hidden" value="{{$data->id}}" name="project_id">
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">يتطلب مرفع </label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="checkbox" name="is_pdf" value="1" style=" width: 41px;height: 22px;">
-                                <!--end::Input-->
+                            <div class="form-check form-check-custom form-check-solid mb-7">
+                                <input class="form-check-input" type="checkbox" name="is_pdf" value="1" id="flexRadioDefault121"/>
+                                <label class="form-check-label" for="flexRadioDefault121">
+                                    يتطلب مرفق ؟
+                                </label>
                             </div>
 
                         </div>
@@ -492,9 +495,10 @@
 
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js'></script>
 
     <script type="text/javascript">
+
         $(function () {
             var table = $('#users_table').DataTable({
                 processing: true,
@@ -566,6 +570,7 @@
                     alert("You are " + years + " years old!");
                 }
             );
+
         });
     </script>
 
