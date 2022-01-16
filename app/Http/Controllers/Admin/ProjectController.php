@@ -24,19 +24,19 @@ class ProjectController extends Controller
     public  function  index(Request $request){
         if(Auth::user()->jop_type == 3){
             if(isset($request->contract_id)){
-            $data = Project::where('projects.confirm',1)->orderBy('projects.id','desc');
+            $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc');
             }else{
-                $data = Project::where('confirm',1)->orderBy('id','desc');
+                $data = Project::where('confirm',1)->orderBy('confirm_date','desc');
             }
         }elseif(Auth::user()->jop_type == 2 ){
 
             if(isset($request->contract_id)){
-                $data = Project::where('projects.confirm',1)->orderBy('projects.id','desc')->where('projects.state',Auth::user()->state);
+                $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->where('projects.state',Auth::user()->state);
             }else{
-                $data = Project::where('confirm',1)->orderBy('id','desc')->where('state',Auth::user()->state);
+                $data = Project::where('confirm',1)->orderBy('confirm_date','desc')->where('state',Auth::user()->state);
             }
         }elseif(Auth::user()->jop_type == 1){
-                $data = Project::where('projects.confirm',1)->orderBy('projects.id','desc')->
+                $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->
                 rightJoin('user_permission','projects.id','=','user_permission.project_id')
                     ->where('user_permission.emp_id', Auth::user()->id)
             ->select('projects.*');
@@ -164,7 +164,7 @@ class ProjectController extends Controller
                         $dataa = array('reciever_id'=>$user->id , 'type' => 0 ,'project_id'=> $project->id, 'level_id' => $ProjectLevels->id ,'is_read' => 1 );
                         UserChatPermission::insert($dataa);
                     }
-                    $UserChatPermission = array('level_id'=> $ProjectLevels->id , 'reciever_id' => $request->client_id ,'type' =>1  , 'project_id' => $project->i );
+                    $UserChatPermission = array('level_id'=> $ProjectLevels->id , 'reciever_id' => $request->client_id ,'type' =>1  , 'project_id' => $project->id );
                     UserChatPermission::insert($UserChatPermission);
 
                 }

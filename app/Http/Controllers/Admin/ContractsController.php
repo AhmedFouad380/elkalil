@@ -9,12 +9,17 @@ use App\Models\Explan;
 use App\Models\inbox;
 use App\Models\inboxFile;
 use App\Models\Income;
+use App\Models\Level;
+use App\Models\LevelDetails;
 use App\Models\Project;
 use App\Models\ProjectContract;
+use App\Models\ProjectLevelDetails;
+use App\Models\ProjectLevels;
 use App\Models\ProjectPaid;
 use App\Models\Setting;
 use App\Models\SmsLogs;
 use App\Models\User;
+use App\Models\UserChatPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -28,7 +33,7 @@ class ContractsController extends Controller
 
     public function datatable(Request $request)
     {
-        $data = Project::where('is_accepted',1)->where('confirm',0)->orderBy('date', 'desc')->get();
+        $data = Project::where('is_accepted',1)->orderBy('date', 'desc')->get();
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
@@ -335,6 +340,48 @@ class ContractsController extends Controller
 
         }
         // end send Notification To  Users Same State
+        $ProjectContract = ProjectContract::where('project_id',$Project->id)->first();
+        $contract = Contract::find($ProjectContract->contract_id);
+
+        // Create ProjectLevels
+        $StanderLevels = Level::where('contract_id',$contract->id)->get();
+        foreach($StanderLevels as $level){
+            $ProjectLevels = New ProjectLevels();
+            $ProjectLevels->title=$level->title;
+            $ProjectLevels->percent=$level->percent;
+            $ProjectLevels->contract_id=$level->contract_id;
+            $ProjectLevels->project_id=$Project->id;
+            $ProjectLevels->project_contract_id=$contract->id;
+            $ProjectLevels->level_id=$level->id;
+            $ProjectLevels->sort=$level->sort;
+            $ProjectLevels->progress_time=$level->progress_time;
+            $ProjectLevels->save();
+            //Create LevelDetails
+            $levelsDetails = LevelDetails::where('level_id',$level->id)->get();
+            foreach($levelsDetails as $de){
+                $ProjectLevelDetails = New ProjectLevelDetails();
+                $ProjectLevelDetails->title=$de->title;
+                $ProjectLevelDetails->project_id=$Project->id;
+                $ProjectLevelDetails->level_id=$ProjectLevels->id;
+//                        $ProjectLevelDetails->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
+                $ProjectLevelDetails->client_view=$de->client_view;
+                $ProjectLevelDetails->sort=$de->sort;
+                $ProjectLevelDetails->question_type=$de->question_type;
+                $ProjectLevelDetails->values=$de->values;
+                $ProjectLevelDetails->emp_id=0;
+                $ProjectLevelDetails->save();
+            }
+            // chat permission
+            $users = User::where('state',$request->state)->get();
+            foreach($users as $user){
+                $dataa = array('reciever_id'=>$user->id , 'type' => 0 ,'project_id'=> $Project->id, 'level_id' => $ProjectLevels->id ,'is_read' => 1 );
+                UserChatPermission::insert($dataa);
+            }
+            $UserChatPermission = array('level_id'=> $ProjectLevels->id , 'reciever_id' => $Project->client_id ,'type' =>1  , 'project_id' => $Project->id );
+            UserChatPermission::insert($UserChatPermission);
+
+        }
+
         return response()->json(['message' => 'Success']);
     }
 
