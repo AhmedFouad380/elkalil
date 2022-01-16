@@ -74,7 +74,7 @@
                                     <div class="d-flex mb-4">
                                         <a href="#" data-id="{{$level->id}}"  class="btn CompleteLevel btn-sm btn-danger me-3">اكتمال نسبة المرحلة</a>
                                     </div>
-                            @endif
+                                @endif
                             <!--end::Actions-->
                             </div>
                             <!--end::Head-->
@@ -206,103 +206,104 @@
                     <!--end::Nav wrapper-->
                 </div>
             </div>
-        </div>
-        <!--end::Navbar-->
+        
+            <!--end::Navbar-->
 
-        <!--begin::Row-->
-        <div class="row g-6 g-xl-9">
-            <div class="card mb-5">
-                <!--begin::Header-->
-                <div class="card-header border-0 pt-5">
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bolder fs-3 mb-1">{{$level->title}}</span>
-                        <span class="text-muted mt-1 fw-bold fs-7"></span>
-                    </h3>
-                    <div class="card-toolbar">
-                        @if(Auth::user()->jop_type != 1)
-                        <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
-                                data-bs-target="#kt_modal_add_user">
-                                <i class="bi bi-plus-circle-fill fs-2x"></i>
-                            اضافة تعديلات
-                        </button>
-                        @endif
-                        <a href="{{url('assign_users',$level->id)}}" class="btn btn-sm btn-light-danger me-5">
-                            <i class="bi bi-person-workspace fs-2x"></i>
-                            مشرفي المرحلة
-                        </a>
+            <!--begin::Row-->
+            <div class="row g-6 g-xl-9">
+                <div class="card mb-5">
+                    <!--begin::Header-->
+                    <div class="card-header border-0 pt-5">
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bolder fs-3 mb-1">{{$level->title}}</span>
+                            <span class="text-muted mt-1 fw-bold fs-7"></span>
+                        </h3>
+                        <div class="card-toolbar">
+                            @if(Auth::user()->jop_type != 1)
+                            <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
+                                    data-bs-target="#kt_modal_add_user">
+                                    <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                اضافة تعديلات
+                            </button>
+                            @endif
+                            <a href="{{url('assign_users',$level->id)}}" class="btn btn-sm btn-light-danger me-5">
+                                <i class="bi bi-person-workspace fs-2x"></i>
+                                مشرفي المرحلة
+                            </a>
 
-                        @if(Auth::user()->jop_type != 1)
-                        <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
-                                data-bs-target="#kt_modal_add_user2">
-                                <i class="bi bi-calendar-check-fill fs-2x"></i>
-                            وقت المرحلة
-                        </button>
-                        @endif
+                            @if(Auth::user()->jop_type != 1)
+                            <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
+                                    data-bs-target="#kt_modal_add_user2">
+                                    <i class="bi bi-calendar-check-fill fs-2x"></i>
+                                وقت المرحلة
+                            </button>
+                            @endif
 
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
-                    <div class="card-body py-3">
-                        <!--begin::Table container-->
-                        <div class="table-responsive">
-                            <!--begin::Table-->
-                            <table class="table align-middle gs-0 gy-4">
-                                <!--begin::Table head-->
-                                <thead>
-                                <tr class="fw-bolder text-muted bg-light">
-                                    <th class="min-w-50px">م</th>
-                                    <th class="ps-4 min-w-325px rounded-start">متطلبات المرحلة </th>
-                                    <th class="min-w-200px">تاريخ الطلب</th>
-                                    <th class="min-w-125px">الانجاز</th>
-                                </tr>
-                                </thead>
-                                <!--end::Table head-->
-                                <!--begin::Table body-->
-                                <tbody>
-                                @foreach($levelDetails as $key => $details)
-                                    <tr>
-                                        <td>
-                                            <span class="fw-bold text-dark d-block fs-5">{{$key +1 }}</span>
-                                        </td>
-                                        <td>
-                                            @if($details->state == 1)
-                                                <div class="d-flex align-items-center">
-                                                    <button   class="btn   text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
-                                                </div>
-                                            @else
-                                                <div class="d-flex align-items-center">
-                                                    <button  data-id="{{$details->id}}"  class="btn  edit-Advert text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
-                                                </div>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <span class="text-dark fw-bold d-block fs-5">{{$details->date}}</span>
-                                        </td>
-                                        @if($details->state == 1)
-                                            <td>
-                                                <span class="text-dark fw-bold d-block fs-5"><i class="bi bi-check-circle-fill fs-2x text-success"></i></span>
-                                            </td>
-                                        @else
-                                            <td>
-                                                <span class="text-dark fw-bold d-block fs-5"><i class="bi bi-x-octagon-fill fs-2x text-danger"></i></span>
-                                            </td>
-                                        @endif
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                                <!--end::Table body-->
-                            </table>
-                            <!--end::Table-->
                         </div>
-                        <!--end::Table container-->
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body py-3">
+                            <!--begin::Table container-->
+                            <div class="table-responsive">
+                                <!--begin::Table-->
+                                <table class="table align-middle gs-0 gy-4">
+                                    <!--begin::Table head-->
+                                    <thead>
+                                    <tr class="fw-bolder text-muted bg-light">
+                                        <th class="min-w-50px">م</th>
+                                        <th class="ps-4 min-w-325px rounded-start">متطلبات المرحلة </th>
+                                        <th class="min-w-200px">تاريخ الطلب</th>
+                                        <th class="min-w-125px">الانجاز</th>
+                                    </tr>
+                                    </thead>
+                                    <!--end::Table head-->
+                                    <!--begin::Table body-->
+                                    <tbody>
+                                    @foreach($levelDetails as $key => $details)
+                                        <tr>
+                                            <td>
+                                                <span class="fw-bold text-dark d-block fs-5">{{$key +1 }}</span>
+                                            </td>
+                                            <td>
+                                                @if($details->state == 1)
+                                                    <div class="d-flex align-items-center">
+                                                        <button   class="btn   text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
+                                                    </div>
+                                                @else
+                                                    <div class="d-flex align-items-center">
+                                                        <button  data-id="{{$details->id}}"  class="btn  edit-Advert text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <span class="text-dark fw-bold d-block fs-5">{{$details->date}}</span>
+                                            </td>
+                                            @if($details->state == 1)
+                                                <td>
+                                                    <span class="text-dark fw-bold d-block fs-5"><i class="bi bi-check-circle-fill fs-2x text-success"></i></span>
+                                                </td>
+                                            @else
+                                                <td>
+                                                    <span class="text-dark fw-bold d-block fs-5"><i class="bi bi-x-octagon-fill fs-2x text-danger"></i></span>
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                                <!--end::Table-->
+                            </div>
+                            <!--end::Table container-->
+                        </div>
+                        <!--begin::Body-->
                     </div>
-                    <!--begin::Body-->
                 </div>
-            </div>
-            <!--end::Row-->
+                <!--end::Row-->
 
+            </div>
+            <!--end::Post-->
         </div>
-        <!--end::Post-->
     </div>
     <!--begin::Form-->
 
