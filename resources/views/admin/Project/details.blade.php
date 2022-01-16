@@ -305,10 +305,10 @@
                         <div class="d-flex flex-stack">
                             <!--begin::Title-->
                                 @if($level->auto_complete == 1)
-                                    <i class="bi bi-check2-circle fs-2x text-info"></i>
+                                    <i class="bi bi-check2-circle fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"></i>
                                 @endif
                                 @if($level->created_by == 1)
-                                    <i class="bi bi-person-bounding-box fs-2x text-info"></i>
+                                    <i class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"></i>
                                 @endif
                             <!--end::Title-->
                         </div>
