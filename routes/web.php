@@ -284,3 +284,5 @@ Route::get('/project_details7', function () {
 Route::get('/project_details8', function () {
     return view('admin/project_details8');
 });
+
+Route::get('GetLevelDetails/{id}',['App\Http\Controllers\Admin\ProjectLevelController','GetLevelDetails']);

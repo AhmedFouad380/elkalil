@@ -79,7 +79,7 @@ class ProjectLevelController extends Controller
         if(isset($request->pdf)){
             $files = [];
             foreach($request->pdf as $file) {
-                $imageName = time() . '.' . $file->extension();
+                $imageName = Auth::user()->id . '@' . \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d') . '@'. time() . '.' .$file->extension();
                 $path = "https://alkhalilsys.com/images/";
 //            $request->image->store('http://alkhalilsys.com/images/', $imageName);
                 Storage::disk('public2')->put('images', $imageName);
@@ -132,5 +132,10 @@ class ProjectLevelController extends Controller
         $data->save();
         return back()->with('message', 'Success');
 
+    }
+
+    public function GetLevelDetails($id){
+        $data = ProjectLevelDetails::where('level_id',$id)->pluck('id','title');
+        return response()->json($data);
     }
 }

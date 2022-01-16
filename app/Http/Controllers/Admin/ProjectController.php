@@ -199,11 +199,18 @@ class ProjectController extends Controller
 
     }
 
-    public function projectFiles($id){
+    public function projectFiles($id ,Request $request){
 
         $data = Project::find($id);
+        $files = ProjectLevelDetails::where('project_id',$id)->where('is_pdf',1)->where('pdf','!=',null)->where('pdf','!=','');
 
-        $files = ProjectLevelDetails::where('project_id',$id)->where('is_pdf',1)->where('pdf','!=',null)->where('pdf','!=','')->get();
+        if(isset($request->level_id)){
+        $files->where('level_id',$request->level_id);
+        }
+        if(isset($request->level_detail_id)){
+        $files->where('id',$request->level_detail_id);
+        }
+        $files = $files->get();
         return view('admin.Project.projectFiles',compact('data','id','files'));
     }
 

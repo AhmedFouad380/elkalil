@@ -245,25 +245,6 @@
         document.getElementById("lodaer2").style.display = "block";
 
     })
-    $("#MainCategory2").click(function () {
-        var wahda = $(this).val();
 
-        if (wahda != '') {
-
-            $.get("{{ URL::to('/GetSubCategory')}}" + '/' + wahda, function ($data) {
-                console.log($data)
-
-                var outs = "";
-                $.each($data, function (name, id) {
-
-                    outs += '<option value="' + id + '">' + name + '</option>'
-
-                });
-                $('#SubCategory2').html(outs);
-
-
-            });
-        }
-    });
 
 </script>

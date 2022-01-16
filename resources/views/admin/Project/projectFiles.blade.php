@@ -110,7 +110,7 @@
                                             <!--begin::Modal body-->
                                             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                                 <!--begin::Form-->
-                                                <form id="" class="form" action="{{url('employee_setting')}}" method="get">
+                                                <form id="" class="form"  method="get">
                                                 @csrf
                                                 <!--begin::Scroll-->
                                                     <div class="d-flex flex-column scroll-y me-n7 pe-7"
@@ -123,15 +123,15 @@
 
                                                         <!--begin::Input group-->
                                                         <div class="mb-10">
-                                                            <label class="form-label fs-6 fw-bold">الصلاحيات:</label>
-                                                            <select class="form-select form-select-solid fw-bolder"
+                                                            <label class="form-label fs-6 fw-bold">المرحلة :</label>
+                                                            <select id="level" class="form-select form-select-solid fw-bolder"
                                                                     data-kt-select2="true"
                                                                     data-placeholder="اختر" data-allow-clear="true"
                                                                     data-kt-user-table-filter="role" data-hide-search="true"
-                                                                    name="users_group">
+                                                                    name="level_id">
                                                                 <option></option>
-                                                                @foreach(\App\Models\UserGroup::all() as $user_group)
-                                                                    <option @if(old('users_group') == $user_group->id) selected @endif
+                                                                @foreach(\App\Models\ProjectLevels::where('project_id',$data->id)->get() as $user_group)
+                                                                    <option
                                                                     value="{{$user_group->id}}">{{$user_group->title}}</option>
                                                                 @endforeach
                                                             </select>
@@ -139,19 +139,13 @@
                                                         <!--end::Input group-->
                                                         <!--begin::Input group-->
                                                         <div class="mb-10">
-                                                            <label class="form-label fs-6 fw-bold">صلاحية قائمة المشروعات :</label>
-                                                            <select class="form-select form-select-solid fw-bolder"
+                                                            <label class="form-label fs-6 fw-bold">المراحلة الداخليه  :</label>
+                                                            <select id="leveldetails" class="form-select form-select-solid fw-bolder"
                                                                     data-kt-select2="true"
                                                                     data-placeholder="اختر" data-allow-clear="true"
                                                                     data-kt-user-table-filter="two-step" data-hide-search="true"
-                                                                    name="jop_type">
-                                                                <option></option>
-                                                                <option @if(old('jop_type') == 1) selected @endif value="1">مشروع محدد
-                                                                </option>
-                                                                <option @if(old('jop_type') == 2) selected @endif value="2">فرع محدد
-                                                                </option>
-                                                                <option @if(old('jop_type') == 3) selected @endif value="3">كل الفروع
-                                                                </option>
+                                                                    name="level_detail_id">
+
 
                                                             </select>
                                                         </div>
@@ -312,10 +306,10 @@
                             <!--end::Nav item-->
                         </ul>
                         <!--end::Nav links-->
-                        
+
                     </div>
                     <!--end::Nav wrapper-->
-                    
+
                 </div>
             </div>
             <!--end::Navbar-->
@@ -485,5 +479,29 @@
         </script>
 
     @endif
+
+    <script>
+        $("#level").on('click, change ,keyup',function () {
+            var wahda = $(this).val();
+            if (wahda != '') {
+
+                $.get("{{ URL::to('/GetLevelDetails')}}" + '/' + wahda, function ($data) {
+                    console.log($data)
+
+                    var outs = "";
+                    outs += '<option value="" >الكل</option>'
+
+                    $.each($data, function (name, id) {
+
+                        outs += '<option value="' + id + '">' + name + '</option>'
+
+                    });
+                    $('#leveldetails').html(outs);
+
+
+                });
+            }
+        });
+    </script>
 @endsection
 
