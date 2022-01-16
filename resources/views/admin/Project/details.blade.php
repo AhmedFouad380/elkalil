@@ -66,8 +66,9 @@
                             @if(Auth::user()->jop_type != 1)
 
                             <div class="d-flex mb-4">
-                                <button type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-light-danger me-3 font-weight-bolder" data-bs-toggle="modal"
                                         data-bs-target="#kt_modal_add_user">
+                                        <i class="bi bi-plus-circle-fill fs-2x"></i>
                                     اضافة مرحلة
                                 </button>
                             </div>
@@ -87,14 +88,14 @@
                                                  data-bs-dismiss="modal">
                                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                                 <span class="svg-icon svg-icon-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                         viewBox="0 0 24 24" fill="none">
-                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                              transform="rotate(-45 6 17.3137)" fill="black"/>
-                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                              transform="rotate(45 7.41422 6)" fill="black"/>
-                    </svg>
-                </span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                                            transform="rotate(-45 6 17.3137)" fill="black"/>
+                                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                            transform="rotate(45 7.41422 6)" fill="black"/>
+                                                    </svg>
+                                                </span>
                                                 <!--end::Svg Icon-->
                                             </div>
                                             <!--end::Close-->
@@ -303,7 +304,12 @@
                         <!--begin::Heading-->
                         <div class="d-flex flex-stack">
                             <!--begin::Title-->
-                                <h4 class="fw-bolder text-gray-800 m-0">مرحلة</h4>
+                                @if($level->auto_complete == 1)
+                                    <i class="bi bi-check2-circle fs-2x text-info"></i>
+                                @endif
+                                @if($level->created_by == 1)
+                                    <i class="bi bi-person-bounding-box fs-2x text-info"></i>
+                                @endif
                             <!--end::Title-->
                         </div>
                         <!--end::Heading-->
@@ -317,9 +323,7 @@
                             <!--begin::Text-->
                             <p class="fw-bold fs-4 text-gray-400 mb-3">
                                 {{$level->title}}</p>
-                            @if($level->auto_complete == 1)
-                                <p class="text-gray-400 mb-3">تم استكمال المرحلة من قبل مدير المشروع</p>
-                            @endif
+                            
                             <!--end::Text-->
                             <!--begin::Action-->
                             <div class="mb-9 mb-xxl-1">
