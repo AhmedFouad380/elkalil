@@ -101,7 +101,7 @@
                                 <!--end::Car Title-->
                                 <!--begin::Card toolbar-->
                                 <div class="card-toolbar">
-                                    <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">{{$contract->find($project->projectContract->contract_id)->title}}</span>
+                                    <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">@if( $project->projectContract && $contract->find($project->projectContract->contract_id)){{$contract->find($project->projectContract->contract_id)->title}} @endif</span>
                                 </div>
                                 <!--end::Card toolbar-->
                             </div>
@@ -189,7 +189,7 @@
                         <!--end::Car Title-->
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
-                            <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">{{$contract->find($project->projectContract->contract_id)->title}}</span>
+                            <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">@if( $project->projectContract && $contract->find($project->projectContract->contract_id)){{$contract->find($project->projectContract->contract_id)->title}} @endif</span>
                         </div>
                         <!--end::Card toolbar-->
                     </div>

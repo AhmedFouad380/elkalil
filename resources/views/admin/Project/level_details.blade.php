@@ -68,7 +68,7 @@
                                 </div>
                                 <!--end::Details-->
                                 <!--begin::Actions-->
-                                @if($level->auto_complete != 1 && $level->percent != $level->progress)
+                                @if($level->auto_complete != 1 && $level->percent != $level->progress && Auth::user()->jop_type != 1 )
                                     <div class="d-flex mb-4">
                                         <a href="#" data-id="{{$level->id}}"  class="btn CompleteLevel btn-sm btn-danger me-3">اكتمال نسبة المرحلة</a>
                                     </div>
