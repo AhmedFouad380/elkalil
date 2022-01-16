@@ -219,8 +219,7 @@
                         <div class="card-body d-flex justify-content-center text-center flex-column p-8">
                             <div class="d-flex flex-stack">
                                 <!--begin::Title-->
-                                <div class="fs-7 fw-bold text-gray-400">{{$file->date}}</div>
-                                <div class="fs-7 fw-bold text-gray-400">اسم الموظف</div>
+                                <div class="fs-7 fw-bold text-gray-400">{{$c[1]}}</div>
                                 <!--end::Title-->
                             </div>
                             <!--begin::Name-->
@@ -232,6 +231,10 @@
                                 <!--end::Image-->
                                 <!--begin::Title-->
                                 <div class="fs-5 fw-bolder mb-2">{{$file->title}} </div>
+                                @inject('user','App\Models\User')
+                                @if($user->find($c[0]))
+                                <div class="fs-7 fw-bold text-gray-400"> {{$user->find($c[0])->name }}</div>
+                                @endif
                                 <!--end::Title-->
                             </a>
                             <!--end::Name-->
