@@ -210,6 +210,12 @@
                     <div class="card h-100">
                         <!--begin::Card body-->
                         <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                            <div class="d-flex flex-stack">
+                                <!--begin::Title-->
+                                <div class="fs-7 fw-bold text-gray-400">{{$file->date}}</div>
+                                <div class="fs-7 fw-bold text-gray-400">اسم الموظف</div>
+                                <!--end::Title-->
+                            </div>
                             <!--begin::Name-->
                             <a href="https://alkhalilsys.com/images/{{$file->img}}" download target="_blank" class="text-gray-800 text-hover-primary d-flex flex-column">
                                 <!--begin::Image-->
