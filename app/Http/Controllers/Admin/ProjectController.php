@@ -203,7 +203,7 @@ class ProjectController extends Controller
 
         $data = Project::find($id);
 
-        $files = ProjectLevelDetails::where('project_id',$id)->where('img','!=',null)->get();
+        $files = ProjectLevelDetails::where('project_id',$id)->where('is_pdf',1)->where('pdf','!=',null)->where('pdf','!=','')->get();
         return view('admin.Project.projectFiles',compact('data','id','files'));
     }
 

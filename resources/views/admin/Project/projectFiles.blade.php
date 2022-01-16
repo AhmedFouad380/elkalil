@@ -205,13 +205,20 @@
             <!--end::Col-->
                 @foreach($files as $file)
                 <!--begin::Col-->
-                <div class="col-md-6 col-lg-4 col-xl-3">
+
+
+                    @foreach($file->pdf as $b)
+
+                        <?php
+                        $c = explode('@',$b);
+                        ?>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
                     <!--begin::Card-->
                     <div class="card h-100">
                         <!--begin::Card body-->
                         <div class="card-body d-flex justify-content-center text-center flex-column p-8">
                             <!--begin::Name-->
-                            <a href="https://alkhalilsys.com/images/{{$file->img}}" download target="_blank" class="text-gray-800 text-hover-primary d-flex flex-column">
+                            <a href="https://alkhalilsys.com/images/{{$b}}" download target="_blank" class="text-gray-800 text-hover-primary d-flex flex-column">
                                 <!--begin::Image-->
                                 <div class="symbol symbol-60px mb-5">
                                     <img src="{{ URL::asset('admin/assets/media/svg/files/pdf.svg')}}" alt="" />
@@ -223,7 +230,6 @@
                             </a>
                             <!--end::Name-->
                             <!--begin::Description-->
-                            <div class="fs-7 fw-bold text-gray-400">{{$file->date}}</div>
                             <!--end::Description-->
                         </div>
                         <!--end::Card body-->
@@ -231,6 +237,7 @@
                     <!--end::Card-->
                 </div>
                 <!--end::Col-->
+                @endforeach
                 @endforeach
                 <!--end::Col-->
 
