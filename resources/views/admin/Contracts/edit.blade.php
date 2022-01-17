@@ -975,10 +975,14 @@
                                     <!--end::Label-->
                                     <textarea rows="5" name="note"></textarea>
 
-                                    <p>
-                                        <input type="checkbox" value="1" name="type">
-                                        ارسالة رسالة نصية
-                                    </p>
+                                    <div class="mt-5 fv-row">
+                                        <div class="form-check form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="1" name="type" id="flexRadioDefault121"/>
+                                            <label class="form-check-label" for="flexRadioDefault121">
+                                                ارسالة رسالة نصية
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
