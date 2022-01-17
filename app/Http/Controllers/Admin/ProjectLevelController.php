@@ -88,7 +88,7 @@ class ProjectLevelController extends Controller
         if(isset($request->pdf)){
             $files = [];
             foreach($request->pdf as $file) {
-                 $imageName = Auth::user()->id . '@' . \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d') . '@'. Storage::disk('public2')->put("", $file);
+//                 $imageName = Auth::user()->id . '@' . \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d') . '@'. Storage::disk('public2')->put("", $file);
 //                $path = "https://alkhalilsys.com/images/";
 ////            $request->image->store('http://alkhalilsys.com/images/', $imageName);
 //                Storage::disk('public2')->put('images', $imageName);
@@ -99,6 +99,7 @@ class ProjectLevelController extends Controller
 //                $path = "https://alkhalilsys.com/images/";
 ////              $request->image->store('http://alkhalilsys.com/images/', $imageName);
 //                Storage::disk('public2')->put('images', $imageName);
+                $imageName =  upload_multiple2($file,'images');
                  $files[]=$imageName;
             }
             $data->pdf=$files;

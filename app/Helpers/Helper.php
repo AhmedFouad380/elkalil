@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 use Kreait\Firebase\Factory;
 
 //use Kreait\Firebase\Factory;
@@ -297,7 +298,18 @@ function upload_multiple($file, $dir)
     $destinationPath =$dir;
     // dd($file->storeAs($destinationPath, $image, 'public2'));
      $file->storeAs($destinationPath, $image, 'public2');
-    return $image;
+
+     return $image;
+}
+
+function upload_multiple2($file, $dir)
+{
+
+    $image2 = Auth::user()->id . '@' . \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d') . '@'. Storage::disk('public2')->put("", $file);
+    $destinationPath =$dir;
+    // dd($file->storeAs($destinationPath, $image, 'public2'));
+    $file->storeAs($destinationPath, $image2, 'public2');
+     return $image2;
 }
 
 function unlinkFile($image, $path)
