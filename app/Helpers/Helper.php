@@ -297,7 +297,7 @@ function upload_multiple($file, $dir)
     $destinationPath =$dir;
 
     // dd($file->storeAs($destinationPath, $image, 'public2'));
-    // $file->storeAs($destinationPath, $image, 'public2');
+     $file->storeAs($destinationPath, $image, 'public2');
     return $image;
 }
 

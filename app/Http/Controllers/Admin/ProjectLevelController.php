@@ -64,10 +64,11 @@ class ProjectLevelController extends Controller
 
         }elseif($data->question_type == 4){
 
-            $imageName = time().'.'.$request->img->extension();
-            $path = "https://alkhalilsys.com/images/";
-//            $request->image->store('http://alkhalilsys.com/images/', $imageName);
-            Storage::disk('public2')->put('images', $imageName);
+//            $imageName = time().'.'.$request->img->extension();
+//            $path = "https://alkhalilsys.com/images/";
+////            $request->image->store('http://alkhalilsys.com/images/', $imageName);
+//            Storage::disk('public2')->put('images', $imageName);
+            $imageName =   upload_multiple($request->img,'images');
             $data->img=$imageName;
 
         }elseif($data->question_type == 5){
@@ -79,10 +80,12 @@ class ProjectLevelController extends Controller
         if(isset($request->pdf)){
             $files = [];
             foreach($request->pdf as $file) {
-                $imageName = time() . '.' . $file->extension();
-                $path = "https://alkhalilsys.com/images/";
-//            $request->image->store('http://alkhalilsys.com/images/', $imageName);
-                Storage::disk('public2')->put('images', $imageName);
+//                $imageName = time() . '.' . $file->extension();
+//                $path = "https://alkhalilsys.com/images/";
+////            $request->image->store('http://alkhalilsys.com/images/', $imageName);
+//                Storage::disk('public2')->put('images', $imageName);
+                $imageName =   upload_multiple($file,'images');
+                $data->img=$imageName;
                 $files[]=$imageName;
             }
             $data->pdf=$files;
