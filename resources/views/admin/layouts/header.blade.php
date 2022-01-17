@@ -500,6 +500,7 @@
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>
+                @if(Auth::user()->userGroup->is_client_order == 1)
                 <div
                     class="menu-item  @if(Request::segment(1) == 'Requests') here show @endif  menu-lg-down-accordion me-lg-1">
                     <a class="menu-link py-3" href="{{url('Requests')}}">
@@ -507,6 +508,8 @@
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>
+                @endif
+                @if(Auth::user()->userGroup->is_contracting == 1)
                 <div
                     class="menu-item @if(Request::segment(1) == 'Contracts') here show @endif menu-lg-down-accordion me-lg-1">
                     <a class="menu-link py-3" href="{{url('Contracts')}}">
@@ -514,6 +517,8 @@
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>
+                @endif
+                @if(Auth::user()->userGroup->is_projects == 1)
                 <div
                     class="menu-item @if(Request::segment(1) == 'projects') here show @endif menu-lg-down-accordion me-lg-1">
                     <a class="menu-link py-3" href="{{url('/projects')}}">
@@ -521,6 +526,8 @@
                         <span class="menu-arrow d-lg-none"></span>
                     </a>
                 </div>
+                @endif
+                @if(Auth::user()->userGroup->is_report == 1)
                 <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
                      class="menu-item menu-lg-down-accordion me-lg-1">
                     <span class="menu-link py-3">
@@ -612,6 +619,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if(Auth::user()->userGroup->is_financial == 1)
                 <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
                      class="menu-item menu-lg-down-accordion me-lg-1">
                     <span class="menu-link py-3">
@@ -757,6 +766,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if(Auth::user()->userGroup->is_settings == 1)
                 <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
                      class="menu-item menu-lg-down-accordion me-lg-1">
                     <span
@@ -1097,6 +1108,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
             <!--end::Menu-->
         </div>

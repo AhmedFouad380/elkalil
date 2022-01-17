@@ -305,10 +305,10 @@
                         <div class="d-flex flex-stack">
                             <!--begin::Title-->
                                 @if($level->auto_complete == 1)
-                                    <i class="bi bi-check2-circle fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"></i>
+                                    <i class="bi bi-check2-circle fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم استكمال المرحلة من قبل المشرف"></i>
                                 @endif
-                                @if($level->created_by == 1)
-                                    <i class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"></i>
+                                @if($level->created_by != 0)
+                                    <i class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المرحلة يدويا "></i>
                                 @endif
                             <!--end::Title-->
                         </div>
@@ -323,7 +323,7 @@
                             <!--begin::Text-->
                             <p class="fw-bold fs-4 text-gray-400 mb-3">
                                 {{$level->title}}</p>
-                            
+
                             <!--end::Text-->
                             <!--begin::Action-->
                             <div class="mb-9 mb-xxl-1">

@@ -9,6 +9,21 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ClientsController extends Controller
 {
+    public function __construct()
+
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->userGroup->is_settings;
+            if( $this->id  == 0 ){
+                return redirect('/');
+            }
+            return $next($request);
+
+        });
+
+    }
+
     /**
      * Display a listing of the resource.
      *

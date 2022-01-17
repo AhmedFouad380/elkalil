@@ -192,10 +192,14 @@
         </div>
 
 @endif
+    @if($data->state == 1)
+        <a type="button"  class=" btn btn-danger changeState"  data-id="{{$data->id}}">اللغاء نسبة الانجاز </a>
 
+@endif
 
 <!--end: Wizard Actions-->
     <div class="modal-footer">
+
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
         <button type="submit" id="loading" class=" btn btn-primary" onclick="spinner()">حفظ</button>
     </div>
@@ -231,12 +235,12 @@
         viewModel.onClear = function(fileData){
             if(confirm('Are you sure?')){
             fileData.clear && fileData.clear();
-            }                            
+            }
         };
         viewModel.debug = function(){
             window.viewModel = viewModel;
             console.log(ko.toJSON(viewModel));
-            debugger; 
+            debugger;
         };
         ko.applyBindings(viewModel);
     });
@@ -245,25 +249,55 @@
         document.getElementById("lodaer2").style.display = "block";
 
     })
-    $("#MainCategory2").click(function () {
-        var wahda = $(this).val();
-
-        if (wahda != '') {
-
-            $.get("{{ URL::to('/GetSubCategory')}}" + '/' + wahda, function ($data) {
-                console.log($data)
-
-                var outs = "";
-                $.each($data, function (name, id) {
-
-                    outs += '<option value="' + id + '">' + name + '</option>'
-
-                });
-                $('#SubCategory2').html(outs);
 
 
+    $('.changeState').on('click',function () {
+        var id =  $(this).data('id');
+
+        if (id) {
+            Swal.fire({
+                title: "هل انت متاكد من اللغاء نسبة الانجاز",
+                text: "",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#f64e60",
+                confirmButtonText: "نعم",
+                cancelButtonText: "لا",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        url: '{{url("changeState")}}',
+                        type: "get",
+                        data: {'id': id},
+                        dataType: "JSON",
+                        success: function (data) {
+                            if (data.message == "Success") {
+                                Swal.fire("نجح", "تم اللغاء نسبة الانجاز بنجاح", "success");
+                                setTimeout(reload, 3000)
+                                function reload() {
+                                    location.reload();
+                                }
+                            } else {
+                                Swal.fire("عفوا! ", "حدث خطأ", "error");
+                            }
+                        },
+                        fail: function (xhrerrorThrown) {
+                            Swal.fire("عفوا! ", "حدث خطأ", "error");
+
+                        }
+                    });
+                    // result.dismiss can be 'cancel', 'overlay',
+                    // 'close', and 'timer'
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire("عفوا!", "تم الغاء العملية", "error");
+
+
+                }
             });
         }
-    });
+
+    })
 
 </script>

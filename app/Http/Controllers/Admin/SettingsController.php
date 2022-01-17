@@ -8,6 +8,23 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
+    public function __construct()
+
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = \Illuminate\Support\Facades\Auth::user()->userGroup->is_settings;
+            if( $this->id  == 0 ){
+                return redirect('/');
+            }
+            return $next($request);
+
+        });
+
+    }
+
+
+
     public function Settings()
     {
         $settings = Setting::findOrFail(1);

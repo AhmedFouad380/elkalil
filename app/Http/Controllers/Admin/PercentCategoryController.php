@@ -7,10 +7,26 @@ use App\Models\PercentCategory;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class PercentCategoryController extends Controller
 {
+    public function __construct()
+
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->userGroup->is_settings;
+            if( $this->id  == 0 ){
+                return redirect('/');
+            }
+            return $next($request);
+
+        });
+
+    }
+
     /**
      * Display a listing of the resource.
      *

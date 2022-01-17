@@ -295,7 +295,6 @@ function upload_multiple($file, $dir)
 
     $image = "https://alkhalilsys.com/" . Storage::disk('public2')->put($dir, $file);
     $destinationPath =$dir;
-
     // dd($file->storeAs($destinationPath, $image, 'public2'));
      $file->storeAs($destinationPath, $image, 'public2');
     return $image;

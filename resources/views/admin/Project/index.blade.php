@@ -101,7 +101,11 @@
                                 <!--end::Car Title-->
                                 <!--begin::Card toolbar-->
                                 <div class="card-toolbar">
-                                    <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">{{$contract->find($project->projectContract->contract_id)->title}}</span>
+
+                                    <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">@if( $project->projectContract && $contract->find($project->projectContract->contract_id)){{$contract->find($project->projectContract->contract_id)->title}} @endif</span>
+                                    <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> x </span>
+
+
                                 </div>
                                 <!--end::Card toolbar-->
                             </div>
@@ -175,7 +179,7 @@
                 @else
             <div class="col-md-6 col-xl-4">
                 <!--begin::Card-->
-                <a href="{{url('project_details',$project->id)}}" class="card border-hover-primary">
+                <div  class="card border-hover-primary">
                     <!--begin::Card header-->
                     <div class="card-header border-0 pt-9">
                         <!--begin::Card Title-->
@@ -189,14 +193,18 @@
                         <!--end::Car Title-->
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
-                            <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">{{$contract->find($project->projectContract->contract_id)->title}}</span>
+                            <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">@if( $project->projectContract && $contract->find($project->projectContract->contract_id)){{$contract->find($project->projectContract->contract_id)->title}} @endif</span>
+                            <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> x </span>
+
                         </div>
                         <!--end::Card toolbar-->
                     </div>
                     <!--end:: Card header-->
                     <!--begin:: Card body-->
+                    <a href="{{url('project_details',$project->id)}}" class="card border-hover-primary">
                     <div class="card-body p-9">
                         <!--begin::Name-->
+
                         <div class="fs-3 fw-bolder text-dark">{{$project->name}}</div>
                         <!--end::Name-->
                         <!--begin::Description-->
@@ -255,8 +263,10 @@
                         </div>
                         <!--end::Users-->
                     </div>
+                    </a>
+
                     <!--end:: Card body-->
-                </a>
+                </div>
                 <!--end::Card-->
             </div>
                 @endif
@@ -714,7 +724,54 @@
             src='https://maps.google.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyAIcQUxj9rT_a3_5GhMp-i6xVqMrtasqws&language=ar'></script>
     <script src="{{asset('admin/locationpicker.jquery.js')}}"></script>
     <script>
+$('.DeleteProject').on('click',function () {
+   var id =  $(this).data('id');
 
+    if (id) {
+        Swal.fire({
+            title: "هل انت متاكد من حذف المشروع",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f64e60",
+            confirmButtonText: "نعم",
+            cancelButtonText: "لا",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: '{{url("DeleteProject")}}',
+                    type: "get",
+                    data: {'id': id},
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data.message == "Success") {
+                            Swal.fire("نجح", "تمت حذف المشروع بنجاح", "success");
+                            setTimeout(reload, 7000)
+                            function reload() {
+                                location.reload();
+                            }
+                        } else {
+                            Swal.fire("عفوا! ", "حدث خطأ", "error");
+                        }
+                    },
+                    fail: function (xhrerrorThrown) {
+                        Swal.fire("عفوا! ", "حدث خطأ", "error");
+
+                    }
+                });
+                // result.dismiss can be 'cancel', 'overlay',
+                // 'close', and 'timer'
+            } else if (result.dismiss === 'cancel') {
+                Swal.fire("عفوا!", "تم الغاء العملية", "error");
+
+
+            }
+        });
+    }
+
+})
         const myLatLng = { lat: -25.363, lng: 131.044 };
 
         $('#us1').locationpicker({
@@ -851,6 +908,8 @@
 
 </script>
 @endforeach
+
+
     <script type="text/javascript">
         $(function () {
             var table = $('#users_table').DataTable({

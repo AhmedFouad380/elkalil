@@ -21,26 +21,41 @@ use Illuminate\Http\Request;
 use Auth;
 class ProjectController extends Controller
 {
+
+    public function __construct()
+
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->userGroup->is_projects;
+            if( $this->id  == 0 ){
+                return redirect('/');
+            }
+            return $next($request);
+
+        });
+
+    }
     public  function  index(Request $request){
         if(Auth::user()->jop_type == 3){
             if(isset($request->contract_id)){
-            $data = Project::orderBy('projects.id','desc');
+            $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc');
             }else{
-                $data = Project::orderBy('id','desc');
+                $data = Project::where('confirm',1)->orderBy('confirm_date','desc');
             }
         }elseif(Auth::user()->jop_type == 2 ){
 
             if(isset($request->contract_id)){
-                $data = Project::orderBy('projects.id','desc')->where('state',Auth::user()->state);
+                $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->where('projects.state',Auth::user()->state);
             }else{
-                $data = Project::orderBy('id','desc')->where('state',Auth::user()->state);
+                $data = Project::where('confirm',1)->orderBy('confirm_date','desc')->where('state',Auth::user()->state);
             }
         }elseif(Auth::user()->jop_type == 1){
-            if(isset($request->contract_id)){
-                $data = Project::orderBy('projects.id','desc')->join('user_permission', 'user_permission.project_id = projects.id and user_permission.emp_id = '.Auth::user()->id, 'right');
-            }else{
-                $data = Project::orderBy('id','desc')->join('user_permission', 'user_permission.project_id = projects.id and user_permission.emp_id = '.Auth::user()->id, 'right');
-            }
+                $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->
+                rightJoin('user_permission','projects.id','=','user_permission.project_id')
+                    ->where('user_permission.emp_id', Auth::user()->id)
+            ->select('projects.*');
+
         }
 
         if(isset($request->name)){
@@ -67,7 +82,7 @@ class ProjectController extends Controller
                 $data->whereDate('confirm_date','<=',$request->to);
             }
         }
-       $data = $data->where('confirm',1)->paginate(12);
+       $data = $data->paginate(12);
         return view('admin.Project.index',compact('data'));
     }
 
@@ -164,7 +179,7 @@ class ProjectController extends Controller
                         $dataa = array('reciever_id'=>$user->id , 'type' => 0 ,'project_id'=> $project->id, 'level_id' => $ProjectLevels->id ,'is_read' => 1 );
                         UserChatPermission::insert($dataa);
                     }
-                    $UserChatPermission = array('level_id'=> $ProjectLevels->id , 'reciever_id' => $request->client_id ,'type' =>1  , 'project_id' => $project->i );
+                    $UserChatPermission = array('level_id'=> $ProjectLevels->id , 'reciever_id' => $request->client_id ,'type' =>1  , 'project_id' => $project->id );
                     UserChatPermission::insert($UserChatPermission);
 
                 }
@@ -179,8 +194,14 @@ class ProjectController extends Controller
 
     public function project_details($id){
         $data = Project::find($id);
-        $levels = ProjectLevels::where('project_id',$id)->get();
-
+        if(Auth::user()->jop_type == 1 ){
+            $levels = ProjectLevels::where('project_levels.project_id', $id)->
+            Join('user_permission','project_levels.id','=','user_permission.level_id')
+                ->where('user_permission.emp_id', Auth::user()->id)->select('project_levels.*')
+            ->get();
+        }else {
+            $levels = ProjectLevels::where('project_id', $id)->get();
+        }
         return view('admin.Project.details',compact('data','levels'));
 
     }
@@ -193,11 +214,18 @@ class ProjectController extends Controller
 
     }
 
-    public function projectFiles($id){
+    public function projectFiles($id ,Request $request){
 
         $data = Project::find($id);
+        $files = ProjectLevelDetails::where('project_id',$id)->where('is_pdf',1)->where('pdf','!=',null)->where('pdf','!=','');
 
-        $files = ProjectLevelDetails::where('project_id',$id)->where('img','!=',null)->get();
+        if(isset($request->level_id)){
+        $files->where('level_id',$request->level_id);
+        }
+        if(isset($request->level_detail_id)){
+        $files->where('id',$request->level_detail_id);
+        }
+        $files = $files->get();
         return view('admin.Project.projectFiles',compact('data','id','files'));
     }
 
@@ -355,6 +383,14 @@ class ProjectController extends Controller
             return back()->with('error_message','عفوا حذث خطأ');
 
         }
+        return response()->json(['message' => 'Success']);
+
+    }
+    public function DeleteProject(Request $request){
+
+        Project::find($request->id)->delete();
+        ProjectLevelDetails:where('project_id',$request->id)->delete();
+        ProjectLevels:where('project_id',$request->id)->delete();
         return response()->json(['message' => 'Success']);
 
     }

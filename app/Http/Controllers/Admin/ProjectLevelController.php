@@ -42,6 +42,14 @@ class ProjectLevelController extends Controller
         return response()->json(['message' => 'Success']);
 
     }
+    public function changeState(Request $request){
+        $data = ProjectLevelDetails::find($request->id);
+        $data->state = 0;
+        $data->date = null;
+        $data->save();
+        return response()->json(['message' => 'Success']);
+
+    }
 
     public function edit_LevelDetails(Request $request){
 
@@ -80,13 +88,18 @@ class ProjectLevelController extends Controller
         if(isset($request->pdf)){
             $files = [];
             foreach($request->pdf as $file) {
-//                $imageName = time() . '.' . $file->extension();
+                 $imageName = Auth::user()->id . '@' . \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d') . '@'. Storage::disk('public2')->put("images", $file);
 //                $path = "https://alkhalilsys.com/images/";
 ////            $request->image->store('http://alkhalilsys.com/images/', $imageName);
 //                Storage::disk('public2')->put('images', $imageName);
-                $imageName =   upload_multiple($file,'images');
-                $data->img=$imageName;
-                $files[]=$imageName;
+                $imageName2 =  upload_multiple($file,'images');
+                $data->img=$imageName2;
+
+//                $imageName = Auth::user()->id . '@' . \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d') . '@'. time() . '.' .$file->extension();
+//                $path = "https://alkhalilsys.com/images/";
+////              $request->image->store('http://alkhalilsys.com/images/', $imageName);
+//                Storage::disk('public2')->put('images', $imageName);
+                 $files[]=$imageName;
             }
             $data->pdf=$files;
 
@@ -135,5 +148,10 @@ class ProjectLevelController extends Controller
         $data->save();
         return back()->with('message', 'Success');
 
+    }
+
+    public function GetLevelDetails($id){
+        $data = ProjectLevelDetails::where('level_id',$id)->pluck('id','title');
+        return response()->json($data);
     }
 }
