@@ -103,7 +103,7 @@
                                 <div class="card-toolbar">
 
                                     <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">@if( $project->projectContract && $contract->find($project->projectContract->contract_id)){{$contract->find($project->projectContract->contract_id)->title}} @endif</span>
-                                    <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> x </span>
+                                    <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> <i class="bi bi-trash fs-2x text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف المشروع"></i></span>
 
 
                                 </div>
@@ -194,7 +194,7 @@
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
                             <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">@if( $project->projectContract && $contract->find($project->projectContract->contract_id)){{$contract->find($project->projectContract->contract_id)->title}} @endif</span>
-                            <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> x </span>
+                            <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> <i class="bi bi-trash fs-2x text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف المشروع"></i> </span>
 
                         </div>
                         <!--end::Card toolbar-->
@@ -726,7 +726,7 @@
     <script>
 $('.DeleteProject').on('click',function () {
    var id =  $(this).data('id');
-
+alert(id);
     if (id) {
         Swal.fire({
             title: "هل انت متاكد من حذف المشروع",
@@ -748,7 +748,7 @@ $('.DeleteProject').on('click',function () {
                     success: function (data) {
                         if (data.message == "Success") {
                             Swal.fire("نجح", "تمت حذف المشروع بنجاح", "success");
-                            setTimeout(reload, 7000)
+                            setTimeout(reload, 3000)
                             function reload() {
                                 location.reload();
                             }

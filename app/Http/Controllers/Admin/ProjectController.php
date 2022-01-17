@@ -11,6 +11,7 @@ use App\Models\Level;
 use App\Models\LevelDetails;
 use App\Models\Project;
 use App\Models\ProjectContract;
+use App\Models\ProjectPaid;
 use App\Models\ProjectLevelDetails;
 use App\Models\ProjectLevels;
 use App\Models\ProjectOther;
@@ -130,9 +131,13 @@ class ProjectController extends Controller
                 $project->created_by=Auth::user()->id;
                 $project->save();
                 // other
-            $other = new ProjectOther;
-            $other->project_id=$project->id;
-            $other->save();
+                $other = new ProjectOther;
+                $other->project_id=$project->id;
+                $other->save();
+
+                // projectPaid
+                $project_paid_data['project_id'] = $project->id;
+                $project_paid = ProjectPaid::create($project_paid_data);
 
             //projectContract
                 $con = Contract::find($request->contract_id);
@@ -388,9 +393,9 @@ class ProjectController extends Controller
     }
     public function DeleteProject(Request $request){
 
-        Project::find($request->id)->delete();
-        ProjectLevelDetails:where('project_id',$request->id)->delete();
-        ProjectLevels:where('project_id',$request->id)->delete();
+        Project::where('id', $request->id)->delete();
+        ProjectLevelDetails::where('project_id',$request->id)->delete();
+        ProjectLevels::where('project_id',$request->id)->delete();
         return response()->json(['message' => 'Success']);
 
     }
