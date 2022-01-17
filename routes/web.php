@@ -168,6 +168,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('assign_users/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'assign_users']);
     Route::post('assgin_new_user', [\App\Http\Controllers\Admin\ProjectController::class, 'assgin_new_user']);
     Route::get('remove_assign_user', [\App\Http\Controllers\Admin\ProjectController::class, 'remove_assign_user']);
+    Route::get('DeleteProject', [\App\Http\Controllers\Admin\ProjectController::class, 'DeleteProject']);
 
     Route::post('store-new-level', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'store_level']);
     Route::post('store-new-levelDetail', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'store_new_levelDetail']);
@@ -175,7 +176,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('edit-LevelDetails', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'edit_LevelDetails']);
     Route::post('AnswerLevelDetails', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'AnswerLevelDetails']);
     Route::post('Store_ProgressTime', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'Store_ProgressTime']);
-
+    Route::get('changeState', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'changeState']);
 
     Route::post('store-project', [\App\Http\Controllers\Admin\ProjectController::class, 'store']);
     Route::get('project_details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'project_details']);

@@ -14,6 +14,7 @@
         <!--begin::Post-->
         <div class="content flex-row-fluid" id="kt_content">
             <!--begin::Row-->
+            @if(Auth::user()->jop_type != 1 )
             <div class="row g-5 g-lg-10">
                 <!--begin::Col-->
                 <div class="col-xl-4 mb-xl-10 mb-5">
@@ -760,7 +761,7 @@
                 </div>
                 <!--end::Col-->
             </div>
-
+            @endif
 
             <!--begin::Calendar Widget 1-->
             <div class="card">

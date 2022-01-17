@@ -11,6 +11,22 @@ use Yajra\DataTables\Facades\DataTables;
 use Auth;
 class RequestsController extends Controller
 {
+    public function __construct()
+
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = \Illuminate\Support\Facades\Auth::user()->userGroup->is_client_order;
+            if( $this->id  == 0 ){
+                return redirect('/');
+            }
+            return $next($request);
+
+        });
+
+    }
+
+
     public function index()
     {
         return view('admin.Requests.index');

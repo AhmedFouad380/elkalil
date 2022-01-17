@@ -26,6 +26,24 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ContractsController extends Controller
 {
+
+    public function __construct()
+
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->userGroup->is_contracting;
+            if( $this->id  == 0 ){
+                return redirect('/');
+            }
+            return $next($request);
+
+        });
+
+    }
+
+
+
     public function index()
     {
         return view('admin.Contracts.index');
@@ -33,7 +51,11 @@ class ContractsController extends Controller
 
     public function datatable(Request $request)
     {
+        if(Auth::user()->jop_type != 3 ){
         $data = Project::where('is_accepted',1)->orderBy('date', 'desc')->get();
+        }elseif(Auth::user()->jop_type != 2){
+            $data = Project::where('is_accepted',1)->orderBy('date', 'desc')->get();
+        }
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';

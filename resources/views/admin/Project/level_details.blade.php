@@ -206,7 +206,7 @@
                     <!--end::Nav wrapper-->
                 </div>
             </div>
-        
+
             <!--end::Navbar-->
 
             <!--begin::Row-->
@@ -265,15 +265,9 @@
                                                 <span class="fw-bold text-dark d-block fs-5">{{$key +1 }}</span>
                                             </td>
                                             <td>
-                                                @if($details->state == 1)
-                                                    <div class="d-flex align-items-center">
-                                                        <button   class="btn   text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
-                                                    </div>
-                                                @else
                                                     <div class="d-flex align-items-center">
                                                         <button  data-id="{{$details->id}}"  class="btn  edit-Advert text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
                                                     </div>
-                                                @endif
                                             </td>
                                             <td>
                                                 <span class="text-dark fw-bold d-block fs-5">{{$details->date}}</span>

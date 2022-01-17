@@ -42,6 +42,14 @@ class ProjectLevelController extends Controller
         return response()->json(['message' => 'Success']);
 
     }
+    public function changeState(Request $request){
+        $data = ProjectLevelDetails::find($request->id);
+        $data->state = 0;
+        $data->date = null;
+        $data->save();
+        return response()->json(['message' => 'Success']);
+
+    }
 
     public function edit_LevelDetails(Request $request){
 

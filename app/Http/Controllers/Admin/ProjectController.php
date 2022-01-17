@@ -21,6 +21,21 @@ use Illuminate\Http\Request;
 use Auth;
 class ProjectController extends Controller
 {
+
+    public function __construct()
+
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->userGroup->is_projects;
+            if( $this->id  == 0 ){
+                return redirect('/');
+            }
+            return $next($request);
+
+        });
+
+    }
     public  function  index(Request $request){
         if(Auth::user()->jop_type == 3){
             if(isset($request->contract_id)){
@@ -368,6 +383,14 @@ class ProjectController extends Controller
             return back()->with('error_message','عفوا حذث خطأ');
 
         }
+        return response()->json(['message' => 'Success']);
+
+    }
+    public function DeleteProject(Request $request){
+
+        Project::find($request->id)->delete();
+        ProjectLevelDetails:where('project_id',$request->id)->delete();
+        ProjectLevels:where('project_id',$request->id)->delete();
         return response()->json(['message' => 'Success']);
 
     }
