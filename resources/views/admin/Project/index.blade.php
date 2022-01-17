@@ -179,7 +179,7 @@
                 @else
             <div class="col-md-6 col-xl-4">
                 <!--begin::Card-->
-                <a  class="card border-hover-primary">
+                <div  class="card border-hover-primary">
                     <!--begin::Card header-->
                     <div class="card-header border-0 pt-9">
                         <!--begin::Card Title-->
@@ -266,7 +266,7 @@
                     </a>
 
                     <!--end:: Card body-->
-                </a>
+                </div>
                 <!--end::Card-->
             </div>
                 @endif
