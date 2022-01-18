@@ -252,6 +252,7 @@
                                     <tr class="fw-bolder text-muted bg-light">
                                         <th class="min-w-50px">م</th>
                                         <th class="ps-4 min-w-325px rounded-start">متطلبات المرحلة </th>
+                                        <th class="min-w-200px">نسبة الانجاز</th>
                                         <th class="min-w-200px">تاريخ الطلب</th>
                                         <th class="min-w-125px">الانجاز</th>
                                     </tr>
@@ -268,6 +269,9 @@
                                                     <div class="d-flex align-items-center">
                                                         <button  data-id="{{$details->id}}"  class="btn  edit-Advert text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
                                                     </div>
+                                            </td>
+                                            <td>
+                                                <span class="text-dark fw-bold d-block fs-5">{{$details->percent}} %</span>
                                             </td>
                                             <td>
                                                 <span class="text-dark fw-bold d-block fs-5">{{$details->date}}</span>
@@ -347,11 +351,11 @@
                             <!--begin::Input group-->
                             <div class="mb-10">
                                 <label class="form-label fs-6 fw-bold">الموضوع</label>
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="name" placeholder="" value="" autocomplete="nope" />
+                                <input type="text" required class="form-control form-control-lg form-control-solid" name="name" placeholder="" value="" autocomplete="nope" />
                             </div>
                             <div class="mb-10">
                                 <label class="form-label fs-6 fw-bold">النسبة </label>
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="percent" placeholder="" value="" autocomplete="nope" />
+                                <input type="number" required class="form-control form-control-lg form-control-solid" name="percent" placeholder="" value="" autocomplete="nope" />
                             </div>
                             <input type="hidden" value="{{$id}}" name="level_id">
                             <input type="hidden" value="{{$data->id}}" name="project_id">
@@ -432,7 +436,7 @@
                             <!--begin::Input group-->
                             <div class="mb-10">
                                 <label class="form-label fs-6 fw-bold">وقت المرحلة ( ايام ) </label>
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="progress_time" placeholder="" value="{{$level->progress_time}}" autocomplete="nope" />
+                                <input type="number" required class="form-control form-control-lg form-control-solid" name="progress_time" placeholder="" value="{{$level->progress_time}}" autocomplete="nope" />
                             </div>
                             <input type="hidden" value="{{$id}}" name="level_id">
                             <input type="hidden" value="{{$data->id}}" name="project_id">

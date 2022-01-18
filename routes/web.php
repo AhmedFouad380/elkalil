@@ -207,83 +207,84 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('inbox', [InboxController::class, 'index'])->name('inbox');
     Route::get('reply/{id}', [InboxController::class, 'show'])->name('reply');
 
-});
+
+    Route::get('Get_Levels', [PageController::class, 'Get_Levels']);
+    Route::get('contractName', [PageController::class, 'contractName']);
+    Route::get('getMoney', [PageController::class, 'getMoney']);
 
 
-Route::get('Get_Levels', [PageController::class, 'Get_Levels']);
-Route::get('contractName', [PageController::class, 'contractName']);
-Route::get('getMoney', [PageController::class, 'getMoney']);
+    Route::get('/quest2/{client_id}/{emp_id?}', [PageController::class, 'quest2']);
+    Route::post('/quest2', 'App\Http\Controllers\Front\PageController@store_quest2')->name('create_quest2.submit');
+    Route::get('success_msg', [PageController::class, 'success_msg']);
 
 
-Route::get('/quest2/{client_id}/{emp_id?}', [PageController::class, 'quest2']);
-Route::post('/quest2', 'App\Http\Controllers\Front\PageController@store_quest2')->name('create_quest2.submit');
-Route::get('success_msg', [PageController::class, 'success_msg']);
+    Route::get('/table', function () {
+        return view('admin/table');
+    });
 
-Route::post('login', [AuthController::class, 'login']);
-Route::get('logout', [AuthController::class, 'logout']);
-
-Route::get('/table', function () {
-    return view('admin/table');
-});
-
-Route::get('/table-view', function () {
-    return view('admin/table-view');
-});
+    Route::get('/table-view', function () {
+        return view('admin/table-view');
+    });
 
 //Route::get('/project-details/{id}', function () {
 //    return view('admin/project_details');
 //});
 
-Route::get('/project-details2', function () {
-    return view('admin/project_details2');
+    Route::get('/project-details2', function () {
+        return view('admin/project_details2');
+    });
+
+    Route::get('/project-details3', function () {
+        return view('admin/project_details3');
+    });
+
+    Route::get('/project-details4', function () {
+        return view('admin/project_details4');
+    });
+
+    Route::get('/project-details5', function () {
+        return view('admin/project_details5');
+    });
+
+    Route::get('/project-details6', function () {
+        return view('admin/project_details6');
+    });
+
+    Route::get('/project-details7', function () {
+        return view('admin/project_details7');
+    });
+    Route::get('/project-details8', function () {
+        return view('admin/project_details8');
+    });
+
+
+
+    Route::get('/project_details2', function () {
+        return view('admin/project_details2');
+    });
+    Route::get('/project_details3', function () {
+        return view('admin/project_details3');
+    });
+    Route::get('/project_details4', function () {
+        return view('admin/project_details4');
+    });
+    Route::get('/project_details5', function () {
+        return view('admin/project_details5');
+    });
+    Route::get('/project_details6', function () {
+        return view('admin/project_details6');
+    });
+    Route::get('/project_details7', function () {
+        return view('admin/project_details7');
+    });
+
+    Route::get('/project_details8', function () {
+        return view('admin/project_details8');
+    });
+
+    Route::get('GetLevelDetails/{id}',['App\Http\Controllers\Admin\ProjectLevelController','GetLevelDetails']);
+    Route::get('logout', [AuthController::class, 'logout']);
+
 });
 
-Route::get('/project-details3', function () {
-    return view('admin/project_details3');
-});
-
-Route::get('/project-details4', function () {
-    return view('admin/project_details4');
-});
-
-Route::get('/project-details5', function () {
-    return view('admin/project_details5');
-});
-
-Route::get('/project-details6', function () {
-    return view('admin/project_details6');
-});
-
-Route::get('/project-details7', function () {
-    return view('admin/project_details7');
-});
-Route::get('/project-details8', function () {
-    return view('admin/project_details8');
-});
-
-
-
-Route::get('/project_details2', function () {
-    return view('admin/project_details2');
-});
-Route::get('/project_details3', function () {
-    return view('admin/project_details3');
-});
-Route::get('/project_details4', function () {
-    return view('admin/project_details4');
-});
-Route::get('/project_details5', function () {
-    return view('admin/project_details5');
-});
-Route::get('/project_details6', function () {
-    return view('admin/project_details6');
-});
-Route::get('/project_details7', function () {
-    return view('admin/project_details7');
-});
-
-Route::get('/project_details8', function () {
-    return view('admin/project_details8');
-});
-
-Route::get('GetLevelDetails/{id}',['App\Http\Controllers\Admin\ProjectLevelController','GetLevelDetails']);
+Route::post('login', [AuthController::class, 'login']);

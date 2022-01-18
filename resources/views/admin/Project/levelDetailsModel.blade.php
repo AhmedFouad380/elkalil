@@ -193,13 +193,12 @@
 
 @endif
     @if($data->state == 1)
-        <a type="button"  class=" btn btn-danger changeState"  data-id="{{$data->id}}">اللغاء نسبة الانجاز </a>
+        <a type="button"  class=" btn btn-danger changeState"  data-id="{{$data->id}}">الغاء نسبة الانجاز </a>
 
 @endif
 
 <!--end: Wizard Actions-->
     <div class="modal-footer">
-
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
         <button type="submit" id="loading" class=" btn btn-primary" onclick="spinner()">حفظ</button>
     </div>

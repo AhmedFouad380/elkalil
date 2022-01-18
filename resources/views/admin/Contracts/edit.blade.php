@@ -1818,7 +1818,7 @@
             var date =$('#confirmDate').val()
             if (id) {
                 Swal.fire({
-                    title: "هل انت متاكد من قبول المشروع",
+                    title: "هل انت متاكد من تفعيل المشروع ",
                     text: "",
                     icon: "warning",
                     showCancelButton: true,
@@ -1837,7 +1837,7 @@
                             dataType: "JSON",
                             success: function (data) {
                                 if (data.message == "Success") {
-                                    Swal.fire("نجح", "تمت قبول المشروع بنجاح", "success");
+                                    Swal.fire("نجح", "تمت تفعيل المشروع  بنجاح", "success");
                                     $('#kt_modal_confirmProject').modal('hide');
 
                                     setTimeout(reload, 7000)

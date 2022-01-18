@@ -748,7 +748,7 @@ $('.DeleteProject').on('click',function () {
                     success: function (data) {
                         if (data.message == "Success") {
                             Swal.fire("نجح", "تمت حذف المشروع بنجاح", "success");
-                            setTimeout(reload, 7000)
+                            setTimeout(reload, 3000)
                             function reload() {
                                 location.reload();
                             }

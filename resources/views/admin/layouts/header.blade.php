@@ -35,13 +35,14 @@
             <!--begin::Toolbar wrapper-->
             <div class="topbar d-flex align-items-stretch flex-shrink-0" id="kt_topbar">
 
+            @if(Auth::user()->userGroup->is_client_order == 1 )
                 <!--begin::Notifications-->
-                <div class="d-flex align-items-center ms-2 ms-lg-3">
-                    <!--begin::Menu- wrapper-->
-                    <div class="btn btn-icon btn-color-warning position-relative w-30px h-30px w-md-40px h-md-40px"
-                         data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
-                        <span class="svg-icon svg-icon-1">
+                    <div class="d-flex align-items-center ms-2 ms-lg-3">
+                        <!--begin::Menu- wrapper-->
+                        <div class="btn btn-icon btn-color-warning position-relative w-30px h-30px w-md-40px h-md-40px"
+                             data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                            <span class="svg-icon svg-icon-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
                                 <path
@@ -58,43 +59,43 @@
                                       fill="black"/>
                             </svg>
                         </span>
-                        <!--end::Svg Icon-->
-                    </div>
-                    <!--begin::Menu-->
-                    <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true">
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-column bgi-no-repeat rounded-top"
-                             style="background-image:url('{{asset('admin/assets/media/misc/pattern-1.jpg')}}')">
-                            <!--begin::Title-->
-                            <h3 class="text-white fw-bold px-9 mt-10 mb-6">اشعارات العملاء الجدد
-                                <span
-                                    class="fs-8 opacity-75 ps-3">{{\App\Models\Project::where('is_accepted',2)->where('view',0)->count()}}</span>
-                            </h3>
-                            <!--end::Title-->
-                            <!--begin::Tabs-->
-                            <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
-                                <li class="nav-item">
-                                    <a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active"
-                                       data-bs-toggle="tab" href="#kt_topbar_notifications_1">طلبات العملاء الجديده</a>
-                                </li>
-
-                            </ul>
-                            <!--end::Tabs-->
+                            <!--end::Svg Icon-->
                         </div>
-                        <!--end::Heading-->
-                        <!--begin::Tab content-->
-                        <div class="tab-content">
-                            <!--begin::Tab panel-->
-                            <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
-                                <!--begin::Items-->
-                                <div class="scroll-y mh-325px my-5 px-8">
-                                @foreach(\App\Models\Project::where('is_accepted',2)->where('view',0)->get() as $project)
-                                    <!--begin::Item-->
-                                        <div class="d-flex flex-stack py-4">
-                                            <!--begin::Section-->
-                                            <div class="d-flex align-items-center">
-                                                <!--begin::Symbol-->
-                                                <div class="symbol symbol-35px me-4">
+                        <!--begin::Menu-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true">
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-column bgi-no-repeat rounded-top"
+                                 style="background-image:url('{{asset('admin/assets/media/misc/pattern-1.jpg')}}')">
+                                <!--begin::Title-->
+                                <h3 class="text-white fw-bold px-9 mt-10 mb-6">اشعارات العملاء الجدد
+                                    <span
+                                        class="fs-8 opacity-75 ps-3">{{\App\Models\Project::where('is_accepted',2)->where('view',0)->count()}}</span>
+                                </h3>
+                                <!--end::Title-->
+                                <!--begin::Tabs-->
+                                <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active"
+                                           data-bs-toggle="tab" href="#kt_topbar_notifications_1">طلبات العملاء الجديده</a>
+                                    </li>
+
+                                </ul>
+                                <!--end::Tabs-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Tab content-->
+                            <div class="tab-content">
+                                <!--begin::Tab panel-->
+                                <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
+                                    <!--begin::Items-->
+                                    <div class="scroll-y mh-325px my-5 px-8">
+                                    @foreach(\App\Models\Project::where('is_accepted',2)->where('view',0)->get() as $project)
+                                        <!--begin::Item-->
+                                            <div class="d-flex flex-stack py-4">
+                                                <!--begin::Section-->
+                                                <div class="d-flex align-items-center">
+                                                    <!--begin::Symbol-->
+                                                    <div class="symbol symbol-35px me-4">
                                                 <span class="symbol-label bg-light-primary">
                                                     <!--begin::Svg Icon | path: icons/duotune/maps/map001.svg-->
                                                     <span class="svg-icon svg-icon-2 svg-icon-primary">
@@ -110,33 +111,33 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </span>
+                                                    </div>
+                                                    <!--end::Symbol-->
+                                                    <!--begin::Title-->
+                                                    <div class="mb-0 me-2">
+                                                        <a href="#"
+                                                           class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{$project->name}}</a>
+                                                        <div class="text-gray-400 fs-7">{{$project->services}}
+                                                            - {{$project->project_type}}</div>
+                                                    </div>
+                                                    <!--end::Title-->
                                                 </div>
-                                                <!--end::Symbol-->
-                                                <!--begin::Title-->
-                                                <div class="mb-0 me-2">
-                                                    <a href="#"
-                                                       class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{$project->name}}</a>
-                                                    <div class="text-gray-400 fs-7">{{$project->services}}
-                                                        - {{$project->project_type}}</div>
-                                                </div>
-                                                <!--end::Title-->
+                                                <!--end::Section-->
+                                                <!--begin::Label-->
+                                                <span
+                                                    class="badge badge-light fs-8">{{Carbon\Carbon::parse($project->date)->translatedFormat("d M Y")}}</span>
+                                                <!--end::Label-->
                                             </div>
-                                            <!--end::Section-->
-                                            <!--begin::Label-->
-                                            <span
-                                                class="badge badge-light fs-8">{{Carbon\Carbon::parse($project->date)->translatedFormat("d M Y")}}</span>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Item-->
-                                    @endforeach
-                                </div>
-                                <!--end::Items-->
-                                <!--begin::View more-->
-                                <div class="py-3 text-center border-top">
-                                    <a href="/Requests"
-                                       class="btn btn-color-gray-600 btn-active-color-primary">عرض الكل
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-                                        <span class="svg-icon svg-icon-5">
+                                            <!--end::Item-->
+                                        @endforeach
+                                    </div>
+                                    <!--end::Items-->
+                                    <!--begin::View more-->
+                                    <div class="py-3 text-center border-top">
+                                        <a href="/Requests"
+                                           class="btn btn-color-gray-600 btn-active-color-primary">عرض الكل
+                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                            <span class="svg-icon svg-icon-5">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none">
                                             <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1"
@@ -146,19 +147,21 @@
                                                 fill="black"/>
                                         </svg>
                                     </span>
-                                        <!--end::Svg Icon--></a>
+                                            <!--end::Svg Icon--></a>
+                                    </div>
+                                    <!--end::View more-->
                                 </div>
-                                <!--end::View more-->
-                            </div>
-                            <!--end::Tab panel-->
+                                <!--end::Tab panel-->
 
+                            </div>
+                            <!--end::Tab content-->
                         </div>
-                        <!--end::Tab content-->
+                        <!--end::Menu-->
+                        <!--end::Menu wrapper-->
                     </div>
-                    <!--end::Menu-->
-                    <!--end::Menu wrapper-->
-                </div>
-                <!--end::Notifications-->
+
+            @endif
+            <!--end::Notifications-->
 
                 <!--begin::inbox-->
                 <div class="d-flex align-items-center ms-2 ms-lg-3">
@@ -501,43 +504,43 @@
                     </a>
                 </div>
                 @if(Auth::user()->userGroup->is_client_order == 1)
-                <div
-                    class="menu-item  @if(Request::segment(1) == 'Requests') here show @endif  menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3" href="{{url('Requests')}}">
-                        <span class="menu-title">طلبات العملاء الجدد</span>
-                        <span class="menu-arrow d-lg-none"></span>
-                    </a>
-                </div>
+                    <div
+                        class="menu-item  @if(Request::segment(1) == 'Requests') here show @endif  menu-lg-down-accordion me-lg-1">
+                        <a class="menu-link py-3" href="{{url('Requests')}}">
+                            <span class="menu-title">طلبات العملاء الجدد</span>
+                            <span class="menu-arrow d-lg-none"></span>
+                        </a>
+                    </div>
                 @endif
                 @if(Auth::user()->userGroup->is_contracting == 1)
-                <div
-                    class="menu-item @if(Request::segment(1) == 'Contracts') here show @endif menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3" href="{{url('Contracts')}}">
-                        <span class="menu-title"> التعاقدات و المتابعة</span>
-                        <span class="menu-arrow d-lg-none"></span>
-                    </a>
-                </div>
+                    <div
+                        class="menu-item @if(Request::segment(1) == 'Contracts') here show @endif menu-lg-down-accordion me-lg-1">
+                        <a class="menu-link py-3" href="{{url('Contracts')}}">
+                            <span class="menu-title"> التعاقدات و المتابعة</span>
+                            <span class="menu-arrow d-lg-none"></span>
+                        </a>
+                    </div>
                 @endif
                 @if(Auth::user()->userGroup->is_projects == 1)
-                <div
-                    class="menu-item @if(Request::segment(1) == 'projects') here show @endif menu-lg-down-accordion me-lg-1">
-                    <a class="menu-link py-3" href="{{url('/projects')}}">
-                        <span class="menu-title">قائمة المشاريع</span>
-                        <span class="menu-arrow d-lg-none"></span>
-                    </a>
-                </div>
+                    <div
+                        class="menu-item @if(Request::segment(1) == 'projects') here show @endif menu-lg-down-accordion me-lg-1">
+                        <a class="menu-link py-3" href="{{url('/projects')}}">
+                            <span class="menu-title">قائمة المشاريع</span>
+                            <span class="menu-arrow d-lg-none"></span>
+                        </a>
+                    </div>
                 @endif
                 @if(Auth::user()->userGroup->is_report == 1)
-                <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
-                     class="menu-item menu-lg-down-accordion me-lg-1">
+                    <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
+                         class="menu-item menu-lg-down-accordion me-lg-1">
                     <span class="menu-link py-3">
                         <span class="menu-title">التقارير والاحصائيات</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </span>
-                    <div
-                        class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
+                        <div
+                            class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -562,9 +565,9 @@
                                 </span>
                                 <span class="menu-title">ارشيف المشاريع</span>
                             </span>
-                        </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
+                            </div>
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -589,9 +592,9 @@
                                 </span>
                                 <span class="menu-title">تقرير المدفوعات من العملاء</span>
                             </span>
-                        </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
+                            </div>
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -616,21 +619,21 @@
                                 </span>
                                 <span class="menu-title">تقارير المهام والانجازية</span>
                             </span>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endif
                 @if(Auth::user()->userGroup->is_financial == 1)
-                <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
-                     class="menu-item menu-lg-down-accordion me-lg-1">
+                    <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
+                         class="menu-item menu-lg-down-accordion me-lg-1">
                     <span class="menu-link py-3">
                         <span class="menu-title">الحسابات المالية</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </span>
-                    <div
-                        class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
+                        <div
+                            class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -655,9 +658,9 @@
                                 </span>
                                 <span class="menu-title">سندات القبض</span>
                             </span>
-                        </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
+                            </div>
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -682,9 +685,9 @@
                                 </span>
                                 <span class="menu-title">سندات الصرف</span>
                             </span>
-                        </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
+                            </div>
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -709,9 +712,9 @@
                                 </span>
                                 <span class="menu-title">كشف حساب عميل</span>
                             </span>
-                        </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
+                            </div>
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -736,9 +739,9 @@
                                 </span>
                                 <span class="menu-title">كشف ح مصروفات المشروع</span>
                             </span>
-                        </div>
-                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
+                            </div>
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -763,13 +766,13 @@
                                 </span>
                                 <span class="menu-title">مطالبة مالية </span>
                             </span>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endif
                 @if(Auth::user()->userGroup->is_settings == 1)
-                <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
-                     class="menu-item menu-lg-down-accordion me-lg-1">
+                    <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
+                         class="menu-item menu-lg-down-accordion me-lg-1">
                     <span
                         class="menu-link @if(Request::segment(1) == "public_setting" ||
                         Request::segment(1) == "employee_setting" ||
@@ -793,12 +796,12 @@
                         <span class="menu-title">الاعدادات</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </span>
-                    <div
-                        class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+                        <div
+                            class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
 
-                        <div data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <a href="/employee_setting">
+                            <div data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
+                                <a href="/employee_setting">
                             <span
                                 class="menu-link @if(Request::segment(1) == "employee_setting" || Request::segment(1) == "employee-edit" ) active @endif py-3">
                                 <span class="menu-icon ">
@@ -829,11 +832,11 @@
                                         الموظفين والادوار
                                       </span>
                             </span>
-                            </a>
-                        </div>
-                        <div data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <a href="/permission_setting">
+                                </a>
+                            </div>
+                            <div data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
+                                <a href="/permission_setting">
                             <span
                                 class="menu-link @if(Request::segment(1) == "permission_setting" ||Request::segment(1) == "edit-permission") active @endif py-3">
                                 <span class="menu-icon ">
@@ -865,11 +868,11 @@
 
                                       </span>
                             </span>
-                            </a>
-                        </div>
-                        <div data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <a href="/percent-category_setting">
+                                </a>
+                            </div>
+                            <div data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
+                                <a href="/percent-category_setting">
                             <span
                                 class="menu-link @if(Request::segment(1) == "percent-setting" ||Request::segment(1) == "edit-percent") active @endif py-3">
                                 <span class="menu-icon ">
@@ -901,11 +904,11 @@
 
                                       </span>
                             </span>
-                            </a>
-                        </div>
-                        <div data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <a href="/contract_setting">
+                                </a>
+                            </div>
+                            <div data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
+                                <a href="/contract_setting">
                             <span
                                 class="menu-link @if(Request::segment(1) == "contract_setting" ||Request::segment(1) == "edit-contract") active @endif py-3">
                                 <span class="menu-icon ">
@@ -937,11 +940,11 @@
 
                                       </span>
                             </span>
-                            </a>
-                        </div>
-                        <div data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <a href="/contract_setting">
+                                </a>
+                            </div>
+                            <div data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
+                                <a href="/contract_setting">
                             <span
                                 class="menu-link @if(Request::segment(1) == "level-setting" || Request::segment(1) == "edit-level"|| Request::segment(1) == "level-details-setting"|| Request::segment(1) == "edit-details-level") active @endif py-3">
                                 <span class="menu-icon ">
@@ -973,11 +976,11 @@
 
                                       </span>
                             </span>
-                            </a>
-                        </div>
-                        <div data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <a href="/employee_setting">
+                                </a>
+                            </div>
+                            <div data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
+                                <a href="/employee_setting">
                             <span
                                 class="menu-link @if(Request::segment(1) == "client_setting" || Request::segment(1) == "client-edit" ) active @endif py-3">
                                 <span class="menu-icon ">
@@ -1008,11 +1011,11 @@
                                         قائمة العملاء
                                       </span>
                             </span>
-                            </a>
-                        </div>
-                        <div data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <a href="/public_setting">
+                                </a>
+                            </div>
+                            <div data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
+                                <a href="/public_setting">
                             <span class="menu-link @if(Request::segment(1) == "public_setting") active @endif py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -1038,11 +1041,11 @@
                                 <span
                                     class="menu-title  @if(Request::segment(1) == "public_setting") text-active-primary active @endif">اعدادات عامة </span>
                             </span>
-                            </a>
-                        </div>
-                        <div data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <a href="/percent-category_setting">
+                                </a>
+                            </div>
+                            <div data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
+                                <a href="/percent-category_setting">
                             <span
                                 class="menu-link @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-category") active @endif py-3">
                                 <span class="menu-icon">
@@ -1069,11 +1072,11 @@
                                 <span
                                     class="menu-title  @if(Request::segment(1) == "percent-category_setting" || Request::segment(1) == "edit-percent-category") text-active-primary active @endif">تصنيف الشركات </span>
                             </span>
-                            </a>
-                        </div>
-                        <div data-kt-menu-placement="right-start"
-                             class="menu-item menu-lg-down-accordion">
-                            <a href="/messages">
+                                </a>
+                            </div>
+                            <div data-kt-menu-placement="right-start"
+                                 class="menu-item menu-lg-down-accordion">
+                                <a href="/messages">
                             <span
                                 class="menu-link @if(Request::segment(1) == "messages" ) active @endif py-3">
                                 <span class="menu-icon ">
@@ -1104,10 +1107,10 @@
                                         تصنيف الرسائل
                                       </span>
                             </span>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endif
             </div>
             <!--end::Menu-->

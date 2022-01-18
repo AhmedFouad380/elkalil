@@ -51,10 +51,10 @@ class ContractsController extends Controller
 
     public function datatable(Request $request)
     {
-        if(Auth::user()->jop_type != 3 ){
+        if(Auth::user()->jop_type == 3 ){
         $data = Project::where('is_accepted',1)->orderBy('date', 'desc')->get();
-        }elseif(Auth::user()->jop_type != 2){
-            $data = Project::where('is_accepted',1)->orderBy('date', 'desc')->get();
+        }elseif(Auth::user()->jop_type == 2){
+            $data = Project::where('state',Auth::user()->state)->where('is_accepted',1)->orderBy('date', 'desc')->get();
         }
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {
