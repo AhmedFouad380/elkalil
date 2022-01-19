@@ -1363,7 +1363,8 @@
                                         <span class="required">: اجمالي مبلغ التعاقد </span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="number" required name="paid" id="paid" class="form-control" value="@if($data->projectPaid)  {{$data->projectPaid->paid}} @endif">
+                                    <input type="number" required name="paid" id="paid" class="form-control"
+                                           value="{{$data->projectPaid->paid}}">
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
@@ -1373,7 +1374,8 @@
                                         <span class="required">: الدفع المقدمة </span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="number" required id="paid_down" name="paid_down" class="form-control" value="@if($data->projectPaid)  {{$data->projectPaid->paid_down}} @endif ">
+                                    <input type="number" required id="paid_down" name="paid_down" class="form-control"
+                                           value="{{$data->projectPaid->paid_down}}">
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
