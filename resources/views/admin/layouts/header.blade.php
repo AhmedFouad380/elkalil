@@ -337,7 +337,7 @@
                                                     class="w-70px badge badge-light-success me-4">{{$inbox->sender_name}}</span>
                                                 <!--end::Code-->
                                                 <!--begin::Title-->
-                                                <a href="#"
+                                                <a href="{{url('reply/'.$inbox->id)}}"
                                                    class="text-gray-800 text-hover-primary fw-bold">{{$inbox->title}}</a>
                                                 <!--end::Title-->
                                             </div>
