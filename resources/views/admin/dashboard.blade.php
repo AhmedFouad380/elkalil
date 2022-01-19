@@ -608,6 +608,7 @@
                             <div class="card-px pt-5 pb-10 flex-grow-1">
                                 <!--begin::Row-->
                                 <div class="row g-0 mt-5 mb-10" id="items">
+                                    @inject('Projects','App\Models\Project')
                                     @inject('levels','App\Models\Level')
                                     @inject('ProjectLevels','App\Models\ProjectLevels')
                                     @foreach($levels->where('contract_id',$contract->id)->where('percent','!=',0)->get() as $key => $level)
@@ -629,8 +630,13 @@
                                                     </div>
                                                 </div>
                                                 <?php
-
+                                                if(Auth::user()->jop_type == 3){
                                                 $countProjectLevels = $ProjectLevels->where('level_id',$level->id)->where('auto_complete','!=',1)->get();
+                                                }else{
+                                                  $ids =   $Projects->where('state',Auth::user()->state)->pluck('id')->ToArray();
+                                                    $countProjectLevels = $ProjectLevels->whereIn('project_id',$ids)->where('level_id',$level->id)->where('auto_complete','!=',1)->get();
+
+                                                }
                                                 $count = 0;
                                                 foreach ($countProjectLevels as $b) {
                                                     if($b->percent != $b->progress){
@@ -1211,6 +1217,7 @@
                                 @inject('Project','App\Models\Project')
                             {
                                 name: "اجمالي المشاريع التي تم تفعيلها ", data: [
+                                    @if(Auth::user()->jop_type)
                                     @for($x = 1; $x <= 12 ; $x++)
                                     @if($x == 12 )
                                     {{$Project->whereYear('confirm_date',date('Y'))->whereMonth('confirm_date',$x)->count()}}
@@ -1218,6 +1225,16 @@
                                     {{$Project->whereYear('confirm_date',date('Y'))->whereMonth('confirm_date',$x)->count()}},
                                     @endif
                                     @endfor
+                                    @else
+                                    @for($x = 1; $x <= 12 ; $x++)
+                                    @if($x == 12 )
+                                    {{$Project->where('state',Auth::user()->state)->whereYear('confirm_date',date('Y'))->whereMonth('confirm_date',$x)->count()}}
+                                    @else
+                                    {{$Project->where('state',Auth::user()->state)->whereYear('confirm_date',date('Y'))->whereMonth('confirm_date',$x)->count()}},
+                                    @endif
+                                    @endfor
+
+                                    @endif
                                 ]
                             }
                         ],
