@@ -259,7 +259,6 @@ Route::group(['middleware' => ['admin']], function () {
     });
 
 
-
     Route::get('/project_details2', function () {
         return view('admin/project_details2');
     });
@@ -283,7 +282,7 @@ Route::group(['middleware' => ['admin']], function () {
         return view('admin/project_details8');
     });
 
-    Route::get('GetLevelDetails/{id}',['App\Http\Controllers\Admin\ProjectLevelController','GetLevelDetails']);
+    Route::get('GetLevelDetails/{id}', ['App\Http\Controllers\Admin\ProjectLevelController', 'GetLevelDetails']);
     Route::get('logout', [AuthController::class, 'logout']);
 
 });

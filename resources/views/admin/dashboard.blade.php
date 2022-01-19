@@ -795,7 +795,7 @@
                                                 </div>
                                             </div>
                                     @endforeach
-                                @else
+                                             @else
                                           @foreach($State->where('id',Auth::user()->state)->get() as $key => $data)
                                             <div class="col-2" style="margin-bottom: 30px">
                                                 <div class="d-flex align-items-center me-2">
