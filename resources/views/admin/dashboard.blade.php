@@ -150,7 +150,9 @@
                                     <!--end::Svg Icon-->
                                     <div class="d-flex flex-column">
                                         @inject('Inbox','App\Models\inbox')
-                                        <div class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Inbox->count()}}</div>
+                                        <div class="text-white fw-bolder fs-1 mb-0 mt-5">
+                                            {{$Inbox->where('recipient_id',Auth::user()->id)->count()}}
+                                        </div>
                                         <div class="text-white fw-bold fs-6">البريد الوارد</div>
                                     </div>
                                 </div>
@@ -181,8 +183,14 @@
                                     <!--end::Svg Icon-->
                                     <div class="d-flex flex-column">
                                         @inject('Project','App\Models\Project')
+                                        @if(Auth::user()->jop_type == 3)
                                         <div
                                             class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Project->where('is_accepted',2)->count()}}</div>
+                                        @else
+                                            <div
+                                                class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Project->where('state',Auth::user()->state)->where('is_accepted',2)->count()}}</div>
+
+                                            @endif
                                         <div class="text-white  fs-6" style="font-size: 12px!important">طالبات العملاء
                                             الجدد
                                         </div>
@@ -218,8 +226,14 @@
                                     <!--end::Svg Icon-->
                                     <div class="d-flex flex-column">
                                         @inject('Project','App\Models\Project')
+                                        @if(Auth::user()->jop_type == 3)
                                         <div
                                             class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Project->where('confirm',1)->where('progress','!=',100)->count()}}</div>
+                                        @else
+                                            <div
+                                                class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Project->where('state',Auth::user()->state)->where('confirm',1)->where('progress','!=',100)->count()}}</div>
+                                            @endif
+
                                         <div class="text-white  fs-6" style="font-size: 12px!important"> التعاقدات و
                                             المتابعه
                                         </div>
@@ -253,8 +267,13 @@
                                     <!--end::Svg Icon-->
                                     <div class="d-flex flex-column">
                                         @inject('Project','App\Models\Project')
-                                        <div
-                                            class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Project->where('confirm',0)->count()}}</div>
+                                        @if(Auth::user()->jop_type == 3)
+                                            <div
+                                                class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Project->where('confirm',0)->count()}}</div>
+                                        @else
+                                            <div
+                                                class="text-white fw-bolder fs-1 mb-0 mt-5">{{$Project->where('state',Auth::user()->state)->where('confirm',0)->count()}}</div>
+                                        @endif
                                         <div class="text-white  fs-6" style="font-size: 12px!important"> التعاقدات و
                                             المتابعه
                                         </div>
@@ -279,7 +298,14 @@
                        style="background-color: #4AB58E; background-position: calc(100% + 1rem) bottom; background-size: 25% auto; ">
                         <!--begin::Body-->
                         <div class="card-body d-flex flex-column align-items-start justify-content-center">
-                            <h3 class="text-white fw-bolder mb-3">{{$Project->where('is_archive',1)->count()   }} </h3>
+                            <h3 class="text-white fw-bolder mb-3">
+                                @if(Auth::user()->jop_type == 3)
+                                {{$Project->where('is_archive',1)->count()   }}
+                                @else
+                                    {{$Project->where('state',Auth::user()->state)->where('is_archive',1)->count()   }}
+
+                                @endif
+                            </h3>
                             <h3 class="text-white fw-bolder mb-3">ارشيف المشاريع </h3>
                         </div>
                         <!--end::Body-->
@@ -394,8 +420,17 @@
                                 <div class="d-flex text-center flex-column text-white pt-8">
                                     <span class="fw-bold fs-7" style="color:#000">اجمالي دخل المشاريع  </span>
                                     @inject('income','App\Models\Income')
+                                    @inject('project','App\Models\Project')
+                                    @if(Auth::user()->jop_type == 3)
                                     <span class="fw-bolder fs-2x pt-1"
                                           style="color:#000">{{$income->sum('amount')}} ر.س</span>
+                                    @else
+                                        <?php
+                                            $project_ids=      $project->where('state',Auth::user()->state)->pluck('id')->ToArray();
+                                        ?>
+                                        <span class="fw-bolder fs-2x pt-1"
+                                              style="color:#000">{{$income->whereIn('project_id',$project_ids)->sum('amount')}} ر.س</span>
+                                    @endif
                                 </div>
                             @inject('contracts','App\Models\Contract')
                             @inject('ProjectContract','App\Models\ProjectContract')
@@ -427,15 +462,27 @@
                                                 <a href="#"
                                                    class="fs-5 text-gray-800 text-hover-primary fw-bolder">{{$Contract->title}}</a>
                                                 <div class="text-gray-400 fw-bold fs-7">
+                                                    @if(Auth::user()->jop_type == 3)
                                                     ( {{$ProjectContract->where('contract_id','!=',1)->where('contract_id',$Contract->id)->count() }}
                                                     )
+                                                    @else
+                                                      {{$ProjectContract->whereIn('project_id',$project_ids)->where('contract_id','!=',1)->where('contract_id',$Contract->id)->count() }}
+
+                                                    @endif
                                                 </div>
                                             </div>
                                             <!--end::Title-->
                                             <!--begin::Label-->
                                             <div class="d-flex align-items-center">
                                                 <div
-                                                    class="fw-bolder fs-5 text-gray-800 pe-1">{{$ProjectContract->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}</div>
+                                                    class="fw-bolder fs-5 text-gray-800 pe-1">
+                                                    @if(Auth::user()->jop_type == 3)
+                                                    {{$ProjectContract->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}
+                                                    @else
+                                                        {{$ProjectContract->whereIn('project_id',$project_ids)->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}
+
+                                                    @endif
+                                                </div>
                                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr065.svg-->
                                                 <span class="svg-icon svg-icon-5 svg-icon-success ms-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -714,11 +761,12 @@
                                 <div class="row g-0 mt-5 mb-10" id="items2">
                                     @inject('Project','App\Models\Project')
                                     @inject('State','App\Models\State')
-                                    @foreach($State->all() as $key => $data)
-                                        <div class="col-2" style="margin-bottom: 30px">
-                                            <div class="d-flex align-items-center me-2">
-                                                <div class="symbol symbol-50px me-3">
-                                                    <div class="symbol-label bg-light-danger">
+                                    @if(Auth::user()->jop_type == 3 )
+                                          @foreach($State->all() as $key => $data)
+                                            <div class="col-2" style="margin-bottom: 30px">
+                                                <div class="d-flex align-items-center me-2">
+                                                    <div class="symbol symbol-50px me-3">
+                                                        <div class="symbol-label bg-light-danger">
                                                 <span class="svg-icon svg-icon-1 svg-icon-danger">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                          viewBox="0 0 24 24" fill="none">
@@ -730,17 +778,47 @@
                                                             fill="black"/>
                                                     </svg>
                                                 </span>
+                                                        </div>
                                                     </div>
+                                                    <div>
+                                                        <div
+                                                            class="fs-4 text-dark fw-bolder">{{$Project->where('state',$data->id)->count()}}</div>
+                                                        <div class="fs-7 text-muted fw-bold">{{$data->title}}</div>
+                                                    </div>
+                                                    <!--end::Title-->
                                                 </div>
-                                                <div>
-                                                    <div
-                                                        class="fs-4 text-dark fw-bolder">{{$Project->where('state',$data->id)->count()}}</div>
-                                                    <div class="fs-7 text-muted fw-bold">{{$data->title}}</div>
-                                                </div>
-                                                <!--end::Title-->
                                             </div>
-                                        </div>
-                                @endforeach
+                                    @endforeach
+                                @else
+                                          @foreach($State->where('id',Auth::user()->state)->get() as $key => $data)
+                                            <div class="col-2" style="margin-bottom: 30px">
+                                                <div class="d-flex align-items-center me-2">
+                                                    <div class="symbol symbol-50px me-3">
+                                                        <div class="symbol-label bg-light-danger">
+                                                <span class="svg-icon svg-icon-1 svg-icon-danger">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24" fill="none">
+                                                        <path opacity="0.3"
+                                                              d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z"
+                                                              fill="black"/>
+                                                        <path
+                                                            d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z"
+                                                            fill="black"/>
+                                                    </svg>
+                                                </span>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div
+                                                            class="fs-4 text-dark fw-bolder">{{$Project->where('state',$data->id)->count()}}</div>
+                                                        <div class="fs-7 text-muted fw-bold">{{$data->title}}</div>
+                                                    </div>
+                                                    <!--end::Title-->
+                                                </div>
+                                            </div>
+                                    @endforeach
+
+                                @endif
                                 <!--begin::Col-->
                                     <!--end::Col-->
                                     <!--begin::Col-->
@@ -964,6 +1042,8 @@
                         series: [{
                             name: " سندات القبض ", data:
                                 [
+                                    @if(Auth::user()->jop_type == 3)
+
                                     @for($x = 1 ; $x <= 12 ;$x++)
                                     {{$income->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count()}},
                                     @php
@@ -972,6 +1052,22 @@
                                         }
                                     @endphp
                                     @endfor
+
+                                    @else
+
+                                    <?php
+                                   $ids= $project->where('state',Auth::user()->state)->pluck('id')->toArray();
+                                    ?>
+                                    @for($x = 1 ; $x <= 12 ;$x++)
+                                    {{$income->whereIn('project_id',$ids)->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count()}},
+                                    @php
+                                        if($income->whereIn('project_id',$ids)->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count() > $max2){
+                                        $max2 = $Outcome->whereIn('project_id',$ids)->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count();
+                                        }
+                                    @endphp
+                                    @endfor
+
+                                    @endif
                                 ]
                         },
                             {

@@ -96,8 +96,8 @@ class ProjectLevelController extends Controller
             $files = [];
             foreach ($request->pdf as $file) {
 
-                $imageName2 = upload_multiple($file, 'images');
-                $data->img = $imageName2;
+//                $imageName2 = upload_multiple($file, 'images');
+////                $data->img = $imageName2;
                 $imageName = upload_multiple2($file, 'images');
                 $files[] = $imageName;
             }
