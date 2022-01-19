@@ -499,7 +499,7 @@
 
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js'></script>
 
     <script type="text/javascript">
 

@@ -479,7 +479,7 @@
                                                     @if(Auth::user()->jop_type == 3)
                                                     {{$ProjectContract->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}
                                                     @else
-                                                        {{$ProjectContract->whereIn('project_id',$project_ids)->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}
+                                                        {{$ProjectContract->whereIn('project_contract.project_id',$project_ids)->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}
 
                                                     @endif
                                                 </div>
@@ -1218,6 +1218,7 @@
                             {
                                 name: "اجمالي المشاريع التي تم تفعيلها ", data: [
                                     @if(Auth::user()->jop_type)
+
                                     @for($x = 1; $x <= 12 ; $x++)
                                     @if($x == 12 )
                                     {{$Project->whereYear('confirm_date',date('Y'))->whereMonth('confirm_date',$x)->count()}}
@@ -1225,7 +1226,9 @@
                                     {{$Project->whereYear('confirm_date',date('Y'))->whereMonth('confirm_date',$x)->count()}},
                                     @endif
                                     @endfor
+
                                     @else
+
                                     @for($x = 1; $x <= 12 ; $x++)
                                     @if($x == 12 )
                                     {{$Project->where('state',Auth::user()->state)->whereYear('confirm_date',date('Y'))->whereMonth('confirm_date',$x)->count()}}
