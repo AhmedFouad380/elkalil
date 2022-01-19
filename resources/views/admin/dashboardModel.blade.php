@@ -1,4 +1,5 @@
 @inject('levels','App\Models\Level')
+@inject('Projects','App\Models\Projects')
 @inject('ProjectLevels','App\Models\ProjectLevels')
 @foreach($levels->where('contract_id',$contract->id)->where('percent','!=',0)->get() as $key => $level)
     <div class="col-2" style="margin-bottom: 30px">
@@ -15,7 +16,13 @@
             </div>
             <?php
 
-            $countProjectLevels = $ProjectLevels->where('level_id',$level->id)->where('auto_complete','!=',1)->get();
+            if(Auth::user()->jop_type == 3){
+                $countProjectLevels = $ProjectLevels->where('level_id',$level->id)->where('auto_complete','!=',1)->get();
+            }else{
+                $ids =   $Projects->where('state',Auth::user()->state)->pluck('id')->ToArray();
+                $countProjectLevels = $ProjectLevels->whereIn('project_id',$ids)->where('level_id',$level->id)->where('auto_complete','!=',1)->get();
+
+            }
             $count = 0;
             foreach ($countProjectLevels as $b) {
                 if($b->percent != $b->progress){
