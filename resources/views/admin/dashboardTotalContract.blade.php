@@ -1,7 +1,15 @@
 <div class="d-flex text-center flex-column text-white pt-8">
     <span class="fw-bold fs-7" style="color:#000">اجمالي دخل المشاريع  </span>
     @inject('income','App\Models\Income')
+    @inject('project','App\Models\Project')
+    @if(Auth::user()->jop_type == 3 )
     <span class="fw-bolder fs-2x pt-1" style="color:#000">{{$income->whereDate('created_at',"<=",$data->to)->whereDate('created_at','>=',$data->from)->sum('amount')}} ر.س</span>
+    @else
+        <?php
+        $project_ids=      $project->where('state',Auth::user()->state)->pluck('id')->ToArray();
+        ?>
+            <span class="fw-bolder fs-2x pt-1" style="color:#000">{{$income->whereIn('project_id',$project_ids)->whereDate('created_at',"<=",$data->to)->whereDate('created_at','>=',$data->from)->sum('amount')}} ر.س</span>
+    @endif
 </div>
 @inject('contracts','App\Models\Contract')
 @inject('ProjectContract','App\Models\ProjectContract')
@@ -28,15 +36,34 @@
             <!--begin::Title-->
             <div class="mb-1 pe-3 flex-grow-1">
                 <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">{{$Contract->title}}</a>
-                <div class="text-gray-400 fw-bold fs-7"> ( {{$ProjectContract->whereDate('created_at',"<=",$data->to)->whereDate('created_at','>=',$data->from)->
-join('incomes','incomes.project_id','project_contract.project_id')->where('contract_id',$Contract->id)->count() }} ) </div>
+                <div class="text-gray-400 fw-bold fs-7">
+                    @if(Auth::user()->jop_type == 3)
+                    ( {{$ProjectContract->whereDate('created_at',"<=",$data->to)->whereDate('created_at','>=',$data->from)->
+join('incomes','incomes.project_id','project_contract.project_id')->where('contract_id',$Contract->id)->count() }} )
+                    @else
+                                            {{$ProjectContract->whereIn('project_id',$project_ids)->whereDate('created_at',"<=",$data->to)->whereDate('created_at','>=',$data->from)->
+join('incomes','incomes.project_id','project_contract.project_id')->where('contract_id',$Contract->id)->count() }}
+
+                    @endif
+
+                </div>
             </div>
             <!--end::Title-->
             <!--begin::Label-->
             <div class="d-flex align-items-center">
-                <div class="fw-bolder fs-5 text-gray-800 pe-1">{{$ProjectContract->where('contract_id',$Contract->id)->
-whereDate('created_at',"<=",$data->to)->whereDate('created_at','>=',$data->from)->
-join('incomes','incomes.project_id','project_contract.project_id')->sum('amount')}}</div>
+                <div class="fw-bolder fs-5 text-gray-800 pe-1">
+                    @if(Auth::user()->jop_type == 3)
+
+                        {{$ProjectContract->where('contract_id',$Contract->id)->
+    whereDate('created_at',"<=",$data->to)->whereDate('created_at','>=',$data->from)->
+    join('incomes','incomes.project_id','project_contract.project_id')->sum('amount')}}
+                    @else
+                        {{$ProjectContract->whereIn('project_id',$project_ids)->where('contract_id',$Contract->id)->
+    whereDate('created_at',"<=",$data->to)->whereDate('created_at','>=',$data->from)->
+    join('incomes','incomes.project_id','project_contract.project_id')->sum('amount')}}
+
+                    @endif
+                </div>
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr065.svg-->
                 <span class="svg-icon svg-icon-5 svg-icon-success ms-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

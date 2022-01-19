@@ -84,6 +84,7 @@
     @elseif($data->question_type == 3 )
         <div class="mb-10">
             <label>الاجابة</label>
+            <br>
             <?php
             $a = str_replace('[', "" ,$data->values);
             $b = str_replace(']', "" ,$a);
@@ -92,8 +93,9 @@
 
             ?>
             @foreach($answers as $data1)
+                <input value="{{$data1}}" @if(in_array($data1 ,$answers) ) checked  @endif type="checkbox" name="asnwer[]" class="form-check-input ">
                 <label class="form-label fs-6 fw-bold">{{$data1}}</label>
-                <input value="{{$data1}}" @if(is_array($data1 ,$answers) )checked  @endif type="checkbox" name="asnwer[]" class="form-control form-control-lg form-control-solid">
+                <br>
             @endforeach
         </div>
     @elseif($data->question_type == 4 )
