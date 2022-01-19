@@ -310,6 +310,10 @@
                                 @if($level->created_by != 0)
                                     <i class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المرحلة يدويا "></i>
                                 @endif
+
+                            @if(\App\Models\UserChatPermission::where('reciever_id',Auth::user()->id)->where('is_read',0)->where('type',0)->where('level_id',$level->id)->count() > 0)
+                                <img class="bi bi-person-bounding-box fs-2x text-info" src="{{asset('images/giphy.gif')}}" style="    max-width: 41px;">
+                        @endif
                             <!--end::Title-->
                         </div>
                         <!--end::Heading-->

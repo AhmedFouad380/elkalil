@@ -197,7 +197,12 @@
                         {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
                         {{--                        </li>--}}
                                                 <li class="nav-item">
-                                                    <a class="nav-link text-active-primary me-6" href="#">المحادثات</a>
+                                                    <a class="nav-link text-active-primary me-6" href="#">المحادثات الفورية
+                                                        @if(\App\Models\UserChatPermission::where('reciever_id',Auth::user()->id)->where('is_read',0)->where('type',0)->where('level_id',$level->id)->count() > 0)
+                                                            <img class="bi bi-person-bounding-box fs-2x text-info" src="{{asset('images/giphy.gif')}}" style="    max-width: 41px;">
+                                                        @endif
+
+                                                    </a>
                                                 </li>
                         <!--end::Nav item-->
                         </ul>

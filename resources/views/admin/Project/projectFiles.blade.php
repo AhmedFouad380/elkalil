@@ -323,7 +323,6 @@
 
 
                     @foreach(json_decode($file->pdf) as $b)
-
                         <?php
                         $c = explode('@',$b);
                         ?>

@@ -90,12 +90,17 @@ class ContractsController extends Controller
 
             })
             ->rawColumns(['actions', 'checkbox', 'name', 'date', 'type','confirm'])
+            ->setRowClass(function ($row) {
+                return $row->view  == 0 ? 'unread' : '';
+            })
             ->make();
 
     }
     public function edit($id){
 
         $data = Project::findOrFail($id);
+        $data->view = 1;
+        $data->save();
         $explans = Explan::OrderBy('id','desc')->where('project_id',$id)->get();
         return view('admin.Contracts.edit',compact('data','explans'));
     }

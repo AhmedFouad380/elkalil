@@ -116,6 +116,8 @@
             try {
                 $data = Project::FindOrFail($request->id);
                 $data->is_accepted = 1;
+                $data->is_contract=1;
+                $data->view=0;
                 $data->save();
                 Explan::create([
                     'title' => 'تم قبول المشروع',

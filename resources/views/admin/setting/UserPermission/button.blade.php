@@ -202,6 +202,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="fv-row mb-7">
+                                <div
+                                    class="form-check form-switch form-check-custom form-check-solid row">
+                                    <label class="form-check-label col-6" for="flexSwitchDefault">
+                                        الحذف
+                                    </label>
+                                    <div class="col-4">
+                                        <input class="form-check-input" name="is_delete" type="hidden"
+                                               value="0" id="flexSwitchDefault"/>
+                                        <input
+                                            class="form-check-input form-control form-control-solid mb-3 mb-lg-0"
+                                            name="is_delete" type="checkbox"
+
+                                            value="1" id="flexSwitchDefault" checked/>
+                                    </div>
+                                </div>
+                            </div>
                             <!--end::Input group-->
 
 

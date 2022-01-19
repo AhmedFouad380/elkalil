@@ -975,10 +975,14 @@
                                     <!--end::Label-->
                                     <textarea rows="5" name="note"></textarea>
 
-                                    <p>
-                                        <input type="checkbox" value="1" name="type">
-                                        ارسالة رسالة نصية
-                                    </p>
+                                    <div class="mt-5 fv-row">
+                                        <div class="form-check form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="1" name="type" id="flexRadioDefault121"/>
+                                            <label class="form-check-label" for="flexRadioDefault121">
+                                                ارسالة رسالة نصية
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
@@ -1240,7 +1244,7 @@
                                         <span class="required">: اجمالي مبلغ التعاقد </span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="number" required name="paid" id="paid" class="form-control" value="{{$data->projectPaid->paid}}">
+                                    <input type="number" required name="paid" id="paid" class="form-control" value="@if($data->projectPaid)  {{$data->projectPaid->paid}} @endif">
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
@@ -1250,7 +1254,7 @@
                                         <span class="required">: الدفع المقدمة </span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="number" required id="paid_down" name="paid_down" class="form-control" value="{{$data->projectPaid->paid_down}}">
+                                    <input type="number" required id="paid_down" name="paid_down" class="form-control" value="@if($data->projectPaid)  {{$data->projectPaid->paid_down}} @endif ">
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
