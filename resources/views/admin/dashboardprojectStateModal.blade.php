@@ -1,10 +1,10 @@
 @inject('Project','App\Models\Project')
 @if(Auth::user()->jop_type == 3)
-@foreach(\App\Models\State::all() as $key => $data)
-    <div class="col-2" style="margin-bottom: 30px">
-        <div class="d-flex align-items-center me-2">
-            <div class="symbol symbol-50px me-3">
-                <div class="symbol-label bg-light-danger">
+    @foreach(\App\Models\State::all() as $key => $data)
+        <div class="col-2" style="margin-bottom: 30px">
+            <div class="d-flex align-items-center me-2">
+                <div class="symbol symbol-50px me-3">
+                    <div class="symbol-label bg-light-danger">
                                                 <span class="svg-icon svg-icon-1 svg-icon-danger">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                          viewBox="0 0 24 24" fill="none">
@@ -16,17 +16,17 @@
                                                             fill="black"/>
                                                     </svg>
                                                 </span>
+                    </div>
                 </div>
+                <div>
+                    <div
+                        class="fs-4 text-dark fw-bolder">{{$Project->where('state',$data->id)->whereBetween('date',[$from , $to])->count()}}</div>
+                    <div class="fs-7 text-muted fw-bold">{{$data->title}}</div>
+                </div>
+                <!--end::Title-->
             </div>
-            <div>
-                <div
-                    class="fs-4 text-dark fw-bolder">{{$Project->where('state',$data->id)->whereBetween('date',[$from , $to])->count()}}</div>
-                <div class="fs-7 text-muted fw-bold">{{$data->title}}</div>
-            </div>
-            <!--end::Title-->
         </div>
-    </div>
-@endforeach
+    @endforeach
 @else
     @foreach(\App\Models\State::where('id',Auth::user()->id)->get() as $key => $data)
         <div class="col-2" style="margin-bottom: 30px">
