@@ -20,7 +20,7 @@ class InboxController extends Controller
             $query->where('recipient_id', Auth::id())->orWhere('sender_id', Auth::id());
         })->where(function ($query) {
             $query->where('empl', 0)->orWhere('empl', 2);
-        })->where('sub', 0)->orderBy('id','desc')->paginate(10);
+        })->where('sub', 0)->orderBy('id', 'desc')->paginate(10);
         return view('admin.inbox.inbox', compact('inboxes'));
     }
 
@@ -53,14 +53,24 @@ class InboxController extends Controller
      */
     public function show($id)
     {
-        $inbox = inbox::with(['replies', 'files'])->where('id',$id)->firstOrFail();
+        $inbox = inbox::with(['replies', 'files'])->where('id', $id)->firstOrFail();
         if (Auth::id() == $inbox->recipient_id) {
-            $inbox->view=1;
+            $inbox->view = 1;
             $inbox->save();
         }
-        $inbox_replies = inbox::where('sub',$id)->update([
-            'view'=>1
+        $inbox_replies = inbox::where('sub', $id)->update([
+            'view' => 1
         ]);
+        if ($inbox->sub != 0) {
+            $inbox = inbox::with(['replies', 'files'])->where('id', $inbox->sub)->firstOrFail();
+            if (Auth::id() == $inbox->recipient_id) {
+                $inbox->view = 1;
+                $inbox->save();
+            }
+            $inbox_replies = inbox::where('sub', $id)->update([
+                'view' => 1
+            ]);
+        }
         return view('admin.inbox.reply', compact('inbox'));
     }
 

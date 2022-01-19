@@ -101,14 +101,14 @@
                                     <h2 class="fw-bold me-3 my-1">{{$inbox->title}}</h2>
                                     <!--begin::Heading-->
                                 </div>
-                                <div class="d-flex">
-                                    <!--begin::Print-->
-                                    <a href="#" class="btn btn-sm btn-icon btn-light btn-active-light-primary me-2"
-                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Print">
-                                        <i class="bi bi-printer-fill fs-2"></i>
-                                    </a>
-                                    <!--end::Print-->
-                                </div>
+{{--                                <div class="d-flex">--}}
+{{--                                    <!--begin::Print-->--}}
+{{--                                    <a href="#" class="btn btn-sm btn-icon btn-light btn-active-light-primary me-2"--}}
+{{--                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Print">--}}
+{{--                                        <i class="bi bi-printer-fill fs-2"></i>--}}
+{{--                                    </a>--}}
+{{--                                    <!--end::Print-->--}}
+{{--                                </div>--}}
                             </div>
                             <!--end::Title-->
                             <!--begin::Message accordion-->
