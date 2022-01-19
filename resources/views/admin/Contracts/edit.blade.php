@@ -8,13 +8,15 @@
 @endsection
 
 @section('style')
-<style>
-    .pac-container { z-index: 100000 !important; }
-</style>
+    <style>
+        .pac-container {
+            z-index: 100000 !important;
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">بيانات المشروع:  {{$data->name}}</h1>
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">بيانات المشروع: {{$data->name}}</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -24,7 +26,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">التعاقدات  </li>
+        <li class="breadcrumb-item text-gray-500">التعاقدات</li>
         <li class="breadcrumb-item text-gray-500">بيانات المشروع</li>
         <!--end::Item-->
     </ul>
@@ -53,9 +55,11 @@
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
 
-                                <a href="#" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card2">اشعار مراجعه</a>
+                                <a href="#" class="btn btn-light-primary" data-bs-toggle="modal"
+                                   data-bs-target="#kt_modal_new_card2">اشعار مراجعه</a>
 
-                                <a href="#"  style="margin: 10px;" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">تعديل البيانات</a>
+                                <a href="#" style="margin: 10px;" class="btn btn-light-primary" data-bs-toggle="modal"
+                                   data-bs-target="#kt_modal_new_card">تعديل البيانات</a>
 
                             </div>
                             <!--end::Card toolbar-->
@@ -70,35 +74,45 @@
                                     <!--begin::Header-->
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <!--begin::Toggle-->
-                                        <div class="d-flex align-items-center collapsible toggle" data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_1">
+                                        <div class="d-flex align-items-center collapsible toggle"
+                                             data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_1">
                                             <!--begin::Arrow-->
                                             <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2">
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                                                 <span class="svg-icon toggle-on svg-icon-primary svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
                                                 <span class="svg-icon toggle-off svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+                                                          transform="rotate(-90 10.8891 17.8033)" fill="black"/>
+                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                             </div>
                                             <!--end::Arrow-->
                                             <!--begin::Logo-->
-                                            <img src="assets/media/svg/card-logos/mastercard.svg" class="w-40px me-3" alt="" />
+                                            <img src="assets/media/svg/card-logos/mastercard.svg" class="w-40px me-3"
+                                                 alt=""/>
                                             <!--end::Logo-->
                                             <!--begin::Summary-->
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center fw-bolder">بيانات العميل
-                                                    <div class="badge badge-light-primary ms-5"></div></div>
+                                                    <div class="badge badge-light-primary ms-5"></div>
+                                                </div>
                                                 <div class="text-muted"></div>
                                             </div>
                                             <!--end::Summary-->
@@ -118,15 +132,15 @@
                                             <div class="flex-equal me-5">
                                                 <table class="table table-flush fw-bold gy-1">
                                                     <tr>
-                                                        <td class="text-muted min-w-125px w-125px">اسم العميل : </td>
+                                                        <td class="text-muted min-w-125px w-125px">اسم العميل :</td>
                                                         <td class="text-gray-800"> {{$data->client->name}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-muted min-w-125px w-125px">تاريخ التقديم : </td>
+                                                        <td class="text-muted min-w-125px w-125px">تاريخ التقديم :</td>
                                                         <td class="text-gray-800">{{\Carbon\Carbon::parse($data->date)->format('Y-m-d H;i')}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-muted min-w-125px w-125px">رقم الهاتف : </td>
+                                                        <td class="text-muted min-w-125px w-125px">رقم الهاتف :</td>
                                                         <td class="text-gray-800">{{$data->phone}}</td>
                                                     </tr>
                                                     <tr>
@@ -137,7 +151,10 @@
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">الموقع</td>
                                                         <td class="text-gray-800">
-                                                            <button type="button" class="btn btn-light-warring me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_edit_location">                                                                <i class="bi bi-geo-alt-fill fs-2x"></i>
+                                                            <button type="button" class="btn btn-light-warring me-3"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#kt_modal_edit_location"><i
+                                                                    class="bi bi-geo-alt-fill fs-2x"></i>
                                                             </button>
 
                                                         </td>
@@ -147,7 +164,8 @@
                                             <!--end::Col-->
                                             <!--begin::Col-->
                                             <div class="flex-equal">
-                                                <div class="mixed-widget-4-chart" data-kt-chart-color="primary" style="height: 200px"></div>
+                                                <div class="mixed-widget-4-chart" data-kt-chart-color="primary"
+                                                     style="height: 200px"></div>
                                             </div>
                                             <!--end::Col-->
                                         </div>
@@ -162,30 +180,38 @@
                                     <!--begin::Header-->
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <!--begin::Toggle-->
-                                        <div class="d-flex align-items-center collapsible toggle collapsed" data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_2">
+                                        <div class="d-flex align-items-center collapsible toggle collapsed"
+                                             data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_2">
                                             <!--begin::Arrow-->
                                             <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2">
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                                                 <span class="svg-icon toggle-on svg-icon-primary svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
                                                 <span class="svg-icon toggle-off svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+                                                          transform="rotate(-90 10.8891 17.8033)" fill="black"/>
+                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                             </div>
                                             <!--end::Arrow-->
                                             <!--begin::Logo-->
-                                            <img src="assets/media/svg/card-logos/visa.svg" class="w-40px me-3" alt="" />
+                                            <img src="assets/media/svg/card-logos/visa.svg" class="w-40px me-3" alt=""/>
                                             <!--end::Logo-->
                                             <!--begin::Summary-->
                                             <div class="me-3">
@@ -207,10 +233,13 @@
                                         <div class="d-flex flex-wrap py-5">
                                             <!--begin::Col-->
                                             <div class="flex-equal me-5">
-                                                <a href="{{url('quest2/'.$data->id.'/'.Auth::user()->id)}}"  target="_blank" class="btn btn-light-primary me-3 font-weight-bolder">
+                                                <a href="{{url('quest2/'.$data->id.'/'.Auth::user()->id)}}"
+                                                   target="_blank"
+                                                   class="btn btn-light-primary me-3 font-weight-bolder">
                                                     <i class="bi bi-eye fs-2x"></i> رؤية
                                                 </a>
-                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_send_quest" class="btn btn-light-danger me-3 font-weight-bolder">
+                                                <a data-bs-toggle="modal" data-bs-target="#kt_modal_send_quest"
+                                                   class="btn btn-light-danger me-3 font-weight-bolder">
                                                     <i class="bi bi-envelope fs-2x"></i> ارسال
                                                 </a>
                                             </div>
@@ -232,23 +261,32 @@
                                     <!--begin::Header-->
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <!--begin::Toggle-->
-                                        <div class="d-flex align-items-center collapsible toggle collapsed" data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_22">
+                                        <div class="d-flex align-items-center collapsible toggle collapsed"
+                                             data-bs-toggle="collapse"
+                                             data-bs-target="#kt_create_new_payment_method_22">
                                             <!--begin::Arrow-->
                                             <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2">
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                                                 <span class="svg-icon toggle-on svg-icon-primary svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
                                                 <span class="svg-icon toggle-off svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+                                                          transform="rotate(-90 10.8891 17.8033)" fill="black"/>
+                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
@@ -256,7 +294,7 @@
                                             <!--end::Arrow-->
                                             <!--begin::Logo-->
                                             <!--end::Logo-->
-                                            <img src="assets/media/svg/card-logos/visa.svg" class="w-40px me-3" alt="" />
+                                            <img src="assets/media/svg/card-logos/visa.svg" class="w-40px me-3" alt=""/>
 
                                             <!--begin::Summary-->
                                             <div class="me-3">
@@ -278,12 +316,14 @@
                                         <div class="d-flex flex-wrap py-5">
                                             <!--begin::Col-->
                                             <div class="flex-equal me-5">
-                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_price" class="btn btn-light-primary me-3 font-weight-bolder">
+                                                <a data-bs-toggle="modal" data-bs-target="#kt_modal_price"
+                                                   class="btn btn-light-primary me-3 font-weight-bolder">
                                                     <i class="bi bi-eye fs-2x"></i> رؤية
                                                 </a>
 
 
-                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_send_price" class="btn btn-light-danger me-3 font-weight-bolder">
+                                                <a data-bs-toggle="modal" data-bs-target="#kt_modal_send_price"
+                                                   class="btn btn-light-danger me-3 font-weight-bolder">
                                                     <i class="bi bi-envelope fs-2x"></i> ارسال
                                                 </a>
 
@@ -306,30 +346,39 @@
                                     <!--begin::Header-->
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <!--begin::Toggle-->
-                                        <div class="d-flex align-items-center collapsible toggle collapsed" data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_23">
+                                        <div class="d-flex align-items-center collapsible toggle collapsed"
+                                             data-bs-toggle="collapse"
+                                             data-bs-target="#kt_create_new_payment_method_23">
                                             <!--begin::Arrow-->
                                             <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2">
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                                                 <span class="svg-icon toggle-on svg-icon-primary svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
                                                 <span class="svg-icon toggle-off svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+                                                          transform="rotate(-90 10.8891 17.8033)" fill="black"/>
+                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                             </div>
                                             <!--end::Arrow-->
                                             <!--begin::Logo-->
-                                            <img src="assets/media/svg/card-logos/visa.svg" class="w-40px me-3" alt="" />
+                                            <img src="assets/media/svg/card-logos/visa.svg" class="w-40px me-3" alt=""/>
 
                                             <!--end::Logo-->
                                             <!--begin::Summary-->
@@ -352,12 +401,14 @@
                                         <div class="d-flex flex-wrap py-5">
                                             <!--begin::Col-->
                                             <div class="flex-equal me-5">
-                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_tamplate" class="btn btn-light-primary me-3 font-weight-bolder">
+                                                <a data-bs-toggle="modal" data-bs-target="#kt_modal_tamplate"
+                                                   class="btn btn-light-primary me-3 font-weight-bolder">
                                                     <i class="bi bi-eye fs-2x"></i> رؤية
                                                 </a>
 
 
-                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_send_templete" class="btn btn-light-danger me-3 font-weight-bolder">
+                                                <a data-bs-toggle="modal" data-bs-target="#kt_modal_send_templete"
+                                                   class="btn btn-light-danger me-3 font-weight-bolder">
                                                     <i class="bi bi-envelope fs-2x"></i> ارسال
                                                 </a>
 
@@ -381,23 +432,32 @@
                                     <!--begin::Header-->
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <!--begin::Toggle-->
-                                        <div class="d-flex align-items-center collapsible toggle collapsed" data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_24">
+                                        <div class="d-flex align-items-center collapsible toggle collapsed"
+                                             data-bs-toggle="collapse"
+                                             data-bs-target="#kt_create_new_payment_method_24">
                                             <!--begin::Arrow-->
                                             <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2">
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                                                 <span class="svg-icon toggle-on svg-icon-primary svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
                                                 <span class="svg-icon toggle-off svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+                                                          transform="rotate(-90 10.8891 17.8033)" fill="black"/>
+                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
@@ -405,7 +465,7 @@
                                             <!--end::Arrow-->
                                             <!--begin::Logo-->
                                             <!--end::Logo-->
-                                            <img src="assets/media/svg/card-logos/visa.svg" class="w-40px me-3" alt="" />
+                                            <img src="assets/media/svg/card-logos/visa.svg" class="w-40px me-3" alt=""/>
 
                                             <!--begin::Summary-->
                                             <div class="me-3">
@@ -428,11 +488,13 @@
                                             <!--begin::Col-->
                                             <div class="flex-equal me-5">
 
-                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_info" class="btn btn-light-primary me-3 font-weight-bolder">
+                                                <a data-bs-toggle="modal" data-bs-target="#kt_modal_info"
+                                                   class="btn btn-light-primary me-3 font-weight-bolder">
                                                     <i class="bi bi-eye fs-2x"></i> رؤية
                                                 </a>
 
-                                                <a    data-bs-toggle="modal" data-bs-target="#kt_modal_send_paid" class="btn btn-light-danger me-3 font-weight-bolder">
+                                                <a data-bs-toggle="modal" data-bs-target="#kt_modal_send_paid"
+                                                   class="btn btn-light-danger me-3 font-weight-bolder">
                                                     <i class="bi bi-envelope fs-2x"></i> ارسال
                                                 </a>
 
@@ -457,35 +519,45 @@
                                     <!--begin::Header-->
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <!--begin::Toggle-->
-                                        <div class="d-flex align-items-center collapsible toggle collapsed" data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_3">
+                                        <div class="d-flex align-items-center collapsible toggle collapsed"
+                                             data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_3">
                                             <!--begin::Arrow-->
                                             <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2">
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                                                 <span class="svg-icon toggle-on svg-icon-primary svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
                                                 <span class="svg-icon toggle-off svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                                          fill="black"/>
+                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+                                                          transform="rotate(-90 10.8891 17.8033)" fill="black"/>
+                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
+                                                          fill="black"/>
                                                 </svg>
                                             </span>
                                                 <!--end::Svg Icon-->
                                             </div>
                                             <!--end::Arrow-->
                                             <!--begin::Logo-->
-                                            <img src="assets/media/svg/card-logos/american-express.svg" class="w-40px me-3" alt="" />
+                                            <img src="assets/media/svg/card-logos/american-express.svg"
+                                                 class="w-40px me-3" alt=""/>
                                             <!--end::Logo-->
                                             <!--begin::Summary-->
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center fw-bolder"> تفعيل المشروع ؟
-                                                    <div class="badge badge-light-danger ms-5"></div></div>
+                                                    <div class="badge badge-light-danger ms-5"></div>
+                                                </div>
                                                 <div class="text-muted"></div>
                                             </div>
                                             <!--end::Summary-->
@@ -503,14 +575,15 @@
                                         <div class="d-flex flex-wrap py-5">
                                             <!--begin::Col-->
                                             <div class="flex-equal me-5">
-                                                <a href="#" class="btn btn-light-success" data-bs-toggle="modal" data-bs-target="#kt_modal_confirmProject">
+                                                <a href="#" class="btn btn-light-success" data-bs-toggle="modal"
+                                                   data-bs-target="#kt_modal_confirmProject">
                                                     <i class="bi bi-check-circle fs-2x"></i> تفعيل
 
-                                                    </a>
+                                                </a>
 
 
-
-                                                <button type="button" data-id="{{$data->id}}" class=" RejectProject btn btn-light-danger me-3">
+                                                <button type="button" data-id="{{$data->id}}"
+                                                        class=" RejectProject btn btn-light-danger me-3">
                                                     <i class="bi bi-x-octagon fs-2x"></i> رفـض
                                                 </button>
                                             </div>
@@ -549,7 +622,9 @@
                             <!--begin::Card title-->
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
-                                <button type="button" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_product">اضافة شرح</button>
+                                <button type="button" class="btn btn-light-primary" data-bs-toggle="modal"
+                                        data-bs-target="#kt_modal_add_product">اضافة شرح
+                                </button>
                             </div>
                             <!--end::Card toolbar-->
                         </div>
@@ -559,7 +634,8 @@
                             <!--begin::Table wrapper-->
                             <div class="table-responsive">
                                 <!--begin::Table-->
-                                <table class="table align-middle table-row-dashed fs-6 fw-bold gy-4" id="kt_subscription_products_table">
+                                <table class="table align-middle table-row-dashed fs-6 fw-bold gy-4"
+                                       id="kt_subscription_products_table">
                                     <!--begin::Table head-->
                                     <thead>
                                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
@@ -573,14 +649,14 @@
                                     <!--begin::Table body-->
                                     <tbody class="text-gray-600">
                                     @foreach($explans as $Key => $exp)
-                                    <tr>
-                                        <td>{{$Key + 1}}</td>
-                                        <td>{{$exp->comments}}</td>
-                                        <td>{{$exp->time}} {{$exp->date}}</td>
-                                        <td>{{$exp->emp_name}}</td>
+                                        <tr>
+                                            <td>{{$Key + 1}}</td>
+                                            <td>{{$exp->comments}}</td>
+                                            <td>{{$exp->time}} {{$exp->date}}</td>
+                                            <td>{{$exp->emp_name}}</td>
                                         </tr>
-                                        @endforeach
-                                        </tbody>
+                                    @endforeach
+                                    </tbody>
                                     <!--end::Table body-->
                                 </table>
                                 <!--end::Table-->
@@ -596,7 +672,7 @@
                 <!--begin::Sidebar-->
                 <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-350px mb-10 order-1 order-lg-2">
                     <!--begin::Card-->
-                    <div class="card card-flush pt-3 mb-0" >
+                    <div class="card card-flush pt-3 mb-0">
                         <!--begin::Card header-->
                         <div class="card-header">
                             <!--begin::Card title-->
@@ -717,9 +793,12 @@
                                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                     <span class="svg-icon svg-icon-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                              transform="rotate(-45 6 17.3137)" fill="black"/>
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                              transform="rotate(45 7.41422 6)" fill="black"/>
                                     </svg>
                                 </span>
                                     <!--end::Svg Icon-->
@@ -732,26 +811,28 @@
                                 <!--begin::Label-->
                                 <h3 class="mb-7">
                                     <span class="fw-bolder required">اختار الموقع</span>
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Please select a subscription"></i>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                                       title="Please select a subscription"></i>
                                 </h3>
                                 <!--end::Label-->
                                 <!--begin::Scroll-->
                                 <div class="scroll-y mh-300px me-n7 pe-7">
-                                    <input type="text" id="search_input" placeholder=" أبحث  بالمكان او اضغط على الخريطه" />
-                                    <input type="hidden" id="information"  />
+                                    <input type="text" id="search_input"
+                                           placeholder=" أبحث  بالمكان او اضغط على الخريطه"/>
+                                    <input type="hidden" id="information"/>
                                     <div id="us1" style="width: 100%; height: 400px;"></div>
                                     <?php
-                                    if(!empty($data->lat) && !empty($data->lng)){
+                                    if (!empty($data->lat) && !empty($data->lng)) {
                                         $lat = $data->lat;
                                         $lng = $data->lng;
-                                    }else{
-                                    $lat = !empty(old('lat')) ? old('lat') : '24.69670448385797';
-                                    $lng = !empty(old('lng')) ? old('lng') : '46.690517596875';
+                                    } else {
+                                        $lat = !empty(old('lat')) ? old('lat') : '24.69670448385797';
+                                        $lng = !empty(old('lng')) ? old('lng') : '46.690517596875';
                                     }
                                     ?>
 
                                     <input type="hidden" id="lat" name="lat" required value="{{$lat}}">
-                                    <input type="hidden" id="lng" name="lng"  required value="{{$lng}}">
+                                    <input type="hidden" id="lng" name="lng" required value="{{$lng}}">
                                     <input type="hidden" name="id" value="{{$data->id}}">
                                     <!--begin::Product-->
                                     <!--end::Input group-->
@@ -788,8 +869,8 @@
                     <div class="modal-content">
                         <!--begin::Form-->
                         <form class="form" action="{{url('Add_explan')}}" method="post">
-                            @csrf
-                            <!--begin::Modal header-->
+                        @csrf
+                        <!--begin::Modal header-->
                             <div class="modal-header">
                                 <!--begin::Modal title-->
                                 <h2 class="fw-bolder">اصافة شرح</h2>
@@ -798,9 +879,12 @@
                                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                     <span class="svg-icon svg-icon-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                              transform="rotate(-45 6 17.3137)" fill="black"/>
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                              transform="rotate(45 7.41422 6)" fill="black"/>
                                     </svg>
                                 </span>
                                     <!--end::Svg Icon-->
@@ -812,7 +896,8 @@
                             <div class="modal-body py-10 px-lg-17">
                                 <!--begin::Label-->
                                 <h3 class="mb-7">
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Please select a subscription"></i>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                                       title="Please select a subscription"></i>
                                 </h3>
                                 <!--end::Label-->
                                 <!--begin::Scroll-->
@@ -823,7 +908,8 @@
                                         <span class="required">العنوان</span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="text"  required class="form-control form-control-solid" placeholder="" name="title" />
+                                    <input type="text" required class="form-control form-control-solid" placeholder=""
+                                           name="title"/>
                                 </div>
 
                                 <div class="d-flex flex-column mb-7 fv-row">
@@ -843,7 +929,8 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="hidden" name="project_id" value="{{$data->id}}">
-                                    <input type="text" class="form-control form-control-solid" placeholder="" value="{{Auth::user()->name}}" name="emp_name" disabled />
+                                    <input type="text" class="form-control form-control-solid" placeholder=""
+                                           value="{{Auth::user()->name}}" name="emp_name" disabled/>
                                 </div>
 
                             </div>
@@ -883,9 +970,12 @@
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -904,14 +994,16 @@
                                         <span class="required">: تاريخ التفعيل</span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="date"  id="confirmDate"  required class="form-control form-control-solid" placeholder="" value="{{$data->client->name}}" name="title" />
+                                    <input type="date" id="confirmDate" required class="form-control form-control-solid"
+                                           placeholder="" value="{{$data->client->name}}" name="title"/>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
                                     <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
                                     </button>
-                                    <button type="button" data-id="{{$data->id}}" id="ConfirmProject" class=" ConfirmProject btn btn-primary">
+                                    <button type="button" data-id="{{$data->id}}" id="ConfirmProject"
+                                            class=" ConfirmProject btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
                                         <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -941,9 +1033,12 @@
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -954,7 +1049,8 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_new_card_form" class="form"  method="post" action="{{url('Send_revision')}}">
+                            <form id="kt_modal_new_card_form" class="form" method="post"
+                                  action="{{url('Send_revision')}}">
                                 <!--begin::Input group-->
                                 @csrf
                                 <div class="d-flex flex-column mb-7 fv-row">
@@ -963,10 +1059,12 @@
                                         <span class="required">: اسم العميل</span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="text"  disabled required class="form-control form-control-solid" placeholder="" value="{{$data->client->name}}" name="title" />
-                                    <input type="hidden"   required class="form-control form-control-solid" placeholder="" value="{{$data->client_id}}" name="client_id" />
+                                    <input type="text" disabled required class="form-control form-control-solid"
+                                           placeholder="" value="{{$data->client->name}}" name="title"/>
+                                    <input type="hidden" required class="form-control form-control-solid" placeholder=""
+                                           value="{{$data->client_id}}" name="client_id"/>
                                 </div>
-                                <input type="hidden" name="project_id" value="{{$data->id}}" >
+                                <input type="hidden" name="project_id" value="{{$data->id}}">
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
@@ -977,7 +1075,8 @@
 
                                     <div class="mt-5 fv-row">
                                         <div class="form-check form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" name="type" id="flexRadioDefault121"/>
+                                            <input class="form-check-input" type="checkbox" value="1" name="type"
+                                                   id="flexRadioDefault121"/>
                                             <label class="form-check-label" for="flexRadioDefault121">
                                                 ارسالة رسالة نصية
                                             </label>
@@ -1020,9 +1119,12 @@
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -1033,17 +1135,20 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_new_card_form" class="form" action="{{url('UpdateClientData')}}" method="post">
-                                @csrf
-                                <!--begin::Input group-->
+                            <form id="kt_modal_new_card_form" class="form" action="{{url('UpdateClientData')}}"
+                                  method="post">
+                            @csrf
+                            <!--begin::Input group-->
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                         <span class="required">: اسم العميل</span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="text"  required class="form-control form-control-solid" placeholder="" value="{{$data->client->name}}" name="title" />
-                                    <input type="hidden"  required class="form-control form-control-solid" placeholder="" value="{{$data->id}}" name="id" />
+                                    <input type="text" required class="form-control form-control-solid" placeholder=""
+                                           value="{{$data->client->name}}" name="title"/>
+                                    <input type="hidden" required class="form-control form-control-solid" placeholder=""
+                                           value="{{$data->id}}" name="id"/>
                                 </div>
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
@@ -1051,7 +1156,8 @@
                                         <span class="required">رقـم الجـوال :</span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="number"  required class="form-control form-control-solid" placeholder="" value="{{$data->client->phone}}" name="phone" />
+                                    <input type="number" required class="form-control form-control-solid" placeholder=""
+                                           value="{{$data->client->phone}}" name="phone"/>
                                 </div>
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
@@ -1062,7 +1168,8 @@
                                     @inject('Contracts','App\Models\Contract')
                                     <select class="form-control" name="contract_id">
                                         @foreach($Contracts->all() as $con)
-                                            <option value="{{$con->id}}" @if($con->id == $data->projectContract->contract_id) selected @endif > {{$con->title}} </option>
+                                            <option value="{{$con->id}}"
+                                                    @if($con->id == $data->projectContract->contract_id) selected @endif > {{$con->title}} </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -1101,9 +1208,12 @@
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -1116,15 +1226,16 @@
                             <!--begin::Form-->
                             <form method="post" class="form" action="{{url('UpdateProjectContract')}}">
                             @csrf
-                                <!--begin::Input group-->
+                            <!--begin::Input group-->
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                         <span class="required">: تصميم عرض السعر</span>
                                     </label>
                                     <!--end::Label-->
-                                    <textarea id="editor1" name="price" value="">{!!  $data->projectContract->price !!}</textarea>
-                            <input type="hidden" name="id" value="{{$data->id}}">
+                                    <textarea id="editor1" name="price"
+                                              value="">{!!  $data->projectContract->price !!}</textarea>
+                                    <input type="hidden" name="id" value="{{$data->id}}">
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
@@ -1161,9 +1272,12 @@
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -1183,7 +1297,8 @@
                                         <span class="required">: تصميم العقد</span>
                                     </label>
                                     <!--end::Label-->
-                                    <textarea id="editor2" name="template" value="">{!!  $data->projectContract->template !!}</textarea>
+                                    <textarea id="editor2" name="template"
+                                              value="">{!!  $data->projectContract->template !!}</textarea>
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
@@ -1222,9 +1337,12 @@
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -1235,7 +1353,8 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form method="post" class="form" action="{{url('UpdateProjectPaid')}}">
+                            <form method="post" id="UpdateProjectPaid" class="form"
+                                  action="{{url('UpdateProjectPaid')}}">
                             @csrf
                             <!--begin::Input group-->
                                 <div class="d-flex flex-column mb-7 fv-row">
@@ -1244,7 +1363,8 @@
                                         <span class="required">: اجمالي مبلغ التعاقد </span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="number" required name="paid" id="paid" class="form-control" value="{{$data->projectPaid->paid}}">
+                                    <input type="number" required name="paid" id="paid" class="form-control"
+                                           value="{{$data->projectPaid->paid}}">
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
@@ -1254,7 +1374,8 @@
                                         <span class="required">: الدفع المقدمة </span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="number" required id="paid_down" name="paid_down" class="form-control" value="{{$data->projectPaid->paid_down}}">
+                                    <input type="number" required id="paid_down" name="paid_down" class="form-control"
+                                           value="{{$data->projectPaid->paid_down}}">
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
@@ -1264,37 +1385,49 @@
                                         <span class="required">: المبلغ المتبقى </span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="number" required id="paid_term" name="paid_term" class="form-control" value="{{$data->projectPaid->paid_term}}">
+                                    <input type="number" required id="paid_term" name="paid_term"
+                                           class="form-control" value="{{$data->projectPaid->paid_term}}">
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
-                                    <div class="d-flex flex-column fv-row mb-7 " id="questions" style="display: none">
-                                        <div class="row">
-                                            <!--begin::Label-->
-                                            <label> الدفعات</label>
-                                            <br>
-                                            <div class="col-3">
-                                                <button type="button" id="add-question"
-                                                        class="btn btn-light-primary me-3">
-                                                    <i class="bi bi-plus-circle-fill fs-2x"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-6">
+                                <div class="d-flex flex-column fv-row mb-7 " id="questions" style="display: none">
+                                    <div class="row">
+                                        <!--begin::Label-->
+                                        <label> الدفعات</label>
+                                        <br>
+                                        <div class="col-3">
+                                            <button type="button" id="add-question"
+                                                    class="btn btn-light-primary me-3">
+                                                <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-6">
+                                            @php
+                                                $incomes = \App\Models\Income::where('project_id',$data->id)->get();
+                                            @endphp
+                                            @if($incomes->count() > 0)
+                                                @foreach($incomes as $income)
+                                                <input type="number" value="{{$income->amount}}" name="values[]"
+                                                       class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                       placeholder=""/>
+                                                @endforeach
+                                            @else
                                                 <input type="number" value="0" name="values[]"
                                                        class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
                                                        placeholder=""/>
-                                            </div>
+                                            @endif
                                         </div>
-
-                                        <!--end::Input-->
                                     </div>
+
+                                    <!--end::Input-->
+                                </div>
 
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
                                     <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
                                     </button>
-                                    <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                                    <button type="submit" id="kt_modal_new_card_submit " class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
                                         <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -1318,15 +1451,18 @@
                         <!--begin::Modal header-->
                         <div class="modal-header">
                             <!--begin::Modal title-->
-                            <h2>  ارسال المعلومات المالية</h2>
+                            <h2> ارسال المعلومات المالية</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -1346,15 +1482,14 @@
                                         <span class="required">: ارسال </span>
                                     </label>
                                     <!--end::Label-->
-                                    <select name="type" class="form-control" >
-                                        <option value="1" > رساله نصية</option>
-                                        <option  value="2" > البريد الوارد</option>
-                                        <option  value="3" > الاثنين معا</option>
+                                    <select name="type" class="form-control">
+                                        <option value="1"> رساله نصية</option>
+                                        <option value="2"> البريد الوارد</option>
+                                        <option value="3"> الاثنين معا</option>
                                     </select>
                                     <input type="hidden" name="project_id" value="{{$data->id}}">
 
                                 </div>
-
 
 
                                 <!--end::Input group-->
@@ -1386,15 +1521,18 @@
                         <!--begin::Modal header-->
                         <div class="modal-header">
                             <!--begin::Modal title-->
-                            <h2>  ارسال العقد</h2>
+                            <h2> ارسال العقد</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -1414,15 +1552,14 @@
                                         <span class="required">: ارسال </span>
                                     </label>
                                     <!--end::Label-->
-                                    <select name="type" class="form-control" >
-                                        <option value="1" > رساله نصية</option>
-                                        <option  value="2" > البريد الوارد</option>
-                                        <option  value="3" > الاثنين معا</option>
+                                    <select name="type" class="form-control">
+                                        <option value="1"> رساله نصية</option>
+                                        <option value="2"> البريد الوارد</option>
+                                        <option value="3"> الاثنين معا</option>
                                     </select>
                                     <input type="hidden" name="project_id" value="{{$data->id}}">
 
                                 </div>
-
 
 
                                 <!--end::Input group-->
@@ -1454,15 +1591,18 @@
                         <!--begin::Modal header-->
                         <div class="modal-header">
                             <!--begin::Modal title-->
-                            <h2>  ارسال عرض السعر</h2>
+                            <h2> ارسال عرض السعر</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -1482,15 +1622,14 @@
                                         <span class="required">: ارسال </span>
                                     </label>
                                     <!--end::Label-->
-                                    <select name="type" class="form-control" >
-                                        <option value="1" > رساله نصية</option>
-                                        <option  value="2" > البريد الوارد</option>
-                                        <option  value="3" > الاثنين معا</option>
+                                    <select name="type" class="form-control">
+                                        <option value="1"> رساله نصية</option>
+                                        <option value="2"> البريد الوارد</option>
+                                        <option value="3"> الاثنين معا</option>
                                     </select>
                                     <input type="hidden" name="project_id" value="{{$data->id}}">
 
                                 </div>
-
 
 
                                 <!--end::Input group-->
@@ -1522,15 +1661,18 @@
                         <!--begin::Modal header-->
                         <div class="modal-header">
                             <!--begin::Modal title-->
-                            <h2>  ارسال استبيان المشاريع</h2>
+                            <h2> ارسال استبيان المشاريع</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
                                 </svg>
                             </span>
                                 <!--end::Svg Icon-->
@@ -1550,15 +1692,14 @@
                                         <span class="required">: ارسال </span>
                                     </label>
                                     <!--end::Label-->
-                                    <select name="type" class="form-control" >
-                                        <option value="1" > رساله نصية</option>
-                                        <option  value="2" > البريد الوارد</option>
-                                        <option  value="3" > الاثنين معا</option>
+                                    <select name="type" class="form-control">
+                                        <option value="1"> رساله نصية</option>
+                                        <option value="2"> البريد الوارد</option>
+                                        <option value="3"> الاثنين معا</option>
                                     </select>
                                     <input type="hidden" name="project_id" value="{{$data->id}}">
 
                                 </div>
-
 
 
                                 <!--end::Input group-->
@@ -1594,7 +1735,7 @@
     <script src="{{ URL::asset('admin/assets/plugins/custom/tinymce/tinymce.bundle.js')}}"></script>
 
     <script>
-         var options = {selector: "#editor1"};
+        var options = {selector: "#editor1"};
 
         if (KTApp.isDarkMode()) {
             options["skin"] = "oxide-dark";
@@ -1617,29 +1758,29 @@
 
     </script>
 
-<script>
-    $("#add-question").on("click", function () {
-        $("#questions").append('<div class="row">' +
-            '                                            <div class="col-3">' +
-            '                                             </div>' +
-            '                                            <div class="col-6">' +
-            '                                                <input value="0" type="number" name="values[]"' +
-            '                                                       class="values form-control col-6 form-control-solid mb-3 mb-lg-0"' +
-            '                                                       placeholder=""/>' +
-            '                                            </div>' +
-            '                                            <div class="col-3">' +
-            '                                                     <button type="button"' +
-            '                                                        class="btn btn-light-danger me-3 delete_question">' +
-            '                                                    <i class="bi bi-trash-fill fs-2x fs-2x"></i>' +
-            '                                                </button>' +
-            '                                             </div>' +
-            '                                        </div>');
-    });
+    <script>
+        $("#add-question").on("click", function () {
+            $("#questions").append('<div class="row">' +
+                '                                            <div class="col-3">' +
+                '                                             </div>' +
+                '                                            <div class="col-6">' +
+                '                                                <input value="0" type="number" name="values[]"' +
+                '                                                       class="values form-control col-6 form-control-solid mb-3 mb-lg-0"' +
+                '                                                       placeholder=""/>' +
+                '                                            </div>' +
+                '                                            <div class="col-3">' +
+                '                                                     <button type="button"' +
+                '                                                        class="btn btn-light-danger me-3 delete_question">' +
+                '                                                    <i class="bi bi-trash-fill fs-2x fs-2x"></i>' +
+                '                                                </button>' +
+                '                                             </div>' +
+                '                                        </div>');
+        });
 
-    $(document).on('click', '.delete_question', function () {
-        $(this).parent().parent().remove();
-    });
-</script>
+        $(document).on('click', '.delete_question', function () {
+            $(this).parent().parent().remove();
+        });
+    </script>
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script>
         (function () {
@@ -1653,13 +1794,13 @@
                         r = KTUtil.getCssVariableValue("--bs-gray-700");
                     new ApexCharts(e, {
                         series: [{{$data->progress}}],
-                        chart: { fontFamily: "inherit", height: t, type: "radialBar" },
+                        chart: {fontFamily: "inherit", height: t, type: "radialBar"},
                         plotOptions: {
                             radialBar: {
-                                hollow: { margin: 0, size: "65%" },
+                                hollow: {margin: 0, size: "65%"},
                                 dataLabels: {
                                     showOn: "always",
-                                    name: { show: !1, fontWeight: "700" },
+                                    name: {show: !1, fontWeight: "700"},
                                     value: {
                                         color: r,
                                         fontSize: "30px",
@@ -1671,11 +1812,11 @@
                                         },
                                     },
                                 },
-                                track: { background: s, strokeWidth: "100%" },
+                                track: {background: s, strokeWidth: "100%"},
                             },
                         },
                         colors: [o],
-                        stroke: { lineCap: "round" },
+                        stroke: {lineCap: "round"},
                         labels: ["Progress"],
                     }).render();
                 }
@@ -1690,14 +1831,14 @@
 
     <script>
 
-        const myLatLng = { lat: -25.363, lng: 131.044 };
+        const myLatLng = {lat: -25.363, lng: 131.044};
 
         $('#us1').locationpicker({
             location: {
                 latitude: {{$lat}},
                 longitude: {{$lng}}
             },
-            position:myLatLng,
+            position: myLatLng,
             radius: 300,
             markerIcon: "{{asset('admin/map-marker-2-xl.png')}}",
             inputBinding: {
@@ -1732,7 +1873,7 @@
                 map = new google.maps.Map(document.getElementById("us1"), mapOptions);
 
                 content = document.getElementById('information');
-                google.maps.event.addListener(map, 'click', function(e) {
+                google.maps.event.addListener(map, 'click', function (e) {
                     placeMarker(e.latLng);
                 });
 
@@ -1741,18 +1882,19 @@
 
                 var searchBox = new google.maps.places.SearchBox(input);
 
-                google.maps.event.addListener(searchBox, 'places_changed', function() {
+                google.maps.event.addListener(searchBox, 'places_changed', function () {
                     var places = searchBox.getPlaces();
                     placeMarker(places[0].geometry.location);
                 });
 
                 marker = new google.maps.Marker({
-                        map: map,
-                        position: myLatlng,
-                        title: "{{$data->name}}",
+                    map: map,
+                    position: myLatlng,
+                    title: "{{$data->name}}",
                 });
             }
         }
+
         function placeMarker(location) {
             marker.setPosition(location);
             map.panTo(location);
@@ -1760,10 +1902,10 @@
             content.innerHTML = "Lat: " + location.lat() + " / Long: " + location.lng();
             $("#lat").val(location.lat());
             $("#lng").val(location.lng());
-            google.maps.event.addListener(marker, 'click', function(e) {
+            google.maps.event.addListener(marker, 'click', function (e) {
                 new google.maps.InfoWindow({
                     content: "Lat: " + location.lat() + " / Long: " + location.lng()
-                }).open(map,marker);
+                }).open(map, marker);
 
             });
         }
@@ -1772,39 +1914,12 @@
     </script>
 
     <script>
-        $("#paid_down").on("click , change, keyup", function () {
-            var totalPrice = 0;
-            var sum = [];
 
-            $(".values").each(function (index) {
-                sum.push($(this).val())
-                totalPrice += Number($(this).val());
-            })
+        $(document).on('submit', '#UpdateProjectPaid', function (e) {
 
-            var paid_down = $(this).val();
-            var paid = $('#paid').val();
-            var paid_term = paid - paid_down - totalPrice;
-            document.getElementById('paid_term').value=paid_term
-
-        })
-        $("#paid_term").on("click , change, keyup", function () {
-            var paid_term = $(this).val();
-            var paid = $('#paid').val();
-            var paid_down = paid - paid_term;
-            document.getElementById('paid_down').value=paid_down
-
-        })
-
-        function simpleArraySum(ar) {
-            var sum = 0;
-            for (var i = 0; i < ar.length; i++) {
-                sum += ar[i];
-            }
-            return sum;
-        }
-        $(".values").on("click , change, keyup", function () {
             var sum = [];
             var totalPrice = 0;
+            var paid_term = 0;
 
             $(".values").each(function (index) {
                 sum.push($(this).val())
@@ -1813,112 +1928,172 @@
 
             var paid_down = $('#paid_down').val();
             var paid = $('#paid').val();
-            var paid_term = paid - paid_down - totalPrice ;
-            document.getElementById('paid_term').value=paid_term
+            paid_term = paid - paid_down - totalPrice;
+            document.getElementById('paid_term').value = paid_term;
 
-        })
-        $("#ConfirmProject").on("click", function () {
-            var id =$(this).data('id')
-            var date =$('#confirmDate').val()
-            if (id) {
+
+            if (document.getElementById('paid_term').value < 0) {
+                e.preventDefault();
                 Swal.fire({
-                    title: "هل انت متاكد من قبول المشروع",
-                    text: "",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#f64e60",
-                    confirmButtonText: "نعم",
-                    cancelButtonText: "لا",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                }).then(function (result) {
-                    if (result.value) {
-                        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                        $.ajax({
-                            url: '{{url("ConfirmProject")}}',
-                            type: "get",
-                            data: {'id': id,'date':date},
-                            dataType: "JSON",
-                            success: function (data) {
-                                if (data.message == "Success") {
-                                    Swal.fire("نجح", "تمت قبول المشروع بنجاح", "success");
-                                    $('#kt_modal_confirmProject').modal('hide');
+                    icon: 'warning',
+                    title: "برجاء التأكد من البيانات.",
+                    text: "اجمالى الدفعات اكبر من اجمالى مبلغ التعاقد!",
+                    type: "error",
+                    timer: 5000,
+                    showConfirmButton: false
+                });
+            } else {
+                $this.submit();
+            }
 
-                                    setTimeout(reload, 7000)
-                                    function reload() {
-                                        window.location.href = "{{url('/Contracts')}}"
+
+        });
+        $(document).ready(function () {
+
+            $("#paid_down").on("click , change, keyup", function () {
+                var totalPrice = 0;
+                var sum = [];
+
+                $(".values").each(function (index) {
+                    sum.push($(this).val())
+                    totalPrice += Number($(this).val());
+                })
+
+                var paid_down = $(this).val();
+                var paid = $('#paid').val();
+                var paid_term = paid - paid_down - totalPrice;
+                document.getElementById('paid_term').value = paid_term
+
+            })
+            $("#paid_term").on("click , change, keyup", function () {
+                var paid_term = $(this).val();
+                var paid = $('#paid').val();
+                var paid_down = paid - paid_term;
+                document.getElementById('paid_down').value = paid_down
+
+            })
+
+
+            $(".values").on("click , change, keyup", function () {
+                var sum = [];
+                var totalPrice = 0;
+
+                $(".values").each(function (index) {
+                    sum.push($(this).val())
+                    totalPrice += Number($(this).val());
+                })
+
+                var paid_down = $('#paid_down').val();
+                var paid = $('#paid').val();
+                var paid_term = paid - paid_down - totalPrice;
+                document.getElementById('paid_term').value = paid_term
+
+            })
+            $("#ConfirmProject").on("click", function () {
+                var id = $(this).data('id')
+                var date = $('#confirmDate').val()
+                if (id) {
+                    Swal.fire({
+                        title: "هل انت متاكد من قبول المشروع",
+                        text: "",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#f64e60",
+                        confirmButtonText: "نعم",
+                        cancelButtonText: "لا",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }).then(function (result) {
+                        if (result.value) {
+                            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                            $.ajax({
+                                url: '{{url("ConfirmProject")}}',
+                                type: "get",
+                                data: {'id': id, 'date': date},
+                                dataType: "JSON",
+                                success: function (data) {
+                                    if (data.message == "Success") {
+                                        Swal.fire("نجح", "تمت قبول المشروع بنجاح", "success");
+                                        $('#kt_modal_confirmProject').modal('hide');
+
+                                        setTimeout(reload, 7000)
+
+                                        function reload() {
+                                            window.location.href = "{{url('/Contracts')}}"
+                                        }
+                                    } else {
+                                        Swal.fire("عفوا! ", "حدث خطأ", "error");
+                                        $('#kt_modal_confirmProject').modal('hide');
+
                                     }
-                                } else {
+                                },
+                                fail: function (xhrerrorThrown) {
                                     Swal.fire("عفوا! ", "حدث خطأ", "error");
                                     $('#kt_modal_confirmProject').modal('hide');
 
                                 }
-                            },
-                            fail: function (xhrerrorThrown) {
-                                Swal.fire("عفوا! ", "حدث خطأ", "error");
-                                $('#kt_modal_confirmProject').modal('hide');
-
-                            }
-                        });
-                        // result.dismiss can be 'cancel', 'overlay',
-                        // 'close', and 'timer'
-                    } else if (result.dismiss === 'cancel') {
-                        Swal.fire("عفوا!", "تم الغاء العملية", "error");
-                        $('#kt_modal_confirmProject').modal('hide');
+                            });
+                            // result.dismiss can be 'cancel', 'overlay',
+                            // 'close', and 'timer'
+                        } else if (result.dismiss === 'cancel') {
+                            Swal.fire("عفوا!", "تم الغاء العملية", "error");
+                            $('#kt_modal_confirmProject').modal('hide');
 
 
-                    }
-                });
-            }
-        });
-        $(".RejectProject").on("click", function () {
-            var id=$(this).data('id')
-            if (id) {
-                Swal.fire({
-                    title: "هل انت متاكد من رفض المشروع",
-                    text: "",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#f64e60",
-                    confirmButtonText: "نعم",
-                    cancelButtonText: "لا",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                }).then(function (result) {
-                    if (result.value) {
-                        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                        $.ajax({
-                            url: '{{url("RejectProject")}}',
-                            type: "get",
-                            data: {'id': id, _token: CSRF_TOKEN},
-                            dataType: "JSON",
-                            success: function (data) {
-                                if (data.message == "Success") {
-                                    $('#kt_menu_61a08bf50cf89').hide();
+                        }
+                    });
+                }
+            });
+            $(".RejectProject").on("click", function () {
+                var id = $(this).data('id')
+                if (id) {
+                    Swal.fire({
+                        title: "هل انت متاكد من رفض المشروع",
+                        text: "",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#f64e60",
+                        confirmButtonText: "نعم",
+                        cancelButtonText: "لا",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }).then(function (result) {
+                        if (result.value) {
+                            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                            $.ajax({
+                                url: '{{url("RejectProject")}}',
+                                type: "get",
+                                data: {'id': id, _token: CSRF_TOKEN},
+                                dataType: "JSON",
+                                success: function (data) {
+                                    if (data.message == "Success") {
+                                        $('#kt_menu_61a08bf50cf89').hide();
 
-                                    Swal.fire("نجح", "تمت رفض المشروع بنجاح", "success");
+                                        Swal.fire("نجح", "تمت رفض المشروع بنجاح", "success");
 
-                                    setTimeout(reload, 7000)
-                                    function reload() {
-                                        window.location.href = "{{url('/Contracts')}}"
+                                        setTimeout(reload, 7000)
+
+                                        function reload() {
+                                            window.location.href = "{{url('/Contracts')}}"
+                                        }
+                                    } else {
+                                        Swal.fire("عفوا! ", "حدث خطأ", "error");
                                     }
-                                } else {
+                                },
+                                fail: function (xhrerrorThrown) {
                                     Swal.fire("عفوا! ", "حدث خطأ", "error");
                                 }
-                            },
-                            fail: function (xhrerrorThrown) {
-                                Swal.fire("عفوا! ", "حدث خطأ", "error");
-                            }
-                        });
-                        // result.dismiss can be 'cancel', 'overlay',
-                        // 'close', and 'timer'
-                    } else if (result.dismiss === 'cancel') {
-                        Swal.fire("عفوا!", "تم الغاء العملية", "error");
-                    }
-                });
-            }
-        });
+                            });
+                            // result.dismiss can be 'cancel', 'overlay',
+                            // 'close', and 'timer'
+                        } else if (result.dismiss === 'cancel') {
+                            Swal.fire("عفوا!", "تم الغاء العملية", "error");
+                        }
+                    });
+                }
+            });
 
+        });
     </script>
 
     <?php
