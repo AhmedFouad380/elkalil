@@ -660,7 +660,8 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_new_card_form" class="form" action="#">
+                            <form id="kt_modal_new_card_form" class="form"  method="post" action="{{url('updateProjectData')}}">
+                                @csrf
                                 <!--begin::Input group-->
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
@@ -668,7 +669,7 @@
                                         <span class="required">: اسم العميل</span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="text"  required class="form-control form-control-solid" placeholder="" value="{{$data->client->name}}" name="title" />
+                                    <input type="text"  required class="form-control form-control-solid" placeholder="" value="{{$data->client->name}}" name="name" />
                                 </div>
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
@@ -677,6 +678,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="number"  required class="form-control form-control-solid" placeholder="" value="{{$data->client->phone}}" name="phone" />
+                                    <input type="hidden"  required class="form-control form-control-solid" placeholder="" value="{{$data->id}}" name="id" />
                                 </div>
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->

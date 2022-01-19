@@ -6,6 +6,8 @@
     use App\Models\Contract;
     use App\Models\Explan;
     use App\Models\Project;
+    use App\Models\ProjectContract;
+    use http\Client;
     use Illuminate\Http\Request;
     use Yajra\DataTables\Facades\DataTables;
     use Auth;
@@ -89,7 +91,37 @@
                 return view('admin.Requests.edit',compact('data','explans'));
         }
 
+        public function updateProjectData(Request $request){
+            $Project = Project::find($request->id);
+            $Project->phone=$request->phone;
+            $Project->save();
 
+            $client = \App\Models\Client::find($Project->client_id);
+            $client->name=$request->name;
+            $client->phone=$request->phone;
+            $client->save();
+
+            $contract = Contract::find($request->contract_id);
+            $data = ProjectContract::where('project_id',$request->id)->first();
+            $data->contract_id=$contract->id;
+            $data->price=$contract->price;
+            $data->template=$contract->template;
+            $data->color=$contract->color;
+            $data->save();
+
+            $explan = 'تم تعديل بيانات المشروع ';
+            Explan::create([
+                'title' => $explan,
+                'comments' => $explan,
+                'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                'emp_name'=>Auth::user()->name,
+                'emp_id'=>Auth::user()->id,
+                'project_id'=>$request->id
+            ]);
+            return back()->with('message','Success');
+
+        }
 
         public function updateLocation(Request $request){
 

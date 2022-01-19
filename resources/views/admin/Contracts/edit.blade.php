@@ -1135,7 +1135,7 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_new_card_form" class="form" action="{{url('UpdateClientData')}}"
+                            <form id="kt_modal_new_card_form" class="form" action="{{url('updateProjectData')}}"
                                   method="post">
                             @csrf
                             <!--begin::Input group-->
@@ -1146,7 +1146,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="text" required class="form-control form-control-solid" placeholder=""
-                                           value="{{$data->client->name}}" name="title"/>
+                                           value="{{$data->client->name}}" name="name"/>
                                     <input type="hidden" required class="form-control form-control-solid" placeholder=""
                                            value="{{$data->id}}" name="id"/>
                                 </div>

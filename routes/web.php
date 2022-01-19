@@ -156,6 +156,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('Requests', [\App\Http\Controllers\Admin\RequestsController::class, 'index']);
     Route::get('Requests_datatable', [\App\Http\Controllers\Admin\RequestsController::class, 'datatable'])->name('Requests.datatable.data');
     Route::post('updateLocation', [\App\Http\Controllers\Admin\RequestsController::class, 'updateLocation'])->name('updateLocation');
+    Route::post('updateProjectData', [\App\Http\Controllers\Admin\RequestsController::class, 'updateProjectData'])->name('updateProjectData');
     Route::get('RejectProject', [\App\Http\Controllers\Admin\RequestsController::class, 'RejectProject'])->name('RejectProject');
     Route::get('AcceptProject', [\App\Http\Controllers\Admin\RequestsController::class, 'AcceptProject'])->name('AcceptProject');
     Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
