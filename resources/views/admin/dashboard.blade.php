@@ -479,7 +479,7 @@
                                                     @if(Auth::user()->jop_type == 3)
                                                     {{$ProjectContract->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}
                                                     @else
-                                                        {{$ProjectContract->whereIn('project_id',$project_ids)->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}
+                                                        {{$ProjectContract->whereIn('project_contract.project_id',$project_ids)->where('contract_id',$Contract->id)->join('incomes','incomes.project_id','project_contract.project_id','left')->sum('amount')}}
 
                                                     @endif
                                                 </div>
@@ -795,7 +795,7 @@
                                                 </div>
                                             </div>
                                     @endforeach
-                                @else
+                                             @else
                                           @foreach($State->where('id',Auth::user()->state)->get() as $key => $data)
                                             <div class="col-2" style="margin-bottom: 30px">
                                                 <div class="d-flex align-items-center me-2">

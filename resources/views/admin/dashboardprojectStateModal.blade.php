@@ -1,4 +1,5 @@
 @inject('Project','App\Models\Project')
+@inject('State','App\Models\State')
 @if(Auth::user()->jop_type == 3)
     @foreach(\App\Models\State::all() as $key => $data)
         <div class="col-2" style="margin-bottom: 30px">
@@ -28,7 +29,7 @@
         </div>
     @endforeach
 @else
-    @foreach(\App\Models\State::where('id',Auth::user()->id)->get() as $key => $data)
+    @foreach($State->where('id',Auth::user()->state)->get() as $key => $data)
         <div class="col-2" style="margin-bottom: 30px">
             <div class="d-flex align-items-center me-2">
                 <div class="symbol symbol-50px me-3">
