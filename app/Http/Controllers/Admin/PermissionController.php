@@ -85,6 +85,7 @@ class PermissionController extends Controller
             'is_financial' => 'required|in:0,1',
             'is_settings' => 'required|in:0,1',
             'is_progressTime' => 'required|in:0,1',
+            'is_delete' => 'required|in:0,1',
 
         ]);
 
@@ -137,6 +138,7 @@ class PermissionController extends Controller
             'is_financial' => 'required|in:0,1',
             'is_settings' => 'required|in:0,1',
             'is_progressTime' => 'required|in:0,1',
+            'is_delete' => 'required|in:0,1',
 
         ]);
         $user = UserGroup::whereId($request->id)->update($data);

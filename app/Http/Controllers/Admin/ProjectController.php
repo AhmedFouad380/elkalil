@@ -58,7 +58,12 @@ class ProjectController extends Controller
             ->select('projects.*');
 
         }
-
+        if(isset($request->minProgress)){
+                $data->where('progress','>=',$request->minProgress);
+        }
+        if(isset($request->maxProgress)){
+            $data->where('progress','<=',$request->maxProgress);
+        }
         if(isset($request->name)){
             $data->where('name','like','%'.$request->name.'%');
         }

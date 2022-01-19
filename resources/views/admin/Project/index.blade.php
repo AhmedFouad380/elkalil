@@ -87,8 +87,9 @@
             @if($project->confirm_date > \Carbon\Carbon::now()->format('Y-m-d'))
                     <div class="col-md-6 col-xl-4">
                         <!--begin::Card-->
-                        <a  class="card border-hover-primary">
+                        <a  style="border:3px solid #bf1e2e !important" class="card border-hover-primary">
                             <!--begin::Card header-->
+
                             <div class="card-header border-0 pt-9">
                                 <!--begin::Card Title-->
                                 <div class="card-title m-0">
@@ -96,6 +97,10 @@
                                     <div class="symbol symbol-50px w-50px bg-light">
                                         <img src="{{ URL::asset('admin/assets/media/svg/brand-logos/plurk.svg')}}" alt="image" class="p-3" />
                                     </div>
+
+                                    @if($project->is_created != 0)
+                                        <i style="margin: 5px 15px 5px 5px" class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المرحلة يدويا "></i>
+                                @endif
                                     <!--end::Avatar-->
                                 </div>
                                 <!--end::Car Title-->
@@ -103,8 +108,9 @@
                                 <div class="card-toolbar">
 
                                     <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">@if( $project->projectContract && $contract->find($project->projectContract->contract_id)){{$contract->find($project->projectContract->contract_id)->title}} @endif</span>
-                                    <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> <i class="bi bi-trash fs-2x text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف المشروع"></i></span>
-
+@if(Auth::user()->userGroup->is_delete == 1)
+                                        <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> <i class="bi bi-trash fs-2x text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف المشروع"></i></span>
+@endif
 
                                 </div>
                                 <!--end::Card toolbar-->
@@ -181,6 +187,7 @@
                 <!--begin::Card-->
                 <div  class="card border-hover-primary">
                     <!--begin::Card header-->
+
                     <div class="card-header border-0 pt-9">
                         <!--begin::Card Title-->
                         <div class="card-title m-0">
@@ -188,13 +195,23 @@
                             <div class="symbol symbol-50px w-50px bg-light">
                                 <img src="{{ URL::asset('admin/assets/media/svg/brand-logos/plurk.svg')}}" alt="image" class="p-3" />
                             </div>
+
+
+                            @if($project->is_created != 0)
+                                <i style="margin: 5px 15px 5px 5px" class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المرحلة يدويا "></i>
+                        @endif
+                            @if(\App\Models\UserChatPermission::where('reciever_id',Auth::user()->id)->where('is_read',0)->where('type',0)->where('project_id',$project->id)->count() > 0)
+                                <img class="bi bi-person-bounding-box fs-2x text-info" src="{{asset('images/giphy.gif')}}" style="    max-width: 41px;">
+                                @endif
                             <!--end::Avatar-->
                         </div>
                         <!--end::Car Title-->
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
                             <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">@if( $project->projectContract && $contract->find($project->projectContract->contract_id)){{$contract->find($project->projectContract->contract_id)->title}} @endif</span>
-                            <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> <i class="bi bi-trash fs-2x text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف المشروع"></i> </span>
+                            @if(Auth::user()->userGroup->is_delete == 1)
+                                <span  data-id="{{$project->id}}" style="margin: 10px" class="DeleteProject badge badge-light-danger fw-bolder me-auto px-4 py-3"> <i class="bi bi-trash fs-2x text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف المشروع"></i></span>
+                            @endif
 
                         </div>
                         <!--end::Card toolbar-->
@@ -372,6 +389,18 @@
                             <label class="form-label fs-6 fw-bold">رقم العميل</label>
 
                             <input type="number" class="form-control form-control-lg form-control-solid" name="phone" minlength="9" maxlength="9" placeholder="" value="" autocomplete="nope" />
+                        </div>
+                        <div class="mb-10">
+                            <label class="form-label fs-6 fw-bold">نسبة الانجاز</label>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="row align-items-center">
+                                        <input type="hidden" class="form-control"  name="minProgress" id="kt_nouislider_3_input" placeholder="Quantity" />
+                                        <input type="hidden" class="form-control"   name="maxProgress"  id="kt_nouislider_3.1_input" placeholder="Quantity" />
+                                    <div class="mb-10" style="margin-right:116px">
+                                        <div id="kt_nouislider_3" class="nouislider"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-10">
                             <label class="form-label fs-6 fw-bold">نوع التعاقد</label>
@@ -726,7 +755,7 @@
     <script>
 $('.DeleteProject').on('click',function () {
    var id =  $(this).data('id');
-alert(id);
+
     if (id) {
         Swal.fire({
             title: "هل انت متاكد من حذف المشروع",
@@ -1013,6 +1042,56 @@ alert(id);
         </script>
 
     @endif
+    <pre style="height:400px">
+<script>
+      // Class definition
+      var KTnoUiSliderDemos = function() {
 
+
+
+       var demo3 = function() {
+        // init slider
+        var slider = document.getElementById('kt_nouislider_3');
+
+        noUiSlider.create(slider, {
+         start: [0, 100],
+         connect: true,
+         direction: 'rtl',
+         tooltips: [true, wNumb({ decimals: 0 })],
+         range: {
+          'min': [0],
+          'max': 100
+         }
+        });
+
+
+        // init slider input
+        var sliderInput0 = document.getElementById('kt_nouislider_3_input');
+        var sliderInput1 = document.getElementById('kt_nouislider_3.1_input');
+        var sliderInputs = [sliderInput1, sliderInput0];
+
+        slider.noUiSlider.on('update', function( values, handle ) {
+         sliderInputs[handle].value = values[handle];
+        });
+       }
+
+
+
+       // Modal demo
+
+
+       return {
+        // public functions
+        init: function() {
+         demo3();
+
+        }
+       };
+      }();
+
+      jQuery(document).ready(function() {
+       KTnoUiSliderDemos.init();
+      });
+</script>
 @endsection
 

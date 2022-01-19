@@ -192,20 +192,15 @@
         </div>
 
 @endif
-   
+    @if($data->state == 1)
+        <a type="button"  class=" btn btn-danger changeState"  data-id="{{$data->id}}">الغاء نسبة الانجاز </a>
+
+@endif
 
 <!--end: Wizard Actions-->
     <div class="modal-footer">
-        <div class="col-md-3">
-            @if($data->state == 1)
-                <a type="button"  class=" btn btn-danger changeState"  data-id="{{$data->id}}">الغاء نسبة الانجاز </a>
-            @endif
-        </div>
-        <div class="col-md-8" style="text-align: left;">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-            <button type="submit" id="loading" class=" btn btn-primary" onclick="spinner()">حفظ</button>
-        </div>
-        
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+        <button type="submit" id="loading" class=" btn btn-primary" onclick="spinner()">حفظ</button>
     </div>
 </form>
 

@@ -1401,24 +1401,38 @@
                                                 <i class="bi bi-plus-circle-fill fs-2x"></i>
                                             </button>
                                         </div>
-                                        <div class="col-6">
-                                            @php
-                                                $incomes = \App\Models\Income::where('project_id',$data->id)->get();
-                                            @endphp
-                                            @if($incomes->count() > 0)
-                                                @foreach($incomes as $income)
-                                                <input type="number" value="{{$income->amount}}" name="values[]"
-                                                       class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
-                                                       placeholder=""/>
-                                                @endforeach
-                                            @else
+                                        @php
+                                            $incomes = \App\Models\Income::where('project_id',$data->id)->get();
+                                        @endphp
+                                        @if($incomes->count() > 0)
+                                            @foreach($incomes as $key => $income)
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input value="{{$income->amount}}" type="number"
+                                                               name="values[]"
+                                                               class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                               placeholder=""/>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <button type="button"
+                                                                class="btn btn-light-danger me-3 delete_question">
+                                                            <i class="bi bi-trash-fill fs-2x fs-2x"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @else
+
+                                            <div class="col-6">
                                                 <input type="number" value="0" name="values[]"
                                                        class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
                                                        placeholder=""/>
-                                            @endif
-                                        </div>
-                                    </div>
 
+                                            </div>
+                                        @endif
+                                    </div>
                                     <!--end::Input-->
                                 </div>
 
@@ -1970,6 +1984,7 @@
                 var paid = $('#paid').val();
                 var paid_down = paid - paid_term;
                 document.getElementById('paid_down').value = paid_down
+
 
             })
 

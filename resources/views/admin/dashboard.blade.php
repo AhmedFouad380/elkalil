@@ -957,11 +957,20 @@
                         @inject('project','App\Models\Project')
                             @inject('income','App\Models\Income')
                             @inject('Outcome','App\Models\Outcome')
+                        @php
+                            $max = 5;
+                        $max2 = 5;
+                        @endphp
                         series: [{
                             name: " سندات القبض ", data:
                                 [
                                     @for($x = 1 ; $x <= 12 ;$x++)
                                     {{$income->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count()}},
+                                    @php
+                                        if($income->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count() > $max2){
+                                        $max2 = $Outcome->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count();
+                                        }
+                                    @endphp
                                     @endfor
                                 ]
                         },
@@ -970,6 +979,11 @@
                                     [
                                         @for($x = 1 ; $x <= 12 ;$x++)
                                         {{$Outcome->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count()}},
+                                        @php
+                                        if($Outcome->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count() > $max){
+                                        $max = $Outcome->whereYear('created_at',date('Y'))->whereMonth('created_at',$x)->count();
+                                        }
+                                        @endphp
                                         @endfor
                                     ]
                             },
@@ -1003,7 +1017,14 @@
                             axisTicks: {show: !1},
                             labels: {show: !1, style: {colors: s, fontSize: "12px"}},
                         },
-                        yaxis: {min: 0, max: 80, labels: {show: !1, style: {colors: s, fontSize: "12px"}}},
+                        @php
+                        if($max > $max2 ){
+                        $big = $max;
+                        }else{
+                        $big = $max2;
+                        }
+                        @endphp
+                        yaxis: {min: 0, max: {{$big}}, labels: {show: !1, style: {colors: s, fontSize: "12px"}}},
                         states: {
                             normal: {filter: {type: "none", value: 0}},
                             hover: {filter: {type: "none", value: 0}},

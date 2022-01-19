@@ -118,11 +118,11 @@
                                                     <!--begin::Input group-->
                                                     <div class="mb-10">
                                                         <label class="form-label fs-6 fw-bold">اسم المرحلة</label>
-                                                        <input type="text" class="form-control form-control-lg form-control-solid" name="name" placeholder="" value="" autocomplete="nope" />
+                                                        <input type="text" required class="form-control form-control-lg form-control-solid" name="name" placeholder="" value="" autocomplete="nope" />
                                                     </div>
                                                     <div class="mb-10">
                                                         <label class="form-label fs-6 fw-bold">نسبة المرحلة </label>
-                                                        <input type="number" class="form-control form-control-lg form-control-solid" name="percent" placeholder="" value="" autocomplete="nope" />
+                                                        <input type="number"  required class="form-control form-control-lg form-control-solid" name="percent" placeholder="" value="" autocomplete="nope" />
                                                     </div>
                                                     <input type="hidden" value="{{$data->id}}" name="project_id">
                                                     <div class="fv-row mb-7">
@@ -310,6 +310,10 @@
                                 @if($level->created_by != 0)
                                     <i class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المرحلة يدويا "></i>
                                 @endif
+
+                            @if(\App\Models\UserChatPermission::where('reciever_id',Auth::user()->id)->where('is_read',0)->where('type',0)->where('level_id',$level->id)->count() > 0)
+                                <img class="bi bi-person-bounding-box fs-2x text-info" src="{{asset('images/giphy.gif')}}" style="    max-width: 41px;">
+                        @endif
                             <!--end::Title-->
                         </div>
                         <!--end::Heading-->
@@ -545,28 +549,5 @@
     $error_message = session()->get("error_message");
     ?>
 
-        @if( session()->has("error_message"))
-            <script>
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-bottom-right",
-                    "preventDuplicates": false,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                    toastr.error("{{$error_message}}" , "عفوا !" );
-            </script>
-
-        @endif
 @endsection
 
