@@ -177,6 +177,8 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('AnswerLevelDetails', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'AnswerLevelDetails']);
     Route::post('Store_ProgressTime', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'Store_ProgressTime']);
     Route::get('changeState', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'changeState']);
+    Route::get('Chat-level/{id}', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'ChatLevel']);
+    Route::get('StoreChat', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'StoreChat']);
 
     Route::post('store-project', [\App\Http\Controllers\Admin\ProjectController::class, 'store']);
     Route::get('project_details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'project_details']);

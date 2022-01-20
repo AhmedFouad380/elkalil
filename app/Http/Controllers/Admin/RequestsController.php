@@ -71,6 +71,9 @@
                         return \Carbon\Carbon::parse($row->date)->format('Y-m-d H:i');
 
                 })
+                ->setRowClass(function ($row) {
+                    return $row->view == 0 ? 'unread' : '';
+                })
                 ->addColumn('type', function ($row) {
 
                     return Contract::find($row->projectContract->contract_id) ? Contract::find($row->projectContract->contract_id)->title : "-";
@@ -87,6 +90,8 @@
         public function edit($id){
 
             $data = Project::findOrFail($id);
+            $data->view=1;
+            $data->save();
             $explans = Explan::OrderBy('id','desc')->where('project_id',$id)->get();
                 return view('admin.Requests.edit',compact('data','explans'));
         }

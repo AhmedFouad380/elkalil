@@ -8,7 +8,11 @@
 @endsection
 
 @section('style')
-
+    <style>
+        .unread{
+            background-color:#eeeeee;
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')

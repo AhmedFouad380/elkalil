@@ -4,12 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Level;
+use App\Models\Message;
+use App\Models\Project;
 use App\Models\ProjectContract;
 use App\Models\ProjectLevelDetails;
 use App\Models\ProjectLevels;
+use App\Models\User;
+use App\Models\UserChatPermission;
+use App\Models\UserPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use Pusher\Pusher;
 
 class ProjectLevelController extends Controller
 {
@@ -158,4 +164,127 @@ class ProjectLevelController extends Controller
         $data = ProjectLevelDetails::where('level_id', $id)->pluck('id', 'title');
         return response()->json($data);
     }
+
+    public function ChatLevel($id){
+
+        $level = ProjectLevels::findOrFail($id);
+        $data = Project::find($level->project_id);
+        $chat = Message::where('level_id',$id)->get();
+
+        UserChatPermission::where('reciever_id',Auth::user()->id)->where('type',0)->where('level_id',$id)->update([
+            'is_read'=>1
+        ]);
+        return view('admin.Project.chat',compact('level','data','chat'));
+    }
+
+    public function StoreChat(Request $request){
+
+        $this->validate(request(), [
+            'message' => 'required|string',
+            'level_id' => 'required|exists:project_levels,id',
+        ]);
+        $level = ProjectLevels::find($request->level_id);
+        $data = new Message();
+        $data->level_id=$request->level_id;
+        $data->project_id=$level->project_id;
+        $data->sender_id=Auth::user()->id;
+        $data->sender_name=Auth::user()->name;
+        $data->type=0;
+        $data->message=$request->message;
+        $data->file=$request->file;
+        $data->created_at=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d H:i:s');
+        $data->save();
+
+        //is read
+        UserChatPermission::where('reciever_id','!=',Auth::user()->id)->where('type',0)->where('level_id',$level->id)->update([
+            'is_read'=>1
+        ]);
+        UserChatPermission::where('type',1)->where('level_id',$level->id)->update([
+            'is_read'=>1
+        ]);
+
+        $ids = UserChatPermission::where('level_id',$level->id)->where('reciever_id','!=',Auth::user()->id)->pluck('reciever_id')->ToArray();
+
+        $token = User::whereIn('id',$ids)->pluck('token_id')->ToArray();
+
+        $project = Project::find($level->project_id);
+        array_push($token, $project->client->token_id );
+
+        if($data->file == null){
+            $dataNotifaction = array('id'=> $data->id , 'sender_id' => $data->sender_id ,'sender_name'=> $data->sender_name , 'type' => $data->type , 'message' => $data->message , 'project_name' => $level->project->name ,'project_id' => $data->project_id ,'level_id'=> $data->level_id , 'level_name' => $level->title , 'file'=> '' , 'created_at'=> $data->created_at);
+        }else{
+
+            $dataNotifaction = array('id'=> $data->id , 'sender_id' => $data->sender_id ,'sender_name'=> $data->sender_name , 'type' => $data->type , 'message' => $data->message , 'project_name' => $Project[0]->name  , 'project_id' => $data->project_id ,'level_id'=> $data->level_id , 'level_name' => $level->title , 'file'=> $data->file , 'created_at'=> $data->created_at);
+        }
+        $this->send($token , $level->project->name , $data->message , 5 , $dataNotifaction );
+        //end is read
+        $options = array(
+            'cluster' => env('PUSHER_APP_CLUSTER'),
+            'encrypted' => true
+        );
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+
+        $pusher->trigger('MessageSent-channel', 'App\Events\SendMessage', $data);
+        return response()->json($data);
+
+    }
+
+    public function send($tokens, $title="hello", $msg="helo msg", $type=5,$chat=null ){
+//        $key = 'AAAA-3lLTNI:APA91bHfjq6BmKczrRM7XkwhtPMdf0JcVCTQQvsnDOmgac4lcYf_bxpVdryg_nQNFqog-6TT3hmvZIxP-vv3t8OKMBnCirPSyNH1JEXStzaQ-NnpoHXKvQm4d-EUcvOPz5sSLxRPWcOq';
+        $key = 'AAAA7MITCVM:APA91bFxG1YuBa-5G6nYPwrn4KFrbKjtilNv-dlm5yXKOLJiGtMgdLSTCjYIY1i3M6Nf4au0r6b2mEL_MjfkGb1-haRJa-zZr1laU5uffby_y2n63IMaVgrh5u63aQRJZMnpJg-SAO5V';
+
+        $fields = array
+        (
+            "registration_ids" => (array)$tokens,  //array of user token whom notification sent two
+            "priority" => 10,
+            'data' => [
+                'title' => $title,
+                'body' => $msg,
+                'chat' => $chat,
+                'type' => $type,
+                'icon' => 'myIcon',
+                'sound' => 'mySound'
+            ],
+            'notification' => [
+                'title' => $title,
+                'body' => $msg,
+                'chat' => $chat,
+                'type' => 3,
+                'icon' => 'myIcon',
+                'sound' => 'mySound'
+            ],
+            'vibrate' => 1,
+            'sound' => 1
+        );
+
+        $headers = array
+        (
+            'accept: application/json',
+            'Content-Type: application/json',
+            'Authorization: key=' . $key
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        $result = curl_exec($ch);
+
+        //  var_dump($result);
+        if ($result === FALSE) {
+            die('Curl failed: ' . curl_error($ch));
+        }
+        curl_close($ch);
+        return $result;
+    }
+
 }

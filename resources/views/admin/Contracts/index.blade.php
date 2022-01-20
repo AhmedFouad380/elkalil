@@ -10,7 +10,7 @@
 @section('style')
 <style>
     .unread{
-        background-color:#bebebe;
+        background-color:#eeeeee;
     }
 </style>
 @endsection

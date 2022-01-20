@@ -515,6 +515,8 @@
                                 <div class="separator separator-dashed"></div>
 
                                 <!--begin::Option-->
+                                @if($data->confirm != 1)
+
                                 <div class="py-1">
                                     <!--begin::Header-->
                                     <div class="py-3 d-flex flex-stack flex-wrap">
@@ -550,7 +552,6 @@
                                             </div>
                                             <!--end::Arrow-->
                                             <!--begin::Logo-->
-                                            @if($data->confirm != 1)
 
                                                 <img src="assets/media/svg/card-logos/american-express.svg"
                                                      class="w-40px me-3" alt=""/>
@@ -562,7 +563,6 @@
                                                     </div>
                                                     <div class="text-muted"></div>
                                                 </div>
-                                        @endif
                                         <!--end::Summary-->
                                         </div>
                                         <!--end::Toggle-->
@@ -601,6 +601,8 @@
                                     </div>
                                     <!--end::Body-->
                                 </div>
+                                @endif
+
                                 <div class="separator separator-dashed"></div>
 
                                 <!--end::Option-->

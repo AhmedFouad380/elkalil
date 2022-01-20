@@ -394,8 +394,8 @@
                             <label class="form-label fs-6 fw-bold">نسبة الانجاز</label>
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <div class="row align-items-center">
-                                        <input type="hidden" class="form-control"  name="minProgress" id="kt_nouislider_3_input" placeholder="Quantity" />
-                                        <input type="hidden" class="form-control"   name="maxProgress"  id="kt_nouislider_3.1_input" placeholder="Quantity" />
+                                        <input type="hidden" class="form-control"  name="maxProgress" id="kt_nouislider_3_input" placeholder="Quantity" />
+                                        <input type="hidden" class="form-control"   name="minProgress"  id="kt_nouislider_3.1_input" placeholder="Quantity" />
                                     <div class="mb-10" style="margin-right:116px">
                                         <div id="kt_nouislider_3" class="nouislider"></div>
                                     </div>
@@ -474,7 +474,7 @@
                     <!--end::Scroll-->
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
-                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                         </button>
                         <button type="submit" class="btn btn-primary"
                                 data-kt-users-modal-action="submit">
@@ -725,7 +725,7 @@
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
                         <button type="reset" class="btn btn-light me-3"
-                                data-bs-dismiss="modal">ألغاء
+                                data-bs-dismiss="modal">إلغاء
                         </button>
                         <button type="submit" class="btn btn-primary"
                                 data-kt-users-modal-action="submit">
