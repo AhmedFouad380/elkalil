@@ -47,7 +47,6 @@ Route::get('/quest', function () {
     return view('auth/request');
 });
 Route::post('/quest', 'App\Http\Controllers\Front\PageController@store_quest')->name('create_quest.submit');
-Route::get('success_msg', [PageController::class, 'success_msg']);
 
 Route::get('logout', [AuthController::class, 'logout']);
 
@@ -259,6 +258,7 @@ Route::group(['middleware' => ['admin']], function () {
     });
 
 
+
     Route::get('/project_details2', function () {
         return view('admin/project_details2');
     });
@@ -282,9 +282,10 @@ Route::group(['middleware' => ['admin']], function () {
         return view('admin/project_details8');
     });
 
-    Route::get('GetLevelDetails/{id}', ['App\Http\Controllers\Admin\ProjectLevelController', 'GetLevelDetails']);
+    Route::get('GetLevelDetails/{id}',['App\Http\Controllers\Admin\ProjectLevelController','GetLevelDetails']);
     Route::get('logout', [AuthController::class, 'logout']);
 
 });
 
 Route::post('login', [AuthController::class, 'login']);
+Route::get('success_msg', [PageController::class, 'success_msg']);

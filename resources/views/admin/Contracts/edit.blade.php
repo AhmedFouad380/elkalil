@@ -550,17 +550,20 @@
                                             </div>
                                             <!--end::Arrow-->
                                             <!--begin::Logo-->
-                                            <img src="assets/media/svg/card-logos/american-express.svg"
-                                                 class="w-40px me-3" alt=""/>
-                                            <!--end::Logo-->
-                                            <!--begin::Summary-->
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center fw-bolder"> تفعيل المشروع ؟
-                                                    <div class="badge badge-light-danger ms-5"></div>
+                                            @if($data->confirm != 1)
+
+                                                <img src="assets/media/svg/card-logos/american-express.svg"
+                                                     class="w-40px me-3" alt=""/>
+                                                <!--end::Logo-->
+                                                <!--begin::Summary-->
+                                                <div class="me-3">
+                                                    <div class="d-flex align-items-center fw-bolder"> تفعيل المشروع ؟
+                                                        <div class="badge badge-light-danger ms-5"></div>
+                                                    </div>
+                                                    <div class="text-muted"></div>
                                                 </div>
-                                                <div class="text-muted"></div>
-                                            </div>
-                                            <!--end::Summary-->
+                                        @endif
+                                        <!--end::Summary-->
                                         </div>
                                         <!--end::Toggle-->
                                         <!--begin::Input-->
@@ -843,7 +846,7 @@
                             <!--begin::Modal footer-->
                             <div class="modal-footer flex-center">
                                 <!--begin::Button-->
-                                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                 </button>
                                 <!--end::Button-->
                                 <!--begin::Button-->
@@ -938,7 +941,7 @@
                             <!--begin::Modal footer-->
                             <div class="modal-footer flex-center">
                                 <!--begin::Button-->
-                                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                 </button>                                <!--end::Button-->
                                 <!--begin::Button-->
                                 <button type="submit" id="kt_modal_add_product_submit" class="btn btn-primary">
@@ -1000,7 +1003,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="button" data-id="{{$data->id}}" id="ConfirmProject"
                                             class=" ConfirmProject btn btn-primary">
@@ -1086,7 +1089,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
@@ -1176,7 +1179,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
@@ -1240,7 +1243,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
@@ -1305,7 +1308,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
@@ -1439,7 +1442,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="submit" id="kt_modal_new_card_submit " class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
@@ -1509,7 +1512,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
@@ -1579,7 +1582,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
@@ -1649,7 +1652,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
@@ -1719,7 +1722,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">ألغاء
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">إلغاء
                                     </button>
                                     <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                         <span class="indicator-label">حفظ</span>
@@ -2009,7 +2012,7 @@
                 var date = $('#confirmDate').val()
                 if (id) {
                     Swal.fire({
-                        title: "هل انت متاكد من قبول المشروع",
+                        title: "هل انت متاكد من تفعيل المشروع",
                         text: "",
                         icon: "warning",
                         showCancelButton: true,
@@ -2028,7 +2031,7 @@
                                 dataType: "JSON",
                                 success: function (data) {
                                     if (data.message == "Success") {
-                                        Swal.fire("نجح", "تمت قبول المشروع بنجاح", "success");
+                                        Swal.fire("نجح", "تمت تفعيل المشروع بنجاح", "success");
                                         $('#kt_modal_confirmProject').modal('hide');
 
                                         setTimeout(reload, 7000)
@@ -2063,7 +2066,7 @@
                 var id = $(this).data('id')
                 if (id) {
                     Swal.fire({
-                        title: "هل انت متاكد من رفض المشروع",
+                        title: "هل انت متاكد من رقض المشروع",
                         text: "",
                         icon: "warning",
                         showCancelButton: true,
@@ -2084,7 +2087,7 @@
                                     if (data.message == "Success") {
                                         $('#kt_menu_61a08bf50cf89').hide();
 
-                                        Swal.fire("نجح", "تمت رفض المشروع بنجاح", "success");
+                                        Swal.fire("نجح", "تمت رفض بنجاح", "success");
 
                                         setTimeout(reload, 7000)
 
