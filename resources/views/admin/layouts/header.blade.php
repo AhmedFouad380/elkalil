@@ -39,7 +39,7 @@
                 <!--begin::Notifications-->
                     <div class="d-flex align-items-center ms-2 ms-lg-3">
                         <!--begin::Menu- wrapper-->
-                        <div class="btn btn-icon btn-color-warning position-relative w-30px h-30px w-md-40px h-md-40px"
+                        <div class="btn btn-icon @if(\App\Models\Project::where('is_accepted',2)->where('view',0)->count() > 0) btn-color-danger @else btn-color-warning @endif position-relative w-30px h-30px w-md-40px h-md-40px"
                              data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                             <span class="svg-icon svg-icon-1">
@@ -342,7 +342,7 @@
                                                     class="w-70px badge badge-light-success me-4">{{$inbox->sender_name}}</span>
                                                 <!--end::Code-->
                                                 <!--begin::Title-->
-                                                <a href="#"
+                                                <a href="{{url('reply/'.$inbox->id)}}"
                                                    class="text-gray-800 text-hover-primary fw-bold">{{$inbox->title}}</a>
                                                 <!--end::Title-->
                                             </div>
