@@ -197,10 +197,10 @@ class ProjectLevelController extends Controller
 
         //is read
         UserChatPermission::where('reciever_id','!=',Auth::user()->id)->where('type',0)->where('level_id',$level->id)->update([
-            'is_read'=>1
+            'is_read'=>0
         ]);
         UserChatPermission::where('type',1)->where('level_id',$level->id)->update([
-            'is_read'=>1
+            'is_read'=>0
         ]);
 
         $ids = UserChatPermission::where('level_id',$level->id)->where('reciever_id','!=',Auth::user()->id)->pluck('reciever_id')->ToArray();
