@@ -115,7 +115,7 @@
                                                     <!--end::Symbol-->
                                                     <!--begin::Title-->
                                                     <div class="mb-0 me-2">
-                                                        <a href="#"
+                                                        <a href="{{url('Requests-edit/'.$project->id)}}"
                                                            class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{$project->name}}</a>
                                                         <div class="text-gray-400 fs-7">{{$project->services}}
                                                             - {{$project->project_type}}</div>
