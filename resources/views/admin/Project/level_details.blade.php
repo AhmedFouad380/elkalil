@@ -5,8 +5,7 @@
           type="text/css"/>
     <link href="{{ URL::asset('admin/assets/plugins/custom/prismjs/prismjs.bundle.css')}}" rel="stylesheet"
           type="text/css"/>
-    <link href="{{ URL::asset('admin/assets/plugins/knockout/knockout-file-bindings.css')}}" rel="stylesheet"
-    type="text/css"/>
+
 @endsection
 
 @section('style')
@@ -296,6 +295,7 @@
                                     <!--end::Table body-->
                                 </table>
                                 <!--end::Table-->
+                                
                             </div>
                             <!--end::Table container-->
                         </div>
@@ -499,7 +499,6 @@
 
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js'></script>
 
     <script type="text/javascript">
 

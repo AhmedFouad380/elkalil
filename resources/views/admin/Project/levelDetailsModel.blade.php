@@ -151,7 +151,7 @@
 
         <div class="mb-10">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label fw-bold fs-6">المرفق</label>
+            <label class="col-lg-4 col-form-label fw-bold fs-6">المرفق </label>
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-12">
@@ -159,31 +159,41 @@
                             <div class="card-block">
                                 <h4 class="card-title"></h4>
                                 <div class="controls">
+                                    <span class="btn CompleteLevel btn-sm btn-danger my-3 repeat">اضف المزيد </span>
                                     {{-- <input type="file" id="input-file-now" multiple class="dropify"  name="pdf[]" data-default-file="" required data-validation-required-message="{{trans('word.This field is required')}}"/> --}}
                                 </div>
                             </div>
                         </div>
 
                         <!--begin::Dropzone-->
-                        <div class="well" data-bind="fileDrag: multiFileData">
-                            <div class="form-group row">
-                                <div class="col-md-12">
-                                          <!-- ko foreach: {data: multiFileData().dataURLArray, as: 'dataURL'} -->
-                                          <img style="height: 100px; margin: 5px  5px 10px;" class="img-rounded  thumb" data-bind="attr: { src: dataURL }, visible: dataURL">
-                                          <!-- /ko -->
-                                    <div data-bind="ifnot: fileData().dataURL">
-                                    </div>
-                                    <hr>
+
+                            <div class="form-group row ">
+                                <div class="col-md-3 repeatresult" style="margin-bottom:15px;">
+                                    <img class="border rounded" data-preview="p1" src="{{ URL::asset('admin/assets/media/avatars/upload.png')}}" width="170" height="170">
+                                    <h6 data-file-name="p1"></h6>
+                                    <label class="btn btn-secondary" for="p1">
+                                        <input type="file" id="p1" name="pdf[]" style="display:none">
+                                        <input type="file" id="p3" name="pdf[]" style="display:none">
+                                        <input type="file" id="p4" name="pdf[]" style="display:none">
+                                        <input type="file" id="p5" name="pdf[]" style="display:none">
+                                        <input type="file" id="p6" name="pdf[]" style="display:none">
+                                        <input type="file" id="p7" name="pdf[]" style="display:none">
+                                        <input type="file" id="p8" name="pdf[]" style="display:none">
+                                        <input type="file" id="p9" name="pdf[]" style="display:none">
+                                        <input type="file" id="p10" name="pdf[]" style="display:none">
+                                        <input type="file" id="p11" name="pdf[]" style="display:none">
+                                        <input type="file" id="p12" name="pdf[]" style="display:none">
+                                        <input type="file" id="p13" name="pdf[]" style="display:none">
+                                        رفع الملف
+                                    </label>
                                 </div>
-                                <div class="col-md-12">
-                                    <input type="file" name="pdf[]" multiple data-bind="fileInput: multiFileData, customFileInput: {
-                                      buttonClass: 'btn btn-success',
-                                      fileNameClass: 'disabled form-control',
-                                      onClear: onClear,
-                                    }" accept="image/*">
+                                <div class="dfdfd"></div>
+                                
+                                <div class="col-md-3">
+
                                 </div>
                             </div>
-                        </div>
+                            
                         <!--end::Dropzone-->
                 <!--end::Image input-->
                 <!--begin::Hint-->
@@ -212,8 +222,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!--begin::Page scripts(used by this page) -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js'></script>
-    <script src='{{ URL::asset('admin/assets/plugins/knockout/knockout-file-bindings.js')}}'></script>
+
 <script>
     $('#kt_select4').select2({
         placeholder: ""
@@ -221,30 +230,76 @@
     $('#kt_select5').select2({
         placeholder: ""
     });
+    
 </script>
 <!--begin::Page scripts(used by this page) -->
-<script type="text/javascript">
-    $(function(){
-        var viewModel = {};
-        viewModel.fileData = ko.observable({
-            dataURL: ko.observable(),
-            // base64String: ko.observable(),
-        });
-        viewModel.multiFileData = ko.observable({
-            dataURLArray: ko.observableArray(),
-        });
-        viewModel.onClear = function(fileData){
-            if(confirm('Are you sure?')){
-            fileData.clear && fileData.clear();
+<script>
+    // $(function () {
+    //     $(".repeat").on('click', function () {
+    //        var $self = $(this);
+	
+    //        $( ".repeatresult" ).clone().appendTo( ".dfdfd" );
+    //     });
+    // });
+    var i = 3;
+    $('.repeat').click(function() {	
+			$('.repeatresult:last').after('<div class="col-md-3 repeatresult" style="margin-bottom:15px;"><img class="border rounded" data-preview="p'+i+'" src="{{ URL::asset("admin/assets/media/avatars/upload.png")}}" width="170" height="170"><h6 data-file-name="p'+i+'"></h6><label class="btn btn-secondary" for="p'+i+'"><input type="file" id="p'+i+'" name="pdf[]" style="display:none">رفع الملف </label></div>');
+			i++;
+			return false;
+	});
+
+ </script>
+ <script type="text/javascript">
+    $(function() {
+
+        $('input[type=file]').change(function() {
+            var id = $(this).attr('id');
+            var uploadFileName = this.files[0].name;
+            var strLimit = 20;
+
+            //
+            // prevent a long string file name
+            //
+            if (uploadFileName.length > strLimit) {
+                var endOfFileName = uploadFileName.substr( (uploadFileName.lastIndexOf('.') -2) );
+                var startOfFileName = uploadFileName.substr(0, (strLimit - endOfFileName.length - 3));
+                uploadFileName = startOfFileName+"..."+endOfFileName;
             }
-        };
-        viewModel.debug = function(){
-            window.viewModel = viewModel;
-            console.log(ko.toJSON(viewModel));
-            debugger;
-        };
-        ko.applyBindings(viewModel);
+
+            //
+            // show file name
+            //
+            $('[data-file-name="' + id + '"]').html(uploadFileName);
+
+            //
+            // show image preview
+            //
+
+            var fileTypes = ['jpg', 'jpeg', 'png'];
+
+            var extension = this.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
+            isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
+
+            if (isSuccess) {
+                var reader = new FileReader();
+                reader.readAsDataURL(this.files[0]);
+
+                reader.onload = function(e) {
+                    $('[data-preview="' + id + '"]').attr('src', e.target.result);
+                };
+            }
+            
+        });
+
     });
+</script>
+<script type="text/javascript">
+
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+
     $('#loading').on('click',function () {
         document.getElementById("loader").style.display = "block";
         document.getElementById("lodaer2").style.display = "block";
