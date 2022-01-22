@@ -148,7 +148,7 @@
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
-                                        <div class="col-2">
+                                        <div class="col-3 col-md-2">
                                             <input type="text" class="form-control form-control-lg form-control-solid" name="" placeholder="966" value="966" readonly/>
                                         </div>
                                         <!--end::Col-->
