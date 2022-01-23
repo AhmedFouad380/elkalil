@@ -17,7 +17,7 @@ class PermissionController extends Controller
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             $this->id = Auth::user()->userGroup->is_settings;
-            if( $this->id  == 0 ){
+            if ($this->id == 0) {
                 return redirect('/');
             }
             return $next($request);

@@ -110,15 +110,15 @@
                     data: {
 
                         @if(Request::get('view'))
-                        view: {{ Request::get('view') }}
+                        view: "{{ Request::get('view') }}"
                         ,
                         @endif
                         @if(Request::get('from'))
-                        from: {{ Request::get('from') }}
+                        from: "{{ Request::get('from') }}"
                         ,
                         @endif
                             @if(Request::get('to'))
-                        to:{{Request::get('to') }}
+                        to:"{{Request::get('to') }}"
                         @endif
                     }
                 },

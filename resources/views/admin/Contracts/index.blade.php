@@ -109,13 +109,7 @@
                 ajax: {
                     url: '{{ route('Contracts.datatable.data') }}',
                     data: {
-                        @if(Request::get('users_group'))
-                        users_group: {{ Request::get('users_group') }}
-                        ,
-                        @endif
-                            @if(Request::get('jop_type'))
-                        jop_type:{{Request::get('jop_type') }}
-                        @endif
+
                     }
                 },
                 columns: [
