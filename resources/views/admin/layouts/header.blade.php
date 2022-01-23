@@ -1,4 +1,7 @@
 <!--begin::Header-->
+<style>.margin-10 {
+        margin:10px;
+    }</style>
 <!--begin::Header-->
 <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
      data-kt-sticky-offset="{default: '200px', lg: '300px'}">
@@ -60,6 +63,12 @@
                             </svg>
                         </span>
                             <!--end::Svg Icon-->
+                            @if(\App\Models\Project::where('is_accepted',2)->where('view',0)->count() > 0 )
+                                <span class="menu-label">
+														<span class="label label-danger label-inline" style="color:#fff;    border-radius: 50px;
+    background-color: #f00; padding:0px 8px">{{\App\Models\Project::where('is_accepted',2)->where('view',0)->count()}} </span>
+													</span>
+                            @endif
                         </div>
                         <!--begin::Menu-->
                         <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true">
@@ -89,7 +98,7 @@
                                 <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
                                     <!--begin::Items-->
                                     <div class="scroll-y mh-325px my-5 px-8">
-                                    @foreach(\App\Models\Project::where('is_accepted',2)->where('view',0)->get() as $project)
+                                    @foreach(\App\Models\Project::where('is_accepted',2)->where('view',0)->OrderBy('id','desc')->get() as $project)
                                         <!--begin::Item-->
                                             <div class="d-flex flex-stack py-4">
                                                 <!--begin::Section-->
@@ -158,18 +167,20 @@
                         </div>
                         <!--end::Menu-->
                         <!--end::Menu wrapper-->
+
+
                     </div>
 
 
-            @endif
+                @endif
                 @if(Auth::user()->userGroup->is_contracting == 1 )
 
-                <div class="d-flex align-items-center ms-2 ms-lg-3">
-                    <!--begin::Menu- wrapper-->
-                    <div class="btn btn-icon @if(\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count() > 0) btn-color-danger @else btn-color-warning @endif position-relative w-30px h-30px w-md-40px h-md-40px"
-                         data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
-                        <span class="svg-icon svg-icon-1">
+                    <div class="d-flex align-items-center ms-2 ms-lg-3">
+                        <!--begin::Menu- wrapper-->
+                        <div class="btn btn-icon @if(\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count() > 0) btn-color-danger  @else btn-color-warning @endif position-relative w-30px h-30px w-md-40px h-md-40px"
+                             data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                            <span class="svg-icon svg-icon-1">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 													<rect x="8" y="9" width="3" height="10" rx="1.5" fill="black"></rect>
 													<rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5" fill="black"></rect>
@@ -177,43 +188,51 @@
 													<rect x="3" y="13" width="3" height="6" rx="1.5" fill="black"></rect>
 												</svg>
 											</span>
-                        <!--end::Svg Icon-->
-                    </div>
-                    <!--begin::Menu-->
-                    <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true">
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-column bgi-no-repeat rounded-top"
-                             style="background-image:url('{{asset('admin/assets/media/misc/pattern-1.jpg')}}')">
-                            <!--begin::Title-->
-                            <h3 class="text-white fw-bold px-9 mt-10 mb-6">اشعارات التعاقدات والمتابعه
-                                <span
-                                    class="fs-8 opacity-75 ps-3">{{\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count()}}</span>
-                            </h3>
-                            <!--end::Title-->
-                            <!--begin::Tabs-->
-                            <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
-                                <li class="nav-item">
-                                    <a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active"
-                                       data-bs-toggle="tab" href="#kt_topbar_notifications_1">التعاقدات والمتابعه</a>
-                                </li>
+                            <!--end::Svg Icon-->
 
-                            </ul>
-                            <!--end::Tabs-->
                         </div>
-                        <!--end::Heading-->
-                        <!--begin::Tab content-->
-                        <div class="tab-content">
-                            <!--begin::Tab panel-->
-                            <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
-                                <!--begin::Items-->
-                                <div class="scroll-y mh-325px my-5 px-8">
-                                @foreach(\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->get() as $project)
-                                    <!--begin::Item-->
-                                        <div class="d-flex flex-stack py-4">
-                                            <!--begin::Section-->
-                                            <div class="d-flex align-items-center">
-                                                <!--begin::Symbol-->
-                                                <div class="symbol symbol-35px me-4">
+                        @if(\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count() > 0 )
+                            <span class="menu-label">
+														<span class="label label-danger label-inline" style="color:#fff;    border-radius: 50px;
+    background-color: #f00; padding:0px 8px;     margin-right: -6px;
+">{{\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count()}} </span>
+													</span>
+                    @endif
+                    <!--begin::Menu-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true">
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-column bgi-no-repeat rounded-top"
+                                 style="background-image:url('{{asset('admin/assets/media/misc/pattern-1.jpg')}}')">
+                                <!--begin::Title-->
+                                <h3 class="text-white fw-bold px-9 mt-10 mb-6">اشعارات التعاقدات والمتابعه
+                                    <span
+                                        class="fs-8 opacity-75 ps-3">{{\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count()}}</span>
+                                </h3>
+                                <!--end::Title-->
+                                <!--begin::Tabs-->
+                                <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active"
+                                           data-bs-toggle="tab" href="#kt_topbar_notifications_1">التعاقدات والمتابعه</a>
+                                    </li>
+
+                                </ul>
+                                <!--end::Tabs-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Tab content-->
+                            <div class="tab-content">
+                                <!--begin::Tab panel-->
+                                <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
+                                    <!--begin::Items-->
+                                    <div class="scroll-y mh-325px my-5 px-8">
+                                    @foreach(\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->OrderBy('id','desc')->get() as $project)
+                                        <!--begin::Item-->
+                                            <div class="d-flex flex-stack py-4">
+                                                <!--begin::Section-->
+                                                <div class="d-flex align-items-center">
+                                                    <!--begin::Symbol-->
+                                                    <div class="symbol symbol-35px me-4">
                                                 <span class="symbol-label bg-light-primary">
                                                     <!--begin::Svg Icon | path: icons/duotune/maps/map001.svg-->
                                                     <span class="svg-icon svg-icon-2 svg-icon-primary">
@@ -229,33 +248,33 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </span>
+                                                    </div>
+                                                    <!--end::Symbol-->
+                                                    <!--begin::Title-->
+                                                    <div class="mb-0 me-2">
+                                                        <a href="{{url('Contracts-edit/'.$project->id)}}"
+                                                           class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{$project->name}}</a>
+                                                        <div class="text-gray-400 fs-7">{{$project->services}}
+                                                            - {{$project->project_type}}</div>
+                                                    </div>
+                                                    <!--end::Title-->
                                                 </div>
-                                                <!--end::Symbol-->
-                                                <!--begin::Title-->
-                                                <div class="mb-0 me-2">
-                                                    <a href="{{url('Contracts-edit/'.$project->id)}}"
-                                                       class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{$project->name}}</a>
-                                                    <div class="text-gray-400 fs-7">{{$project->services}}
-                                                        - {{$project->project_type}}</div>
-                                                </div>
-                                                <!--end::Title-->
+                                                <!--end::Section-->
+                                                <!--begin::Label-->
+                                                <span
+                                                    class="badge badge-light fs-8">{{Carbon\Carbon::parse($project->date)->translatedFormat("d M Y")}}</span>
+                                                <!--end::Label-->
                                             </div>
-                                            <!--end::Section-->
-                                            <!--begin::Label-->
-                                            <span
-                                                class="badge badge-light fs-8">{{Carbon\Carbon::parse($project->date)->translatedFormat("d M Y")}}</span>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Item-->
-                                    @endforeach
-                                </div>
-                                <!--end::Items-->
-                                <!--begin::View more-->
-                                <div class="py-3 text-center border-top">
-                                    <a href="/Requests"
-                                       class="btn btn-color-gray-600 btn-active-color-primary">عرض الكل
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-                                        <span class="svg-icon svg-icon-5">
+                                            <!--end::Item-->
+                                        @endforeach
+                                    </div>
+                                    <!--end::Items-->
+                                    <!--begin::View more-->
+                                    <div class="py-3 text-center border-top">
+                                        <a href="/Requests"
+                                           class="btn btn-color-gray-600 btn-active-color-primary">عرض الكل
+                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                            <span class="svg-icon svg-icon-5">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none">
                                             <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1"
@@ -265,20 +284,20 @@
                                                 fill="black"/>
                                         </svg>
                                     </span>
-                                        <!--end::Svg Icon--></a>
+                                            <!--end::Svg Icon--></a>
+                                    </div>
+                                    <!--end::View more-->
                                 </div>
-                                <!--end::View more-->
-                            </div>
-                            <!--end::Tab panel-->
+                                <!--end::Tab panel-->
 
+                            </div>
+                            <!--end::Tab content-->
                         </div>
-                        <!--end::Tab content-->
+                        <!--end::Menu-->
+                        <!--end::Menu wrapper-->
                     </div>
-                    <!--end::Menu-->
-                    <!--end::Menu wrapper-->
-                </div>
-                @endif
-                <!--end::Notifications-->
+            @endif
+            <!--end::Notifications-->
 
                 <!--begin::inbox-->
                 <div class="d-flex align-items-center ms-2 ms-lg-3">
