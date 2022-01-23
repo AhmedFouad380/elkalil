@@ -8,11 +8,11 @@
 @endsection
 
 @section('style')
-<style>
-    .unread{
-        background-color:#eeeeee;
-    }
-</style>
+    <style>
+        .unread {
+            background-color: #eeeeee;
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')
@@ -26,7 +26,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">التعاقدات </li>
+        <li class="breadcrumb-item text-gray-500">التعاقدات</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -100,17 +100,23 @@
                     "url": "{{ url('admin/assets/ar.json') }}"
                 },
                 buttons: [
-                    {extend: 'print', className: 'btn btn-light-primary me-3', text: '<i class="bi bi-printer-fill fs-2x"></i>'},
+                    {
+                        extend: 'print',
+                        className: 'btn btn-light-primary me-3',
+                        text: '<i class="bi bi-printer-fill fs-2x"></i>'
+                    },
                     // {extend: 'pdf', className: 'btn btn-raised btn-danger', text: 'PDF'},
-                    {extend: 'excel', className: 'btn btn-light-primary me-3', text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'},
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-light-primary me-3',
+                        text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'
+                    },
                     // {extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
 
                 ],
                 ajax: {
                     url: '{{ route('Contracts.datatable.data') }}',
-                    data: {
-
-                    }
+                    data: {}
                 },
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
@@ -125,7 +131,9 @@
 
             $.ajax({
                 url: "{{ URL::to('/add-Contracts-button')}}",
-                success: function (data) { $('.add_button').append(data); },
+                success: function (data) {
+                    $('.add_button').append(data);
+                },
                 dataType: 'html'
             });
         });
