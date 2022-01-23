@@ -64,10 +64,15 @@ class ArchiveController extends Controller
                 return $row->contract ? $row->contract->title : '';
             })->editColumn('archive_date', function ($row) {
                 return Carbon::parse($row->archive_date)->diffForHumans();
+            })->editColumn('project_type', function ($row) {
+                return $row->project_type;
             })->addColumn('client', function ($row) {
-                return $row->client ? $row->client->name : '';
-            })
-            ->rawColumns(['name'])
+                $name = '';
+                $name .= ' <span class="text-gray-800 text-hover-primary mb-1">' . $row->client ? $row->client->name : " " . '</span>';
+                 return $name;
+
+            })->addIndexColumn()
+            ->rawColumns(['name','client'])
             ->make();
 
     }

@@ -59,8 +59,11 @@
                         <tr class="text-start text-muted fw-bolder fs-5 text-uppercase gs-0">
 
 
+                            <th class="min-w-125px">م</th>
                             <th class="min-w-125px">اسم المشروع</th>
+                            <th class="min-w-125px">اسم العميل</th>
                             <th class="min-w-125px">نوع التعاقد</th>
+                            <th class="min-w-125px">نوع المشروع</th>
                             <th class="min-w-125px">تاريخ الارشفة</th>
 
                         </tr>
@@ -102,6 +105,12 @@
                 },
                 buttons: [
                     {
+                        extend: 'colvis',
+                        className: 'btn btn-light-primary me-3',
+                        text: ' <i class="bi bi-eye-fill fs-2x"></i>إظهار / إخفاء الأعمدة '
+                    }
+                    ,
+                    {
                         extend: 'print',
                         className: 'btn btn-light-primary me-3',
                         text: '<i class="bi bi-printer-fill fs-2x"></i>'
@@ -111,8 +120,7 @@
                         extend: 'excel',
                         className: 'btn btn-light-primary me-3',
                         text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'
-                    },
-                    // {extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
+                    }
 
                 ],
                 ajax: {
@@ -123,15 +131,18 @@
                         ,
                         @endif
                             @if(Request::get('archive_to'))
-                        archive_to:"{!! Request::get('archive_to') !!}"
+                        archive_to: "{!! Request::get('archive_to') !!}"
                         @endif
 
                     }
                 },
                 columns: [
 
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex', "searchable": false, "orderable": true},
                     {data: 'name', name: 'name', "searchable": true, "orderable": true},
+                    {data: 'client', name: 'client', "searchable": true, "orderable": true},
                     {data: 'contract', name: 'contract', "searchable": true, "orderable": true},
+                    {data: 'project_type', name: 'project_type', "searchable": true, "orderable": true},
                     {data: 'archive_date', name: 'archive_date', "searchable": true, "orderable": true},
 
 
