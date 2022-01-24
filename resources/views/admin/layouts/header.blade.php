@@ -668,7 +668,7 @@
                 @endif
                 @if(Auth::user()->userGroup->is_report == 1)
                     <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
-                         class="menu-item @if(Request::segment(1) == 'project-archive' || Request::segment(1) == 'projects-incomes' ) here show @endif menu-lg-down-accordion me-lg-1">
+                         class="menu-item @if(Request::segment(1) == 'project-archive' || Request::segment(1) == 'projects-incomes'|| Request::segment(1) == 'explan' ) here show @endif menu-lg-down-accordion me-lg-1">
                     <span class="menu-link py-3">
                         <span class="menu-title">التقارير والاحصائيات</span>
                         <span class="menu-arrow d-lg-none"></span>
@@ -713,7 +713,7 @@
                             </div>
                             <div data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
-                                <a href="/project-archive">
+                                <a href="/projects-incomes">
                             <span
                                 class="menu-link @if(Request::segment(1) == "projects-incomes"  ) active @endif py-3">
                                 <span class="menu-icon ">
@@ -746,10 +746,12 @@
                             </span>
                                 </a>
                             </div>
-                             <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
-                                <span class="menu-icon">
+                                <a href="/explan">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "explan"  ) active @endif py-3">
+                                <span class="menu-icon ">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -768,12 +770,18 @@
                                                   fill="black"/>
                                         </svg>
                                     </span>
+
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">تقارير المهام والانجازية</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "explan" ) text-active-primary active @endif ">
+
+                                        تقارير المهام والانجازية
+                                      </span>
                             </span>
+                                </a>
                             </div>
-                        </div>
+                         </div>
                     </div>
                 @endif
                 @if(Auth::user()->userGroup->is_financial == 1)

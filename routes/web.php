@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ArchiveController;
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\ContractTypesController;
+use App\Http\Controllers\Admin\ExplanReportController;
 use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\Admin\IncomesReportController;
 use App\Http\Controllers\Admin\LevelController;
@@ -291,9 +292,15 @@ Route::group(['middleware' => ['admin']], function () {
 
 
     Route::get('projects-incomes', [IncomesReportController::class, 'index']);
-    Route::get('/archive-button', function () {
-        return view('admin/reports/incomeReport/button');
+
+
+    Route::get('explan', [ExplanReportController::class, 'index']);
+    Route::get('explan_datatable', [ExplanReportController::class, 'datatable'])->name('explan.datatable.data');
+
+    Route::get('/explan-button', function () {
+        return view('admin/reports/explanReport/button');
     });
+
 });
 
 Route::post('login', [AuthController::class, 'login']);

@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branche;
-use App\Models\Income;
+use App\Models\Explan;
 use App\Models\Level;
 use App\Models\Project;
 use App\Models\ProjectLevels;
-use App\Models\ProjectPaid;
 use App\Models\User;
 use App\Models\UserChatPermission;
 use App\SmsMaster;
@@ -17,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
-class IncomesReportController extends Controller
+class ExplanReportController extends Controller
 {
     public function __construct()
     {
@@ -40,32 +39,49 @@ class IncomesReportController extends Controller
      */
     public function index()
     {
-        $projects = Project::where('is_accepted', 1)->where('is_archive', 0)->get();
-        foreach ($projects as $project) {
-            $paid = 0;
-            $remain = 0;
-            $total = ProjectPaid::where('project_id', $project->id)->first();
-//            if ($total){
-//                if ($total->paid && $total->paid !=''){
-            $paid_results = Income::where('project_id', $project->id)->get();
-            foreach ($paid_results as $pad) {
-                $paid += $pad->amount;
-            }
-            $remain = $total->paid - $paid;
-            $term_list[] = array('project_name' => $project->name, 'total' => $total->paid, 'paid' => $paid, 'remain' => $remain);
-
-//                }
-//            }
-            $total_paid[] = $paid;
-            $total_remain[] = $remain;
-        }
-        $total_paid = array_sum($total_paid);
-        $total_remain = array_sum($total_remain);
-
-
-        return view('admin.reports.incomeReport.index', compact('term_list', 'total_paid', 'total_remain'));
+        return view('admin.reports.explanReport.index');
     }
 
+    public function datatable(Request $request)
+    {
+
+        $data = Explan::orderBy('id', 'desc');
+        if ($request->has('archive_from') && $request->archive_from != null && !empty($request->archive_from)
+            && $request->has('archive_to') && $request->archive_to != null && !empty($request->archive_to)) {
+            $data = $data->whereBetween('date', [$request->archive_from, $request->archive_to]);
+        }
+        if ($request->project_id) {
+            $data = $data->where('project_id', $request->project_id);
+        }
+        if ($request->emp_id) {
+            $data = $data->where('emp_id', $request->emp_id);
+        }
+
+        $data = $data->get();
+        return Datatables::of($data)
+            ->editColumn('title', function ($row) {
+                $name = '';
+                $name .= ' <span class="text-gray-600 text-hover-primary mb-1">' . $row->title . '</span> ';
+                return $name;
+            })->editColumn('comments', function ($row) {
+                $name = '';
+                $name .= ' <span class="text-gray-800 text-hover-primary mb-1">' . $row->comments . '</span> ';
+                return $name;
+            })
+            ->addColumn('project', function ($row) {
+                return $row->project ? $row->project->name : 'غير موجود';
+            })->editColumn('date', function ($row) {
+                return Carbon::parse($row->date)->format('Y-m-d');
+            })->addColumn('employee', function ($row) {
+                $name = '';
+                $name .= ' <span class="text-gray-800 text-hover-primary mb-1">' . $row->emp_name ? $row->emp_name : "النظام". '</span>';
+                return $name;
+
+            })->addIndexColumn()
+            ->rawColumns(['title', 'comments', 'employee'])
+            ->make();
+
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -25,4 +25,9 @@ class Explan extends Model
     {
         return $this->belongsTo(User::class, 'emp_id');
     }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
 }
