@@ -45,8 +45,8 @@ class IncomesReportController extends Controller
             $paid = 0 ;
             $remain = 0 ;
             $total = ProjectPaid::where('project_id',$project->id)->first();
-            if ($total){
-                if ($total->paid && $total->paid !=''){
+//            if ($total){
+//                if ($total->paid && $total->paid !=''){
                     $paid_results = Income::where('project_id',$project->id)->get();
                     foreach ($paid_results as $pad){
                         $paid += $pad->amount;
@@ -54,8 +54,8 @@ class IncomesReportController extends Controller
                     $remain = $total->paid - $paid ;
                     $term_list[] = array('project_name' => $project->name,'total' => $total->paid, 'paid' => $paid, 'remain' => $remain);
 
-                }
-            }
+//                }
+//            }
             $total_paid[] = $paid ;
             $total_remain[] = $remain;
         }
