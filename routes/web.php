@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\ArchiveController;
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\ContractTypesController;
+use App\Http\Controllers\Admin\ExplanReportController;
 use App\Http\Controllers\Admin\InboxController;
+use App\Http\Controllers\Admin\IncomesReportController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\LevelDetailsController;
 use App\Http\Controllers\Admin\MessagesController;
@@ -117,8 +120,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/add-contract-button', function () {
         return view('admin/setting/ContractCategory/button');
     });
-
-
 //Level setting
     Route::get('level-setting/{id}', [LevelController::class, 'index']);
     Route::get('level-datatable', [LevelController::class, 'datatable'])->name('Level.datatable.data');
@@ -137,11 +138,9 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('edit-details-level/{id}', [LevelDetailsController::class, 'edit']);
     Route::post('update-details-level', [LevelDetailsController::class, 'update']);
     Route::get('add-level-details-button/{id}', [LevelDetailsController::class, 'button']);
-
 //Messaging
     Route::get('messages', [MessagesController::class, 'index']);
     Route::get('messages_datatable', [MessagesController::class, 'datatable'])->name('messages.datatable.data');
-
 //percent setting
     Route::get('percent-setting/{id}', [PercentController::class, 'index']);
     Route::get('percent-datatable', [PercentController::class, 'datatable'])->name('Percent.datatable.data');
@@ -150,7 +149,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('edit-percent/{id}', [PercentController::class, 'edit']);
     Route::post('update-percent', [PercentController::class, 'update']);
     Route::get('add-percent-button/{id}', [PercentController::class, 'button']);
-
 //Requests settings
     Route::get('Requests', [\App\Http\Controllers\Admin\RequestsController::class, 'index']);
     Route::get('Requests_datatable', [\App\Http\Controllers\Admin\RequestsController::class, 'datatable'])->name('Requests.datatable.data');
@@ -160,7 +158,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('AcceptProject', [\App\Http\Controllers\Admin\RequestsController::class, 'AcceptProject'])->name('AcceptProject');
     Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
     // Projects
-
     Route::get('projects', [\App\Http\Controllers\Admin\ProjectController::class, 'index']);
     Route::get('projectFiles/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectFiles']);
     Route::get('projectExplan/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectExplan']);
@@ -260,7 +257,6 @@ Route::group(['middleware' => ['admin']], function () {
     });
 
 
-
     Route::get('/project_details2', function () {
         return view('admin/project_details2');
     });
@@ -284,8 +280,26 @@ Route::group(['middleware' => ['admin']], function () {
         return view('admin/project_details8');
     });
 
-    Route::get('GetLevelDetails/{id}',['App\Http\Controllers\Admin\ProjectLevelController','GetLevelDetails']);
+    Route::get('GetLevelDetails/{id}', ['App\Http\Controllers\Admin\ProjectLevelController', 'GetLevelDetails']);
     Route::get('logout', [AuthController::class, 'logout']);
+
+    Route::get('project-archive', [ArchiveController::class, 'index']);
+    Route::get('archive_datatable', [ArchiveController::class, 'datatable'])->name('archive.datatable.data');
+
+    Route::get('/archive-button', function () {
+        return view('admin/reports/archive/button');
+    });
+
+
+    Route::get('projects-incomes', [IncomesReportController::class, 'index']);
+
+
+    Route::get('explan', [ExplanReportController::class, 'index']);
+    Route::get('explan_datatable', [ExplanReportController::class, 'datatable'])->name('explan.datatable.data');
+
+    Route::get('/explan-button', function () {
+        return view('admin/reports/explanReport/button');
+    });
 
 });
 

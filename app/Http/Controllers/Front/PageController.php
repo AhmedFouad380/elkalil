@@ -29,7 +29,7 @@ class PageController extends Controller
     {
     }
 
-    
+
 
     public function store_quest(Request $request)
     {
@@ -121,7 +121,7 @@ class PageController extends Controller
         $url = "http://basic.unifonic.com/rest/SMS/messages";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=".$message."&SenderID=ALKHALIL-GR&Recipient=".$phone."&encoding=UTF8&responseType=json"); // define what you want to post
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=su7G9tOZc6U0kPVnoeiJGHUDMKe8tp&Body=".$message."&SenderID=ALKHALIL-GR&Recipient=".$phone."&encoding=UTF8&responseType=json"); // define what you want to post
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec ($ch);
         curl_close ($ch);

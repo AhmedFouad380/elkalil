@@ -9,14 +9,20 @@
 
 @section('style')
     <style>
-        .unread {
-            background-color: #eeeeee;
+        @media (min-width: 992px) {
+            .aside-me .content {
+                padding-right: 30px;
+            }
+        }
+
+        .select2-container .select2-selection--single .select2-selection__clear {
+            padding-right: 355px;
         }
     </style>
 @endsection
 
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">التعاقدات</h1>
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">ارشيف المشاريع</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -26,7 +32,8 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">التعاقدات</li>
+        <li class="breadcrumb-item text-gray-500">التقارير والاحصائيات</li>
+        <li class="breadcrumb-item text-gray-500">ارشيف المشاريع</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -35,6 +42,7 @@
 @section('content')
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
+
 
         <div class="content flex-row-fluid" id="kt_content">
             <!--begin::Card-->
@@ -49,19 +57,15 @@
                         <!--begin::Table row-->
 
                         <tr class="text-start text-muted fw-bolder fs-5 text-uppercase gs-0">
-                            <th class="w-10px pe-2">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                           data-kt-check-target="#users_table .form-check-input" value="1"/>
-                                </div>
-                            </th>
 
+
+                            <th class="min-w-125px">م</th>
+                            <th class="min-w-125px">اسم المشروع</th>
                             <th class="min-w-125px">اسم العميل</th>
-                            <th class="min-w-125px">تاريخ الطلب</th>
+                            <th class="min-w-125px">نوع التعاقد</th>
                             <th class="min-w-125px">نوع المشروع</th>
-                            <th class="min-w-125px">نسبة الانجاز</th>
-                            <th class="min-w-125px">النوع</th>
-                            <th class=" min-w-100px">الاجراءات</th>
+                            <th class="min-w-125px">تاريخ الارشفة</th>
+
                         </tr>
                         <!--end::Table row-->
                         </thead>
@@ -101,6 +105,12 @@
                 },
                 buttons: [
                     {
+                        extend: 'colvis',
+                        className: 'btn btn-light-primary me-3',
+                        text: ' <i class="bi bi-eye-fill fs-2x"></i>إظهار / إخفاء الأعمدة '
+                    }
+                    ,
+                    {
                         extend: 'print',
                         className: 'btn btn-light-primary me-3',
                         text: '<i class="bi bi-printer-fill fs-2x"></i>'
@@ -110,27 +120,36 @@
                         extend: 'excel',
                         className: 'btn btn-light-primary me-3',
                         text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'
-                    },
-                    // {extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
+                    }
 
                 ],
                 ajax: {
-                    url: '{{ route('Contracts.datatable.data') }}',
-                    data: {}
+                    url: '{{ route('archive.datatable.data') }}',
+                    data: {
+                        @if(Request::get('archive_from'))
+                        archive_from: "{!! Request::get('archive_from') !!}"
+                        ,
+                        @endif
+                            @if(Request::get('archive_to'))
+                        archive_to: "{!! Request::get('archive_to') !!}"
+                        @endif
+
+                    }
                 },
                 columns: [
-                    {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
+
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex', "searchable": false, "orderable": true},
                     {data: 'name', name: 'name', "searchable": true, "orderable": true},
-                    {data: 'date', name: 'date', "searchable": true, "orderable": true},
-                    {data: 'type', name: 'type', "searchable": true, "orderable": true},
-                    {data: 'progress', name: 'progress', "searchable": true, "orderable": true},
-                    {data: 'confirm', name: 'confirm', "searchable": true, "orderable": true},
-                    {data: 'actions', name: 'actions', "searchable": false, "orderable": false},
+                    {data: 'client', name: 'client', "searchable": true, "orderable": true},
+                    {data: 'contract', name: 'contract', "searchable": true, "orderable": true},
+                    {data: 'project_type', name: 'project_type', "searchable": true, "orderable": true},
+                    {data: 'archive_date', name: 'archive_date', "searchable": true, "orderable": true},
+
+
                 ]
             });
-
             $.ajax({
-                url: "{{ URL::to('/add-Contracts-button')}}",
+                url: "{{ URL::to('/archive-button')}}",
                 success: function (data) {
                     $('.add_button').append(data);
                 },
@@ -139,11 +158,9 @@
         });
     </script>
 
-
     <?php
     $message = session()->get("message");
     ?>
-
     @if( session()->has("message"))
         <script>
             toastr.options = {
@@ -162,7 +179,6 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             };
-
             toastr.success("نجاح", "{{$message}}");
         </script>
 

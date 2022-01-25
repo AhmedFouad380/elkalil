@@ -119,7 +119,7 @@
                 ],
                 ajax: {
                     url: '{{ route('Percent.datatable.data') }}',
-                    data: {id: {{ $id }} }
+                    data: {id: "{{ $id }}" }
                 },
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},

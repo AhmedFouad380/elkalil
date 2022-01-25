@@ -120,7 +120,7 @@
                 ],
                 ajax: {
                     url: '{{ route('Level.datatable.data') }}',
-                    data: {id: {{ $id }} }
+                    data: {id: "{{ $id }}" }
                 },
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},

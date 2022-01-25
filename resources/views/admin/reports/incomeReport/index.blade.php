@@ -9,14 +9,20 @@
 
 @section('style')
     <style>
-        .unread {
-            background-color: #eeeeee;
+        @media (min-width: 992px) {
+            .aside-me .content {
+                padding-right: 30px;
+            }
+        }
+
+        .select2-container .select2-selection--single .select2-selection__clear {
+            padding-right: 355px;
         }
     </style>
 @endsection
 
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">التعاقدات</h1>
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">ارشيف المشاريع</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -26,7 +32,8 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">التعاقدات</li>
+        <li class="breadcrumb-item text-gray-500">التقارير والاحصائيات</li>
+        <li class="breadcrumb-item text-gray-500">ارشيف المشاريع</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -36,9 +43,50 @@
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
 
+
         <div class="content flex-row-fluid" id="kt_content">
             <!--begin::Card-->
             <div class="card">
+                <div class="col-xl-12 mb-5" style="padding-right: 27%">
+                    <!--begin::Row-->
+                    <div class="row g-5 g-lg-10">
+
+                        <!--begin::Col-->
+                        <div class="col-lg-6 mb-5 mb-lg-10">
+                            <!--begin: Statistics Widget 6-->
+                            <a href="#" class="card bg-body h-150px">
+                                <!--begin::Body-->
+                                <div class="card-body d-flex flex-column py-6 px-6">
+                                    <div class="d-flex flex-column flex-grow-1 mb-5">
+                                        <span class="text-gray-500 fw-bold me-2 fs-7">اجمالي المدفوع</span>
+                                        <span class="fw-bolder fs-1 text-gray-900">{{$total_paid}}</span>
+                                    </div>
+
+                                </div>
+                                <!--end:: Body-->
+                            </a>
+                            <!--end: Statistics Widget 6-->
+                        </div>
+                        <div class="col-lg-6 mb-5 mb-lg-10">
+                            <!--begin: Statistics Widget 6-->
+                            <a href="#" class="card bg-body h-150px">
+                                <!--begin::Body-->
+                                <div class="card-body d-flex flex-column py-6 px-6">
+                                    <div class="d-flex flex-column flex-grow-1 mb-5">
+                                        <span class="text-gray-500 fw-bold me-2 fs-7">اجمالي المتبقى</span>
+                                        <span class="fw-bolder fs-1 text-gray-900">{{$total_remain}}</span>
+                                     </div>
+
+                                </div>
+                                <!--end:: Body-->
+                            </a>
+                            <!--end: Statistics Widget 6-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+
+                </div>
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
 
@@ -49,25 +97,30 @@
                         <!--begin::Table row-->
 
                         <tr class="text-start text-muted fw-bolder fs-5 text-uppercase gs-0">
-                            <th class="w-10px pe-2">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                           data-kt-check-target="#users_table .form-check-input" value="1"/>
-                                </div>
-                            </th>
 
-                            <th class="min-w-125px">اسم العميل</th>
-                            <th class="min-w-125px">تاريخ الطلب</th>
-                            <th class="min-w-125px">نوع المشروع</th>
-                            <th class="min-w-125px">نسبة الانجاز</th>
-                            <th class="min-w-125px">النوع</th>
-                            <th class=" min-w-100px">الاجراءات</th>
+
+                            <th class="min-w-125px">م</th>
+                            <th class="min-w-125px">اسم المشروع</th>
+                            <th class="min-w-125px">اجمالى المشروع</th>
+                            <th class="min-w-125px">اجمالى المدفوع</th>
+                            <th class="min-w-125px">اجمالى المتبقى</th>
+
                         </tr>
                         <!--end::Table row-->
                         </thead>
                         <!--end::Table head-->
                         <!--begin::Table body-->
-
+                        <tbody>
+                        @foreach($term_list as $key=>$row)
+                            <tr>
+                                <td>{{$key+1}}</td>
+                                <td>{{$row['project_name']}}</td>
+                                <td>{{$row['total']}}</td>
+                                <td>{{$row['paid']}}</td>
+                                <td>{{$row['remain']}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
 
                         <!--end::Table body-->
                     </table>
@@ -87,8 +140,6 @@
     <script type="text/javascript">
         $(function () {
             var table = $('#users_table').DataTable({
-                processing: true,
-                serverSide: true,
                 autoWidth: false,
                 responsive: true,
                 aaSorting: [],
@@ -101,6 +152,12 @@
                 },
                 buttons: [
                     {
+                        extend: 'colvis',
+                        className: 'btn btn-light-primary me-3',
+                        text: ' <i class="bi bi-eye-fill fs-2x"></i>إظهار / إخفاء الأعمدة '
+                    }
+                    ,
+                    {
                         extend: 'print',
                         className: 'btn btn-light-primary me-3',
                         text: '<i class="bi bi-printer-fill fs-2x"></i>'
@@ -110,40 +167,18 @@
                         extend: 'excel',
                         className: 'btn btn-light-primary me-3',
                         text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'
-                    },
-                    // {extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
+                    }
 
                 ],
-                ajax: {
-                    url: '{{ route('Contracts.datatable.data') }}',
-                    data: {}
-                },
-                columns: [
-                    {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
-                    {data: 'name', name: 'name', "searchable": true, "orderable": true},
-                    {data: 'date', name: 'date', "searchable": true, "orderable": true},
-                    {data: 'type', name: 'type', "searchable": true, "orderable": true},
-                    {data: 'progress', name: 'progress', "searchable": true, "orderable": true},
-                    {data: 'confirm', name: 'confirm', "searchable": true, "orderable": true},
-                    {data: 'actions', name: 'actions', "searchable": false, "orderable": false},
-                ]
+
             });
 
-            $.ajax({
-                url: "{{ URL::to('/add-Contracts-button')}}",
-                success: function (data) {
-                    $('.add_button').append(data);
-                },
-                dataType: 'html'
-            });
         });
     </script>
-
 
     <?php
     $message = session()->get("message");
     ?>
-
     @if( session()->has("message"))
         <script>
             toastr.options = {
@@ -162,7 +197,6 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             };
-
             toastr.success("نجاح", "{{$message}}");
         </script>
 
