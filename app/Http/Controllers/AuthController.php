@@ -45,23 +45,23 @@ class AuthController extends Controller
         $user->code = $code;
         $user->save();
         // send sms
-//        $message = "رمز استعاده كلمة المرور الخاصة بك هى :" . $code;
-//        $ch = curl_init();
-//        $url = "http://basic.unifonic.com/rest/SMS/messages";
-//        curl_setopt($ch, CURLOPT_URL, $url);
-//        curl_setopt($ch, CURLOPT_POST, true);
-//        // curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=pm@uramit.com&password=uram123&msg=".$message."&sender=Bus-exc.&to=".$client->phone."&encoding=UTF8"); // define what you want to post
-//        curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=ngKAr3bTdAMthOzNZumtHX3DaEuJEx&Body=" . $message . "&SenderID=ALKHALIL-GR&Recipient=" . $user->phone . "&encoding=UTF8&responseType=json"); // define what you want to post
-//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//        $output = curl_exec($ch);
-//        curl_close($ch);
-//
-//        $setting = Setting::find(1);
-//        $setting->sms_used = 2 + $setting->sms_used;
-//        $setting->save();
-//        $description = 'ارسال استعاده كلمة المرور للرقم    ' . $user->phone;
-//        $dataLog = array('type' => 2, 'user_id' => $user->id, 'description' => $description, 'sms_count' => 2);
-//        SmsLogs::insert($dataLog);
+        $message = "رمز استعاده كلمة المرور الخاصة بك هى :" . $code;
+        $ch = curl_init();
+        $url = "http://basic.unifonic.com/rest/SMS/messages";
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=pm@uramit.com&password=uram123&msg=".$message."&sender=Bus-exc.&to=".$client->phone."&encoding=UTF8"); // define what you want to post
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=su7G9tOZc6U0kPVnoeiJGHUDMKe8tp&Body=" . $message . "&SenderID=ALKHALIL&Recipient=" . $user->phone . "&encoding=UTF8&responseType=json"); // define what you want to post
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        $setting = Setting::find(1);
+        $setting->sms_used = 2 + $setting->sms_used;
+        $setting->save();
+        $description = 'ارسال استعاده كلمة المرور للرقم    ' . $user->phone;
+        $dataLog = array('type' => 2, 'user_id' => $user->id, 'description' => $description, 'sms_count' => 2);
+        SmsLogs::insert($dataLog);
 
         return view('auth/check-phone', compact('user'));
 
