@@ -183,27 +183,35 @@ class ProjectLevelController extends Controller
             'message' => 'required|string',
             'level_id' => 'required|exists:project_levels,id',
         ]);
+
+        if(Auth::check()){
+            $user_id=Auth::user()->id;
+            $user_name=Auth::user()->name;
+        }else{
+            $user_id=$request->sender_id;
+            $user_name=$request->sender_name;
+        }
         $level = ProjectLevels::find($request->level_id);
         $data = new Message();
         $data->level_id=$request->level_id;
         $data->project_id=$level->project_id;
-        $data->sender_id=Auth::user()->id;
-        $data->sender_name=Auth::user()->name;
+        $data->sender_id=$user_id;
+        $data->sender_name=$user_name;
         $data->type=0;
         $data->message=$request->message;
-        $data->file=$request->file;
+//        $data->file=$request->file;
         $data->created_at=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d H:i:s');
         $data->save();
 
         //is read
-        UserChatPermission::where('reciever_id','!=',Auth::user()->id)->where('type',0)->where('level_id',$level->id)->update([
+        UserChatPermission::where('reciever_id','!=',$user_id)->where('type',0)->where('level_id',$level->id)->update([
             'is_read'=>0
         ]);
         UserChatPermission::where('type',1)->where('level_id',$level->id)->update([
             'is_read'=>0
         ]);
 
-        $ids = UserChatPermission::where('level_id',$level->id)->where('reciever_id','!=',Auth::user()->id)->pluck('reciever_id')->ToArray();
+        $ids = UserChatPermission::where('level_id',$level->id)->where('reciever_id','!=',$user_id)->pluck('reciever_id')->ToArray();
 
         $token = User::whereIn('id',$ids)->pluck('token_id')->ToArray();
 
@@ -214,7 +222,7 @@ class ProjectLevelController extends Controller
             $dataNotifaction = array('id'=> $data->id , 'sender_id' => $data->sender_id ,'sender_name'=> $data->sender_name , 'type' => $data->type , 'message' => $data->message , 'project_name' => $level->project->name ,'project_id' => $data->project_id ,'level_id'=> $data->level_id , 'level_name' => $level->title , 'file'=> '' , 'created_at'=> $data->created_at);
         }else{
 
-            $dataNotifaction = array('id'=> $data->id , 'sender_id' => $data->sender_id ,'sender_name'=> $data->sender_name , 'type' => $data->type , 'message' => $data->message , 'project_name' => $Project[0]->name  , 'project_id' => $data->project_id ,'level_id'=> $data->level_id , 'level_name' => $level->title , 'file'=> $data->file , 'created_at'=> $data->created_at);
+            $dataNotifaction = array('id'=> $data->id , 'sender_id' => $data->sender_id ,'sender_name'=> $data->sender_name , 'type' => $data->type , 'message' => $data->message , 'project_name' => $project->name  , 'project_id' => $data->project_id ,'level_id'=> $data->level_id , 'level_name' => $level->title , 'file'=> $data->file , 'created_at'=> $data->created_at);
         }
         $this->send($token , $level->project->name , $data->message , 5 , $dataNotifaction );
         //end is read
@@ -232,6 +240,72 @@ class ProjectLevelController extends Controller
 
         $pusher->trigger('MessageSent-channel', 'App\Events\SendMessage', $data);
         return response()->json($data);
+
+    }
+    public function StoreChatMobile(Request $request){
+
+        $this->validate(request(), [
+            'message' => 'required|string',
+            'level_id' => 'required|exists:project_levels,id',
+        ]);
+
+        if(Auth::check()){
+            $user_id=Auth::user()->id;
+            $user_name=Auth::user()->name;
+        }else{
+            $user_id=$request->sender_id;
+            $user_name=$request->sender_name;
+        }
+        $level = ProjectLevels::find($request->level_id);
+        $data = new Message();
+        $data->level_id=$request->level_id;
+        $data->project_id=$level->project_id;
+        $data->sender_id=$user_id;
+        $data->sender_name=$user_name;
+        $data->type=0;
+        $data->message=$request->message;
+//        $data->file=$request->file;
+        $data->created_at=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d H:i:s');
+        $data->save();
+
+        //is read
+        UserChatPermission::where('reciever_id','!=',$user_id)->where('type',0)->where('level_id',$level->id)->update([
+            'is_read'=>0
+        ]);
+        UserChatPermission::where('type',1)->where('level_id',$level->id)->update([
+            'is_read'=>0
+        ]);
+
+        $ids = UserChatPermission::where('level_id',$level->id)->where('reciever_id','!=',$user_id)->pluck('reciever_id')->ToArray();
+
+        $token = User::whereIn('id',$ids)->pluck('token_id')->ToArray();
+
+        $project = Project::find($level->project_id);
+        array_push($token, $project->client->token_id );
+
+        if($data->file == null){
+            $dataNotifaction = array('id'=> $data->id , 'sender_id' => $data->sender_id ,'sender_name'=> $data->sender_name , 'type' => $data->type , 'message' => $data->message , 'project_name' => $level->project->name ,'project_id' => $data->project_id ,'level_id'=> $data->level_id , 'level_name' => $level->title , 'file'=> '' , 'created_at'=> $data->created_at);
+        }else{
+
+            $dataNotifaction = array('id'=> $data->id , 'sender_id' => $data->sender_id ,'sender_name'=> $data->sender_name , 'type' => $data->type , 'message' => $data->message , 'project_name' => $project->name  , 'project_id' => $data->project_id ,'level_id'=> $data->level_id , 'level_name' => $level->title , 'file'=> $data->file , 'created_at'=> $data->created_at);
+        }
+        $this->send($token , $level->project->name , $data->message , 5 , $dataNotifaction );
+        //end is read
+        $options = array(
+            'cluster' => env('PUSHER_APP_CLUSTER'),
+            'encrypted' => true
+        );
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+
+        $pusher->trigger('MessageSent-channel', 'App\Events\SendMessage', $data);
+        $object = array('status'=>200 , 'msg'=>'success ','ar_msg'=>'تم بنجاح','data'=>$data);
+        return response()->json($object);
 
     }
 

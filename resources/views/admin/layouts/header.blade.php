@@ -797,15 +797,17 @@
                 @endif
                 @if(Auth::user()->userGroup->is_financial == 1)
                     <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
-                         class="menu-item menu-lg-down-accordion me-lg-1">
-                    <span
-                        class="menu-link @if(Request::segment(1) == "income-reciepts" ||Request::segment(1) == "outcome-reciepts" ) active  @endif py-3">
-                        <span class="menu-title">الحسابات المالية</span>
+
+
+                         class="menu-item  @if(Request::segment(1) == 'Project_search' || Request::segment(1) == 'client_search' || Request::segment(1) == "income-reciepts" ||Request::segment(1) == "outcome-reciepts"||Request::segment(1) == "financial-request") here show @endif menu-lg-down-accordion me-lg-1">
+                    <span class="menu-link py-3">
+                         <span class="menu-title">الحسابات المالية</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </span>
                         <div
                             class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
-                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                 data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
                                 <a href="/income-reciepts">
                             <span
@@ -840,7 +842,8 @@
                             </span>
                                 </a>
                             </div>
-                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                 data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
                                 <a href="/outcome-reciepts">
                             <span
@@ -877,6 +880,7 @@
                             <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
                                  data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
+                                <a href="{{url('client_search')}}">
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -899,12 +903,16 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">كشف حساب عميل</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "client_search" ) text-active-primary active @endif  ">كشف حساب عميل</span>
                             </span>
+                                </a>
                             </div>
                             <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
                                  data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
+                                <a href="{{url('Project_search')}}">
+
                             <span class="menu-link py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -927,13 +935,18 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">كشف ح مصروفات المشروع</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "Project_search" ) text-active-primary active @endif  ">كشف ح مصروفات المشروع</span>
                             </span>
+                                </a>
                             </div>
                             <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
                                  data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
+                                <a href="{{url('financial-request')}}">
+
+                            <span
+                                class="menu-link @if(Request::segment(1) == "financial-request") active @endif py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -955,9 +968,12 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">مطالبة مالية </span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "financial-request" ) text-active-primary active @endif  ">مطالبة مالية</span>
                             </span>
+                                </a>
                             </div>
+
                         </div>
                     </div>
                 @endif

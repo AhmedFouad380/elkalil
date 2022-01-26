@@ -177,6 +177,7 @@ class ProjectController extends Controller
                         $ProjectLevelDetails->sort=$de->sort;
                         $ProjectLevelDetails->question_type=$de->question_type;
                         $ProjectLevelDetails->values=$de->values;
+                        $ProjectLevelDetails->is_pdf=$de->is_pdf;
                         $ProjectLevelDetails->emp_id=0;
                         $ProjectLevelDetails->save();
                     }

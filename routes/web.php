@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ArchiveController;
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\ContractTypesController;
 use App\Http\Controllers\Admin\ExplanReportController;
+use App\Http\Controllers\Admin\FinaicalRequest;
 use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\Admin\IncomeRecieptsController;
 use App\Http\Controllers\Admin\IncomesReportController;
@@ -200,6 +201,24 @@ Route::group(['middleware' => ['admin']], function () {
         return view('admin/Requests/button');
     });
 
+    Route::get('Dd',function (){
+       echo'ahmed';
+    });
+    Route::get('client_search', [\App\Http\Controllers\Admin\ReportController::class, 'client_search']);
+    Route::get('client_search_datatable', [\App\Http\Controllers\Admin\ReportController::class, 'datatable'])->name('client.search.datatable');
+
+    Route::get('/client_search-button', function () {
+        return view('admin/reports/clientSearch/button');
+    });
+
+    Route::get('Project_search', [\App\Http\Controllers\Admin\ReportController::class, 'Project_search']);
+    Route::get('Project_search_datatable', [\App\Http\Controllers\Admin\ReportController::class, 'datatable2'])->name('project.search.datatable');
+
+    Route::get('/Project_search-button', function () {
+        return view('admin/reports/Project_search/button');
+    });
+
+
     // Explan
 
     Route::post('Add_explan', [\App\Http\Controllers\Admin\ExplanController::class, 'Add_explan'])->name('Add_explan');
@@ -291,8 +310,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/archive-button', function () {
         return view('admin/reports/archive/button');
     });
-
-
     Route::get('projects-incomes', [IncomesReportController::class, 'index']);
 
 
@@ -318,6 +335,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/add-outcome_reciepts-button', function () {
         return view('admin/outcomeReciepts/button');
     });
+
+    Route::get('financial-request', [FinaicalRequest::class, 'index']);
+    Route::post('financial-request', [FinaicalRequest::class, 'send']);
+    Route::get('ProjectFinancial/{id}', [FinaicalRequest::class, 'ProjectFinancial']);
 
 
 });

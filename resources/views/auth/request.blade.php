@@ -502,7 +502,16 @@
 
 @section('script')
     <script src="{{asset('admin/assets/js/custom/modals/create-account.js')}}"></script>
-    <script>
+    <script>       
+
+        function preventBack() {
+            window.history.forward(); 
+        }
+          
+        setTimeout("preventBack()", 0);
+          
+        window.onunload = function () { null };
+
         function myFunction() {
             var id =$('#country').val()
             if (id == "داخل المملكة العربية السعودية"){
