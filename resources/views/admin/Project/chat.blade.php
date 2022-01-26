@@ -341,7 +341,6 @@
     <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
 
 
-    // chat
 
     <script>
         var msgList = document.getElementById("msg-list");
