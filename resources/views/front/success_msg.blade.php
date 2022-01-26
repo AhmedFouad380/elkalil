@@ -45,6 +45,13 @@
 @endsection
 
 @section('script')
+
+<script>
+    function pageRedirect() {
+            window.location.replace("https://dashboard.alkhalilsys.com/");
+        }      
+        setTimeout("pageRedirect()", 2000);
+</script>
 @endsection
 
 
