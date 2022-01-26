@@ -62,7 +62,6 @@ class IncomesReportController extends Controller
         $total_paid = array_sum($total_paid);
         $total_remain = array_sum($total_remain);
 
-
         return view('admin.reports.incomeReport.index', compact('term_list', 'total_paid', 'total_remain'));
     }
 
