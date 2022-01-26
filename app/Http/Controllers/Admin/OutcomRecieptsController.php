@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Branche;
 use App\Models\Income;
 use App\Models\Level;
+use App\Models\Outcome;
 use App\Models\Project;
 use App\Models\ProjectLevels;
 use App\Models\User;
@@ -16,7 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
-class IncomeRecieptsController extends Controller
+class OutcomRecieptsController extends Controller
 {
     public function __construct()
     {
@@ -39,12 +40,12 @@ class IncomeRecieptsController extends Controller
      */
     public function index()
     {
-        return view('admin.incomeReciepts.index');
+        return view('admin.outcomeReciepts.index');
     }
 
     public function datatable(Request $request)
     {
-        $data = Income::orderBy('id', 'asc');
+        $data = Outcome::orderBy('id', 'asc');
         $data = $data->get();
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {
@@ -103,7 +104,7 @@ class IncomeRecieptsController extends Controller
         $data['date'] = date("Y");
         $project = Project::whereId($request->project_id)->first();
         $data['project_name'] = $project->name;
-        $user = Income::create($data);
+        $user = Outcome::create($data);
         return redirect()->back()->with('message', 'تم الاضافة بنجاح ');
 
 
@@ -136,7 +137,7 @@ class IncomeRecieptsController extends Controller
     public function destroy(Request $request)
     {
         try {
-            Income::whereIn('id', $request->id)->delete();
+            Outcome::whereIn('id', $request->id)->delete();
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed']);
         }

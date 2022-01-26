@@ -5,10 +5,12 @@ use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\ContractTypesController;
 use App\Http\Controllers\Admin\ExplanReportController;
 use App\Http\Controllers\Admin\InboxController;
+use App\Http\Controllers\Admin\IncomeRecieptsController;
 use App\Http\Controllers\Admin\IncomesReportController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\LevelDetailsController;
 use App\Http\Controllers\Admin\MessagesController;
+use App\Http\Controllers\Admin\OutcomRecieptsController;
 use App\Http\Controllers\Admin\PercentCategoryController;
 use App\Http\Controllers\Admin\PercentController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -300,6 +302,23 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/explan-button', function () {
         return view('admin/reports/explanReport/button');
     });
+
+    Route::get('income-reciepts', [IncomeRecieptsController::class, 'index']);
+    Route::get('income_reciepts_datatable', [IncomeRecieptsController::class, 'datatable'])->name('income_reciepts.datatable.data');
+    Route::get('delete-income_reciepts', [IncomeRecieptsController::class, 'destroy']);
+    Route::post('store-income_reciepts', [IncomeRecieptsController::class, 'store']);
+    Route::get('/add-income_reciepts-button', function () {
+        return view('admin/incomeReciepts/button');
+    });
+
+    Route::get('outcome-reciepts', [OutcomRecieptsController::class, 'index']);
+    Route::get('outcome_reciepts_datatable', [OutcomRecieptsController::class, 'datatable'])->name('outcome_reciepts.datatable.data');
+    Route::get('delete-outcome_reciepts', [OutcomRecieptsController::class, 'destroy']);
+    Route::post('store-outcome_reciepts', [OutcomRecieptsController::class, 'store']);
+    Route::get('/add-outcome_reciepts-button', function () {
+        return view('admin/outcomeReciepts/button');
+    });
+
 
 });
 
