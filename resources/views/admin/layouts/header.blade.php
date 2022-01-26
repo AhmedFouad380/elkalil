@@ -1141,7 +1141,7 @@
                             </div>
                             <div data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
-                                <a href="/employee_setting">
+                                <a href="/client_setting">
                             <span
                                 class="menu-link @if(Request::segment(1) == "client_setting" || Request::segment(1) == "client-edit" ) active @endif py-3">
                                 <span class="menu-icon ">
