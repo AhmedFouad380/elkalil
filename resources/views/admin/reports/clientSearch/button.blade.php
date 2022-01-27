@@ -67,7 +67,7 @@
                                 <select name="project_id" id="project_id" class="form-control">
                                     <option value="">الكل</option>
                                     @foreach(\App\Models\Project::all() as $project)
-                                        <option value="{{$project->id}}">{{$project->name}}</option>
+                                        <option value="{{$project->id}}">{{$project->name}} / {{$project->client->name}}</option>
                                     @endforeach
                                 </select>
 
