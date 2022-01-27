@@ -19,6 +19,7 @@ class Income extends Model
         'amount',
         'details',
         'type',
+        'created_at',
     ];
 
     public function Project()

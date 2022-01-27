@@ -1,6 +1,6 @@
 <!--begin::Header-->
 <style>.margin-10 {
-        margin:10px;
+        margin: 10px;
     }</style>
 <!--begin::Header-->
 <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
@@ -42,8 +42,10 @@
                 <!--begin::Notifications-->
                     <div class="d-flex align-items-center ms-2 ms-lg-3">
                         <!--begin::Menu- wrapper-->
-                        <div class="btn btn-icon @if(\App\Models\Project::where('is_accepted',2)->where('view',0)->count() > 0) btn-color-danger @else btn-color-warning @endif position-relative w-30px h-30px w-md-40px h-md-40px"
-                             data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                        <div
+                            class="btn btn-icon @if(\App\Models\Project::where('is_accepted',2)->where('view',0)->count() > 0) btn-color-danger @else btn-color-warning @endif position-relative w-30px h-30px w-md-40px h-md-40px"
+                            data-kt-menu-trigger="click" data-kt-menu-attach="parent"
+                            data-kt-menu-placement="bottom-end">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                             <span class="svg-icon svg-icon-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -85,7 +87,8 @@
                                 <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
                                     <li class="nav-item">
                                         <a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active"
-                                           data-bs-toggle="tab" href="#kt_topbar_notifications_1">طلبات العملاء الجديده</a>
+                                           data-bs-toggle="tab" href="#kt_topbar_notifications_1">طلبات العملاء
+                                            الجديده</a>
                                     </li>
 
                                 </ul>
@@ -177,15 +180,22 @@
 
                     <div class="d-flex align-items-center ms-2 ms-lg-3">
                         <!--begin::Menu- wrapper-->
-                        <div class="btn btn-icon @if(\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count() > 0) btn-color-danger  @else btn-color-warning @endif position-relative w-30px h-30px w-md-40px h-md-40px"
-                             data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                        <div
+                            class="btn btn-icon @if(\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count() > 0) btn-color-danger  @else btn-color-warning @endif position-relative w-30px h-30px w-md-40px h-md-40px"
+                            data-kt-menu-trigger="click" data-kt-menu-attach="parent"
+                            data-kt-menu-placement="bottom-end">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                             <span class="svg-icon svg-icon-1">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<rect x="8" y="9" width="3" height="10" rx="1.5" fill="black"></rect>
-													<rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5" fill="black"></rect>
-													<rect x="18" y="11" width="3" height="8" rx="1.5" fill="black"></rect>
-													<rect x="3" y="13" width="3" height="6" rx="1.5" fill="black"></rect>
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none">
+													<rect x="8" y="9" width="3" height="10" rx="1.5"
+                                                          fill="black"></rect>
+													<rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5"
+                                                          fill="black"></rect>
+													<rect x="18" y="11" width="3" height="8" rx="1.5"
+                                                          fill="black"></rect>
+													<rect x="3" y="13" width="3" height="6" rx="1.5"
+                                                          fill="black"></rect>
 												</svg>
 											</span>
                             <!--end::Svg Icon-->
@@ -213,7 +223,8 @@
                                 <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
                                     <li class="nav-item">
                                         <a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active"
-                                           data-bs-toggle="tab" href="#kt_topbar_notifications_1">التعاقدات والمتابعه</a>
+                                           data-bs-toggle="tab" href="#kt_topbar_notifications_1">التعاقدات
+                                            والمتابعه</a>
                                     </li>
 
                                 </ul>
@@ -781,22 +792,27 @@
                             </span>
                                 </a>
                             </div>
-                         </div>
+                        </div>
                     </div>
                 @endif
                 @if(Auth::user()->userGroup->is_financial == 1)
                     <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
-                         class="menu-item  @if(Request::segment(1) == 'Project_search' || Request::segment(1) == 'client_search' ) here show @endif menu-lg-down-accordion me-lg-1">
+
+
+                         class="menu-item  @if(Request::segment(1) == 'Project_search' || Request::segment(1) == 'client_search' || Request::segment(1) == "income-reciepts" ||Request::segment(1) == "outcome-reciepts"||Request::segment(1) == "financial-request") here show @endif menu-lg-down-accordion me-lg-1">
                     <span class="menu-link py-3">
-                        <span class="menu-title">الحسابات المالية</span>
+                         <span class="menu-title">الحسابات المالية</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </span>
                         <div
                             class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
-                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                 data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
-                                <span class="menu-icon">
+                                <a href="/income-reciepts">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "income-reciepts"   ) active @endif py-3">
+                                <span class="menu-icon ">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -815,15 +831,24 @@
                                                   fill="black"/>
                                         </svg>
                                     </span>
+
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">سندات القبض</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "income-reciepts") text-active-primary active @endif ">
+
+                                        سندات القبض
+                                      </span>
                             </span>
+                                </a>
                             </div>
-                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                 data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
-                                <span class="menu-icon">
+                                <a href="/outcome-reciepts">
+                            <span
+                                class="menu-link @if(Request::segment(1) == "outcome-reciepts"   ) active @endif py-3">
+                                <span class="menu-icon ">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -842,12 +867,18 @@
                                                   fill="black"/>
                                         </svg>
                                     </span>
+
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">سندات الصرف</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "outcome-reciepts") text-active-primary active @endif ">
+                                        سندات الصرف
+                                      </span>
                             </span>
+                                </a>
                             </div>
-                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                 data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
                                 <a href="{{url('client_search')}}">
                             <span class="menu-link py-3">
@@ -872,11 +903,13 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title  @if(Request::segment(1) == "client_search" ) text-active-primary active @endif  ">كشف حساب عميل</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "client_search" ) text-active-primary active @endif  ">كشف حساب عميل</span>
                             </span>
-                            </a>
+                                </a>
                             </div>
-                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                 data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
                                 <a href="{{url('Project_search')}}">
 
@@ -902,13 +935,18 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title  @if(Request::segment(1) == "Project_search" ) text-active-primary active @endif  ">كشف ح مصروفات المشروع</span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "Project_search" ) text-active-primary active @endif  ">كشف ح مصروفات المشروع</span>
                             </span>
                                 </a>
                             </div>
-                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                 data-kt-menu-placement="right-start"
                                  class="menu-item menu-lg-down-accordion">
-                            <span class="menu-link py-3">
+                                <a href="{{url('financial-request')}}">
+
+                            <span
+                                class="menu-link @if(Request::segment(1) == "financial-request") active @endif py-3">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -930,9 +968,12 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title ">مطالبة مالية </span>
+                                <span
+                                    class="menu-title  @if(Request::segment(1) == "financial-request" ) text-active-primary active @endif  ">مطالبة مالية</span>
                             </span>
+                                </a>
                             </div>
+
                         </div>
                     </div>
                 @endif

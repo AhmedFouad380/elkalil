@@ -10,7 +10,7 @@ class Outcome extends Model
     use HasFactory;
 
     protected  $table = 'outcomes';
-
+    public $timestamps = false;
     protected $fillable = [
         'project_id',
         'project_name',
@@ -18,6 +18,7 @@ class Outcome extends Model
         'amount',
         'details',
         'type',
+        'created_at',
 
     ];
 
