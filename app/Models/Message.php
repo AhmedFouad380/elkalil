@@ -32,4 +32,13 @@ class Message extends Model
     {
         return $this->belongsTo(Level::class, 'level_id');
     }
+
+    public function setFileAttribute($image)
+    {
+        if (is_file($image)) {
+            $imageFields = upload_multiple3($image,'images');
+            $this->attributes['file'] = $imageFields;
+        }
+    }
+
 }

@@ -1,8 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('css')
-    <link href="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet"
-          type="text/css"/>
+    <link href="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet
     <link href="{{ URL::asset('admin/assets/plugins/custom/prismjs/prismjs.bundle.css')}}" rel="stylesheet"
           type="text/css"/>
 @endsection
@@ -49,7 +48,9 @@
             <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
+                    <div class="card-header">
 
+                    </div>
                     <!--begin::Table-->
                     <table class="table align-middle table-row-dashed fs-4 gy-5" id="users_table">
                         <!--begin::Table head-->
@@ -68,14 +69,54 @@
                           </tr>
                         <!--end::Table row-->
                         </thead>
+                        <tbody>
+                        @if($Project)
+{{--                            <tr class="">--}}
+{{--                                <th class="min-w-125px">1</th>--}}
+{{--                                <th class="min-w-125px">{{$Project->confirm_date}}</th>--}}
+{{--                                <th class="min-w-125px">مبلغ التعاقد</th>--}}
+{{--                                <th class="min-w-125px">{{$Project->name}}</th>--}}
+{{--                                <th class="min-w-125px">{{$Project->projectPaid->paid}}</th>--}}
+{{--                                <th class="min-w-125px">0</th>--}}
+{{--                            </tr>--}}
+                            <tr class="">
+                                <th class="min-w-125px">2</th>
+                                <th class="min-w-125px">{{$Project->confirm_date}}</th>
+                                <th class="min-w-125px">الدفعة المقدمة </th>
+{{--                                <th class="min-w-125px">{{$Project->name}}</th>--}}
+                                <th class="min-w-125px">0</th>
+                                <th class="min-w-125px">{{$Project->projectPaid->paid_down}}</th>
+                            </tr>
+                            @foreach($data as $key => $income)
+                                <tr class="">
+                                    <th class="min-w-125px">{{$key + 3 }}</th>
+                                    <th class="min-w-125px">{{\Carbon\Carbon::parse($income->created_at)->format('Y-m-d')}}</th>
+                                    <th class="min-w-125px">{{$income->details}} </th>
+{{--                                    <th class="min-w-125px">{{$Project->name}}</th>--}}
+                                    <th class="min-w-125px">0</th>
+                                    <th class="min-w-125px">{{$income->amount}}</th>
+                                </tr>
+                            @endforeach
+                            @foreach($data2 as $key => $income)
+                                <tr class="">
+                                    <th class="min-w-125px">{{$key + 3 }}</th>
+                                    <th class="min-w-125px">{{\Carbon\Carbon::parse($income->created_at)->format('Y-m-d')}}</th>
+                                    <th class="min-w-125px">{{$income->details}} </th>
+{{--                                    <th class="min-w-125px">{{$Project->name}}</th>--}}
+                                    <th class="min-w-125px">{{$income->amount}}</th>
+                                    <th class="min-w-125px">0</th>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         @if(isset($Project))
                         <tfoot>
                         <tr style="color:red!important;">
-                            <td colspan="2" >اجمالي المدين : {{$Project->projectPaid->paid}}</td>
-                            <td colspan="2" >اجمالي الدائن : {{$data->sum('amount') +  $Project->projectPaid->paid_down}} </td>
-                            <td colspan="2" >الرصيد المتبقى  : {{$Project->projectPaid->paid - ( $data->sum('amount')  +  $Project->projectPaid->paid_down ) }}</td>
+                            <td colspan="2" >اجمالي المدفوعات : {{$data->sum('amount') +  $Project->projectPaid->paid_down}}</td>
+                            <td colspan="2" >اجمالي المصروفات : {{ $data2->sum('amount') }} </td>
+                            <td colspan="2" > صافي المشروع   : {{ ( $data->sum('amount')  +  $Project->projectPaid->paid_down ) - $data2->sum('amount') }}</td>
                         </tr>
                         </tfoot>
                         @endif
@@ -101,8 +142,9 @@
 
         $(function () {
             var table = $('#users_table').DataTable({
+                order: ['1',"desc"],
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 autoWidth: false,
                 responsive: true,
                 aaSorting: [],
@@ -133,38 +175,6 @@
                     }
 
                 ]
-                @if(isset($Project))
-                ,
-                ajax: {
-                    url: '{{ route('client.search.datatable') }}',
-                    data: {
-                        @if(Request::get('from'))
-                        from: "{!! Request::get('from') !!}"
-                        ,
-                        @endif
-                            @if(Request::get('to'))
-                        to: "{!! Request::get('to') !!}"
-                        ,
-                        @endif
-                            @if(Request::get('project_id'))
-                        project_id: "{!! Request::get('project_id') !!}"
-                        ,
-                        @endif
-
-                    }
-                },
-                columns: [
-
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex', "searchable": false, "orderable": true},
-                    {data: 'created_at', name: 'created_at', "searchable": true, "orderable": true},
-                    {data: 'details', name: 'details', "searchable": true, "orderable": true},
-                    {data: 'project_name', name: 'project_name', "searchable": true, "orderable": true},
-                    {data: 'daen', name: 'dean', "searchable": true, "orderable": true},
-                    {data: 'amount', name: 'amount', "searchable": true, "orderable": true},
-
-
-                ]
-                @endif
             });
             $.ajax({
                 url: "{{ URL::to('/client_search-button')}}",

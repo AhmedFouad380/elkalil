@@ -238,7 +238,7 @@ class ProjectLevelController extends Controller
         );
 
 
-        $pusher->trigger('MessageSent-channel', 'App\Events\SendMessage', $data);
+        $pusher->trigger('MessageSent-channel-'.$request->level_id, 'App\Events\SendMessage', $data);
         return response()->json($data);
 
     }
@@ -262,9 +262,13 @@ class ProjectLevelController extends Controller
         $data->project_id=$level->project_id;
         $data->sender_id=$user_id;
         $data->sender_name=$user_name;
-        $data->type=0;
+        if($request->type){
+            $data->type=$request->type;
+        }else{
+            $data->type=0;
+        }
         $data->message=$request->message;
-//        $data->file=$request->file;
+        $data->file=$request->file;
         $data->created_at=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d H:i:s');
         $data->save();
 
@@ -303,7 +307,7 @@ class ProjectLevelController extends Controller
         );
 
 
-        $pusher->trigger('MessageSent-channel', 'App\Events\SendMessage', $data);
+        $pusher->trigger('MessageSent-channel-'.$request->level_id, 'App\Events\SendMessage', $data);
         $object = array('status'=>200 , 'msg'=>'success ','ar_msg'=>'تم بنجاح','data'=>$data);
         return response()->json($object);
 

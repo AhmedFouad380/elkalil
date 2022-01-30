@@ -390,10 +390,10 @@
             encrypted: true
         });
 
-        var channel = pusher.subscribe('MessageSent-channel');
+        var channel = pusher.subscribe('MessageSent-channel-'.{{$level->id}});
         channel.bind('App\\Events\\SendMessage', function(data) {
-            new Audio('https://audio-previews.elements.envatousercontent.com/files/157617930/preview.mp3?response-content-disposition=attachment%3B+filename%3D%228KR4YVH-notification-2.mp3%22').play();
             if(data.level_id == {{$level->id}} &&  data.sender_name != "{{Auth::user()->name}}"  ){
+                new Audio('https://audio-previews.elements.envatousercontent.com/files/157617930/preview.mp3?response-content-disposition=attachment%3B+filename%3D%228KR4YVH-notification-2.mp3%22').play();
                 var out = '                                   <div class="d-flex justify-content-end mb-10">' +
                     '                                        <!--begin::Wrapper--> ' +
                     '                                        <div class="d-flex flex-column align-items-end"> ' +
