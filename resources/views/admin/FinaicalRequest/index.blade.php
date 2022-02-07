@@ -49,56 +49,71 @@
             <div class="card">
 
                 <!--begin::Card body-->
-                <div class="card-body pt-0">
-
-                    <div class="row g-5 g-lg-10">
-                        <!--begin::Col-->
-                        <div class="col-lg-4 mb-5 mb-lg-10">
-                            <!--begin: Statistics Widget 6-->
-                            <a href="#" class="card bg-body h-150px">
-                                <!--begin::Body-->
-                                <div class="card-body d-flex flex-column py-6 px-6">
-                                    <div class="d-flex flex-column flex-grow-1 mb-5">
-                                        <span class="text-gray-500 fw-bold me-2 fs-7">اجمالي مبلغ التعاقد</span>
-                                        <span class="fw-bolder fs-1 text-gray-900" id="paid">0</span>
+                <div class="card-body pt-50">
+                    <div class="row g-5 g-xl-8">
+                        <div class="col-xl-4">
+                            <div class="d-flex h-100 align-items-center">
+                                <!--begin::Option-->
+                                <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10">
+                                    <!--begin::Heading-->
+                                    <div class="mb-7 text-center">
+                                        <!--begin::Title-->
+                                        <h1 class="text-dark mb-5 fw-boldest">اجمالي مبلغ التعاقد</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Price-->
+                                        <div class="text-center">
+                                            <span class="fs-3x fw-bolder text-primary" id="paid">0</span>
+                                            <span class="mb-2 text-primary">ريال</span>
+                                        </div>
+                                        <!--end::Price-->
                                     </div>
-
+                                    <!--end::Heading-->
                                 </div>
-                                <!--end:: Body-->
-                            </a>
-                            <!--end: Statistics Widget 6-->
+                                <!--end::Option-->
+                            </div>
                         </div>
-                        <div class="col-lg-4 mb-5 mb-lg-10">
-                            <!--begin: Statistics Widget 6-->
-                            <a href="#" class="card bg-body h-150px">
-                                <!--begin::Body-->
-                                <div class="card-body d-flex flex-column py-6 px-6">
-                                    <div class="d-flex flex-column flex-grow-1 mb-5">
-                                        <span class="text-gray-500 fw-bold me-2 fs-7">اجمالي المدفوع</span>
-                                        <span class="fw-bolder fs-1 text-gray-900" id="paid_down">0</span>
+                        <div class="col-xl-4">
+                            <div class="d-flex h-100 align-items-center">
+                                <!--begin::Option-->
+                                <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10">
+                                    <!--begin::Heading-->
+                                    <div class="mb-7 text-center">
+                                        <!--begin::Title-->
+                                        <h1 class="text-dark mb-5 fw-boldest">اجمالي المدفوع</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Price-->
+                                        <div class="text-center">
+                                            <span class="fs-3x fw-bolder text-primary" id="paid_down">0</span>
+                                            <span class="mb-2 text-primary">ريال</span>
+                                        </div>
+                                        <!--end::Price-->
                                     </div>
-
+                                    <!--end::Heading-->
                                 </div>
-                                <!--end:: Body-->
-                            </a>
-                            <!--end: Statistics Widget 6-->
+                                <!--end::Option-->
+                            </div>
                         </div>
-                        <div class="col-lg-4 mb-5 mb-lg-10">
-                            <!--begin: Statistics Widget 6-->
-                            <a href="#" class="card bg-body h-150px">
-                                <!--begin::Body-->
-                                <div class="card-body d-flex flex-column py-6 px-6">
-                                    <div class="d-flex flex-column flex-grow-1 mb-5">
-                                        <span class="text-gray-500 fw-bold me-2 fs-7">اجمالي المتبقى</span>
-                                        <span class="fw-bolder fs-1 text-gray-900" id="paid_term">0</span>
+                        <div class="col-xl-4">
+                            <div class="d-flex h-100 align-items-center">
+                                <!--begin::Option-->
+                                <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10">
+                                    <!--begin::Heading-->
+                                    <div class="mb-7 text-center">
+                                        <!--begin::Title-->
+                                        <h1 class="text-dark mb-5 fw-boldest">اجمالي المتبقى</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Price-->
+                                        <div class="text-center">
+                                            <span class="fs-3x fw-bolder text-primary" id="paid_term">0</span>
+                                            <span class="mb-2 text-primary">ريال</span>
+                                        </div>
+                                        <!--end::Price-->
                                     </div>
-
+                                    <!--end::Heading-->
                                 </div>
-                                <!--end:: Body-->
-                            </a>
-                            <!--end: Statistics Widget 6-->
+                                <!--end::Option-->
+                            </div>
                         </div>
-                        <!--end::Col-->
                     </div>
                     <div id="kt_account_settings_profile_details" class="collapse show">
                         <!--begin::Form-->
@@ -144,26 +159,28 @@
                                     <label class="required fw-bold fs-6 mb-2 col-3"></label>
                                     <!--end::Label-->
                                     <div class="col-6">
-                                        <label for="sms">رسالة نصية</label>
-                                        <input type="radio" name="type" id="sms"
-                                               class="h-20px w-20px " checked
-                                               placeholder="رسالة نصية" value="1" required/>
+                                        <div class="mb-10 d-flex">
+                                            <div class="form-check form-check-custom form-check-solid me-10">
+                                                <input type="radio" name="type" id="sms" class="h-20px w-20px " checked placeholder="رسالة نصية" value="1" required/>
+                                                <label class="form-check-label" for="sms">
+                                                    رسالة نصية
+                                                </label>
+                                            </div>                                        
 
-                                        &nbsp;
-                                        &nbsp;
-                                        &nbsp;
-                                        <label for="inbox">البريد الوارد</label>
-                                        <input type="radio" name="type" id="inbox"
-                                               class="h-20px w-20px "
-                                               placeholder="البريد الوارد" value="2" required/>
-                                        &nbsp;
-                                        &nbsp;
-                                        &nbsp;
-                                        <label for="both">الاثنين معآ</label>
-                                        <input type="radio" name="type" id="both"
-                                               class="h-20px w-20px "
-                                               placeholder="الاثنين معآ" value="3" required/>
+                                            <div class="form-check form-check-custom form-check-solid me-10">
+                                                <input type="radio" name="type" id="inbox" class="h-20px w-20px " placeholder="البريد الوارد" value="2" required/>
+                                                <label class="form-check-label" for="inbox">
+                                                    البريد الوارد
+                                                </label>
+                                            </div>
 
+                                            <div class="form-check form-check-custom form-check-solid me-10">
+                                                <input type="radio" name="type" id="both" class="h-20px w-20px " placeholder="الاثنين معآ" value="3" required/>
+                                                <label class="form-check-label" for="both">
+                                                    الاثنين معآ
+                                                </label>
+                                            </div> 
+                                        </div>                                      
 
                                     </div>
 
