@@ -11,7 +11,7 @@
         fill="black"/>
 </svg>
 </span>
-        <!--end::Svg Icon-->الفلتر
+        <!--end::Svg Icon-->تحديد المشروع
     </button>
 
     <!--begin::Modal - Add task-->
@@ -23,7 +23,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_add_user_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bolder">اعدادات الفلتر</h2>
+                    <h2 class="fw-bolder">اعدادات </h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-icon-primary"

@@ -142,7 +142,7 @@
 
         $(function () {
             var table = $('#users_table').DataTable({
-                order: ['1',"desc"],
+                order: ['1',"asc"],
                 processing: true,
                 serverSide: false,
                 autoWidth: false,

@@ -207,7 +207,7 @@
                     $("#paid").text($data.paid);
                     $("#paid_down").text($data.paid_down);
                     $("#paid_term").text($data.paid_term);
-                    var Message = 'عزيزي العميل ، نرحب بكم في شركة الخليل ، , ونفيدكم بان قد صدر طلب دفعة مقدمة بمبلغ قيمته  '+ $data.paid_term +' ريال';
+                    var Message = 'عزيزي العميل ، نرحب بكم في شركة الخليل ، , ونفيدكم بان قد صدر طلب الدفعة المتبقية بمبلغ قيمته  '+ $data.paid_term +' ريال';
                     $("#message").text(Message);
                     $("#send").css("display", 'block');
 

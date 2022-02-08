@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use Pusher\Pusher;
-
+use Validator;
 class ProjectLevelController extends Controller
 {
     public function store_level(Request $request)
@@ -244,10 +244,18 @@ class ProjectLevelController extends Controller
     }
     public function StoreChatMobile(Request $request){
 
-        $this->validate(request(), [
-            'message' => 'required|string',
+        $rules = [
+            'message' => 'nullable|string',
+            'sender_name' => 'required|string',
             'level_id' => 'required|exists:project_levels,id',
-        ]);
+
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $object = array('status'=>401 , 'msg'=>'Error ','ar_msg'=>'حدث خطأ','data'=>$validator->messages()->first());
+            return response()->json($object);
+        }
+
 
         if(Auth::check()){
             $user_id=Auth::user()->id;
@@ -363,6 +371,28 @@ class ProjectLevelController extends Controller
         }
         curl_close($ch);
         return $result;
+    }
+    public function getMessage(Request $request){
+        $rules = [
+            'user_id' => 'required|string',
+            'level_id' => 'required|exists:project_levels,id',
+
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $object = array('status'=>401 , 'msg'=>'Error ','ar_msg'=>'حدث خطأ','data'=>$validator->messages()->first());
+            return response()->json($object);
+        }
+        $User = User::find($request->user_id);
+        if($User->job_type == 3){
+            $data = Message::where('level_id',$request->level_id)->OrderBy('id','desc')->paginate(10);
+
+        }else{
+        $data = Message::where('level_id',$request->level_id)->where('is_delete',0)->OrderBy('id','desc')->paginate(10);
+        }
+        $object = array('status'=>200 , 'msg'=>'success ','ar_msg'=>'تم بنجاح','data'=>$data);
+        return response()->json($object);
+
     }
 
 }

@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('StoreMessage',['App\Http\Controllers\Admin\ProjectLevelController','StoreChatMobile']);
+Route::post('getMessage',['App\Http\Controllers\Admin\ProjectLevelController','getMessage']);
 

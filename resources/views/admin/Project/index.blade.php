@@ -95,7 +95,7 @@
                                 <div class="card-title m-0">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-50px w-50px bg-light">
-                                        <img src="{{ URL::asset('admin/assets/media/svg/brand-logos/plurk.svg')}}" alt="image" class="p-3" />
+                                        <img src="{{ URL::asset('admin/assets/logo.png')}}" alt="image" class="p-3" />
                                     </div>
 
                                     @if($project->is_created != 0)
@@ -193,7 +193,7 @@
                         <div class="card-title m-0">
                             <!--begin::Avatar-->
                             <div class="symbol symbol-50px w-50px bg-light">
-                                <img src="{{ URL::asset('admin/assets/media/svg/brand-logos/plurk.svg')}}" alt="image" class="p-3" />
+                                <img src="{{ URL::asset('admin/assets/logo.png')}}" alt="image" class="p-3" />
                             </div>
 
 

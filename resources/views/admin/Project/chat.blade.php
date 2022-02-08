@@ -288,7 +288,7 @@
                                                 {{$Message->message}}
 
                                             @if($Message->file != null)
-                                               <a href="{{$Message->file}}" target="_blank"> <img  alt="Pic" style="width:80px" src="{{ URL::asset('images/file.png')}}" /> </a>
+                                               <a href="http://alkhalilsys.com/images/{{$Message->file}}" target="_blank"> <img  alt="Pic" style="width:80px" src="{{ URL::asset('images/file.png')}}" /> </a>
                                                 @endif
                                             </div>
                                             <!--end::Text-->
@@ -350,6 +350,7 @@
             //do stuff here
             var message =$('#message').val()
             var level_id = {{$level->id}}
+                if(message){
             var out = '<div class="d-flex justify-content-start mb-10">' +
                     '                                        <div class="d-flex flex-column align-items-start">' +
                     '                                            <div class="d-flex align-items-center mb-2">' +
@@ -379,7 +380,7 @@
                 }
 
             })
-
+            }
         });
 
     </script>
@@ -390,10 +391,10 @@
             encrypted: true
         });
 
-        var channel = pusher.subscribe('MessageSent-channel-'.{{$level->id}});
+        var channel = pusher.subscribe('MessageSent-channel-{{$level->id}}');
         channel.bind('App\\Events\\SendMessage', function(data) {
             if(data.level_id == {{$level->id}} &&  data.sender_name != "{{Auth::user()->name}}"  ){
-                new Audio('https://audio-previews.elements.envatousercontent.com/files/157617930/preview.mp3?response-content-disposition=attachment%3B+filename%3D%228KR4YVH-notification-2.mp3%22').play();
+                new Audio('https://https://assets.mixkit.co/sfx/preview/mixkit-bell-notification-933.mp3').play();
                 var out = '                                   <div class="d-flex justify-content-end mb-10">' +
                     '                                        <!--begin::Wrapper--> ' +
                     '                                        <div class="d-flex flex-column align-items-end"> ' +
@@ -413,11 +414,13 @@
                     '                                                <!--end::Avatar--> ' +
                     '                                            </div> ' +
                     '                                            <!--end::User--> ' +
-                    '                                            <!--begin::Text--> ' +
-                    '                                            <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text"> ' +
-                    '                                                ' + data.message ;
+                    '                                            <!--begin::Text--> ' ;
+                if(data.message !=  null) {
+                    out += '                                            <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text"> ' +
+                    '                                                ' + data.message;
+                }
                     if(data.file !=  null){
-                        out +=   '<a href="'+ data.file +'" target="_blank"> <img  alt="Pic" style="width:80px" src="{{ URL::asset('images/file.png')}}" /> </a>' ;
+                        out +=   '<a href="http://alkhalilsys.com/images/'+ data.file +'" target="_blank"> <img  alt="Pic" style="width:80px" src="{{ URL::asset('images/file.png')}}" /> </a>' ;
                     }
                    out +=  "                            </div> </div>  </div>" ;
                 $('#newChat').append(out);

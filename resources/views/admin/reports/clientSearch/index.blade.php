@@ -51,14 +51,9 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
 
-                    <div class="card-header">
-                        <div class="add_button" style="margin:10px">
-
-                        </div>
-                    </div>
 
                     <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-4 gy-5" id="datatable">
+                    <table class="table align-middle table-row-dashed fs-4 gy-5" id="users_table">
                         <!--begin::Table head-->
                         <thead>
                         <!--begin::Table row-->
@@ -70,6 +65,7 @@
                             <th class="min-w-125px">التاريخ</th>
                             <th class="min-w-125px">بيان</th>
                             <th class="min-w-125px">اسم المشروع</th>
+                            <th class="min-w-125px">اسم العميل</th>
                             <th class="min-w-125px">مدين</th>
                             <th class="min-w-125px">دائن</th>
 
@@ -84,6 +80,7 @@
                             <th class="min-w-125px">{{$Project->confirm_date}}</th>
                             <th class="min-w-125px">مبلغ التعاقد</th>
                             <th class="min-w-125px">{{$Project->name}}</th>
+                            <th class="min-w-125px">{{$Project->client->name}}</th>
                             <th class="min-w-125px">{{$Project->projectPaid->paid}}</th>
                             <th class="min-w-125px">0</th>
                         </tr>
@@ -92,6 +89,7 @@
                             <th class="min-w-125px">{{$Project->confirm_date}}</th>
                             <th class="min-w-125px">الدفعة المقدمة </th>
                             <th class="min-w-125px">{{$Project->name}}</th>
+                            <th class="min-w-125px">{{$Project->client->name}}</th>
                             <th class="min-w-125px">0</th>
                             <th class="min-w-125px">{{$Project->projectPaid->paid_down}}</th>
                         </tr>
@@ -101,6 +99,7 @@
                             <th class="min-w-125px">{{\Carbon\Carbon::parse($income->created_at)->format('Y-m-d')}}</th>
                             <th class="min-w-125px">{{$income->details}} </th>
                             <th class="min-w-125px">{{$Project->name}}</th>
+                            <th class="min-w-125px">{{$Project->client->name}}</th>
                             <th class="min-w-125px">0</th>
                             <th class="min-w-125px">{{$income->amount}}</th>
                         </tr>
@@ -139,23 +138,41 @@
     <script type="text/javascript">
 
         // table.row.add( /* array or object */).draw();
-        $('#datatable').DataTable();
-
         $(function () {
             var table = $('#users_table').DataTable({
+                order: ['1',"asc"],
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 autoWidth: false,
                 responsive: true,
                 aaSorting: [],
-                "dom": "", // horizobtal scrollable datatable
+                "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button pull-right'B> r>>  <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
                 lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
                 "language": {
                     search: '<i class="fa fa-eye" aria-hidden="true"></i>',
                     searchPlaceholder: 'بحث سريع',
                     "url": "{{ url('admin/assets/ar.json') }}"
                 },
+                buttons: [
+                    {
+                        extend: 'colvis',
+                        className: 'btn btn-light-primary me-3',
+                        text: ' <i class="bi bi-eye-fill fs-2x"></i>إظهار / إخفاء الأعمدة '
+                    }
+                    ,
+                    {
+                        extend: 'print',
+                        className: 'btn btn-light-primary me-3',
+                        text: '<i class="bi bi-printer-fill fs-2x"></i>'
+                    },
+                    // {extend: 'pdf', className: 'btn btn-raised btn-danger', text: 'PDF'},
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-light-primary me-3',
+                        text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'
+                    }
 
+                ]
             });
             $.ajax({
                 url: "{{ URL::to('/client_search-button')}}",
@@ -167,6 +184,7 @@
             // or using tr
 
         });
+
     </script>
     <?php
     $message = session()->get("message");
