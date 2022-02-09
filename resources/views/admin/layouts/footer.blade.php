@@ -10,10 +10,10 @@
         <!--begin::Menu-->
         <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
             <li class="menu-item">
-                <a href="#" target="_blank" class="menu-link px-2">About</a>
+                <a href="https://alkhalil-group.com/%d9%85%d9%86-%d9%86%d8%ad%d9%86/" target="_blank" class="menu-link px-2">About</a>
             </li>
             <li class="menu-item">
-                <a href="#" target="_blank" class="menu-link px-2">Support</a>
+                <a href="https://alkhalil-group.com/%d8%aa%d9%88%d8%a7%d8%b5%d9%84-%d9%85%d8%b9%d9%86%d8%a7/" target="_blank" class="menu-link px-2">Support</a>
             </li>
         </ul>
         <!--end::Menu-->
