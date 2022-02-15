@@ -538,7 +538,8 @@
                         <!--begin::Input group-->
                         <div class="mb-10">
                             <label class="form-label fs-6 fw-bold">اسم المشروع</label>
-                            <input type="text" class="form-control form-control-lg form-control-solid" name="name" placeholder="" value="" autocomplete="nope" required/>
+                            <input type="text" class="form-control form-control-lg form-control-solid"
+                                   name="name" placeholder="" value="" autocomplete="nope" required/>
                         </div>
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
@@ -546,8 +547,9 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             @inject('clients','App\Models\Client')
-                            <select class="form-control" name="client_id" required>
-                                @foreach($clients->all() as $client)
+                                 <select name="client_id" class="form-select form-select-lg form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_user" data-placeholder="اختـر..." data-allow-clear="true" >
+                                     <option></option>
+                                @foreach($clients->orderBy('name','asc')->get() as $client)
                                     <option value="{{$client->id}}">{{$client->name}}</option>
                                 @endforeach
                             </select>
@@ -573,7 +575,7 @@
                             <label class="form-label required">اختـر المدينـة</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select name="state" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="اختـر..." data-allow-clear="true" >
+                            <select name="state" class="form-select form-select-lg form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_user" data-placeholder="اختـر..." data-allow-clear="true" >
                                 <option></option>
                                 @foreach (\App\Models\State::get() as $item)
                                     <option value="{{$item->id}}">{{$item->title}}</option>
@@ -590,7 +592,7 @@
                             <label class="form-label required">حـدد نوع المشروع</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select name="project_type" class="form-select form-select-lg form-select-solid" data-placeholder="اختـر..." data-allow-clear="true" data-hide-search="true">
+                            <select name="project_type" class="form-select form-select-lg form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_user" data-placeholder="اختـر..." data-allow-clear="true">
                                 <option value="فيلا سكنية">فيلا سكنية</option>
                                 <option value="شاليه">شاليه</option>
                                 <option value="عمارة سكنية">عمارة سكنية</option>

@@ -17,7 +17,7 @@ class FinaicalRequest extends Controller
 {
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::orderBy('name','asc')->get();
         return view('admin.FinaicalRequest.index', compact('projects'));
     }
 

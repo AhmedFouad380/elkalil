@@ -51,12 +51,13 @@ class ContractsController extends Controller
     public function datatable(Request $request)
     {
         if (Auth::user()->jop_type == 3) {
-            $data1 = Project::where('is_accepted', 1)->where('is_read',0)->orderBy('date', 'desc')->get();
-            $data2 = Project::where('is_accepted', 1)->where('is_read',1)->orderBy('accpeted_date', 'desc')->get();
-            $data = array_push($data1 ,$data2 );
+            $data1 = Project::where('is_accepted', 1)->where('view', 0)->orderBy('date', 'desc')->get();
+            $data2 = Project::where('is_accepted', 1)->where('view', 1)->orderBy('accept_date', 'desc')->get();
+            $data = array_push($data1, $data2);
         } elseif (Auth::user()->jop_type == 2) {
-            $data = Project::where('state', Auth::user()->state)->where('is_read',0)->where('is_accepted', 1)->orderBy('date', 'desc')->get();
-            $data = Project::where('state', Auth::user()->state)->where('is_read',1)->where('is_accepted', 1)->orderBy('accpeted_date', 'desc')->get();
+            $data1 = Project::where('state', Auth::user()->state)->where('view', 0)->where('is_accepted', 1)->orderBy('date', 'desc')->get();
+            $data2 = Project::where('state', Auth::user()->state)->where('view', 1)->where('is_accepted', 1)->orderBy('accept_date', 'desc')->get();
+            $data = array_push($data1, $data2);
         }
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {

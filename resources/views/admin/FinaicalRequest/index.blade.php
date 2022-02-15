@@ -127,7 +127,8 @@
                                     <label class="required fw-bold fs-6 mb-2 col-3">المشروع</label>
                                     <!--end::Label-->
                                     <div class="col-6">
-                                        <select name="project_id" id="project_id" class="form-control">
+                                        <select name="project_id" id="project_id" class="form-select form-select-lg form-select-solid" data-control="select2"
+                                                 data-placeholder="اختـر..." data-allow-clear="false">
                                             <option value="">اختر المشروع</option>
                                             @foreach($projects as $project)
                                                 <option value="{{$project->id}}">{{$project->name}}</option>
@@ -165,7 +166,7 @@
                                                 <label class="form-check-label" for="sms">
                                                     رسالة نصية
                                                 </label>
-                                            </div>                                        
+                                            </div>
 
                                             <div class="form-check form-check-custom form-check-solid me-10">
                                                 <input type="radio" name="type" id="inbox" class="h-20px w-20px " placeholder="البريد الوارد" value="2" required/>
@@ -179,8 +180,8 @@
                                                 <label class="form-check-label" for="both">
                                                     الاثنين معآ
                                                 </label>
-                                            </div> 
-                                        </div>                                      
+                                            </div>
+                                        </div>
 
                                     </div>
 
