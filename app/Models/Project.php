@@ -77,9 +77,17 @@ class Project extends Model
     {
         return $this->belongsToMany(User::class, 'user_permission', 'project_id', 'emp_id')->distinct();
     }
-    public function income(){
-        return $this->hasMany(Income::class , 'project_id');
+
+    public function income()
+    {
+        return $this->hasMany(Income::class, 'project_id');
     }
+
+    public function installments()
+    {
+        return $this->hasMany(Installments::class, 'project_id');
+    }
+
     public function projectPaid()
     {
         return $this->hasOne(ProjectPaid::class, 'project_id');

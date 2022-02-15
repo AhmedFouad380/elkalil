@@ -517,16 +517,17 @@
                                 <!--begin::Option-->
                                 @if($data->confirm != 1)
 
-                                <div class="py-1">
-                                    <!--begin::Header-->
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <!--begin::Toggle-->
-                                        <div class="d-flex align-items-center collapsible toggle collapsed"
-                                             data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_3">
-                                            <!--begin::Arrow-->
-                                            <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2">
-                                                <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-2">
+                                    <div class="py-1">
+                                        <!--begin::Header-->
+                                        <div class="py-3 d-flex flex-stack flex-wrap">
+                                            <!--begin::Toggle-->
+                                            <div class="d-flex align-items-center collapsible toggle collapsed"
+                                                 data-bs-toggle="collapse"
+                                                 data-bs-target="#kt_create_new_payment_method_3">
+                                                <!--begin::Arrow-->
+                                                <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2">
+                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                                    <span class="svg-icon toggle-on svg-icon-primary svg-icon-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                      viewBox="0 0 24 24" fill="none">
                                                     <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
@@ -535,9 +536,9 @@
                                                           fill="black"/>
                                                 </svg>
                                             </span>
-                                                <!--end::Svg Icon-->
-                                                <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                <span class="svg-icon toggle-off svg-icon-2">
+                                                    <!--end::Svg Icon-->
+                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                                    <span class="svg-icon toggle-off svg-icon-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                      viewBox="0 0 24 24" fill="none">
                                                     <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
@@ -548,10 +549,10 @@
                                                           fill="black"/>
                                                 </svg>
                                             </span>
-                                                <!--end::Svg Icon-->
-                                            </div>
-                                            <!--end::Arrow-->
-                                            <!--begin::Logo-->
+                                                    <!--end::Svg Icon-->
+                                                </div>
+                                                <!--end::Arrow-->
+                                                <!--begin::Logo-->
 
                                                 <img src="assets/media/svg/card-logos/american-express.svg"
                                                      class="w-40px me-3" alt=""/>
@@ -563,44 +564,44 @@
                                                     </div>
                                                     <div class="text-muted"></div>
                                                 </div>
-                                        <!--end::Summary-->
-                                        </div>
-                                        <!--end::Toggle-->
-                                        <!--begin::Input-->
-                                        <div class="d-flex my-3 ms-9">
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Header-->
-                                    <!--begin::Body-->
-                                    <div id="kt_create_new_payment_method_3" class="collapse fs-6 ps-10">
-                                        <!--begin::Details-->
-                                        <div class="d-flex flex-wrap py-5">
-                                            <!--begin::Col-->
-                                            <div class="flex-equal me-5">
-                                                <a href="#" class="btn btn-light-success" data-bs-toggle="modal"
-                                                   data-bs-target="#kt_modal_confirmProject">
-                                                    <i class="bi bi-check-circle fs-2x"></i> تفعيل
-
-                                                </a>
-
-
-                                                <button type="button" data-id="{{$data->id}}"
-                                                        class=" RejectProject btn btn-light-danger me-3">
-                                                    <i class="bi bi-x-octagon fs-2x"></i> رفـض
-                                                </button>
+                                                <!--end::Summary-->
                                             </div>
-                                            <!--end::Col-->
-                                            <!--begin::Col-->
-                                            <div class="flex-equal">
-
+                                            <!--end::Toggle-->
+                                            <!--begin::Input-->
+                                            <div class="d-flex my-3 ms-9">
                                             </div>
-                                            <!--end::Col-->
+                                            <!--end::Input-->
                                         </div>
-                                        <!--end::Details-->
+                                        <!--end::Header-->
+                                        <!--begin::Body-->
+                                        <div id="kt_create_new_payment_method_3" class="collapse fs-6 ps-10">
+                                            <!--begin::Details-->
+                                            <div class="d-flex flex-wrap py-5">
+                                                <!--begin::Col-->
+                                                <div class="flex-equal me-5">
+                                                    <a href="#" class="btn btn-light-success" data-bs-toggle="modal"
+                                                       data-bs-target="#kt_modal_confirmProject">
+                                                        <i class="bi bi-check-circle fs-2x"></i> تفعيل
+
+                                                    </a>
+
+
+                                                    <button type="button" data-id="{{$data->id}}"
+                                                            class=" RejectProject btn btn-light-danger me-3">
+                                                        <i class="bi bi-x-octagon fs-2x"></i> رفـض
+                                                    </button>
+                                                </div>
+                                                <!--end::Col-->
+                                                <!--begin::Col-->
+                                                <div class="flex-equal">
+
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Details-->
+                                        </div>
+                                        <!--end::Body-->
                                     </div>
-                                    <!--end::Body-->
-                                </div>
                                 @endif
 
                                 <div class="separator separator-dashed"></div>
@@ -1407,18 +1408,24 @@
                                             </button>
                                         </div>
                                         @php
-                                            $incomes = \App\Models\Income::where('project_id',$data->id)->get();
+                                            $incomes = \App\Models\Installments::where('project_id',$data->id)->get();
                                         @endphp
                                         @if($incomes->count() > 0)
                                             @foreach($incomes as $key => $income)
                                                 <div class="row">
-                                                    <div class="col-3">
+                                                    <div class="col-1">
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-3">
                                                         <input value="{{$income->amount}}" type="number"
                                                                name="values[]"
                                                                class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
-                                                               placeholder=""/>
+                                                               placeholder="" required/>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <input value="{{$income->installment_date}}" type="date"
+                                                               name="dates[]"
+                                                               class="dates form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                               placeholder="" required/>
                                                     </div>
                                                     <div class="col-3">
                                                         <button type="button"
@@ -1429,12 +1436,24 @@
                                                 </div>
                                             @endforeach
                                         @else
-
-                                            <div class="col-6">
+                                            <div class="col-1">
+                                            </div>
+                                            <div class="col-3">
                                                 <input type="number" value="0" name="values[]"
                                                        class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
-                                                       placeholder=""/>
-
+                                                       placeholder="" required/>
+                                            </div>
+                                            <div class="col-5">
+                                                <input value="" type="date"
+                                                       name="dates[]"
+                                                       class="dates form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                       placeholder="" required/>
+                                            </div>
+                                            <div class="col-3">
+                                                <button type="button"
+                                                        class="btn btn-light-danger me-3 delete_question">
+                                                    <i class="bi bi-trash-fill fs-2x fs-2x"></i>
+                                                </button>
                                             </div>
                                         @endif
                                     </div>
@@ -1780,12 +1799,17 @@
     <script>
         $("#add-question").on("click", function () {
             $("#questions").append('<div class="row">' +
-                '                                            <div class="col-3">' +
+                '                                            <div class="col-1">' +
                 '                                             </div>' +
-                '                                            <div class="col-6">' +
+                '                                            <div class="col-3">' +
                 '                                                <input value="0" type="number" name="values[]"' +
                 '                                                       class="values form-control col-6 form-control-solid mb-3 mb-lg-0"' +
-                '                                                       placeholder=""/>' +
+                '                                                       placeholder="" required/>' +
+                '                                             </div>' +
+                '                                            <div class="col-5">' +
+                '                                                <input value="0" type="date" name="dates[]"' +
+                '                                                       class="dates form-control col-6 form-control-solid mb-3 mb-lg-0"' +
+                '                                                       placeholder="" required/>' +
                 '                                            </div>' +
                 '                                            <div class="col-3">' +
                 '                                                     <button type="button"' +
@@ -1948,10 +1972,10 @@
             var paid_down = $('#paid_down').val();
             var paid = $('#paid').val();
             paid_term = paid - paid_down - totalPrice;
-            document.getElementById('paid_term').value = paid_term;
+            document.getElementById('paid_term').value = paid - paid_down;
 
 
-            if (document.getElementById('paid_term').value < 0) {
+            if (paid_term < 0) {
                 e.preventDefault();
                 Swal.fire({
                     icon: 'warning',
@@ -1967,48 +1991,30 @@
 
 
         });
+
+        $(document).on('change', '#paid_down', function (e) {
+
+
+            var sum = [];
+            var totalPrice = 0;
+            var paid_term = 0;
+
+            // $(".values").each(function (index) {
+            //     sum.push($(this).val())
+            //     totalPrice += Number($(this).val());
+            // })
+
+            var paid_down = $('#paid_down').val();
+            var paid = $('#paid').val();
+            paid_term = paid - paid_down - totalPrice;
+            document.getElementById('paid_term').value = paid_term;
+            console.log(paid_term);
+
+
+        });
         $(document).ready(function () {
 
-            $("#paid_down").on("click , change, keyup", function () {
-                var totalPrice = 0;
-                var sum = [];
 
-                $(".values").each(function (index) {
-                    sum.push($(this).val())
-                    totalPrice += Number($(this).val());
-                })
-
-                var paid_down = $(this).val();
-                var paid = $('#paid').val();
-                var paid_term = paid - paid_down - totalPrice;
-                document.getElementById('paid_term').value = paid_term
-
-            })
-            $("#paid_term").on("click , change, keyup", function () {
-                var paid_term = $(this).val();
-                var paid = $('#paid').val();
-                var paid_down = paid - paid_term;
-                document.getElementById('paid_down').value = paid_down
-
-
-            })
-
-
-            $(".values").on("click , change, keyup", function () {
-                var sum = [];
-                var totalPrice = 0;
-
-                $(".values").each(function (index) {
-                    sum.push($(this).val())
-                    totalPrice += Number($(this).val());
-                })
-
-                var paid_down = $('#paid_down').val();
-                var paid = $('#paid').val();
-                var paid_term = paid - paid_down - totalPrice;
-                document.getElementById('paid_term').value = paid_term
-
-            })
             $("#ConfirmProject").on("click", function () {
                 var id = $(this).data('id')
                 var date = $('#confirmDate').val()

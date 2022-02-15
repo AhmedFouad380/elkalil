@@ -9,6 +9,7 @@ use App\Models\Explan;
 use App\Models\inbox;
 use App\Models\inboxFile;
 use App\Models\Income;
+use App\Models\Installments;
 use App\Models\Level;
 use App\Models\LevelDetails;
 use App\Models\Project;
@@ -175,12 +176,13 @@ class ContractsController extends Controller
 
     public function UpdateProjectPaid(Request $request)
     {
-        $data = ProjectPaid::where('project_id', $request->id)->first();
-        $total = $request->paid_down + $request->paid_term + array_sum($request->values);
 
-        if ($request->paid < $total) {
-            return back()->with('error_message', 'عفوا اجمالي الدفعات اكبر من مبلغ التعاقد ');
-        }
+        $data = ProjectPaid::where('project_id', $request->id)->first();
+//        $total = $request->paid_down + $request->paid_down + array_sum($request->values);
+
+//        if ($request->paid < $total) {
+//            return back()->with('error_message', 'عفوا اجمالي الدفعات اكبر من مبلغ التعاقد ');
+//        }
         if (isset($request->paid)) {
             $data->paid = $request->paid;
         }
@@ -191,19 +193,19 @@ class ContractsController extends Controller
             $data->paid_term = $request->paid_term;
         }
         $data->save();
-        if (isset($request->values) && array_sum($request->values) != 0) {
-            $incomes = Income::where('project_id', $request->id)->delete();
-            foreach ($request->values as $val) {
-                if ($request->values != 0) {
-                    $Income = new Income();
-                    $Income->amount = $val;
-                    $Income->project_id = $request->id;
-                    $Income->date = \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
-                    $Income->created_at = \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
-                    $Income->project_id = $request->id;
-                    $Income->type = 1;
-                    $Income->project_name = Project::find($request->id)->name;
-                    $Income->save();
+        if ($request->values) {
+            if (isset($request->values) && array_sum($request->values) != 0) {
+                $incomes = Installments::where('project_id', $request->id)->delete();
+                foreach ($request->values as $key => $val) {
+                    if ($request->values != 0) {
+                        $Income = new Installments();
+                        $Income->amount = $val;
+                        $Income->project_id = $request->id;
+                        $Income->installment_date = $request->dates[$key];
+                        $Income->project_id = $request->id;
+
+                        $Income->save();
+                    }
                 }
             }
         }
