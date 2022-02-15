@@ -362,6 +362,112 @@ class ProjectController extends Controller
 
 
 }
+    public function AddGeneralSupervisor(Request $request){
+        $this->validate(request(), [
+            'level_id' => 'required',
+            'project_id' => 'required',
+            'emp_id' => 'required',
+
+        ]);
+        $Project = Project::find($request->project_id);
+        $client = User::find($request->emp_id);
+        if(UserPermission::where('emp_id',$request->emp_id)->where('level_id',$request->level_id)->count() > 0){
+            return back()->with('error_message','هذا المستخدم موجود بالفعل ');
+        }
+        $data = new UserPermission();
+        $data->level_id=$request->level_id;
+        $data->project_id=$request->project_id;
+        $data->emp_id=$request->emp_id;
+        $data->user_type=1;
+        $data->save();
+
+        $chat = new UserChatPermission();
+        $chat->reciever_id=$request->emp_id;
+        $chat->type=0;
+        $data->user_type=1;
+        $chat->level_id=$request->level_id;
+        $data->project_id=$request->project_id;
+        $data->save();
+
+
+        $inbox = array(
+            'title' => " تم تكليفك بالاعمال في المشروع   ",
+            'comments' => 'تم تكليفك بالاعمال في مشروع' . $Project->name,
+            'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
+            'sender_id' => \Illuminate\Support\Facades\Auth::user()->id,
+            'sender_name' => Auth::user()->name,
+            'recipient_id' => $client->id,
+            'recipient_name' => $client->name,
+            'project_id' => $Project->id,
+            'project_name' => $Project->name,
+            'updated_at' =>\Carbon\Carbon::now(),
+            'empl' =>2
+
+        );
+        inbox::insert($inbox);
+
+
+        $d_explan = array(
+            'title' => 'تم تعيين موظف للمشروع ',
+            'comments' => 'تم تعيين موظف للمشروع ',
+            'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
+            'emp_id' => Auth::user()->id,
+            'emp_name' => Auth::user()->name,
+            'project_id' => $request->project_id
+        );
+        Explan::insert($d_explan);
+
+
+        // send fcm start
+        if($client->token_id) {
+
+            $token = $client->token_id; // push token
+
+
+            $title = $Project->name;
+            $message = " تم تكليفك بالاعمال في المشروع   ";
+
+            $fields = array
+            (
+                'registration_ids' => [$token],
+                'data' => ['type' => '3'],
+                'notification' => array(
+                    'priority' => 'high',
+                    'body' => $message,
+                    'title' => $title,
+                    'sound' => 'default',
+                    'icon' => 'icon'
+                )
+            );
+            $API_ACCESS_KEY = 'AAAA7MITCVM:APA91bFxG1YuBa-5G6nYPwrn4KFrbKjtilNv-dlm5yXKOLJiGtMgdLSTCjYIY1i3M6Nf4au0r6b2mEL_MjfkGb1-haRJa-zZr1laU5uffby_y2n63IMaVgrh5u63aQRJZMnpJg-SAO5V';
+            $headers = array
+            (
+                'Authorization: key=' . $API_ACCESS_KEY,
+                'Content-Type: application/json'
+            );
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+            $result = curl_exec($ch);
+            curl_close($ch);
+        }
+        // send Fcm end
+        if($request->platform == 'web'){
+        return back()->with('message','Success');
+        }else{
+            $object = array('status'=>200 , 'msg'=>'success ','ar_msg'=>'تم بنجاح','data'=>$data);
+            return response()->json($object);
+        }
+
+
+    }
+
     public function remove_assign_user(Request $request){
 
         $this->validate(request(), [
