@@ -53,7 +53,7 @@
 
 
                     <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-4 gy-5" id="users_table">
+                    <table class="table align-middle table-row-dashed fs-4 gy-5" id="">
                         <!--begin::Table head-->
                         <thead>
                         <!--begin::Table row-->

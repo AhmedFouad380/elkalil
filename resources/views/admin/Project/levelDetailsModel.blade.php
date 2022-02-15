@@ -155,46 +155,46 @@
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="card-title"></h4>
-                                <div class="controls">
-                                    <span class="btn CompleteLevel btn-sm btn-danger my-3 repeat">اضف المزيد </span>
-                                    {{-- <input type="file" id="input-file-now" multiple class="dropify"  name="pdf[]" data-default-file="" required data-validation-required-message="{{trans('word.This field is required')}}"/> --}}
-                                </div>
-                            </div>
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title"></h4>
+                        <div class="controls">
+                            <span class="btn CompleteLevel btn-sm btn-danger my-3 repeat">اضف المزيد </span>
+                            {{-- <input type="file" id="input-file-now" multiple class="dropify"  name="pdf[]" data-default-file="" required data-validation-required-message="{{trans('word.This field is required')}}"/> --}}
                         </div>
+                    </div>
+                </div>
 
-                        <!--begin::Dropzone-->
+                <!--begin::Dropzone-->
 
-                            <div class="form-group row ">
-                                <div class="col-md-3 repeatresult" style="margin-bottom:15px;">
-                                    <img class="border rounded" data-preview="p1" src="{{ URL::asset('admin/assets/media/avatars/upload.png')}}" width="170" height="170">
-                                    <h6 data-file-name="p1"></h6>
-                                    <label class="btn btn-secondary" for="p1">
-                                        <input type="file" id="p1" name="pdf[]" style="display:none">
-                                        <input type="file" id="p3" name="pdf[]" style="display:none">
-                                        <input type="file" id="p4" name="pdf[]" style="display:none">
-                                        <input type="file" id="p5" name="pdf[]" style="display:none">
-                                        <input type="file" id="p6" name="pdf[]" style="display:none">
-                                        <input type="file" id="p7" name="pdf[]" style="display:none">
-                                        <input type="file" id="p8" name="pdf[]" style="display:none">
-                                        <input type="file" id="p9" name="pdf[]" style="display:none">
-                                        <input type="file" id="p10" name="pdf[]" style="display:none">
-                                        <input type="file" id="p11" name="pdf[]" style="display:none">
-                                        <input type="file" id="p12" name="pdf[]" style="display:none">
-                                        <input type="file" id="p13" name="pdf[]" style="display:none">
-                                        رفع الملف
-                                    </label>
-                                </div>
-                                <div class="dfdfd"></div>
-                                
-                                <div class="col-md-3">
+                <div class="form-group row ">
+                    <div class="col-md-3 repeatresult" style="margin-bottom:15px;">
+                        <img class="border rounded" data-preview="p1" src="{{ URL::asset('admin/assets/media/avatars/upload.png')}}" width="170" height="170">
+                        <h6 data-file-name="p1"></h6>
+                        <label class="btn btn-secondary" for="p1">
+                            <input type="file" id="p1" name="pdf[]" style="display:none">
+                            <input type="file" id="p3" name="pdf[]" style="display:none">
+                            <input type="file" id="p4" name="pdf[]" style="display:none">
+                            <input type="file" id="p5" name="pdf[]" style="display:none">
+                            <input type="file" id="p6" name="pdf[]" style="display:none">
+                            <input type="file" id="p7" name="pdf[]" style="display:none">
+                            <input type="file" id="p8" name="pdf[]" style="display:none">
+                            <input type="file" id="p9" name="pdf[]" style="display:none">
+                            <input type="file" id="p10" name="pdf[]" style="display:none">
+                            <input type="file" id="p11" name="pdf[]" style="display:none">
+                            <input type="file" id="p12" name="pdf[]" style="display:none">
+                            <input type="file" id="p13" name="pdf[]" style="display:none">
+                            رفع الملف
+                        </label>
+                    </div>
+                    <div class="dfdfd"></div>
 
-                                </div>
-                            </div>
-                            
-                        <!--end::Dropzone-->
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+
+                <!--end::Dropzone-->
                 <!--end::Image input-->
                 <!--begin::Hint-->
             {{--                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>--}}
@@ -203,7 +203,7 @@
             <!--end::Col-->
         </div>
 
-@endif
+    @endif
     @if($data->state == 1)
         <a type="button"  class=" btn btn-danger changeState"  data-id="{{$data->id}}">الغاء نسبة الانجاز </a>
 
@@ -230,26 +230,26 @@
     $('#kt_select5').select2({
         placeholder: ""
     });
-    
+
 </script>
 <!--begin::Page scripts(used by this page) -->
 <script>
     // $(function () {
     //     $(".repeat").on('click', function () {
     //        var $self = $(this);
-	
+
     //        $( ".repeatresult" ).clone().appendTo( ".dfdfd" );
     //     });
     // });
     var i = 3;
-    $('.repeat').click(function() {	
-			$('.repeatresult:last').after('<div class="col-md-3 repeatresult" style="margin-bottom:15px;"><img class="border rounded" data-preview="p'+i+'" src="{{ URL::asset("admin/assets/media/avatars/upload.png")}}" width="170" height="170"><h6 data-file-name="p'+i+'"></h6><label class="btn btn-secondary" for="p'+i+'"><input type="file" id="p'+i+'" name="pdf[]" style="display:none">رفع الملف </label></div>');
-			i++;
-			return false;
-	});
+    $('.repeat').click(function() {
+        $('.repeatresult:last').after('<div class="col-md-3 repeatresult" style="margin-bottom:15px;"><img class="border rounded" data-preview="p'+i+'" src="{{ URL::asset("admin/assets/media/avatars/upload.png")}}" width="170" height="170"><h6 data-file-name="p'+i+'"></h6><label class="btn btn-secondary" for="p'+i+'"><input type="file" id="p'+i+'" name="pdf[]" style="display:none">رفع الملف </label></div>');
+        i++;
+        return false;
+    });
 
- </script>
- <script type="text/javascript">
+</script>
+<script type="text/javascript">
     $(function() {
 
         $('input[type=file]').change(function() {
@@ -278,7 +278,7 @@
             var fileTypes = ['jpg', 'jpeg', 'png'];
 
             var extension = this.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
-            isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
+                isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
 
             if (isSuccess) {
                 var reader = new FileReader();
@@ -288,17 +288,17 @@
                     $('[data-preview="' + id + '"]').attr('src', e.target.result);
                 };
             }
-            
+
         });
 
     });
 </script>
 <script type="text/javascript">
 
-var loadFile = function(event) {
-	var image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
-};
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
 
     $('#loading').on('click',function () {
         document.getElementById("loader").style.display = "block";
@@ -331,10 +331,8 @@ var loadFile = function(event) {
                         success: function (data) {
                             if (data.message == "Success") {
                                 Swal.fire("نجح", "تم اللغاء نسبة الانجاز بنجاح", "success");
-                                setTimeout(reload, 3000)
-                                function reload() {
-                                    location.reload();
-                                }
+                                location.reload();
+
                             } else {
                                 Swal.fire("عفوا! ", "حدث خطأ", "error");
                             }
