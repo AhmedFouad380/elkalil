@@ -366,7 +366,6 @@ class ProjectController extends Controller
         $this->validate(request(), [
             'project_id' => 'required',
             'emp_id' => 'required',
-
         ]);
         $Project = Project::find($request->project_id);
         $client = User::find($request->emp_id);

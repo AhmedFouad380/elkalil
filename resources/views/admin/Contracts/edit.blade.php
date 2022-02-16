@@ -1436,6 +1436,7 @@
                                                 </div>
                                             @endforeach
                                         @else
+                                            <div class="row">
                                             <div class="col-1">
                                             </div>
                                             <div class="col-3">
@@ -1454,6 +1455,7 @@
                                                         class="btn btn-light-danger me-3 delete_question">
                                                     <i class="bi bi-trash-fill fs-2x fs-2x"></i>
                                                 </button>
+                                            </div>
                                             </div>
                                         @endif
                                     </div>
