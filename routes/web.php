@@ -215,7 +215,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('Project_search_datatable', [\App\Http\Controllers\Admin\ReportController::class, 'datatable2'])->name('project.search.datatable');
 
     Route::get('/Project_search-button', function () {
-        return view('admin/reports/Project_search/button');
+        return view('admin.reports.ProjectSearch.button');
     });
 
 

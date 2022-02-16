@@ -44,7 +44,7 @@
                 </div>
                 <!--end::Modal header-->
                 <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="modal-body">
                     <!--begin::Form-->
                     <form id="" class="" method="get">
 
@@ -117,3 +117,10 @@
 </div>
 
 
+<script>
+
+    $('#project_id').select2({
+        dropdownParent: $('#kt_modal_filter')
+
+    })
+</script>

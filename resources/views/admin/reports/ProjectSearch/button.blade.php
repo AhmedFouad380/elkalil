@@ -117,3 +117,12 @@
 </div>
 
 
+
+
+<script>
+
+    $('#project_id').select2({
+        dropdownParent: $('#kt_modal_filter')
+
+    })
+</script>

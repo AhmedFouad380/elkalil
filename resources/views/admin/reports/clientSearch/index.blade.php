@@ -53,7 +53,7 @@
 
 
                     <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-4 gy-5" id="">
+                    <table class="table align-middle table-row-dashed fs-4 gy-5" id="users_table">
                         <!--begin::Table head-->
                         <thead>
                         <!--begin::Table row-->
@@ -141,10 +141,10 @@
         $(function () {
             var table = $('#users_table').DataTable({
                 order: ['1',"asc"],
-                processing: true,
+                processing: false,
                 serverSide: false,
                 autoWidth: false,
-                responsive: true,
+                responsive: false,
                 aaSorting: [],
                 "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button pull-right'B> r>>  <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
                 lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
