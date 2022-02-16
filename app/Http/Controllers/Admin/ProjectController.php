@@ -367,7 +367,6 @@ class ProjectController extends Controller
             'level_id' => 'required',
             'project_id' => 'required',
             'emp_id' => 'required',
-
         ]);
         $Project = Project::find($request->project_id);
         $client = User::find($request->emp_id);

@@ -547,7 +547,8 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             @inject('clients','App\Models\Client')
-                                 <select name="client_id" class="form-select form-select-lg form-select-solid" data-control="select2" data-dropdown-parent="#kt_modal_add_user" data-placeholder="اختـر..." data-allow-clear="true" >
+                                 <select name="client_id" class="form-select form-select-lg form-select-solid" data-control="select2"
+                                         data-dropdown-parent="#kt_modal_add_user" data-placeholder="اختـر..." data-allow-clear="true" >
                                      <option></option>
                                 @foreach($clients->orderBy('name','asc')->get() as $client)
                                     <option value="{{$client->id}}">{{$client->name}}</option>
