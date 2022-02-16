@@ -9,6 +9,7 @@ use App\Models\Explan;
 use App\Models\inbox;
 use App\Models\inboxFile;
 use App\Models\Income;
+use App\Models\Installments;
 use App\Models\Level;
 use App\Models\LevelDetails;
 use App\Models\Project;
@@ -51,12 +52,17 @@ class ContractsController extends Controller
     public function datatable(Request $request)
     {
         if (Auth::user()->jop_type == 3) {
-            $data1 = Project::where('is_accepted', 1)->where('is_read',0)->orderBy('date', 'desc')->get();
-            $data2 = Project::where('is_accepted', 1)->where('is_read',1)->orderBy('accpeted_date', 'desc')->get();
-            $data = array_push($data1 ,$data2 );
+            $data1 = Project::where('is_accepted', 1)->where('view', 0)
+                ->orderBy('date', 'desc')->get();
+            $data2 = Project::where('is_accepted', 1)->where('view', 1)
+                ->orderBy('accept_date', 'desc')->get();
+            $data = $data1->merge($data2);
         } elseif (Auth::user()->jop_type == 2) {
-            $data = Project::where('state', Auth::user()->state)->where('is_read',0)->where('is_accepted', 1)->orderBy('date', 'desc')->get();
-            $data = Project::where('state', Auth::user()->state)->where('is_read',1)->where('is_accepted', 1)->orderBy('accpeted_date', 'desc')->get();
+            $data1 = Project::where('state', Auth::user()->state)->where('view', 0)
+                ->where('is_accepted', 1)->orderBy('date', 'desc')->get();
+            $data2 = Project::where('state', Auth::user()->state)->where('view', 1)
+                ->where('is_accepted', 1)->orderBy('accept_date', 'desc')->get();
+            $data = $data1->merge($data2);
         }
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {
@@ -170,12 +176,13 @@ class ContractsController extends Controller
 
     public function UpdateProjectPaid(Request $request)
     {
-        $data = ProjectPaid::where('project_id', $request->id)->first();
-        $total = $request->paid_down + $request->paid_term + array_sum($request->values);
 
-        if ($request->paid < $total) {
-            return back()->with('error_message', 'عفوا اجمالي الدفعات اكبر من مبلغ التعاقد ');
-        }
+        $data = ProjectPaid::where('project_id', $request->id)->first();
+//        $total = $request->paid_down + $request->paid_down + array_sum($request->values);
+
+//        if ($request->paid < $total) {
+//            return back()->with('error_message', 'عفوا اجمالي الدفعات اكبر من مبلغ التعاقد ');
+//        }
         if (isset($request->paid)) {
             $data->paid = $request->paid;
         }
@@ -186,19 +193,19 @@ class ContractsController extends Controller
             $data->paid_term = $request->paid_term;
         }
         $data->save();
-        if (isset($request->values) && array_sum($request->values) != 0) {
-            $incomes = Income::where('project_id', $request->id)->delete();
-            foreach ($request->values as $val) {
-                if ($request->values != 0) {
-                    $Income = new Income();
-                    $Income->amount = $val;
-                    $Income->project_id = $request->id;
-                    $Income->date = \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
-                    $Income->created_at = \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
-                    $Income->project_id = $request->id;
-                    $Income->type = 1;
-                    $Income->project_name = Project::find($request->id)->name;
-                    $Income->save();
+        if ($request->values) {
+            if (isset($request->values) && array_sum($request->values) != 0) {
+                $incomes = Installments::where('project_id', $request->id)->delete();
+                foreach ($request->values as $key => $val) {
+                    if ($request->values != 0) {
+                        $Income = new Installments();
+                        $Income->amount = $val;
+                        $Income->project_id = $request->id;
+                        $Income->installment_date = $request->dates[$key];
+                        $Income->project_id = $request->id;
+
+                        $Income->save();
+                    }
                 }
             }
         }
