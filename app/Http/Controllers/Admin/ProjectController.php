@@ -172,6 +172,7 @@ class ProjectController extends Controller
                         $ProjectLevelDetails->title=$de->title;
                         $ProjectLevelDetails->project_id=$project->id;
                         $ProjectLevelDetails->level_id=$ProjectLevels->id;
+                        $ProjectLevelDetails->percent=$de->percent;
 //                        $ProjectLevelDetails->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
                         $ProjectLevelDetails->client_view=$de->client_view;
                         $ProjectLevelDetails->sort=$de->sort;
@@ -363,10 +364,12 @@ class ProjectController extends Controller
 
 }
     public function AddGeneralSupervisor(Request $request){
+
         $this->validate(request(), [
             'project_id' => 'required',
             'emp_id' => 'required',
         ]);
+
         $Project = Project::find($request->project_id);
         $client = User::find($request->emp_id);
         $levels = ProjectLevels::where('project_id',$request->project_id)->get();
