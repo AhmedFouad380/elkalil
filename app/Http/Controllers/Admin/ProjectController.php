@@ -364,18 +364,17 @@ class ProjectController extends Controller
 }
     public function AddGeneralSupervisor(Request $request){
         $this->validate(request(), [
-            'level_id' => 'required',
             'project_id' => 'required',
             'emp_id' => 'required',
 
         ]);
         $Project = Project::find($request->project_id);
         $client = User::find($request->emp_id);
-        if(UserPermission::where('emp_id',$request->emp_id)->where('level_id',$request->level_id)->count() > 0){
-            return back()->with('error_message','هذا المستخدم موجود بالفعل ');
-        }
+        $levels = ProjectLevels::where('project_id',$request->project_id)->get();
+        foreach($levels as $level){
+        if(UserPermission::where('emp_id',$request->emp_id)->where('level_id',$level->id)->count() == 0){
         $data = new UserPermission();
-        $data->level_id=$request->level_id;
+        $data->level_id=$level->id;
         $data->project_id=$request->project_id;
         $data->emp_id=$request->emp_id;
         $data->user_type=1;
@@ -385,11 +384,11 @@ class ProjectController extends Controller
         $chat->reciever_id=$request->emp_id;
         $chat->type=0;
         $data->user_type=1;
-        $chat->level_id=$request->level_id;
+        $chat->level_id=$level->id;
         $data->project_id=$request->project_id;
         $data->save();
-
-
+        }
+        }
         $inbox = array(
             'title' => " تم تكليفك بالاعمال في المشروع   ",
             'comments' => 'تم تكليفك بالاعمال في مشروع' . $Project->name,
