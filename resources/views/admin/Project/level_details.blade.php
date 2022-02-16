@@ -109,6 +109,8 @@
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
+                                @if(Auth::user()->userGroup->is_financial == 1 )
+
                                     <!--begin::Stat-->
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
@@ -128,6 +130,7 @@
                                         <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
                                         <!--end::Label-->
                                     </div>
+                                    @endif
                                     <!--end::Stat-->
                                 </div>
                                 <!--end::Stats-->
@@ -295,7 +298,7 @@
                                     <!--end::Table body-->
                                 </table>
                                 <!--end::Table-->
-                                
+
                             </div>
                             <!--end::Table container-->
                         </div>

@@ -102,6 +102,8 @@
                                     </div>
                                     <!--end::Stat-->
                                     <!--begin::Stat-->
+                                    @if(Auth::user()->userGroup->is_financial == 1 )
+
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
@@ -121,7 +123,9 @@
                                         <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
                                         <!--end::Label-->
                                     </div>
-                                    <!--end::Stat-->
+                                @endif
+
+                                <!--end::Stat-->
                                 </div>
                                 <!--end::Stats-->
                                 <!--begin::Users-->
@@ -189,9 +193,6 @@
                             {{--                        <li class="nav-item">--}}
                             {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
                             {{--                        </li>--}}
-                            <li class="nav-item">
-                                <a class="nav-link text-active-primary me-6" href="#">المحادثات</a>
-                            </li>
                             <!--end::Nav item-->
                         </ul>
                         <!--end::Nav links-->
