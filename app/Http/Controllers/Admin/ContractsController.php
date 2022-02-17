@@ -57,7 +57,7 @@ class ContractsController extends Controller
             $data2 = Project::where('is_accepted', 1)->where('view', 1)
                 ->orderBy('accept_date', 'desc')->get();
             $data = $data1->merge($data2);
-        } elseif (Auth::user()->jop_type == 2) {
+        } else {
             $data1 = Project::where('state', Auth::user()->state)->where('view', 0)
                 ->where('is_accepted', 1)->orderBy('date', 'desc')->get();
             $data2 = Project::where('state', Auth::user()->state)->where('view', 1)

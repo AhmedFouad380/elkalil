@@ -490,7 +490,7 @@
 
             <?php
                 if($level->percent == 0){
-                    $total = 100;
+                    $total = 0;
                 }else{
                 $total = ( $level->progress / $level->percent ) * 100;
                 }

@@ -205,7 +205,13 @@
                             <span class="menu-label">
 														<span class="label label-danger label-inline" style="color:#fff;    border-radius: 50px;
     background-color: #f00; padding:0px 8px;     margin-right: -6px;
-">{{\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count()}} </span>
+">
+                                                        @if(Auth::user()->jop_type == 3)
+                                                                {{\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count()}}
+                                                            @else
+                                                                {{\App\Models\Project::where('is_accepted',1)->where('state',Auth::user()->state)->where('is_contract',1)->where('view',0)->count()}}
+                                                            @endif
+                                                        </span>
 													</span>
                     @endif
                     <!--begin::Menu-->
@@ -216,7 +222,13 @@
                                 <!--begin::Title-->
                                 <h3 class="text-white fw-bold px-9 mt-10 mb-6">اشعارات التعاقدات والمتابعه
                                     <span
-                                        class="fs-8 opacity-75 ps-3">{{\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count()}}</span>
+                                        class="fs-8 opacity-75 ps-3">
+                                         @if(Auth::user()->jop_type == 3)
+                                            {{\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->count()}}
+                                        @else
+                                            {{\App\Models\Project::where('is_accepted',1)->where('state',Auth::user()->state)->where('is_contract',1)->where('view',0)->count()}}
+                                        @endif
+                                    </span>
                                 </h3>
                                 <!--end::Title-->
                                 <!--begin::Tabs-->
@@ -237,6 +249,7 @@
                                 <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
                                     <!--begin::Items-->
                                     <div class="scroll-y mh-325px my-5 px-8">
+                                        @if(Auth::user()->jop_type == 3)
                                     @foreach(\App\Models\Project::where('is_accepted',1)->where('is_contract',1)->where('view',0)->OrderBy('id','desc')->get() as $project)
                                         <!--begin::Item-->
                                             <div class="d-flex flex-stack py-4">
@@ -278,6 +291,50 @@
                                             </div>
                                             <!--end::Item-->
                                         @endforeach
+                                            @else
+                                            @foreach(\App\Models\Project::where('is_accepted',1)->where('state',Auth::user()->state)->where('is_contract',1)->where('view',0)->OrderBy('id','desc')->get() as $project)
+                                                <!--begin::Item-->
+                                                    <div class="d-flex flex-stack py-4">
+                                                        <!--begin::Section-->
+                                                        <div class="d-flex align-items-center">
+                                                            <!--begin::Symbol-->
+                                                            <div class="symbol symbol-35px me-4">
+                                                <span class="symbol-label bg-light-primary">
+                                                    <!--begin::Svg Icon | path: icons/duotune/maps/map001.svg-->
+                                                    <span class="svg-icon svg-icon-2 svg-icon-primary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                             viewBox="0 0 24 24" fill="none">
+                                                            <path opacity="0.3"
+                                                                  d="M6 22H4V3C4 2.4 4.4 2 5 2C5.6 2 6 2.4 6 3V22Z"
+                                                                  fill="black"/>
+                                                            <path
+                                                                d="M18 14H4V4H18C18.8 4 19.2 4.9 18.7 5.5L16 9L18.8 12.5C19.3 13.1 18.8 14 18 14Z"
+                                                                fill="black"/>
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                                            </div>
+                                                            <!--end::Symbol-->
+                                                            <!--begin::Title-->
+                                                            <div class="mb-0 me-2">
+                                                                <a href="{{url('Contracts-edit/'.$project->id)}}"
+                                                                   class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{$project->name}}</a>
+                                                                <div class="text-gray-400 fs-7">{{$project->services}}
+                                                                    - {{$project->project_type}}</div>
+                                                            </div>
+                                                            <!--end::Title-->
+                                                        </div>
+                                                        <!--end::Section-->
+                                                        <!--begin::Label-->
+                                                        <span
+                                                            class="badge badge-light fs-8">{{Carbon\Carbon::parse($project->date)->translatedFormat("d M Y")}}</span>
+                                                        <!--end::Label-->
+                                                    </div>
+                                                    <!--end::Item-->
+                                                @endforeach
+
+                                        @endif
                                     </div>
                                     <!--end::Items-->
                                     <!--begin::View more-->

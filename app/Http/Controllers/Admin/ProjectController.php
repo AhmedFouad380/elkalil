@@ -37,6 +37,7 @@ class ProjectController extends Controller
         });
 
     }
+
     public  function  index(Request $request){
         if(Auth::user()->jop_type == 3){
             if(isset($request->contract_id)){
@@ -227,7 +228,11 @@ class ProjectController extends Controller
 
         $data = Project::find($id);
         $files = ProjectLevelDetails::where('project_id',$id)->where('is_pdf',1)->where('pdf','!=',null)->where('pdf','!=','');
+        if(Auth::user()->jop_type == 1){
+            $levels = UserPermission::where('user_id',Auth::user()->id)->where('project_id',$id)->pluck('level_id')->ToArray();
+            $files->whereIn('level_id',$levels);
 
+        }
         if(isset($request->level_id)){
         $files->where('level_id',$request->level_id);
         }
@@ -292,7 +297,7 @@ class ProjectController extends Controller
 
         $inbox = array(
             'title' => " تم تكليفك بالاعمال في المشروع   ",
-            'comments' => 'تم تكليفك بالاعمال في مشروع' . $Project->name,
+            'comments' => ' تم تكليفك بالاعمال في مشروع ' . $Project->name,
             'date' => \Carbon\Carbon::now()->format('Y-m-d'),
             'time' => \Carbon\Carbon::now()->format('H:i:s'),
             'sender_id' => \Illuminate\Support\Facades\Auth::user()->id,
@@ -365,10 +370,10 @@ class ProjectController extends Controller
 }
     public function AddGeneralSupervisor(Request $request){
 
-        $this->validate(request(), [
-            'project_id' => 'required',
-            'emp_id' => 'required',
-        ]);
+//        $this->validate(request(), [
+//            'project_id' => 'required',
+//            'emp_id' => 'required',
+//        ]);
 
         $Project = Project::find($request->project_id);
         $client = User::find($request->emp_id);
@@ -393,7 +398,7 @@ class ProjectController extends Controller
         }
         $inbox = array(
             'title' => " تم تكليفك بالاعمال في المشروع   ",
-            'comments' => 'تم تكليفك بالاعمال في مشروع' . $Project->name,
+            'comments' => ' تم تكليفك بالاعمال في مشروع ' . $Project->name,
             'date' => \Carbon\Carbon::now()->format('Y-m-d'),
             'time' => \Carbon\Carbon::now()->format('H:i:s'),
             'sender_id' => \Illuminate\Support\Facades\Auth::user()->id,
