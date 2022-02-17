@@ -75,9 +75,17 @@ class ProjectLevelController extends Controller
     {
 
         $data = ProjectLevelDetails::find($request->id);
-
+        $data['fdp'] = Auth::user()->id . '@' . \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d') . '@';
         return view('admin.Project.levelDetailsModel', compact('data'));
 
+    }
+
+    public function uploadPhoto(Request $request)
+    {
+        $imageName = "";
+        $imageName = upload_multiple5($request->pdf, 'images');
+
+        return '<input type="hidden" name="pdf[]" value="'.$imageName.'" />';
     }
 
     public function AnswerLevelDetails(Request $request)
@@ -107,14 +115,14 @@ class ProjectLevelController extends Controller
             $data->otherAnswer = $request->otherAnswer;
 
         }
+
         if (isset($request->pdf)) {
             $files = [];
             foreach ($request->pdf as $file) {
-
-//                $imageName2 = upload_multiple($file, 'images');
-////                $data->img = $imageName2;
-                $imageName = upload_multiple2($file, 'images');
-                $files[] = $imageName;
+                //$imageName2 = upload_multiple($file, 'images');
+                ////$data->img = $imageName2;
+                // $imageName = upload_multiple2($file, 'images');
+                $files[] = Auth::user()->id . '@' . \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d') . '@'. $file;
             }
             $data->pdf = $files;
 
