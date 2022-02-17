@@ -1,6 +1,6 @@
-<div class="dt-buttons flex-wrap">
+<div class="dt-buttons flex-wrap" style="float:right">
     <!--begin::Filter-->
-    <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
+    <button type="button" class="btn btn-light-danger me-3" data-bs-toggle="modal"
             data-bs-target="#kt_modal_filter">
         <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
         <span class="svg-icon svg-icon-2">
