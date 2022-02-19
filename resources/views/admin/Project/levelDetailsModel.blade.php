@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
     .dropify-wrapper{
         line-height: 46px!important;
@@ -148,50 +148,71 @@
 
     @if($data->is_pdf == 1 )
 
-
         <div class="mb-10">
             <!--begin::Label-->
             <label class="col-lg-4 col-form-label fw-bold fs-6">المرفق </label>
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title"></h4>
-                        <div class="controls">
-                            <span class="btn CompleteLevel btn-sm btn-danger my-3 repeat">اضف المزيد </span>
-                            {{-- <input type="file" id="input-file-now" multiple class="dropify"  name="pdf[]" data-default-file="" required data-validation-required-message="{{trans('word.This field is required')}}"/> --}}
-                        </div>
-                    </div>
-                </div>
-
                 <!--begin::Dropzone-->
 
-                <div class="form-group row ">
-                    <div class="col-md-3 repeatresult" style="margin-bottom:15px;">
-                        <img class="border rounded" data-preview="p1" src="{{ URL::asset('admin/assets/media/avatars/upload.png')}}" width="170" height="170">
-                        <h6 data-file-name="p1"></h6>
-                        <label class="btn btn-secondary" for="p1">
-                            <input type="file" id="p1" name="pdf[]" style="display:none">
-                            <input type="file" id="p3" name="pdf[]" style="display:none">
-                            <input type="file" id="p4" name="pdf[]" style="display:none">
-                            <input type="file" id="p5" name="pdf[]" style="display:none">
-                            <input type="file" id="p6" name="pdf[]" style="display:none">
-                            <input type="file" id="p7" name="pdf[]" style="display:none">
-                            <input type="file" id="p8" name="pdf[]" style="display:none">
-                            <input type="file" id="p9" name="pdf[]" style="display:none">
-                            <input type="file" id="p10" name="pdf[]" style="display:none">
-                            <input type="file" id="p11" name="pdf[]" style="display:none">
-                            <input type="file" id="p12" name="pdf[]" style="display:none">
-                            <input type="file" id="p13" name="pdf[]" style="display:none">
-                            رفع الملف
-                        </label>
-                    </div>
-                    <div class="dfdfd"></div>
+                <div class="form-group row">
 
-                    <div class="col-md-3">
+                    <!--begin::Col-->
+                    <div class="col-lg-10">
+                        <!--begin::Dropzone-->
+                        <div class="dropzone dropzone-queue mb-2" id="kt_dropzonejs_example_2">
+                            <!--begin::Controls-->
+                            <div class="dropzone-panel mb-lg-0 mb-2">
+                                <a class="dropzone-select btn btn-sm btn-primary me-2">اخر ملف</a>
+                                <a class="dropzone-upload btn btn-sm btn-light-primary me-2">رفع الكل</a>
+                                <a class="dropzone-remove-all btn btn-sm btn-light-primary">حذف الكل</a>
+                            </div>
+                            <!--end::Controls-->
 
+                            <!--begin::Items-->
+                            <div class="dropzone-items wm-200px">
+                                <div class="dropzone-item" style="display:none">
+                                    <!--begin::File-->
+                                    <div class="dropzone-file">
+                                        <div class="dropzone-filename" title="some_image_file_name.jpg">
+                                            <span data-dz-name>some_image_file_name.jpg</span>
+                                            <strong>(<span data-dz-size>340kb</span>)</strong>
+                                        </div>
+
+                                        <div class="dropzone-error" data-dz-errormessage></div>
+                                    </div>
+                                    <!--end::File-->
+
+                                    <!--begin::Progress-->
+                                    <div class="dropzone-progress">
+                                        <div class="progress">
+                                            <div
+                                                class="progress-bar bg-primary"
+                                                role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-dz-uploadprogress>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Progress-->
+
+                                    <!--begin::Toolbar-->
+                                    <div class="dropzone-toolbar">
+                                        <span class="dropzone-start"><i class="bi bi-play-fill fs-3"></i></span>
+                                        <span class="dropzone-cancel" data-dz-remove style="display: none;"><i class="bi bi-x fs-3"></i></span>
+                                        <span class="dropzone-delete" data-dz-remove><i class="bi bi-x fs-1"></i></span>
+                                    </div>
+                                    <!--end::Toolbar-->
+                                </div>
+                            </div>
+                            <!--end::Items-->
+                        </div>
+                        <!--end::Dropzone-->
+
+                        <!--begin::Hint-->
+                        <span class="form-text text-muted">حجم الملف المسموح به  1000 ميجا</span>
+                        <!--end::Hint-->
                     </div>
+                    <!--end::Col-->
                 </div>
 
                 <!--end::Dropzone-->
@@ -233,64 +254,126 @@
 
 </script>
 <!--begin::Page scripts(used by this page) -->
-<script>
-    // $(function () {
-    //     $(".repeat").on('click', function () {
-    //        var $self = $(this);
 
-    //        $( ".repeatresult" ).clone().appendTo( ".dfdfd" );
-    //     });
-    // });
-    var i = 3;
-    $('.repeat').click(function() {
-        $('.repeatresult:last').after('<div class="col-md-3 repeatresult" style="margin-bottom:15px;"><img class="border rounded" data-preview="p'+i+'" src="{{ URL::asset("admin/assets/media/avatars/upload.png")}}" width="170" height="170"><h6 data-file-name="p'+i+'"></h6><label class="btn btn-secondary" for="p'+i+'"><input type="file" id="p'+i+'" name="pdf[]" style="display:none">رفع الملف </label></div>');
-        i++;
-        return false;
-    });
-
-</script>
 <script type="text/javascript">
-    $(function() {
+    $(function () {
+        // set the dropzone container id
+        const id = "#kt_dropzonejs_example_2";
+        const dropzone = document.querySelector(id);
 
-        $('input[type=file]').change(function() {
-            var id = $(this).attr('id');
-            var uploadFileName = this.files[0].name;
-            var strLimit = 20;
+        // set the preview element template
+        var previewNode = dropzone.querySelector(".dropzone-item");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
 
-            //
-            // prevent a long string file name
-            //
-            if (uploadFileName.length > strLimit) {
-                var endOfFileName = uploadFileName.substr( (uploadFileName.lastIndexOf('.') -2) );
-                var startOfFileName = uploadFileName.substr(0, (strLimit - endOfFileName.length - 3));
-                uploadFileName = startOfFileName+"..."+endOfFileName;
+        var myDropzone = new Dropzone(id, { // Make the whole body a dropzone
+            url: "{{url('uploadPhoto')}}", // Set the url for your upload script location
+            paramName: "pdf",
+            parallelUploads: 20,
+            previewTemplate: previewTemplate,
+            maxFilesize: 1000, // Max filesize in MB
+            autoQueue: true, // Make sure the files aren't queued until manually added
+            previewsContainer: id + " .dropzone-items", // Define the container to display the previews
+            clickable: id + " .dropzone-select", // Define the element that should be used as click trigger to select files.
+            accept: function(file, done) {
+
+                if (file.name == "wow.jpg") {
+                    done("Naha, you don't.");
+                } else {
+                    done();
+                }
             }
-
-            //
-            // show file name
-            //
-            $('[data-file-name="' + id + '"]').html(uploadFileName);
-
-            //
-            // show image preview
-            //
-
-            var fileTypes = ['jpg', 'jpeg', 'png'];
-
-            var extension = this.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
-                isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
-
-            if (isSuccess) {
-                var reader = new FileReader();
-                reader.readAsDataURL(this.files[0]);
-
-                reader.onload = function(e) {
-                    $('[data-preview="' + id + '"]').attr('src', e.target.result);
-                };
-            }
-
         });
 
+        myDropzone.on("addedfile", function (file) {
+            // Hookup the start button
+            file.previewElement.querySelector(id + " .dropzone-start").onclick = function () { myDropzone.enqueueFile(file); };
+            const dropzoneItems = dropzone.querySelectorAll('.dropzone-item');
+            dropzoneItems.forEach(dropzoneItem => {
+                dropzoneItem.style.display = '';
+            });
+            dropzone.querySelector('.dropzone-upload').style.display = "inline-block";
+            dropzone.querySelector('.dropzone-remove-all').style.display = "inline-block";
+        });
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function (progress) {
+            const progressBars = dropzone.querySelectorAll('.progress-bar');
+            progressBars.forEach(progressBar => {
+                progressBar.style.width = progress + "%";
+            });
+        });
+
+        var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+        myDropzone.on("sending", function (file, xhr, formData) {
+            // Show the total progress bar when upload starts
+            formData.append("_token", CSRF_TOKEN);
+            const progressBars = dropzone.querySelectorAll('.progress-bar');
+            progressBars.forEach(progressBar => {
+                progressBar.style.opacity = "1";
+            });
+            // And disable the start button
+
+            file.previewElement.querySelector(id + " .dropzone-start").setAttribute("disabled", "disabled");
+            file.previewElement.querySelector(id + " .dropzone-delete").setAttribute("disabled", "disabled");
+        });
+
+        myDropzone.on("success", function(response) {
+            let newName = response.xhr.response;
+
+            if (newName) {
+                $('#kt_form2').append(newName);
+                console.log(newName);
+            }
+
+            myDropzone.on("renameFile", function(response) {
+                return newName;
+            });
+        });
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("complete", function (progress) {
+            const progressBars = dropzone.querySelectorAll('.dz-complete');
+
+            setTimeout(function () {
+                progressBars.forEach(progressBar => {
+                    progressBar.querySelector('.progress-bar').style.opacity = "0";
+                    progressBar.querySelector('.progress').style.opacity = "0";
+                    progressBar.querySelector('.dropzone-start').style.opacity = "0";
+                    progressBar.querySelector('.dropzone-delete').style.opacity = "0";
+                });
+            }, 300);
+        });
+
+        // Setup the buttons for all transfers
+        dropzone.querySelector(".dropzone-upload").addEventListener('click', function () {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+        });
+
+        // Setup the button for remove all files
+        dropzone.querySelector(".dropzone-remove-all").addEventListener('click', function () {
+            dropzone.querySelector('.dropzone-upload').style.display = "none";
+            dropzone.querySelector('.dropzone-remove-all').style.display = "none";
+            myDropzone.removeAllFiles(true);
+        });
+
+        // On all files completed upload
+        myDropzone.on("queuecomplete", function (progress) {
+            const uploadIcons = dropzone.querySelectorAll('.dropzone-upload');
+            uploadIcons.forEach(uploadIcon => {
+                uploadIcon.style.display = "none";
+            });
+        });
+
+        // On all files removed
+        myDropzone.on("removedfile", function (file) {
+            if (myDropzone.files.length < 1) {
+                dropzone.querySelector('.dropzone-upload').style.display = "none";
+                dropzone.querySelector('.dropzone-remove-all').style.display = "none";
+            }
+        });
     });
 </script>
 <script type="text/javascript">

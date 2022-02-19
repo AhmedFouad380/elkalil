@@ -297,9 +297,9 @@ function upload_multiple($file, $dir)
     $image = "https://alkhalilsys.com/" . Storage::disk('public2')->put($dir, $file);
     $destinationPath =$dir;
     // dd($file->storeAs($destinationPath, $image, 'public2'));
-     $file->storeAs($destinationPath, $image, 'public2');
+    $file->storeAs($destinationPath, $image, 'public2');
 
-     return $image;
+    return $image;
 }
 
 
@@ -320,7 +320,18 @@ function upload_multiple2($file, $dir)
     $destinationPath =$dir;
     // dd($file->storeAs($destinationPath, $image, 'public2'));
     $file->storeAs($destinationPath, $image2, 'public2');
-     return $image2;
+    return $image2;
+}
+
+function upload_multiple5($file, $dir)
+{
+
+    $image2 = Auth::user()->id . '@' . \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d') . '@'. Storage::disk('public2')->put("", $file);
+    $image3 = Storage::disk('public2')->put("", $file);
+    $destinationPath =$dir;
+    // dd($file->storeAs($destinationPath, $image, 'public2'));
+    $file->storeAs($destinationPath, $image2, 'public2');
+    return $image3;
 }
 
 function unlinkFile($image, $path)
