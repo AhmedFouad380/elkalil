@@ -273,7 +273,7 @@ $(function () {
         parallelUploads: 20,
         previewTemplate: previewTemplate,
         maxFilesize: 1000, // Max filesize in MB
-        autoQueue: false, // Make sure the files aren't queued until manually added
+        autoQueue: true, // Make sure the files aren't queued until manually added
         previewsContainer: id + " .dropzone-items", // Define the container to display the previews
         clickable: id + " .dropzone-select", // Define the element that should be used as click trigger to select files.
         accept: function(file, done) {
