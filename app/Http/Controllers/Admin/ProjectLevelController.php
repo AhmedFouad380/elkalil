@@ -58,6 +58,15 @@ class ProjectLevelController extends Controller
         $data->state = 0;
         $data->date = null;
         $data->save();
+
+        $projectLevel = ProjectLevels::find($data->level_id);
+        $projectLevel->progress=$projectLevel->progress - $data->percent;
+        $projectLevel->save();
+
+        $project = Project::find($projectLevel->project_id);
+        $project->progress=$project->progress - $data->percent;
+        $project->save();
+
         return response()->json(['message' => 'Success']);
 
     }
@@ -114,6 +123,14 @@ class ProjectLevelController extends Controller
         $data->date = \Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
 
         $data->save();
+
+        $projectLevel = ProjectLevels::find($data->level_id);
+        $projectLevel->progress=$projectLevel->progress + $data->percent;
+        $projectLevel->save();
+
+        $project = Project::find($projectLevel->project_id);
+        $project->progress=$project->progress + $data->percent;
+        $project->save();
         return back()->with('message', 'Success');
 
     }

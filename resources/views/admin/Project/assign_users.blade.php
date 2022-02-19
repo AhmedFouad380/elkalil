@@ -123,9 +123,10 @@
                                                             <?php
                                                             $is_assgin = $level->assginUsers->pluck('id')->toArray();
                                                             ?>
-                                                            <select class="form-control" name="emp_id">
+                                                            <select class="form-control " id="select2"  data-control="select2"
+                                                                    data-dropdown-parent="#kt_modal_add_user" data-placeholder="اختـر..." data-allow-clear="true" name="emp_id">
                                                                 @inject('Users','App\Models\User')
-                                                                @foreach($Users->where('jop_type','!=',3)->get() as  $User)
+                                                                @foreach($Users->where('jop_type','=',1)->where('state',$data->state)->get() as  $User)
                                                                     @if(!in_array($User->id,$is_assgin))
                                                                       <option value="{{$User->id}}">{{$User->name}}</option>
                                                                     @endif
@@ -196,6 +197,8 @@
                                     </div>
                                     <!--end::Stat-->
                                     <!--begin::Stat-->
+                                    @if(Auth::user()->userGroup->is_financial == 1 )
+
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
@@ -215,6 +218,7 @@
                                         <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
                                         <!--end::Label-->
                                     </div>
+                                    @endif
                                     <!--end::Stat-->
                                 </div>
                                 <!--end::Stats-->
@@ -349,6 +353,9 @@
     <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>
 
     <script type="text/javascript">
+        $('#select2').select2({
+            dropdownParent:$('#kt_modal_add_user')
+        })
         $(function () {
             var table = $('#users_table').DataTable({
                 processing: true,

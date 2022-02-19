@@ -17,6 +17,10 @@
         .select2-container .select2-selection--single .select2-selection__clear {
             padding-right: 355px;
         }
+        .add_button{
+            /*soso class*/
+            flex-direction: row-reverse;
+        }
     </style>
 @endsection
 
@@ -136,9 +140,54 @@
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 
     <script type="text/javascript">
-
         // table.row.add( /* array or object */).draw();
 
+        $(function () {
+            var table = $('#users_table').DataTable({
+                order: ['1',"asc"],
+                processing: false,
+                serverSide: false,
+                autoWidth: false,
+                responsive: false,
+                aaSorting: [],
+                "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button 'B> r>>  <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+                lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
+                "language": {
+                    search: '<i class="fa fa-eye" aria-hidden="true"></i>',
+                    searchPlaceholder: 'بحث سريع',
+                    "url": "{{ url('admin/assets/ar.json') }}"
+                },
+                buttons: [
+                    {
+                        extend: 'colvis',
+                        className: 'btn btn-light-primary me-3',
+                        text: ' <i class="bi bi-eye-fill fs-2x"></i>إظهار / إخفاء الأعمدة '
+                    }
+                    ,
+                    {
+                        extend: 'print',
+                        className: 'btn btn-light-primary me-3',
+                        text: '<i class="bi bi-printer-fill fs-2x"></i>'
+                    },
+                    // {extend: 'pdf', className: 'btn btn-raised btn-danger', text: 'PDF'},
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-light-primary me-3',
+                        text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'
+                    }
+
+                ]
+            });
+            $.ajax({
+                url: "{{ URL::to('/Project_search-button')}}",
+                success: function (data) {
+                    $('.add_button').append(data);
+                },
+                dataType: 'html'
+            });
+            // or using tr
+
+        });
 
     </script>
 

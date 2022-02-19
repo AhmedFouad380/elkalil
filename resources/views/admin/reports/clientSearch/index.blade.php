@@ -18,6 +18,10 @@
         .select2-container .select2-selection--single .select2-selection__clear {
             padding-right: 355px;
         }
+        .add_button{
+            /*soso class*/
+            flex-direction: row-reverse;
+        }
     </style>
 @endsection
 
@@ -53,7 +57,7 @@
 
 
                     <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-4 gy-5" id="">
+                    <table class="table align-middle table-row-dashed fs-4 gy-5" id="users_table">
                         <!--begin::Table head-->
                         <thead>
                         <!--begin::Table row-->
@@ -120,8 +124,42 @@
                         @endif
                         <!--end::Table body-->
                     </table>
+                    <div class="row justify-content-center mt-5">
+                        <nav aria-label="Page navigation example">
+                            @php
+                                $paginator =$incomes->appends(request()->input())->links()->paginator;
+                                    if ($paginator->currentPage() < 2 ){
+                                                $link = $paginator->currentPage();
+                                    }else{
+                                         $link = $paginator->currentPage() -1;
+                                    }
+                                    if($paginator->currentPage() == $paginator->lastPage()){
+                                               $last_links = $paginator->currentPage();
+                                    }else{
+                                               $last_links = $paginator->currentPage() +1;
 
-                    {{$incomes->links()}}
+                                    }
+                            @endphp
+                            @if ($paginator->lastPage() > 1)
+                                <ul class="pagination">
+                                    <li class="{{ ($paginator->currentPage() == 1) ? ' disabled' : '' }} page-item">
+                                        <a class="page-link" href="{{ $paginator->url(1) }}">الاول </a>
+                                    </li>
+                                    @for ($i = $link; $i <= $last_links; $i++)
+                                        <li class="{{ ($paginator->currentPage() == $i) ? ' active' : '' }} page-item">
+                                            <a class="page-link" href="{{ $paginator->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+                                    <li class="{{ ($paginator->currentPage() == $paginator->lastPage()) ? ' disabled' : '' }} page-item">
+                                        <a class="page-link"
+                                           href="{{ $paginator->url($paginator->lastPage()) }}">الاخير</a>
+                                    </li>
+                                </ul>
+                            @endif
+
+                        </nav>
+                    </div>
+
                     <!--end::Table-->
                 </div>
                 <!--end::Card body-->
@@ -141,12 +179,12 @@
         $(function () {
             var table = $('#users_table').DataTable({
                 order: ['1',"asc"],
-                processing: true,
+                processing: false,
                 serverSide: false,
                 autoWidth: false,
-                responsive: true,
+                responsive: false,
                 aaSorting: [],
-                "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button pull-right'B> r>>  <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+                "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button 'B> r>>  <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
                 lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
                 "language": {
                     search: '<i class="fa fa-eye" aria-hidden="true"></i>',

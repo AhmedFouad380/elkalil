@@ -54,7 +54,7 @@
                                         </svg>
                                     </span>
                                         <!--end::Svg Icon-->
-                                        <a href="#" class="text-warning fw-bold fs-6">سندات القبض</a>
+                                        <a href="{{url('income-reciepts')}}" class="text-warning fw-bold fs-6">سندات القبض</a>
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
@@ -71,7 +71,7 @@
                                         </svg>
                                     </span>
                                         <!--end::Svg Icon-->
-                                        <a href="#" class="text-primary fw-bold fs-6">سندات الصرف</a>
+                                        <a href="{{url('outcome-reciepts')}}" class="text-primary fw-bold fs-6">سندات الصرف</a>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -93,7 +93,7 @@
                                         </svg>
                                     </span>
                                         <!--end::Svg Icon-->
-                                        <a href="#" class="text-danger fw-bold fs-6 mt-2">المطالبة المالية </a>
+                                        <a href="{{url('financial-request')}}" class="text-danger fw-bold fs-6 mt-2">المطالبة المالية </a>
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
@@ -111,7 +111,7 @@
                                         </svg>
                                     </span>
                                         <!--end::Svg Icon-->
-                                        <a href="#" class="text-success fw-bold fs-6 mt-2">كشف حساب عميل </a>
+                                        <a href="{{url('client_search')}}" class="text-success fw-bold fs-6 mt-2">كشف حساب عميل </a>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -131,7 +131,7 @@
                         <!--begin::Col-->
                         <div class="col-lg-6 mb-5 mb-lg-10">
                             <!--begin::Tiles Widget 5-->
-                            <a href="#" class="card bg-primary h-150px">
+                            <a href="{{url('inbox')}}" class="card bg-primary h-150px">
                                 <!--begin::Body-->
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -153,7 +153,9 @@
                                         <div class="text-white fw-bolder fs-1 mb-0 mt-5">
                                             {{$Inbox->where('recipient_id',Auth::user()->id)->count()}}
                                         </div>
-                                        <div class="text-white fw-bold fs-6">البريد الوارد</div>
+                                        <div class="text-white fw-bold fs-6">
+                                            البريد الوارد
+                                        </div>
                                     </div>
                                 </div>
                                 <!--end::Body-->
@@ -208,7 +210,7 @@
                         <!--begin::Col-->
                         <div class="col-lg-6 mb-5 mb-lg-10">
                             <!--begin::Tiles Widget 5-->
-                            <a href="#" class="card bg-danger  h-150px">
+                            <a href="{{url('Contracts')}}" class="card bg-danger  h-150px">
                                 <!--begin::Body-->
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -248,7 +250,7 @@
                         </div>
                         <div class="col-lg-6 mb-5 mb-lg-10">
                             <!--begin::Tiles Widget 5-->
-                            <a href="#" class="card bg-success h-150px">
+                            <a href="{{url('Contracts')}}" class="card bg-success h-150px">
                                 <!--begin::Body-->
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->

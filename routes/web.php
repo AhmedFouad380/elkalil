@@ -196,6 +196,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('Send_template', [\App\Http\Controllers\Admin\ContractsController::class, 'Send_template'])->name('Send_template');
     Route::post('Send_quest', [\App\Http\Controllers\Admin\ContractsController::class, 'Send_quest'])->name('Send_quest');
     Route::post('UpdateClientData', [\App\Http\Controllers\Admin\ContractsController::class, 'UpdateClientData'])->name('UpdateClientData');
+    Route::post('AddGeneralSupervisor',['App\Http\Controllers\Admin\ProjectController','AddGeneralSupervisor']);
 
     Route::get('/add-Requests-button', function () {
         return view('admin/Requests/button');
@@ -215,7 +216,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('Project_search_datatable', [\App\Http\Controllers\Admin\ReportController::class, 'datatable2'])->name('project.search.datatable');
 
     Route::get('/Project_search-button', function () {
-        return view('admin/reports/Project_search/button');
+        return view('admin.reports.ProjectSearch.button');
     });
 
 

@@ -19,10 +19,15 @@
             $this->middleware('auth');
             $this->middleware(function ($request, $next) {
                 $this->id = \Illuminate\Support\Facades\Auth::user()->userGroup->is_client_order;
-                if( $this->id  == 0 ){
-                    return redirect('/');
+                $this->id2 = \Illuminate\Support\Facades\Auth::user()->userGroup->is_contracting;
+
+                if( $this->id  == 1 ){
+                    return $next($request);
                 }
-                return $next($request);
+                if( $this->id2  == 1 ){
+                    return $next($request);
+                }
+                return redirect('/');
 
             });
 

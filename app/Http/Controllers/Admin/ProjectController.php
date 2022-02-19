@@ -37,6 +37,7 @@ class ProjectController extends Controller
         });
 
     }
+
     public  function  index(Request $request){
         if(Auth::user()->jop_type == 3){
             if(isset($request->contract_id)){
@@ -53,10 +54,9 @@ class ProjectController extends Controller
             }
         }elseif(Auth::user()->jop_type == 1){
                 $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->
-                rightJoin('user_permission','projects.id','=','user_permission.project_id')
-                    ->where('user_permission.emp_id', Auth::user()->id)
+                LeftJoin('user_permission','projects.id','=','user_permission.project_id')
+                    ->where('user_permission.emp_id', Auth::user()->id)->distinct()
             ->select('projects.*');
-
         }
         if(isset($request->minProgress)){
                 $data->whereBetween('progress',[$request->minProgress,$request->maxProgress]);
@@ -86,6 +86,7 @@ class ProjectController extends Controller
             }
         }
        $data = $data->paginate(12);
+        $data->count();
         return view('admin.Project.index',compact('data'));
     }
 
@@ -172,6 +173,7 @@ class ProjectController extends Controller
                         $ProjectLevelDetails->title=$de->title;
                         $ProjectLevelDetails->project_id=$project->id;
                         $ProjectLevelDetails->level_id=$ProjectLevels->id;
+                        $ProjectLevelDetails->percent=$de->percent;
 //                        $ProjectLevelDetails->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
                         $ProjectLevelDetails->client_view=$de->client_view;
                         $ProjectLevelDetails->sort=$de->sort;
@@ -226,7 +228,11 @@ class ProjectController extends Controller
 
         $data = Project::find($id);
         $files = ProjectLevelDetails::where('project_id',$id)->where('is_pdf',1)->where('pdf','!=',null)->where('pdf','!=','');
+        if(Auth::user()->jop_type == 1){
+            $levels = UserPermission::where('emp_id',Auth::user()->id)->where('project_id',$id)->pluck('level_id')->ToArray();
+            $files->whereIn('level_id',$levels);
 
+        }
         if(isset($request->level_id)){
         $files->where('level_id',$request->level_id);
         }
@@ -291,7 +297,7 @@ class ProjectController extends Controller
 
         $inbox = array(
             'title' => " تم تكليفك بالاعمال في المشروع   ",
-            'comments' => 'تم تكليفك بالاعمال في مشروع' . $Project->name,
+            'comments' => ' تم تكليفك بالاعمال في مشروع ' . $Project->name,
             'date' => \Carbon\Carbon::now()->format('Y-m-d'),
             'time' => \Carbon\Carbon::now()->format('H:i:s'),
             'sender_id' => \Illuminate\Support\Facades\Auth::user()->id,
@@ -363,18 +369,19 @@ class ProjectController extends Controller
 
 }
     public function AddGeneralSupervisor(Request $request){
-        $this->validate(request(), [
-            'level_id' => 'required',
-            'project_id' => 'required',
-            'emp_id' => 'required',
-        ]);
+
+//        $this->validate(request(), [
+//            'project_id' => 'required',
+//            'emp_id' => 'required',
+//        ]);
+
         $Project = Project::find($request->project_id);
         $client = User::find($request->emp_id);
-        if(UserPermission::where('emp_id',$request->emp_id)->where('level_id',$request->level_id)->count() > 0){
-            return back()->with('error_message','هذا المستخدم موجود بالفعل ');
-        }
+        $levels = ProjectLevels::where('project_id',$request->project_id)->get();
+        foreach($levels as $level){
+        if(UserPermission::where('emp_id',$request->emp_id)->where('level_id',$level->id)->count() == 0){
         $data = new UserPermission();
-        $data->level_id=$request->level_id;
+        $data->level_id=$level->id;
         $data->project_id=$request->project_id;
         $data->emp_id=$request->emp_id;
         $data->user_type=1;
@@ -384,14 +391,14 @@ class ProjectController extends Controller
         $chat->reciever_id=$request->emp_id;
         $chat->type=0;
         $data->user_type=1;
-        $chat->level_id=$request->level_id;
+        $chat->level_id=$level->id;
         $data->project_id=$request->project_id;
         $data->save();
-
-
+        }
+        }
         $inbox = array(
             'title' => " تم تكليفك بالاعمال في المشروع   ",
-            'comments' => 'تم تكليفك بالاعمال في مشروع' . $Project->name,
+            'comments' => ' تم تكليفك بالاعمال في مشروع ' . $Project->name,
             'date' => \Carbon\Carbon::now()->format('Y-m-d'),
             'time' => \Carbon\Carbon::now()->format('H:i:s'),
             'sender_id' => \Illuminate\Support\Facades\Auth::user()->id,

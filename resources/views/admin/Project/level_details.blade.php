@@ -47,7 +47,7 @@
                     <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
                         <!--begin::Image-->
                         <div class="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
-                            <img class="mw-50px mw-lg-75px" src="{{ URL::asset('admin/assets/media/svg/brand-logos/volicity-9.svg')}}" alt="image" />
+                            <img class="mw-50px mw-lg-75px" src="{{ URL::asset('admin/assets/media/svg/construction.png')}}" alt="image" />
                         </div>
                         <!--end::Image-->
                         <!--begin::Wrapper-->
@@ -109,6 +109,8 @@
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
+                                @if(Auth::user()->userGroup->is_financial == 1 )
+
                                     <!--begin::Stat-->
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
@@ -128,6 +130,7 @@
                                         <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
                                         <!--end::Label-->
                                     </div>
+                                    @endif
                                     <!--end::Stat-->
                                 </div>
                                 <!--end::Stats-->
@@ -295,7 +298,7 @@
                                     <!--end::Table body-->
                                 </table>
                                 <!--end::Table-->
-                                
+
                             </div>
                             <!--end::Table container-->
                         </div>

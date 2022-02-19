@@ -1,6 +1,6 @@
-<div class="dt-buttons flex-wrap">
+<div class="dt-buttons flex-wrap" style="float:right">
     <!--begin::Filter-->
-    <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
+    <button type="button" class="btn btn-light-danger me-3" data-bs-toggle="modal"
             data-bs-target="#kt_modal_filter">
         <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
         <span class="svg-icon svg-icon-2">
@@ -44,7 +44,7 @@
                 </div>
                 <!--end::Modal header-->
                 <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="modal-body">
                     <!--begin::Form-->
                     <form id="" class="" method="get">
 
@@ -117,3 +117,10 @@
 </div>
 
 
+<script>
+
+    $('#project_id').select2({
+        dropdownParent: $('#kt_modal_filter')
+
+    })
+</script>
