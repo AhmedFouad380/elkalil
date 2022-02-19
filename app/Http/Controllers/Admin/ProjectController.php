@@ -54,10 +54,9 @@ class ProjectController extends Controller
             }
         }elseif(Auth::user()->jop_type == 1){
                 $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->
-                rightJoin('user_permission','projects.id','=','user_permission.project_id')
-                    ->where('user_permission.emp_id', Auth::user()->id)
+                LeftJoin('user_permission','projects.id','=','user_permission.project_id')
+                    ->where('user_permission.emp_id', Auth::user()->id)->distinct()
             ->select('projects.*');
-
         }
         if(isset($request->minProgress)){
                 $data->whereBetween('progress',[$request->minProgress,$request->maxProgress]);
@@ -87,6 +86,7 @@ class ProjectController extends Controller
             }
         }
        $data = $data->paginate(12);
+        $data->count();
         return view('admin.Project.index',compact('data'));
     }
 
@@ -229,7 +229,7 @@ class ProjectController extends Controller
         $data = Project::find($id);
         $files = ProjectLevelDetails::where('project_id',$id)->where('is_pdf',1)->where('pdf','!=',null)->where('pdf','!=','');
         if(Auth::user()->jop_type == 1){
-            $levels = UserPermission::where('user_id',Auth::user()->id)->where('project_id',$id)->pluck('level_id')->ToArray();
+            $levels = UserPermission::where('emp_id',Auth::user()->id)->where('project_id',$id)->pluck('level_id')->ToArray();
             $files->whereIn('level_id',$levels);
 
         }
