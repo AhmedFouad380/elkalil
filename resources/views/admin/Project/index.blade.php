@@ -99,7 +99,7 @@
                                     </div>
 
                                     @if($project->is_created != 0)
-                                        <i style="margin: 5px 15px 5px 5px" class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المرحلة يدويا "></i>
+                                        <i style="margin: 5px 15px 5px 5px" class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المشروع يدويا "></i>
                                 @endif
                                     <!--end::Avatar-->
                                 </div>
@@ -198,7 +198,7 @@
 
 
                             @if($project->is_created != 0)
-                                <i style="margin: 5px 15px 5px 5px" class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المرحلة يدويا "></i>
+                                <i style="margin: 5px 15px 5px 5px" class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المشروع يدويا "></i>
                         @endif
                             @if(\App\Models\UserChatPermission::where('reciever_id',Auth::user()->id)->where('is_read',0)->where('type',0)->where('project_id',$project->id)->count() > 0)
                                 <img class="bi bi-person-bounding-box fs-2x text-info" src="{{asset('images/giphy.gif')}}" style="    max-width: 41px;">
