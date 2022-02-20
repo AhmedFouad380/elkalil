@@ -139,9 +139,9 @@ class ProjectController extends Controller
         $client = User::find($request->emp_id);
 
         UserPermission::where('project_id',$request->project_id)->where('user_type',1)->where('emp_id',$request->emp_id)->delete();
-        UserChatPermission::where('project_id',$request->project_id)->where('user_type',1)->where('emp_id',$request->emp_id)->delete();
+        UserChatPermission::where('project_id',$request->project_id)->where('user_type',1)->where('reciever_id',$request->emp_id)->delete();
 
-        $object = array('status'=>200 , 'msg'=>'Successfuly deleted ','ar_msg'=>'تم الحذف بنجاح','data'=>$client);
+        $object = array('status'=>200 , 'msg'=>'Successfuly deleted ','ar_msg'=>'تم الحذف بنجاح','data'=>(object)[]);
         return response()->json($object);
 
     }

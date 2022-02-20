@@ -61,15 +61,27 @@
                                     <div class="d-flex flex-wrap fw-bold mb-4 fs-5 text-gray-400">{{$data->client->name}}</div>
                                     <!--end::Description-->
                                 </div>
-                                <!--end::Details-->
-                                @if(Auth::user()->jop_type != 1 )
+                            @inject('UserPermission','App\Models\UserPermission')
+
+                            <!--end::Details-->
+                            @if(Auth::user()->jop_type != 1 )
                                 <!--begin::Actions--> <div class="d-flex mb-4">
-                                    <button type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal"
-                                            data-bs-target="#kt_modal_add_user">
-                                        اضافة مشرف
-                                    </button>
-                                </div>
+                                        <button type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal"
+                                                data-bs-target="#kt_modal_add_user">
+                                            اضافة مشرف
+                                        </button>
+                                    </div>
+                                @elseif($UserPermission->where('emp_id',Auth::user()->id)->where('user_type',1)->where('project_id',$data->id)->first())
+                                    <div class="d-flex mb-4">
+
+                                        <button type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal"
+                                                data-bs-target="#kt_modal_add_user">
+                                            اضافة مشرف
+                                        </button>
+                                    </div>
                                 @endif
+
+
                                 <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
                                     <!--begin::Modal dialog-->
                                     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -128,7 +140,7 @@
                                                                 @inject('Users','App\Models\User')
                                                                 @foreach($Users->where('jop_type','=',1)->where('state',$data->state)->get() as  $User)
                                                                     @if(!in_array($User->id,$is_assgin))
-                                                                      <option value="{{$User->id}}">{{$User->name}}</option>
+                                                                        <option value="{{$User->id}}">{{$User->name}}</option>
                                                                     @endif
                                                                 @endforeach
                                                             </select>
@@ -199,27 +211,27 @@
                                     <!--begin::Stat-->
                                     @if(Auth::user()->userGroup->is_financial == 1 )
 
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                        <!--begin::Number-->
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-                                            <span class="svg-icon svg-icon-3 svg-icon-success me-2">
+                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                            <!--begin::Number-->
+                                            <div class="d-flex align-items-center">
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+                                                <span class="svg-icon svg-icon-3 svg-icon-success me-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
                                                 <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
                                             </svg>
                                         </span>
-                                            <!--end::Svg Icon-->
+                                                <!--end::Svg Icon-->
 
-                                            <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
+                                                <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
+                                            </div>
+                                            <!--end::Number-->
+                                            <!--begin::Label-->
+                                            <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
+                                            <!--end::Label-->
                                         </div>
-                                        <!--end::Number-->
-                                        <!--begin::Label-->
-                                        <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
-                                        <!--end::Label-->
-                                    </div>
-                                    @endif
-                                    <!--end::Stat-->
+                                @endif
+                                <!--end::Stat-->
                                 </div>
                                 <!--end::Stats-->
                                 <!--begin::Users-->
@@ -284,10 +296,10 @@
                             </li>
                             <!--end::Nav item-->
                             <!--begin::Nav item-->
-                            {{--                        <li class="nav-item">--}}
-                            {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
-                            {{--                        </li>--}}
-                            <!--end::Nav item-->
+                        {{--                        <li class="nav-item">--}}
+                        {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
+                        {{--                        </li>--}}
+                        <!--end::Nav item-->
                         </ul>
                         <!--end::Nav links-->
                     </div>
@@ -318,7 +330,7 @@
                                         <div class="symbol symbol-65px symbol-circle mb-5">
                                             <img src="{{ URL::asset('admin/assets/media//avatars/150-4.jpg')}}" alt="{{$emp->name}}" />
                                         </div>
-                                @endif
+                                    @endif
                                 <!--end::Avatar-->
                                     <!--begin::Name-->
                                     <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">{{$emp->name}}</a>
@@ -327,7 +339,7 @@
                                     <!--begin::Position-->
                                     @if(Auth::user()->jop_type != 1 )
                                         <a class="delete-user" data-id="{{$level->id}}" data-emp_id="{{$emp->id}}" data-project="{{$data->id}}">     <div class="fw-bold text-danger text-danger-400 mb-6 "  > حذف الموظف  </div> </a>
-                                    @endif
+                                @endif
                                 <!--end::Position-->
                                 </div>
                                 <!--end::Card body-->
@@ -455,7 +467,7 @@
 
                                     setTimeout(reload, 3000)
                                     function reload() {
-location.reload();
+                                        location.reload();
                                     }
                                 } else {
                                     Swal.fire("عفوا! ", "حدث خطأ", "error");

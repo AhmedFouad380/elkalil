@@ -31,157 +31,81 @@
 @endsection
 
 @section('content')
-<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
-    <!--begin::Post-->
-    <div class="content flex-row-fluid" id="kt_content">
-        <!--begin::Navbar-->
-        <div class="card mb-6 mb-xl-9">
-            <div class="card-body pt-9 pb-0">
-                <!--begin::Details-->
-                <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
-                    <!--begin::Image-->
-                    <div class="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
-                        <img class="mw-50px mw-lg-75px" src="{{ URL::asset('admin/assets/media/svg/construction.png')}}" alt="image" />
-                    </div>
-                    <!--end::Image-->
-                    <!--begin::Wrapper-->
-                    <div class="flex-grow-1">
-                        <!--begin::Head-->
-                        <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
-                            <!--begin::Details-->
-                            <div class="d-flex flex-column">
-                                <!--begin::Status-->
-                                <div class="d-flex align-items-center mb-1">
-                                    <a href="#" class="text-gray-800 text-hover-primary fs-2 fw-bolder me-3">{{$data->name}}</a>
-                                    @inject('Contract','App\Models\Contract')
-                                    <span class="badge badge-light-success me-auto">{{$Contract->findOrFail($data->projectContract->contract_id)->title}} </span>
-                                </div>
-                                <!--end::Status-->
-                                <!--begin::Description-->
-                                <div class="d-flex flex-wrap fw-bold mb-4 fs-5 text-gray-400">{{$data->client->name}}</div>
-                                <!--end::Description-->
-                            </div>
-                            <!--end::Details-->
-                            <!--begin::Actions-->
-                            @if(Auth::user()->jop_type != 1)
-
-                            <div class="d-flex mb-4">
-                                <button type="button" class="btn btn-light-danger me-3 font-weight-bolder" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_add_user">
-                                        <i class="bi bi-plus-circle-fill fs-2x"></i>
-                                    اضافة مرحلة
-                                </button>
-                                    <button type="button" class="btn btn-light-danger me-3 font-weight-bolder" data-bs-toggle="modal"
-                                            data-bs-target="#kt_modal_add_user2">
-                                        <i class="bi bi-plus-circle-fill fs-2x"></i>
-                                        اضافة مشرف عام
-                                    </button>
-                                </div>
-
-                            @endif
-                            <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
-                                <!--begin::Modal dialog-->
-                                <div class="modal-dialog modal-dialog-centered mw-650px">
-                                    <!--begin::Modal content-->
-                                    <div class="modal-content">
-                                        <!--begin::Modal header-->
-                                        <div class="modal-header" id="kt_modal_add_user_header">
-                                            <!--begin::Modal title-->
-                                            <h2 class="fw-bolder">اضافة جديده</h2>
-                                            <!--end::Modal title-->
-                                            <!--begin::Close-->
-                                            <div class="btn btn-icon btn-sm btn-active-icon-primary"
-                                                 data-bs-dismiss="modal">
-                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                                <span class="svg-icon svg-icon-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                                            transform="rotate(-45 6 17.3137)" fill="black"/>
-                                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                                            transform="rotate(45 7.41422 6)" fill="black"/>
-                                                    </svg>
-                                                </span>
-                                                <!--end::Svg Icon-->
-                                            </div>
-                                            <!--end::Close-->
-                                        </div>
-                                        <!--end::Modal header-->
-                                        <!--begin::Modal body-->
-                                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                                            <!--begin::Form-->
-                                            <form id="" class="form" method="post" action="{{url('store-new-level')}}">
-                                            @csrf
-                                            <!--begin::Scroll-->
-                                                <div class="d-flex flex-column scroll-y me-n7 pe-7"
-                                                     id="kt_modal_add_user_scroll" data-kt-scroll="true"
-                                                     data-kt-scroll-activate="{default: false, lg: true}"
-                                                     data-kt-scroll-max-height="auto"
-                                                     data-kt-scroll-dependencies="#kt_modal_add_user_header"
-                                                     data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
-                                                     data-kt-scroll-offset="300px">
-
-                                                    <!--begin::Input group-->
-                                                    <div class="mb-10">
-                                                        <label class="form-label fs-6 fw-bold">اسم المرحلة</label>
-                                                        <input type="text" required class="form-control form-control-lg form-control-solid" name="name" placeholder="" value="" autocomplete="nope" />
-                                                    </div>
-                                                    <div class="mb-10">
-                                                        <label class="form-label fs-6 fw-bold">نسبة المرحلة </label>
-                                                        <input type="number"  required class="form-control form-control-lg form-control-solid" name="percent" placeholder="" value="" autocomplete="nope" />
-                                                    </div>
-                                                    <input type="hidden" value="{{$data->id}}" name="project_id">
-                                                    <div class="fv-row mb-7">
-                                                        <!--begin::Label-->
-                                                        <label class="required fw-bold fs-6 mb-2">نوع المرحلة </label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Input-->
-                                                        <select class="form-control" name="type">
-                                                            <option value="1">مرحلة تفاصيل داخلية</option>
-                                                            <option value="3">مرحلة مرفقات المشروع</option>
-                                                        </select>
-                                                        <!--end::Input-->
-                                                    </div>
-
-                                                                                                  </div>
-                                                <!--end::Scroll-->
-                                                <!--begin::Actions-->
-                                                <div class="text-center pt-15">
-                                                    <button type="reset" class="btn btn-light me-3"
-                                                            data-bs-dismiss="modal">ألغاء
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary"
-                                                            data-kt-users-modal-action="submit">
-                                                        <span class="indicator-label">حفظ</span>
-                                                        <span class="indicator-progress">برجاء الانتظار
-                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                    </button>
-                                                </div>
-                                                <!--end::Actions-->
-                                            </form>
-                                            <!--end::Form-->
-                                        </div>
-                                        <!--end::Modal body-->
+    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+        <!--begin::Post-->
+        <div class="content flex-row-fluid" id="kt_content">
+            <!--begin::Navbar-->
+            <div class="card mb-6 mb-xl-9">
+                <div class="card-body pt-9 pb-0">
+                    <!--begin::Details-->
+                    <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
+                        <!--begin::Image-->
+                        <div class="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
+                            <img class="mw-50px mw-lg-75px" src="{{ URL::asset('admin/assets/media/svg/construction.png')}}" alt="image" />
+                        </div>
+                        <!--end::Image-->
+                        <!--begin::Wrapper-->
+                        <div class="flex-grow-1">
+                            <!--begin::Head-->
+                            <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                                <!--begin::Details-->
+                                <div class="d-flex flex-column">
+                                    <!--begin::Status-->
+                                    <div class="d-flex align-items-center mb-1">
+                                        <a href="#" class="text-gray-800 text-hover-primary fs-2 fw-bolder me-3">{{$data->name}}</a>
+                                        @inject('Contract','App\Models\Contract')
+                                        <span class="badge badge-light-success me-auto">{{$Contract->findOrFail($data->projectContract->contract_id)->title}} </span>
                                     </div>
-                                    <!--end::Modal content-->
+                                    <!--end::Status-->
+                                    <!--begin::Description-->
+                                    <div class="d-flex flex-wrap fw-bold mb-4 fs-5 text-gray-400">{{$data->client->name}}</div>
+                                    <!--end::Description-->
                                 </div>
-                                <!--end::Modal dialog-->
-                            </div>
-                            <div class="modal fade" id="kt_modal_add_user2" tabindex="-1" aria-hidden="true">
-                                <!--begin::Modal dialog-->
-                                <div class="modal-dialog modal-dialog-centered mw-650px">
-                                    <!--begin::Modal content-->
-                                    <div class="modal-content">
-                                        <!--begin::Modal header-->
-                                        <div class="modal-header" id="kt_modal_add_user_header">
-                                            <!--begin::Modal title-->
-                                            <h2 class="fw-bolder">اضافة مشرف عام</h2>
-                                            <!--end::Modal title-->
-                                            <!--begin::Close-->
-                                            <div class="btn btn-icon btn-sm btn-active-icon-primary"
-                                                 data-bs-dismiss="modal">
-                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                                <span class="svg-icon svg-icon-1">
+                                <!--end::Details-->
+                                <!--begin::Actions-->
+                                @inject('UserPermission','App\Models\UserPermission')
+                                @if(Auth::user()->jop_type != 1 )
+
+                                    <div class="d-flex mb-4">
+                                        <button type="button" class="btn btn-light-danger me-3 font-weight-bolder" data-bs-toggle="modal"
+                                                data-bs-target="#kt_modal_add_user">
+                                            <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                            اضافة مرحلة
+                                        </button>
+
+                                        <button type="button" class="btn btn-light-danger me-3 font-weight-bolder" data-bs-toggle="modal"
+                                                data-bs-target="#kt_modal_add_user2">
+                                            <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                            اضافة مشرف عام
+                                        </button>
+                                    </div>
+                                @elseif($UserPermission->where('emp_id',Auth::user()->id)->where('user_type',1)->where('project_id',$data->id)->first())
+                                    <div class="d-flex mb-4">
+
+                                        <button type="button" class="btn btn-light-danger me-3 font-weight-bolder" data-bs-toggle="modal"
+                                                data-bs-target="#kt_modal_add_user2">
+                                            <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                            اضافة مشرف عام
+                                        </button>
+                                    </div>
+                                @endif
+
+
+                                <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+                                    <!--begin::Modal dialog-->
+                                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                                        <!--begin::Modal content-->
+                                        <div class="modal-content">
+                                            <!--begin::Modal header-->
+                                            <div class="modal-header" id="kt_modal_add_user_header">
+                                                <!--begin::Modal title-->
+                                                <h2 class="fw-bolder">اضافة جديده</h2>
+                                                <!--end::Modal title-->
+                                                <!--begin::Close-->
+                                                <div class="btn btn-icon btn-sm btn-active-icon-primary"
+                                                     data-bs-dismiss="modal">
+                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                    <span class="svg-icon svg-icon-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                          viewBox="0 0 24 24" fill="none">
                                                         <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
@@ -190,354 +114,442 @@
                                                               transform="rotate(45 7.41422 6)" fill="black"/>
                                                     </svg>
                                                 </span>
-                                                <!--end::Svg Icon-->
+                                                    <!--end::Svg Icon-->
+                                                </div>
+                                                <!--end::Close-->
                                             </div>
-                                            <!--end::Close-->
-                                        </div>
-                                        <!--end::Modal header-->
-                                        <!--begin::Modal body-->
-                                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                                            <!--begin::Form-->
-                                            <form id="" class="form" method="post" action="{{url('AddGeneralSupervisor')}}">
-                                            @csrf
-                                            <!--begin::Scroll-->
-                                                <div class="d-flex flex-column scroll-y me-n7 pe-7"
-                                                     id="kt_modal_add_user_scroll" data-kt-scroll="true"
-                                                     data-kt-scroll-activate="{default: false, lg: true}"
-                                                     data-kt-scroll-max-height="auto"
-                                                     data-kt-scroll-dependencies="#kt_modal_add_user_header"
-                                                     data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
-                                                     data-kt-scroll-offset="300px">
-                                                    <input type="hidden" value="{{$data->id}}" name="project_id">
-                                                    <input type="hidden" value="web" name="platform">
-                                                    <div class="fv-row mb-7">
-                                                        <!--begin::Label-->
-                                                        <label class="required fw-bold fs-6 mb-2">اسم المشرف </label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Input-->
-                                                        <select class="form-control form-select" name="emp_id" >
-                                                            @foreach(\App\Models\User::where('jop_type',1)->get() as $emp)
-                                                            <option value="{{$emp->id}}">{{$emp->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <!--end::Input-->
+                                            <!--end::Modal header-->
+                                            <!--begin::Modal body-->
+                                            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                                <!--begin::Form-->
+                                                <form id="" class="form" method="post" action="{{url('store-new-level')}}">
+                                                @csrf
+                                                <!--begin::Scroll-->
+                                                    <div class="d-flex flex-column scroll-y me-n7 pe-7"
+                                                         id="kt_modal_add_user_scroll" data-kt-scroll="true"
+                                                         data-kt-scroll-activate="{default: false, lg: true}"
+                                                         data-kt-scroll-max-height="auto"
+                                                         data-kt-scroll-dependencies="#kt_modal_add_user_header"
+                                                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
+                                                         data-kt-scroll-offset="300px">
+
+                                                        <!--begin::Input group-->
+                                                        <div class="mb-10">
+                                                            <label class="form-label fs-6 fw-bold">اسم المرحلة</label>
+                                                            <input type="text" required class="form-control form-control-lg form-control-solid" name="name" placeholder="" value="" autocomplete="nope" />
+                                                        </div>
+                                                        <div class="mb-10">
+                                                            <label class="form-label fs-6 fw-bold">نسبة المرحلة </label>
+                                                            <input type="number"  required class="form-control form-control-lg form-control-solid" name="percent" placeholder="" value="" autocomplete="nope" />
+                                                        </div>
+                                                        <input type="hidden" value="{{$data->id}}" name="project_id">
+                                                        <div class="fv-row mb-7">
+                                                            <!--begin::Label-->
+                                                            <label class="required fw-bold fs-6 mb-2">نوع المرحلة </label>
+                                                            <!--end::Label-->
+                                                            <!--begin::Input-->
+                                                            <select class="form-control" name="type">
+                                                                <option value="1">مرحلة تفاصيل داخلية</option>
+                                                                <option value="3">مرحلة مرفقات المشروع</option>
+                                                            </select>
+                                                            <!--end::Input-->
+                                                        </div>
+
                                                     </div>
-
-                                                </div>
-                                                <!--end::Scroll-->
-                                                <!--begin::Actions-->
-                                                <div class="text-center pt-15">
-                                                    <button type="reset" class="btn btn-light me-3"
-                                                            data-bs-dismiss="modal">ألغاء
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary"
-                                                            data-kt-users-modal-action="submit">
-                                                        <span class="indicator-label">حفظ</span>
-                                                        <span class="indicator-progress">برجاء الانتظار
+                                                    <!--end::Scroll-->
+                                                    <!--begin::Actions-->
+                                                    <div class="text-center pt-15">
+                                                        <button type="reset" class="btn btn-light me-3"
+                                                                data-bs-dismiss="modal">ألغاء
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary"
+                                                                data-kt-users-modal-action="submit">
+                                                            <span class="indicator-label">حفظ</span>
+                                                            <span class="indicator-progress">برجاء الانتظار
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                    </button>
-                                                </div>
-                                                <!--end::Actions-->
-                                            </form>
-                                            <!--end::Form-->
+                                                        </button>
+                                                    </div>
+                                                    <!--end::Actions-->
+                                                </form>
+                                                <!--end::Form-->
+                                            </div>
+                                            <!--end::Modal body-->
                                         </div>
-                                        <!--end::Modal body-->
+                                        <!--end::Modal content-->
                                     </div>
-                                    <!--end::Modal content-->
+                                    <!--end::Modal dialog-->
                                 </div>
-                                <!--end::Modal dialog-->
-                            </div>
+                                <div class="modal fade" id="kt_modal_add_user2" tabindex="-1" aria-hidden="true">
+                                    <!--begin::Modal dialog-->
+                                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                                        <!--begin::Modal content-->
+                                        <div class="modal-content">
+                                            <!--begin::Modal header-->
+                                            <div class="modal-header" id="kt_modal_add_user_header">
+                                                <!--begin::Modal title-->
+                                                <h2 class="fw-bolder">اضافة مشرف عام</h2>
+                                                <!--end::Modal title-->
+                                                <!--begin::Close-->
+                                                <div class="btn btn-icon btn-sm btn-active-icon-primary"
+                                                     data-bs-dismiss="modal">
+                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                    <span class="svg-icon svg-icon-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                                              transform="rotate(-45 6 17.3137)" fill="black"/>
+                                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                              transform="rotate(45 7.41422 6)" fill="black"/>
+                                                    </svg>
+                                                </span>
+                                                    <!--end::Svg Icon-->
+                                                </div>
+                                                <!--end::Close-->
+                                            </div>
+                                            <!--end::Modal header-->
+                                            <!--begin::Modal body-->
+                                            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                                <!--begin::Form-->
+                                                <form id="" class="form" method="post" action="{{url('AddGeneralSupervisor')}}">
+                                                @csrf
+                                                <!--begin::Scroll-->
+                                                    <div class="d-flex flex-column scroll-y me-n7 pe-7"
+                                                         id="kt_modal_add_user_scroll" data-kt-scroll="true"
+                                                         data-kt-scroll-activate="{default: false, lg: true}"
+                                                         data-kt-scroll-max-height="auto"
+                                                         data-kt-scroll-dependencies="#kt_modal_add_user_header"
+                                                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
+                                                         data-kt-scroll-offset="300px">
+                                                        <input type="hidden" value="{{$data->id}}" name="project_id">
+                                                        <input type="hidden" value="web" name="platform">
+                                                        <div class="fv-row mb-7">
+                                                            <!--begin::Label-->
+                                                            <label class="required fw-bold fs-6 mb-2">اسم المشرف </label>
+                                                            <!--end::Label-->
+                                                            <!--begin::Input-->
+                                                            <select class="form-control form-select" name="emp_id" >
+                                                                @foreach(\App\Models\User::where('jop_type',1)->get() as $emp)
+                                                                    <option value="{{$emp->id}}">{{$emp->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <!--end::Input-->
+                                                        </div>
 
-                            <!--end::Actions-->
-                        </div>
-                        <!--end::Head-->
-                        <!--begin::Info-->
-                        <div class="d-flex flex-wrap justify-content-start">
-                            <!--begin::Stats-->
-                            <div class="d-flex flex-wrap">
-                                <!--begin::Stat-->
-                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                    <!--begin::Number-->
-                                    <div class="d-flex align-items-center">
-                                        <div class="fs-4 fw-bolder">{{$data->confirm_date}}</div>
+                                                    </div>
+                                                    <!--end::Scroll-->
+                                                    <!--begin::Actions-->
+                                                    <div class="text-center pt-15">
+                                                        <button type="reset" class="btn btn-light me-3"
+                                                                data-bs-dismiss="modal">ألغاء
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary"
+                                                                data-kt-users-modal-action="submit">
+                                                            <span class="indicator-label">حفظ</span>
+                                                            <span class="indicator-progress">برجاء الانتظار
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                        </button>
+                                                    </div>
+                                                    <!--end::Actions-->
+                                                </form>
+                                                <!--end::Form-->
+                                            </div>
+                                            <!--end::Modal body-->
+                                        </div>
+                                        <!--end::Modal content-->
                                     </div>
-                                    <!--end::Number-->
-                                    <!--begin::Label-->
-                                    <div class="fw-bold fs-6 text-gray-400">تاريخ بداية العقد</div>
-                                    <!--end::Label-->
+                                    <!--end::Modal dialog-->
                                 </div>
-                                <!--end::Stat-->
-                                <!--begin::Stat-->
-                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                    <!--begin::Number-->
-                                    <div class="d-flex align-items-center">
-                                        @inject('ProjectLevels','App\Models\ProjectLevels')
-                                        <?php
-                                        $sum = $ProjectLevels->where('project_id',$data->id)->sum('progress_time');
-                                        ?>
-                                        <div class="fs-6 text-gray-800 fw-bolder">{{\Carbon\Carbon::parse($data->confirm_date)->addDays($sum)->format('Y-m-d')}}</div>
+
+                                <!--end::Actions-->
+                            </div>
+                            <!--end::Head-->
+                            <!--begin::Info-->
+                            <div class="d-flex flex-wrap justify-content-start">
+                                <!--begin::Stats-->
+                                <div class="d-flex flex-wrap">
+                                    <!--begin::Stat-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                        <!--begin::Number-->
+                                        <div class="d-flex align-items-center">
+                                            <div class="fs-4 fw-bolder">{{$data->confirm_date}}</div>
+                                        </div>
+                                        <!--end::Number-->
+                                        <!--begin::Label-->
+                                        <div class="fw-bold fs-6 text-gray-400">تاريخ بداية العقد</div>
+                                        <!--end::Label-->
                                     </div>
-                                    <!--end::Number-->
-                                    <!--begin::Label-->
-                                    <div class="fw-bold fs-6 text-gray-400">تاريخ التسليم المتوقع</div>
-                                    <!--end::Label-->
-                                </div>
-                                <!--end::Stat-->
-                                <!--begin::Stat-->
-                                @if(Auth::user()->userGroup->is_financial == 1 )
-                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                    <!--begin::Number-->
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-                                        <span class="svg-icon svg-icon-3 svg-icon-success me-2">
+                                    <!--end::Stat-->
+                                    <!--begin::Stat-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                        <!--begin::Number-->
+                                        <div class="d-flex align-items-center">
+                                            @inject('ProjectLevels','App\Models\ProjectLevels')
+                                            <?php
+                                            $sum = $ProjectLevels->where('project_id',$data->id)->sum('progress_time');
+                                            ?>
+                                            <div class="fs-6 text-gray-800 fw-bolder">{{\Carbon\Carbon::parse($data->confirm_date)->addDays($sum)->format('Y-m-d')}}</div>
+                                        </div>
+                                        <!--end::Number-->
+                                        <!--begin::Label-->
+                                        <div class="fw-bold fs-6 text-gray-400">تاريخ التسليم المتوقع</div>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Stat-->
+                                    <!--begin::Stat-->
+                                    @if(Auth::user()->userGroup->is_financial == 1 )
+                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                            <!--begin::Number-->
+                                            <div class="d-flex align-items-center">
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+                                                <span class="svg-icon svg-icon-3 svg-icon-success me-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
                                                 <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->
+                                                <!--end::Svg Icon-->
 
-                                        <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
-                                     </div>
-                                    <!--end::Number-->
-                                    <!--begin::Label-->
-                                    <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
-                                    <!--end::Label-->
-                                </div>
+                                                <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
+                                            </div>
+                                            <!--end::Number-->
+                                            <!--begin::Label-->
+                                            <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
+                                            <!--end::Label-->
+                                        </div>
                                 @endif
                                 <!--end::Stat-->
+                                </div>
+                                <!--end::Stats-->
+                                <!--begin::Users-->
+                                <div class="symbol-group symbol-hover mb-3">
+                                    <!--begin::User-->
+                                    @if(count($data->assginUsers) > 0)
+                                        @foreach($data->assginUsers as $emp)
+                                            @if(isset($emp->image))
+                                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
+                                                    <img alt="Pic" src="{{$emp-image}}" />
+                                                </div>
+                                            @else
+                                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
+                                                    <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-2.jpg')}}" />
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="">
+                                            <div style=" height: 35px"></div>
+                                        </div>
+                                @endif
+
+                                <!--end::User-->
+                                    <!--begin::All users-->
+                                    <a href="{{url('projectEmployes',$data->id)}}" class="symbol symbol-35px symbol-circle" >
+                                        <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bolder" data-bs-toggle="tooltip" data-bs-trigger="hover" title="رؤية العاملين على المشروع">+</span>
+                                    </a>
+
+                                    <!--end::All users-->
+                                </div>
+                                <!--end::Users-->
                             </div>
-                            <!--end::Stats-->
-                            <!--begin::Users-->
-                            <div class="symbol-group symbol-hover mb-3">
-                                <!--begin::User-->
-                                @if(count($data->assginUsers) > 0)
-                                    @foreach($data->assginUsers as $emp)
-                                        @if(isset($emp->image))
-                                            <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
-                                                <img alt="Pic" src="{{$emp-image}}" />
-                                            </div>
-                                        @else
-                                            <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
-                                                <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-2.jpg')}}" />
-                                            </div>
-                                        @endif
-                                    @endforeach
-                                @else
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="">
-                                        <div style=" height: 35px"></div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Details-->
+                    <div class="separator"></div>
+                    <!--begin::Nav wrapper-->
+                    <div class="d-flex overflow-auto h-55px">
+                        <!--begin::Nav links-->
+                        <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
+                            <!--begin::Nav item-->
+                            <li class="nav-item">
+                                <a class="nav-link text-active-primary me-6 active" href="{{url('project_details',$data->id)}}">مراحل المشروع</a>
+                            </li>
+                            <!--end::Nav item-->
+
+                            <!--end::Nav item-->
+                            <!--begin::Nav item-->
+
+                            <!--end::Nav item-->
+                            <!--begin::Nav item-->
+                            <li class="nav-item">
+                                <a class="nav-link text-active-primary me-6" href="{{url('projectFiles',$data->id)}}">ملفات المشروع</a>
+                            </li>
+                            <!--end::Nav item-->
+                            <!--begin::Nav item-->
+                            <li class="nav-item">
+                                <a class="nav-link text-active-primary me-6" href="{{url('projectExplan',$data->id)}}">الشروحات</a>
+                            </li>
+                            <!--end::Nav item-->
+                            <!--begin::Nav item-->
+                        {{--                        <li class="nav-item">--}}
+                        {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
+                        {{--                        </li>--}}
+                        <!--end::Nav item-->
+                        </ul>
+                        <!--end::Nav links-->
+                    </div>
+                    <!--end::Nav wrapper-->
+                </div>
+            </div>
+            <!--end::Navbar-->
+
+            <!--begin::Row-->
+            <div class="row g-6 g-xl-9">
+                @foreach($levels as $level)
+                    <div class="col-md-6 col-xl-4">
+                        <div class="card card-xl-stretch mb-xl-8">
+                            <!--begin::Body-->
+                            <div class="card-body pt-5">
+                                <!--begin::Heading-->
+                                <div class="d-flex flex-stack">
+                                    <!--begin::Title-->
+                                    @if($level->auto_complete == 1)
+                                        <i class="bi bi-check2-circle fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم استكمال المرحلة من قبل المشرف"></i>
+                                    @endif
+                                    @if($level->created_by != 0)
+                                        <i class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المرحلة يدويا "></i>
+                                    @endif
+
+                                    @if(\App\Models\UserChatPermission::where('reciever_id',Auth::user()->id)->where('is_read',0)->where('type',0)->where('level_id',$level->id)->count() > 0)
+                                        <img class="bi bi-person-bounding-box fs-2x text-info" src="{{asset('images/giphy.gif')}}" style="    max-width: 41px;">
+                                @endif
+                                <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Chart-->
+                                <div class="d-flex flex-center w-100">
+                                    <div class="mixed-widget-17-chart{{$level->id}}" data-kt-chart-color="primary" style="height: 300px"></div>
+                                </div>
+                                <!--end::Chart-->
+                                <!--begin::Content-->
+                                <div class="text-center w-100 position-relative z-index-1" style="margin-top: -130px">
+                                    <!--begin::Text-->
+                                    <p class="fw-bold fs-4 text-gray-400 mb-3">
+                                        {{$level->title}}</p>
+
+                                    <!--end::Text-->
+                                    <!--begin::Action-->
+                                    <div class="mb-9 mb-xxl-1">
+                                        <a href='{{url('level_Details',$level->id)}}' class="btn btn-danger fw-bold">التفاصيل</a>
                                     </div>
-                            @endif
-
-                            <!--end::User-->
-                                <!--begin::All users-->
-                                <a href="{{url('projectEmployes',$data->id)}}" class="symbol symbol-35px symbol-circle" >
-                                    <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bolder" data-bs-toggle="tooltip" data-bs-trigger="hover" title="رؤية العاملين على المشروع">+</span>
-                                </a>
-
-                                <!--end::All users-->
+                                    <!--ed::Action-->
+                                </div>
+                                <!--end::Content-->
                             </div>
-                            <!--end::Users-->
+                            <!--end::Body-->
                         </div>
-                        <!--end::Info-->
                     </div>
-                    <!--end::Wrapper-->
-                </div>
-                <!--end::Details-->
-                <div class="separator"></div>
-                <!--begin::Nav wrapper-->
-                <div class="d-flex overflow-auto h-55px">
-                    <!--begin::Nav links-->
-                    <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6 active" href="{{url('project_details',$data->id)}}">مراحل المشروع</a>
-                        </li>
-                        <!--end::Nav item-->
-
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="{{url('projectFiles',$data->id)}}">ملفات المشروع</a>
-                        </li>
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="{{url('projectExplan',$data->id)}}">الشروحات</a>
-                        </li>
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
-{{--                        </li>--}}
-                        <!--end::Nav item-->
-                    </ul>
-                    <!--end::Nav links-->
-                </div>
-                <!--end::Nav wrapper-->
+                @endforeach
             </div>
+            <!--end::Row-->
+
         </div>
-        <!--end::Navbar-->
-
-        <!--begin::Row-->
-        <div class="row g-6 g-xl-9">
-            @foreach($levels as $level)
-            <div class="col-md-6 col-xl-4">
-                <div class="card card-xl-stretch mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body pt-5">
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-stack">
-                            <!--begin::Title-->
-                                @if($level->auto_complete == 1)
-                                    <i class="bi bi-check2-circle fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم استكمال المرحلة من قبل المشرف"></i>
-                                @endif
-                                @if($level->created_by != 0)
-                                    <i class="bi bi-person-bounding-box fs-2x text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="تم اضافة المرحلة يدويا "></i>
-                                @endif
-
-                            @if(\App\Models\UserChatPermission::where('reciever_id',Auth::user()->id)->where('is_read',0)->where('type',0)->where('level_id',$level->id)->count() > 0)
-                                <img class="bi bi-person-bounding-box fs-2x text-info" src="{{asset('images/giphy.gif')}}" style="    max-width: 41px;">
-                        @endif
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <!--begin::Chart-->
-                        <div class="d-flex flex-center w-100">
-                            <div class="mixed-widget-17-chart{{$level->id}}" data-kt-chart-color="primary" style="height: 300px"></div>
-                        </div>
-                        <!--end::Chart-->
-                        <!--begin::Content-->
-                        <div class="text-center w-100 position-relative z-index-1" style="margin-top: -130px">
-                            <!--begin::Text-->
-                            <p class="fw-bold fs-4 text-gray-400 mb-3">
-                                {{$level->title}}</p>
-
-                            <!--end::Text-->
-                            <!--begin::Action-->
-                            <div class="mb-9 mb-xxl-1">
-                                <a href='{{url('level_Details',$level->id)}}' class="btn btn-danger fw-bold">التفاصيل</a>
-                            </div>
-                            <!--ed::Action-->
-                        </div>
-                        <!--end::Content-->
-                    </div>
-                    <!--end::Body-->
-                </div>
-            </div>
-            @endforeach
-        </div>
-        <!--end::Row-->
-
+        <!--end::Post-->
     </div>
-    <!--end::Post-->
-</div>
 @endsection
 
 @section('script')
     <script src="{{ URL::asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-{{--    <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>--}}
+    {{--    <script src="{{ URL::asset('admin/assets/js/custom/widgets.js')}}"></script>--}}
     @foreach($levels as $level)
         @if($level->auto_complete == 1)
 
             <script>
-            (function () {
-                var e = document.querySelectorAll(".mixed-widget-17-chart{{$level->id}}");
-                [].slice.call(e).map(function (e) {
-                    var t = parseInt(KTUtil.css(e, "height"));
-                    if (e) {
-                        var a = e.getAttribute("data-kt-chart-color"),
-                            o = {
-                                labels: [""],
-                                series: [100],
-                                chart: { fontFamily: "inherit", height: t, type: "radialBar", offsetY: 0 },
-                                plotOptions: {
-                                    radialBar: {
-                                        startAngle: -90,
-                                        endAngle: 90,
-                                        hollow: { margin: 0, size: "55%" },
-                                        dataLabels: {
-                                            showOn: "always",
-                                            name: { show: !0, fontSize: "12px", fontWeight: "700", offsetY: -5, color: KTUtil.getCssVariableValue("--bs-gray-500") },
-                                            value: {
-                                                color: KTUtil.getCssVariableValue("--bs-gray-900"),
-                                                fontSize: "24px",
-                                                fontWeight: "600",
-                                                offsetY: -40,
-                                                show: !0,
-                                                formatter: function (e) {
-                                                    return  "100 %";
+                (function () {
+                    var e = document.querySelectorAll(".mixed-widget-17-chart{{$level->id}}");
+                    [].slice.call(e).map(function (e) {
+                        var t = parseInt(KTUtil.css(e, "height"));
+                        if (e) {
+                            var a = e.getAttribute("data-kt-chart-color"),
+                                o = {
+                                    labels: [""],
+                                    series: [100],
+                                    chart: { fontFamily: "inherit", height: t, type: "radialBar", offsetY: 0 },
+                                    plotOptions: {
+                                        radialBar: {
+                                            startAngle: -90,
+                                            endAngle: 90,
+                                            hollow: { margin: 0, size: "55%" },
+                                            dataLabels: {
+                                                showOn: "always",
+                                                name: { show: !0, fontSize: "12px", fontWeight: "700", offsetY: -5, color: KTUtil.getCssVariableValue("--bs-gray-500") },
+                                                value: {
+                                                    color: KTUtil.getCssVariableValue("--bs-gray-900"),
+                                                    fontSize: "24px",
+                                                    fontWeight: "600",
+                                                    offsetY: -40,
+                                                    show: !0,
+                                                    formatter: function (e) {
+                                                        return  "100 %";
+                                                    },
                                                 },
                                             },
+                                            track: { background: KTUtil.getCssVariableValue("--bs-gray-300"), strokeWidth: "100%" },
                                         },
-                                        track: { background: KTUtil.getCssVariableValue("--bs-gray-300"), strokeWidth: "100%" },
                                     },
-                                },
-                                colors: [KTUtil.getCssVariableValue("--bs-" + a)],
-                                stroke: { lineCap: "round" },
-                            };
-                        new ApexCharts(e, o).render();
-                    }
-                });
-            })()
+                                    colors: [KTUtil.getCssVariableValue("--bs-" + a)],
+                                    stroke: { lineCap: "round" },
+                                };
+                            new ApexCharts(e, o).render();
+                        }
+                    });
+                })()
 
-        </script>
+            </script>
 
-@else
+        @else
 
             <?php
-                if($level->percent == 0){
-                    $total = 0;
-                }else{
+            if($level->percent == 0){
+                $total = 0;
+            }else{
                 $total = ( $level->progress / $level->percent ) * 100;
-                }
+            }
             ?>
-<script>
-    (function () {
-        var e = document.querySelectorAll(".mixed-widget-17-chart{{$level->id}}");
-        [].slice.call(e).map(function (e) {
-            var t = parseInt(KTUtil.css(e, "height"));
-            if (e) {
-                var a = e.getAttribute("data-kt-chart-color"),
-                    o = {
-                        labels: [""],
-                        series: [{{$total}}],
-                        chart: { fontFamily: "inherit", height: t, type: "radialBar", offsetY: 0 },
-                        plotOptions: {
-                            radialBar: {
-                                startAngle: -90,
-                                endAngle: 90,
-                                hollow: { margin: 0, size: "55%" },
-                                dataLabels: {
-                                    showOn: "always",
-                                    name: { show: !0, fontSize: "12px", fontWeight: "700", offsetY: -5, color: KTUtil.getCssVariableValue("--bs-gray-500") },
-                                    value: {
-                                        color: KTUtil.getCssVariableValue("--bs-gray-900"),
-                                        fontSize: "24px",
-                                        fontWeight: "600",
-                                        offsetY: -40,
-                                        show: !0,
-                                        formatter: function (e) {
-                                            return  "{{$total}}  %";
+            <script>
+                (function () {
+                    var e = document.querySelectorAll(".mixed-widget-17-chart{{$level->id}}");
+                    [].slice.call(e).map(function (e) {
+                        var t = parseInt(KTUtil.css(e, "height"));
+                        if (e) {
+                            var a = e.getAttribute("data-kt-chart-color"),
+                                o = {
+                                    labels: [""],
+                                    series: [{{$total}}],
+                                    chart: { fontFamily: "inherit", height: t, type: "radialBar", offsetY: 0 },
+                                    plotOptions: {
+                                        radialBar: {
+                                            startAngle: -90,
+                                            endAngle: 90,
+                                            hollow: { margin: 0, size: "55%" },
+                                            dataLabels: {
+                                                showOn: "always",
+                                                name: { show: !0, fontSize: "12px", fontWeight: "700", offsetY: -5, color: KTUtil.getCssVariableValue("--bs-gray-500") },
+                                                value: {
+                                                    color: KTUtil.getCssVariableValue("--bs-gray-900"),
+                                                    fontSize: "24px",
+                                                    fontWeight: "600",
+                                                    offsetY: -40,
+                                                    show: !0,
+                                                    formatter: function (e) {
+                                                        return  "{{$total}}  %";
+                                                    },
+                                                },
+                                            },
+                                            track: { background: KTUtil.getCssVariableValue("--bs-gray-300"), strokeWidth: "100%" },
                                         },
                                     },
-                                },
-                                track: { background: KTUtil.getCssVariableValue("--bs-gray-300"), strokeWidth: "100%" },
-                            },
-                        },
-                        colors: [KTUtil.getCssVariableValue("--bs-" + a)],
-                        stroke: { lineCap: "round" },
-                    };
-                new ApexCharts(e, o).render();
-            }
-        });
-    })()
+                                    colors: [KTUtil.getCssVariableValue("--bs-" + a)],
+                                    stroke: { lineCap: "round" },
+                                };
+                            new ApexCharts(e, o).render();
+                        }
+                    });
+                })()
 
-</script>
-@endif
+            </script>
+        @endif
     @endforeach
     <script type="text/javascript">
         $('.form-select').select2({
@@ -551,7 +563,7 @@
                 responsive: true,
                 aaSorting: [],
                 "dom": "<'card-header border-0 p-0 pt-6'<'card-title' <'d-flex align-items-center position-relative my-1'f> r> <'card-toolbar' <'d-flex justify-content-end add_button'B> r>>  <'row'l r> <''t><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
-                 lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
+                lengthMenu: [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "الكل"]],
                 "language": {
                     search: '<i class="fa fa-eye" aria-hidden="true"></i>',
                     searchPlaceholder: 'بحث سريع',
@@ -643,7 +655,7 @@
 
             toastr.success("نجاح", "{{$message}}");
         </script>
-@endif
+    @endif
     <?php
     $error_message = session()->get("error_message");
     ?>
