@@ -133,7 +133,7 @@
                                                 <table class="table table-flush fw-bold gy-1">
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">اسم العميل :</td>
-                                                        <td class="text-gray-800"> {{$data->client->name}}</td>
+                                                        <td class="text-gray-800"> {{$data->client ?$data->client->name : ""}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">تاريخ التقديم :</td>
@@ -698,7 +698,7 @@
                                 <!--begin::Details-->
                                 <div class="d-flex align-items-center mb-1">
                                     <span class="me-2">اسـم الكريـم :</span>
-                                    <span class="fw-bold text-gray-600">{{$data->client->name}}</span>
+                                    <span class="fw-bold text-gray-600">{{$data->client ?$data->client->name : ""}}</span>
                                 </div>
                                 <div class="d-flex align-items-center mb-1">
                                     <span class="me-2">اسـم المشـروع :</span>
@@ -1001,7 +1001,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="date" id="confirmDate" required class="form-control form-control-solid"
-                                           placeholder="" value="{{$data->client->name}}" name="title"/>
+                                           placeholder="" value="{{$data->client ?$data->client->name : ""}}" name="title"/>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
@@ -1066,7 +1066,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="text" disabled required class="form-control form-control-solid"
-                                           placeholder="" value="{{$data->client->name}}" name="title"/>
+                                           placeholder="" value="{{$data->client ?$data->client->name : ""}}" name="title"/>
                                     <input type="hidden" required class="form-control form-control-solid" placeholder=""
                                            value="{{$data->client_id}}" name="client_id"/>
                                 </div>
@@ -1152,7 +1152,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="text" required class="form-control form-control-solid" placeholder=""
-                                           value="{{$data->client->name}}" name="name"/>
+                                           value="{{$data->client ?$data->client->name : ""}}" name="name"/>
                                     <input type="hidden" required class="form-control form-control-solid" placeholder=""
                                            value="{{$data->id}}" name="id"/>
                                 </div>
