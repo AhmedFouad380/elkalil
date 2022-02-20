@@ -22,3 +22,4 @@ Route::post('StoreMessage',['App\Http\Controllers\Admin\ProjectLevelController',
 Route::post('getMessage',['App\Http\Controllers\Admin\ProjectLevelController','getMessage']);
 
 Route::post('AddGeneralSupervisor',['App\Http\Controllers\Api\ProjectController','AddGeneralSupervisor']);
+Route::post('DeleteGeneralSupervisor',['App\Http\Controllers\Api\ProjectController','DeleteGeneralSupervisor']);

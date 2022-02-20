@@ -302,10 +302,7 @@
                             {{--                        <li class="nav-item">--}}
                             {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
                             {{--                        </li>--}}
-                            <li class="nav-item">
-                                <a class="nav-link text-active-primary me-6" href="#">المحادثات</a>
-                            </li>
-                            <!--end::Nav item-->
+                                                       <!--end::Nav item-->
                         </ul>
                         <!--end::Nav links-->
 

@@ -44,7 +44,7 @@ class IncomeRecieptsController extends Controller
 
     public function datatable(Request $request)
     {
-        $data = Income::orderBy('id', 'asc');
+        $data = Income::orderBy('id', 'desc');
         $data = $data->get();
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {

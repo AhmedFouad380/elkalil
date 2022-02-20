@@ -11,17 +11,22 @@ use App\Models\User;
 use App\Models\UserChatPermission;
 use App\Models\UserPermission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
+
     public function AddGeneralSupervisor(Request $request){
 
-        $this->validate(request(), [
-            'project_id' => 'required',
-            'emp_id' => 'required',
+        $validator = Validator::make($request->all(), [
+            'project_id' => 'required|exists:projects,id',
+            'emp_id' => 'required|exists:users,id',
         ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => 401, 'msg' => $validator->messages()->first(), 'data' => (object)[]]);
+        }
 
-        $Project = Project::find($request->project_id);
+            $Project = Project::find($request->project_id);
         $client = User::find($request->emp_id);
         $levels = ProjectLevels::where('project_id',$request->project_id)->get();
         foreach($levels as $level){
@@ -118,6 +123,26 @@ class ProjectController extends Controller
             return response()->json($object);
         }
 
+
+    }
+
+    public function DeleteGeneralSupervisor(Request $request){
+        $validator = Validator::make($request->all(), [
+            'project_id' => 'required|exists:projects,id',
+            'emp_id' => 'required|exists:users,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => 401, 'msg' => $validator->messages()->first(), 'data' => (object)[]]);
+        }
+
+        $Project = Project::find($request->project_id);
+        $client = User::find($request->emp_id);
+
+        UserPermission::where('project_id',$request->project_id)->where('user_type',1)->where('emp_id',$request->emp_id)->delete();
+        UserChatPermission::where('project_id',$request->project_id)->where('user_type',1)->where('emp_id',$request->emp_id)->delete();
+
+        $object = array('status'=>200 , 'msg'=>'Successfuly deleted ','ar_msg'=>'تم الحذف بنجاح','data'=>$client);
+        return response()->json($object);
 
     }
 

@@ -45,7 +45,7 @@ class OutcomRecieptsController extends Controller
 
     public function datatable(Request $request)
     {
-        $data = Outcome::orderBy('id', 'asc');
+        $data = Outcome::orderBy('id', 'desc');
         $data = $data->get();
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {
