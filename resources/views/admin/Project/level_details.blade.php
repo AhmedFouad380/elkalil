@@ -73,7 +73,7 @@
                                     <div class="d-flex mb-4">
                                         <a href="#" data-id="{{$level->id}}"  class="btn CompleteLevel btn-sm btn-danger me-3">اكتمال نسبة المرحلة</a>
                                     </div>
-                                @endif
+                            @endif
                             <!--end::Actions-->
                             </div>
                             <!--end::Head-->
@@ -112,26 +112,26 @@
                                 @if(Auth::user()->userGroup->is_financial == 1 )
 
                                     <!--begin::Stat-->
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                        <!--begin::Number-->
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-                                            <span class="svg-icon svg-icon-3 svg-icon-success me-2">
+                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                            <!--begin::Number-->
+                                            <div class="d-flex align-items-center">
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+                                                <span class="svg-icon svg-icon-3 svg-icon-success me-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
                                                 <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
                                             </svg>
                                         </span>
-                                            <!--end::Svg Icon-->
-                                            <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
+                                                <!--end::Svg Icon-->
+                                                <div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="@if(isset($data->projectPaid)){{$data->projectPaid->paid}}@else 0 @endif" data-kt-countup-prefix="SAR">0</div>
+                                            </div>
+                                            <!--end::Number-->
+                                            <!--begin::Label-->
+                                            <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
+                                            <!--end::Label-->
                                         </div>
-                                        <!--end::Number-->
-                                        <!--begin::Label-->
-                                        <div class="fw-bold fs-6 text-gray-400">اجمالي مبلغ التعاقد</div>
-                                        <!--end::Label-->
-                                    </div>
-                                    @endif
-                                    <!--end::Stat-->
+                                @endif
+                                <!--end::Stat-->
                                 </div>
                                 <!--end::Stats-->
                                 <!--begin::Users-->
@@ -195,18 +195,18 @@
                             </li>
                             <!--end::Nav item-->
                             <!--begin::Nav item-->
-                        {{--                        <li class="nav-item">--}}
-                        {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
-                        {{--                        </li>--}}
-                                                <li class="nav-item">
-                                                    <a class="nav-link text-active-primary me-6" href="{{url('Chat-level',$level->id)}}">المحادثات الفورية
-                                                        @if(\App\Models\UserChatPermission::where('reciever_id',Auth::user()->id)->where('is_read',0)->where('type',0)->where('level_id',$level->id)->count() > 0)
-                                                            <img class="bi bi-person-bounding-box fs-2x text-info" src="{{asset('images/giphy.gif')}}" style="    max-width: 41px;">
-                                                        @endif
+                            {{--                        <li class="nav-item">--}}
+                            {{--                            <a class="nav-link text-active-primary me-6" href="#">الاعدادات</a>--}}
+                            {{--                        </li>--}}
+                            <li class="nav-item">
+                                <a class="nav-link text-active-primary me-6" href="{{url('Chat-level',$level->id)}}">المحادثات الفورية
+                                    @if(\App\Models\UserChatPermission::where('reciever_id',Auth::user()->id)->where('is_read',0)->where('type',0)->where('level_id',$level->id)->count() > 0)
+                                        <img class="bi bi-person-bounding-box fs-2x text-info" src="{{asset('images/giphy.gif')}}" style="    max-width: 41px;">
+                                    @endif
 
-                                                    </a>
-                                                </li>
-                        <!--end::Nav item-->
+                                </a>
+                            </li>
+                            <!--end::Nav item-->
                         </ul>
                         <!--end::Nav links-->
                     </div>
@@ -227,11 +227,11 @@
                         </h3>
                         <div class="card-toolbar">
                             @if(Auth::user()->jop_type != 1)
-                            <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
-                                    data-bs-target="#kt_modal_add_user">
+                                <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
+                                        data-bs-target="#kt_modal_add_user">
                                     <i class="bi bi-plus-circle-fill fs-2x"></i>
-                                اضافة تعديلات
-                            </button>
+                                    اضافة تعديلات
+                                </button>
                             @endif
                             <a href="{{url('assign_users',$level->id)}}" class="btn btn-sm btn-light-danger me-5">
                                 <i class="bi bi-person-workspace fs-2x"></i>
@@ -239,11 +239,11 @@
                             </a>
 
                             @if(Auth::user()->jop_type != 1)
-                            <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
-                                    data-bs-target="#kt_modal_add_user2">
+                                <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
+                                        data-bs-target="#kt_modal_add_user2">
                                     <i class="bi bi-calendar-check-fill fs-2x"></i>
-                                وقت المرحلة
-                            </button>
+                                    وقت المرحلة
+                                </button>
                             @endif
 
                         </div>
@@ -273,9 +273,9 @@
                                                 <span class="fw-bold text-dark d-block fs-5">{{$key +1 }}</span>
                                             </td>
                                             <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <button  data-id="{{$details->id}}"  class="btn  edit-Advert text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
-                                                    </div>
+                                                <div class="d-flex align-items-center">
+                                                    <button  data-id="{{$details->id}}"  class="btn  edit-Advert text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$details->title}}</button>
+                                                </div>
                                             </td>
                                             <td>
                                                 <span class="text-dark fw-bold d-block fs-5">{{$details->percent}} %</span>
