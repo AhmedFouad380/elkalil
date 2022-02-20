@@ -1982,7 +1982,7 @@
                 Swal.fire({
                     icon: 'warning',
                     title: "برجاء التأكد من البيانات.",
-                    text: "اجمالى الدفعات اكبر من اجمالى مبلغ التعاقد!",
+                    text: "اجمالى الدفعات اكبر من اجمالى المتبقى!",
                     type: "error",
                     timer: 5000,
                     showConfirmButton: false

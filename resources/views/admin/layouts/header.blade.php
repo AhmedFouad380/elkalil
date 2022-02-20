@@ -637,10 +637,10 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="../../demo16/dist/pages/projects/list.html" class="menu-link px-5">
+                            <a href="/projects" class="menu-link px-5">
                                 <span class="menu-text">مشاريعي</span>
                                 <span class="menu-badge">
-                                    <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
+                                    <span class="badge badge-light-danger badge-circle fw-bolder fs-7"></span>
                                 </span>
                             </a>
                         </div>
