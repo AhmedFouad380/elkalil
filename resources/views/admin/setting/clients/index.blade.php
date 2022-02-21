@@ -111,7 +111,6 @@
                     // {extend: 'pdf', className: 'btn btn-raised btn-danger', text: 'PDF'},
                     {extend: 'excel', className: 'btn btn-light-primary me-3', text: '<i class="bi bi-file-earmark-spreadsheet-fill fs-2x"></i>'},
                     // {extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
-
                 ],
                 ajax: {
                     url: '{{ route('client.datatable.data') }}',
