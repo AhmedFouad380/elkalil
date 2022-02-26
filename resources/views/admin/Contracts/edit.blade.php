@@ -133,7 +133,7 @@
                                                 <table class="table table-flush fw-bold gy-1">
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">اسم العميل :</td>
-                                                        <td class="text-gray-800"> {{$data->client->name}}</td>
+                                                        <td class="text-gray-800"> @if($data->client) {{$data->client->name}} @endif</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-muted min-w-125px w-125px">تاريخ التقديم :</td>
@@ -698,7 +698,7 @@
                                 <!--begin::Details-->
                                 <div class="d-flex align-items-center mb-1">
                                     <span class="me-2">اسـم الكريـم :</span>
-                                    <span class="fw-bold text-gray-600">{{$data->client->name}}</span>
+                                    <span class="fw-bold text-gray-600">@if($data->client) {{$data->client->name}} @endif</span>
                                 </div>
                                 <div class="d-flex align-items-center mb-1">
                                     <span class="me-2">اسـم المشـروع :</span>
@@ -1001,7 +1001,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="date" id="confirmDate" required class="form-control form-control-solid"
-                                           placeholder="" value="{{$data->client->name}}" name="title"/>
+                                           placeholder="" value="" name=""/>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
@@ -1066,7 +1066,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="text" disabled required class="form-control form-control-solid"
-                                           placeholder="" value="{{$data->client->name}}" name="title"/>
+                                           placeholder="" value="@if($data->client) {{$data->client->name}} @endif" name="title"/>
                                     <input type="hidden" required class="form-control form-control-solid" placeholder=""
                                            value="{{$data->client_id}}" name="client_id"/>
                                 </div>
@@ -1152,7 +1152,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="text" required class="form-control form-control-solid" placeholder=""
-                                           value="{{$data->client->name}}" name="name"/>
+                                           value="@if($data->client) {{$data->client->name}} @endif" name="name"/>
                                     <input type="hidden" required class="form-control form-control-solid" placeholder=""
                                            value="{{$data->id}}" name="id"/>
                                 </div>
@@ -1163,7 +1163,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="number" required class="form-control form-control-solid" placeholder=""
-                                           value="{{$data->client->phone}}" name="phone"/>
+                                           value="@if($data->client) {{$data->client->phone}} @endif" name="phone"/>
                                 </div>
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
@@ -1437,25 +1437,25 @@
                                             @endforeach
                                         @else
                                             <div class="row">
-                                            <div class="col-1">
-                                            </div>
-                                            <div class="col-3">
-                                                <input type="number" value="0" name="values[]"
-                                                       class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
-                                                       placeholder="" required/>
-                                            </div>
-                                            <div class="col-5">
-                                                <input value="" type="date"
-                                                       name="dates[]"
-                                                       class="dates form-control col-6 form-control-solid mb-3 mb-lg-0"
-                                                       placeholder="" required/>
-                                            </div>
-                                            <div class="col-3">
-                                                <button type="button"
-                                                        class="btn btn-light-danger me-3 delete_question">
-                                                    <i class="bi bi-trash-fill fs-2x fs-2x"></i>
-                                                </button>
-                                            </div>
+                                                <div class="col-1">
+                                                </div>
+                                                <div class="col-3">
+                                                    <input type="number" value="0" name="values[]"
+                                                           class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                           placeholder="" required/>
+                                                </div>
+                                                <div class="col-5">
+                                                    <input value="" type="date"
+                                                           name="dates[]"
+                                                           class="dates form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                           placeholder="" required/>
+                                                </div>
+                                                <div class="col-3">
+                                                    <button type="button"
+                                                            class="btn btn-light-danger me-3 delete_question">
+                                                        <i class="bi bi-trash-fill fs-2x fs-2x"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         @endif
                                     </div>

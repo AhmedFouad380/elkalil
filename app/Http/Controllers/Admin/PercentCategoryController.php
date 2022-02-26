@@ -40,7 +40,6 @@ class PercentCategoryController extends Controller
     public function datatable(Request $request)
     {
         $data = PercentCategory::orderBy('id', 'asc');
-
         $data = $data->get();
         return Datatables::of($data)
             ->addColumn('checkbox', function ($row) {

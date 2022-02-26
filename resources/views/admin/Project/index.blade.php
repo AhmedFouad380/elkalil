@@ -122,7 +122,7 @@
                                     <div class="fs-3 fw-bolder text-dark">{{$project->name}}  ( لم يتم بدا المشروع بعد) </div>
                                     <!--end::Name-->
                                     <!--begin::Description-->
-                                    <p class="text-gray-400 fw-bold fs-5 mt-1 mb-7">{{$project->client->name}}</p>
+                                    <p class="text-gray-400 fw-bold fs-5 mt-1 mb-7">{{$project->client ? $project->client->name : ""}}</p>
                                     <!--end::Description-->
                                     <!--begin::Progress-->
                                     <div class="flex-grow-1">
@@ -225,7 +225,7 @@
                                         <div class="fs-3 fw-bolder text-dark">{{$project->name}}</div>
                                         <!--end::Name-->
                                         <!--begin::Description-->
-                                        <p class="text-gray-400 fw-bold fs-5 mt-1 mb-7">{{$project->client->name}}</p>
+                                        <p class="text-gray-400 fw-bold fs-5 mt-1 mb-7">{{$project->client ? $project->client->name : ""}}</p>
                                         <!--end::Description-->
                                         <!--begin::Progress-->
                                         <div class="flex-grow-1">
