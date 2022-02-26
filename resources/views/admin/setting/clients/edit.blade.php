@@ -81,7 +81,7 @@
                                 <input type="email" name="email"
                                        class="form-control form-control-solid mb-3 mb-lg-0"
                                        placeholder="البريد الالكتروني" value="{{$employee->email}}"
-                                       required/>
+                                       />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->

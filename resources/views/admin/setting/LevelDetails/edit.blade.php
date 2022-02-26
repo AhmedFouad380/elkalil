@@ -87,7 +87,7 @@
                                     <!--begin::Input-->
                                     <input type="number" name="percent"
                                            class="form-control form-control-solid mb-3 mb-lg-0"
-                                           placeholder="النسبة" value="{{$permission->percent}}" max="100" required/>
+                                           placeholder="النسبة" value="{{$permission->percent}}" step="any" max="100" required/>
 
                                 </div>
 

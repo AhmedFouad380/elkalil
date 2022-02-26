@@ -86,8 +86,7 @@ class ClientsController extends Controller
     {
         $data = $this->validate(request(), [
             'name' => 'required|string',
-            'email' => 'required|email|unique:clients',
-            'password' => 'required|confirmed',
+            'email' => 'nullable|email|unique:clients',
             'phone' => 'required|unique:clients',
             'branche' => 'required|exists:branche,id',
             'state' => 'required|exists:state,id',
@@ -97,7 +96,7 @@ class ClientsController extends Controller
         ]);
 
         $data['date'] = date("Y-m-d H:i:s");
-        $data['password'] = sha1($request->password);
+        $data['password'] = '7c4a8d09ca3762af61e59520943dc26494f8941b';
         $data['ref_code'] = rand(1111, 9999);
         $data['firebase_type'] = 0;
         $data['token_id'] = " ";
@@ -145,7 +144,7 @@ class ClientsController extends Controller
         $data = $this->validate(request(), [
             'name' => 'required|string',
             'id' => 'required|exists:clients,id',
-            'email' => 'required|email|unique:clients,email,' . $request->id,
+            'email' => 'nullable|email|unique:clients,email,' . $request->id,
             'password' => 'nullable|confirmed',
             'phone' => 'required|unique:clients,phone,' . $request->id,
             'branche' => 'required|exists:branche,id',

@@ -47,7 +47,14 @@ class ProjectLevelController extends Controller
     {
         $data = ProjectLevels::find($request->id);
         $data->auto_complete = 1;
+        $data->progress= + $data->percent;
         $data->save();
+
+
+        $project = Project::find($data->project_id);
+        $project->progress=$project->progress + $data->percent;
+        $project->save();
+
         return response()->json(['message' => 'Success']);
 
     }
@@ -180,6 +187,12 @@ class ProjectLevelController extends Controller
         $data = ProjectLevels::find($request->level_id);
         $data->progress_time = $request->progress_time;
         $data->save();
+
+        $sum = ProjectLevels::where('project_id',$data->project_id)->sum('progress_time');
+        $Project = Project::find($data->project_id);
+        $Project->delivery_date = \Carbon\Carbon::parse($Project->confirm_date)->addDays($sum)->format('Y-m-d');;
+        $Project->save();
+
         return back()->with('message', 'Success');
 
     }

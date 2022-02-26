@@ -37,11 +37,21 @@ class ProjectController extends Controller
         });
 
     }
+    public function Delivery_date(){
+        $projects = Project::where('confirm',1)->get();
+        foreach($projects as $project){
+            $sum = ProjectLevels::where('project_id',$project->id)->sum('progress_time');
+            $Project = Project::find($project->id);
+            $Project->delivery_date = \Carbon\Carbon::parse($project->confirm_date)->addDays($sum)->format('Y-m-d');;
+            $Project->save();
 
+        }
+        return 'success';
+    }
     public  function  index(Request $request){
         if(Auth::user()->jop_type == 3){
             if(isset($request->contract_id)){
-            $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc');
+                $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc');
             }else{
                 $data = Project::where('confirm',1)->orderBy('confirm_date','desc');
             }
@@ -53,15 +63,15 @@ class ProjectController extends Controller
                 $data = Project::where('confirm',1)->orderBy('confirm_date','desc')->where('state',Auth::user()->state);
             }
         }elseif(Auth::user()->jop_type == 1){
-                $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->
-                LeftJoin('user_permission','projects.id','=','user_permission.project_id')
-                    ->where('user_permission.emp_id', Auth::user()->id)->distinct()
-            ->select('projects.*');
+            $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->
+            LeftJoin('user_permission','projects.id','=','user_permission.project_id')
+                ->where('user_permission.emp_id', Auth::user()->id)->distinct()
+                ->select('projects.*');
         }
         if(isset($request->minProgress)){
-                $data->whereBetween('progress',[$request->minProgress,$request->maxProgress]);
+            $data->whereBetween('progress',[$request->minProgress,$request->maxProgress]);
         }
-            if(isset($request->name)){
+        if(isset($request->name)){
             $data->where('name','like','%'.$request->name.'%');
         }
 
@@ -85,10 +95,53 @@ class ProjectController extends Controller
                 $data->whereDate('confirm_date','<=',$request->to);
             }
         }
-       $data = $data->paginate(12);
-        $data->count();
+        if($request->withoutsupervisor == 1){
+            $data->doesntHave('assginUsers');
+        }
+        $data = $data->paginate(12);
         return view('admin.Project.index',compact('data'));
     }
+
+    public function lateProject(){
+        if(Auth::user()->jop_type == 3){
+            if(isset($request->contract_id)){
+                $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc');
+            }else{
+                $data = Project::where('confirm',1)->orderBy('confirm_date','desc');
+            }
+        }elseif(Auth::user()->jop_type == 2 ){
+
+            if(isset($request->contract_id)){
+                $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->where('projects.state',Auth::user()->state);
+            }else{
+                $data = Project::where('confirm',1)->orderBy('confirm_date','desc')->where('state',Auth::user()->state);
+            }
+        }elseif(Auth::user()->jop_type == 1){
+            $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->
+            LeftJoin('user_permission','projects.id','=','user_permission.project_id')
+                ->where('user_permission.emp_id', Auth::user()->id)->distinct()
+                ->select('projects.*');
+        }
+        $data->whereDate('delivery_date','<=',date('Y-m-d'));
+
+
+        $data = $data->paginate(12);
+        return view('admin.Project.index',compact('data'));
+
+    }
+    public  function  EmployeeProjects(Request $request){
+        if($request->user_id){
+            $data = Project::where('projects.confirm',1)->orderBy('projects.confirm_date','desc')->
+            LeftJoin('user_permission','projects.id','=','user_permission.project_id')
+                ->where('user_permission.emp_id', $request->user_id)->distinct()
+                ->select('projects.*')->paginate(12);
+        }else{
+            $data = [];
+        }
+        $user_id=$request->user_id;
+        return view('admin.Project.EmployeeProjects',compact('data','user_id'));
+    }
+
 
     public function store(Request $request){
          $this->validate(request(), [
@@ -153,6 +206,8 @@ class ProjectController extends Controller
                 $contract->contract_id=$con->id;
                 $contract->save();
 
+
+
                 // Create ProjectLevels
                 $StanderLevels = Level::where('contract_id',$request->contract_id)->get();
                 foreach($StanderLevels as $level){
@@ -166,6 +221,7 @@ class ProjectController extends Controller
                     $ProjectLevels->sort=$level->sort;
                     $ProjectLevels->progress_time=$level->progress_time;
                     $ProjectLevels->save();
+
                     //Create LevelDetails
                     $levelsDetails = LevelDetails::where('level_id',$level->id)->get();
                     foreach($levelsDetails as $de){
@@ -202,9 +258,15 @@ class ProjectController extends Controller
 
     }
 
-    public function project_details($id){
+    public function project_details($id ,$emp_id = null){
         $data = Project::find($id);
-        if(Auth::user()->jop_type == 1 ){
+        if($emp_id != null){
+            $levels = ProjectLevels::where('project_levels.project_id', $id)->
+            Join('user_permission','project_levels.id','=','user_permission.level_id')
+                ->where('user_permission.emp_id', $emp_id)->select('project_levels.*')
+                ->get();
+        }
+        elseif(Auth::user()->jop_type == 1 ){
             $levels = ProjectLevels::where('project_levels.project_id', $id)->
             Join('user_permission','project_levels.id','=','user_permission.level_id')
                 ->where('user_permission.emp_id', Auth::user()->id)->select('project_levels.*')

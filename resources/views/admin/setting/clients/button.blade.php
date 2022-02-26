@@ -75,7 +75,7 @@
                                 <input type="email" name="email"
                                        class="form-control form-control-solid mb-3 mb-lg-0"
                                        placeholder="البريد الالكتروني" value="{{old('email')}}"
-                                       required/>
+                                       />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -89,26 +89,26 @@
                                        placeholder="رقم الجوال" value="{{old('phone')}}" required/>
                                 <!--end::Input-->
                             </div>
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">كلمة المرور</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="password" name="password"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="كلمة المرور" value="" required/>
-                                <!--end::Input-->
-                            </div>
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fw-bold fs-6 mb-2">تأكيد كلمة المرور</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="password" name="password_confirmation"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="تأكيد كلمة المرور" value="" required/>
-                                <!--end::Input-->
-                            </div>
+{{--                            <div class="fv-row mb-7">--}}
+{{--                                <!--begin::Label-->--}}
+{{--                                <label class="required fw-bold fs-6 mb-2">كلمة المرور</label>--}}
+{{--                                <!--end::Label-->--}}
+{{--                                <!--begin::Input-->--}}
+{{--                                <input type="password" name="password"--}}
+{{--                                       class="form-control form-control-solid mb-3 mb-lg-0"--}}
+{{--                                       placeholder="كلمة المرور" value="" required/>--}}
+{{--                                <!--end::Input-->--}}
+{{--                            </div>--}}
+{{--                            <div class="fv-row mb-7">--}}
+{{--                                <!--begin::Label-->--}}
+{{--                                <label class="required fw-bold fs-6 mb-2">تأكيد كلمة المرور</label>--}}
+{{--                                <!--end::Label-->--}}
+{{--                                <!--begin::Input-->--}}
+{{--                                <input type="password" name="password_confirmation"--}}
+{{--                                       class="form-control form-control-solid mb-3 mb-lg-0"--}}
+{{--                                       placeholder="تأكيد كلمة المرور" value="" required/>--}}
+{{--                                <!--end::Input-->--}}
+{{--                            </div>--}}
                             <!--end::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->

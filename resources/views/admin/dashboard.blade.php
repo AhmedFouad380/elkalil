@@ -292,26 +292,59 @@
                         <!--begin::Col-->
                         <!--end::Col-->
                     </div>
+                    <div class="row g-5 g-lg-10">
+                        <!--begin::Col-->
+                        <div class="col-lg-6 mb-5 mb-lg-10">
+
+                        <a href="#" class="card bgi-no-repeat h-150px mb-5 mb-lg-10"
+                           style="background-color: #4AB58E; background-position: calc(100% + 1rem) bottom; background-size: 25% auto; ">
+                            <!--begin::Body-->
+
+                            <div class="card-body d-flex flex-column align-items-start justify-content-center">
+                                <h3 class="text-white fw-bolder mb-3">
+                                    @if(Auth::user()->jop_type == 3)
+                                        {{$Project->where('is_archive',1)->count()   }}
+                                    @else
+                                        {{$Project->where('state',Auth::user()->state)->where('is_archive',1)->count()   }}
+
+                                    @endif
+                                </h3>
+                                <h3 class="text-white fw-bolder mb-3">ارشيف المشاريع </h3>
+                            </div>
+                            <!--end::Body-->
+                        </a>
+                        </div>
+                        <div class="col-lg-6 mb-5 mb-lg-10">
+
+                            <a href="{{url('lateProject')}}" class="card bgi-no-repeat h-150px mb-5 mb-lg-10"
+                               style="background-color: #999999; background-position: calc(100% + 1rem) bottom; background-size: 25% auto; ">
+                                <!--begin::Body-->
+
+                                <div class="card-body d-flex flex-column align-items-start justify-content-center">
+                                    <h3 class="text-white fw-bolder mb-3">
+                                        @if(Auth::user()->jop_type == 3)
+                                            {{$Project->where('is_archive',1)->count()   }}
+                                        @else
+                                            {{$Project->where('state',Auth::user()->state)->where('is_archive',1)->count()   }}
+
+                                        @endif
+                                    </h3>
+                                    <h3 class="text-white fw-bolder mb-3">المشاريع المتاخرة </h3>
+                                </div>
+                                <!--end::Body-->
+                            </a>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <!--end::Col-->
+                    </div>
+
                     <!--end::Row-->
                     <!--begin::Row-->
                     <!--end::Row-->
                     <!--begin::Engage widget 4-->
-                    <a href="#" class="card bgi-no-repeat h-150px mb-5 mb-lg-10"
-                       style="background-color: #4AB58E; background-position: calc(100% + 1rem) bottom; background-size: 25% auto; ">
-                        <!--begin::Body-->
-                        <div class="card-body d-flex flex-column align-items-start justify-content-center">
-                            <h3 class="text-white fw-bolder mb-3">
-                                @if(Auth::user()->jop_type == 3)
-                                {{$Project->where('is_archive',1)->count()   }}
-                                @else
-                                    {{$Project->where('state',Auth::user()->state)->where('is_archive',1)->count()   }}
 
-                                @endif
-                            </h3>
-                            <h3 class="text-white fw-bolder mb-3">ارشيف المشاريع </h3>
-                        </div>
-                        <!--end::Body-->
-                    </a>
+
                     <!--end::Engage widget 4-->
                 </div>
                 <!--end::Col-->

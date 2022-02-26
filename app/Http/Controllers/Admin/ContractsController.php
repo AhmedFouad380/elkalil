@@ -227,11 +227,13 @@ class ContractsController extends Controller
 
     public function ConfirmProject(Request $request)
     {
-
+        $sum = ProjectLevels::where('project_id',$request->id)->sum('progress_time');
         $Project = Project::find($request->id);
         $Project->confirm_date = $request->date;
+        $Project->delivery_date = \Carbon\Carbon::parse($request->date)->addDays($sum)->format('Y-m-d');;
         $Project->confirm = 1;
         $Project->save();
+
 
         // add explan
         $d_explan = array(

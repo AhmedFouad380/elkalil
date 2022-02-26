@@ -162,6 +162,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('Requests-edit/{id}', [\App\Http\Controllers\Admin\RequestsController::class, 'edit']);
     // Projects
     Route::get('projects', [\App\Http\Controllers\Admin\ProjectController::class, 'index']);
+    Route::get('lateProject', [\App\Http\Controllers\Admin\ProjectController::class, 'lateProject']);
+
+    Route::get('EmployeeProjects', [\App\Http\Controllers\Admin\ProjectController::class, 'EmployeeProjects']);
+
     Route::get('projectFiles/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectFiles']);
     Route::get('projectExplan/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectExplan']);
     Route::get('projectEmployes/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'projectEmployes']);
@@ -182,7 +186,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('StoreChat', [\App\Http\Controllers\Admin\ProjectLevelController::class, 'StoreChat']);
 
     Route::post('store-project', [\App\Http\Controllers\Admin\ProjectController::class, 'store']);
-    Route::get('project_details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'project_details']);
+    Route::get('project_details/{id}/{emp_id?}', [\App\Http\Controllers\Admin\ProjectController::class, 'project_details']);
     Route::get('level_Details/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'level_Details']);
 
     Route::get('Contracts', [\App\Http\Controllers\Admin\ContractsController::class, 'index']);
@@ -347,3 +351,4 @@ Route::group(['middleware' => ['admin']], function () {
 
 Route::post('login', [AuthController::class, 'login']);
 Route::get('success_msg', [PageController::class, 'success_msg']);
+Route::get('Delivery_date', [\App\Http\Controllers\Admin\ProjectController::class, 'Delivery_date']);

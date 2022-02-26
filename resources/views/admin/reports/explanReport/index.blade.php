@@ -22,7 +22,7 @@
 @endsection
 
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">ارشيف المشاريع</h1>
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">تقارير المهام و الانجازية</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -33,7 +33,7 @@
         <!--end::Item-->
         <!--begin::Item-->
         <li class="breadcrumb-item text-gray-500">التقارير والاحصائيات</li>
-        <li class="breadcrumb-item text-gray-500">ارشيف المشاريع</li>
+        <li class="breadcrumb-item text-gray-500">تقارير المهام و الانجازية</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->

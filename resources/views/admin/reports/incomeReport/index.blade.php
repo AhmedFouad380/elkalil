@@ -22,7 +22,7 @@
 @endsection
 
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">ارشيف المشاريع</h1>
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">تقرير المدفوعات من العملاء</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -33,7 +33,7 @@
         <!--end::Item-->
         <!--begin::Item-->
         <li class="breadcrumb-item text-gray-500">التقارير والاحصائيات</li>
-        <li class="breadcrumb-item text-gray-500">ارشيف المشاريع</li>
+        <li class="breadcrumb-item text-gray-500">تقرير المدفوعات من العملاء</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -47,41 +47,61 @@
         <div class="content flex-row-fluid" id="kt_content">
             <!--begin::Card-->
             <div class="card">
-                <div class="col-xl-12 mb-5" style="padding-right: 27%">
+                <div class="col-xl-12 mb-5" style="">
                     <!--begin::Row-->
-                    <div class="row g-5 g-lg-10">
-
+                    <div class="row     ">
+                        <div class="col-md-2"></div>
                         <!--begin::Col-->
-                        <div class="col-lg-6 mb-5 mb-lg-10">
+                        <div class="col-lg-4 mb-5 mb-lg-10">
                             <!--begin: Statistics Widget 6-->
-                            <a href="#" class="card bg-body h-150px">
-                                <!--begin::Body-->
-                                <div class="card-body d-flex flex-column py-6 px-6">
-                                    <div class="d-flex flex-column flex-grow-1 mb-5">
-                                        <span class="text-gray-500 fw-bold me-2 fs-7">اجمالي المدفوع</span>
-                                        <span class="fw-bolder fs-1 text-gray-900">{{$total_paid}}</span>
+                            <div class="d-flex h-100 align-items-center">
+                                <!--begin::Option-->
+                                <div class="w-md-300px d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10">
+                                    <!--begin::Heading-->
+                                    <div class="mb-7 text-center">
+                                        <!--begin::Title-->
+                                        <h1 class="text-dark mb-5 fw-boldest">اجمالي المدفوع</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Price-->
+                                        <div class="text-center">
+                                            <span class="fs-3x fw-bolder text-primary" id="paid_down">{{$total_paid}}</span>
+                                            <span class="mb-2 text-primary">ريال</span>
+                                        </div>
+                                        <!--end::Price-->
                                     </div>
-
+                                    <!--end::Heading-->
                                 </div>
-                                <!--end:: Body-->
-                            </a>
+                                <!--end::Option-->
+                            </div>
+
                             <!--end: Statistics Widget 6-->
                         </div>
-                        <div class="col-lg-6 mb-5 mb-lg-10">
+                        <div class="col-lg-4 mb-5 mb-lg-10">
                             <!--begin: Statistics Widget 6-->
-                            <a href="#" class="card bg-body h-150px">
-                                <!--begin::Body-->
-                                <div class="card-body d-flex flex-column py-6 px-6">
-                                    <div class="d-flex flex-column flex-grow-1 mb-5">
-                                        <span class="text-gray-500 fw-bold me-2 fs-7">اجمالي المتبقى</span>
-                                        <span class="fw-bolder fs-1 text-gray-900">{{$total_remain}}</span>
-                                     </div>
-
+                            <div class="d-flex h-100 align-items-center">
+                                <!--begin::Option-->
+                                <div class="w-md-300px d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10">
+                                    <!--begin::Heading-->
+                                    <div class="mb-7 text-center">
+                                        <!--begin::Title-->
+                                        <h1 class="text-dark mb-5 fw-boldest">اجمالي المتبقى</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Price-->
+                                        <div class="text-center">
+                                            <span class="fs-3x fw-bolder text-primary" id="paid_down">{{$total_remain}}</span>
+                                            <span class="mb-2 text-primary">ريال</span>
+                                        </div>
+                                        <!--end::Price-->
+                                    </div>
+                                    <!--end::Heading-->
                                 </div>
-                                <!--end:: Body-->
-                            </a>
+                                <!--end::Option-->
+                            </div>
+
                             <!--end: Statistics Widget 6-->
                         </div>
+                        <div class="col-md-2"></div>
+
                         <!--end::Col-->
                     </div>
                     <!--end::Row-->
