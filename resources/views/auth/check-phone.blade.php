@@ -37,7 +37,7 @@
                         <div class="fw-bolder text-start text-dark fs-6 mb-1 ms-1">ادخل الكود المكون من 4 ارقام</div>
                         <!--end::Label-->
                         <!--begin::Input group-->
-                        <div class="d-flex flex-wrap flex-stack">
+                        <div class="d-flex flex-wrap flex-stack inputs">
                             <input type="hidden" name="id" value="{{$user->id}}" required>
                             <input type="text" name="forth" data-inputmask="'mask': '9', 'placeholder': ''"
                                    maxlength="1"

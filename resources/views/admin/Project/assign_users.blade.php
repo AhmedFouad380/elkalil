@@ -23,6 +23,13 @@
         <li class="breadcrumb-item text-gray-600">
             <a href="{{ url('/projects') }}" class="text-gray-600 text-hover-primary">المشاريع</a>
         </li>
+        <li class="breadcrumb-item text-gray-600">
+            <a href="{{ url('/project_details',$data->id) }}" class="text-gray-600 text-hover-primary">{{$data->name}}</a>
+        </li>
+        <li class="breadcrumb-item text-gray-600">
+            <a href="{{ url('/level_Details',$level->id) }}" class="text-gray-600 text-hover-primary">{{$level->title}}</a>
+        </li>
+
         <!--begin::Item-->
         <li class="breadcrumb-item text-gray-500">مشرفي المرحلة </li>
         <!--end::Item-->

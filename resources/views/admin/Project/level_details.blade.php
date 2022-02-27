@@ -232,6 +232,13 @@
                                     <i class="bi bi-plus-circle-fill fs-2x"></i>
                                     اضافة تعديلات
                                 </button>
+                            @elseif($UserPermission->where('emp_id',Auth::user()->id)->where('user_type',1)->where('project_id',$data->id)->first())
+                                <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
+                                        data-bs-target="#kt_modal_add_user">
+                                    <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                    اضافة تعديلات
+                                </button>
+
                             @endif
                             <a href="{{url('assign_users',$level->id)}}" class="btn btn-sm btn-light-danger me-5">
                                 <i class="bi bi-person-workspace fs-2x"></i>
@@ -244,6 +251,12 @@
                                     <i class="bi bi-calendar-check-fill fs-2x"></i>
                                     وقت المرحلة
                                 </button>
+                                @elseif($UserPermission->where('emp_id',Auth::user()->id)->where('user_type',1)->where('project_id',$data->id)->first())
+                                    <button type="button" class="btn btn-sm btn-light-danger me-5" data-bs-toggle="modal"
+                                            data-bs-target="#kt_modal_add_user2">
+                                        <i class="bi bi-calendar-check-fill fs-2x"></i>
+                                        وقت المرحلة
+                                    </button>
                             @endif
 
                         </div>

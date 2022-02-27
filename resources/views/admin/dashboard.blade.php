@@ -322,12 +322,11 @@
 
                                 <div class="card-body d-flex flex-column align-items-start justify-content-center">
                                     <h3 class="text-white fw-bolder mb-3">
-                                        @if(Auth::user()->jop_type == 3)
-                                            {{$Project->where('is_archive',1)->count()   }}
-                                        @else
-                                            {{$Project->where('state',Auth::user()->state)->where('is_archive',1)->count()   }}
-
-                                        @endif
+                                            @if(Auth::user()->jop_type == 3)
+                                                {{$Project->whereDate('delivery_date','<=',date('Y-m-d'))->count()}}
+                                            @else
+                                                {{$Project->where('state',Auth::user()->state)->whereDate('delivery_date','<=',date('Y-m-d'))->count() }}
+                                            @endif
                                     </h3>
                                     <h3 class="text-white fw-bolder mb-3">المشاريع المتاخرة </h3>
                                 </div>

@@ -352,3 +352,7 @@ Route::group(['middleware' => ['admin']], function () {
 Route::post('login', [AuthController::class, 'login']);
 Route::get('success_msg', [PageController::class, 'success_msg']);
 Route::get('Delivery_date', [\App\Http\Controllers\Admin\ProjectController::class, 'Delivery_date']);
+Route::get('check-phone',function (){
+    $user = \App\Models\User::find(19);
+    return view('auth.check-phone',compact('user'));
+});

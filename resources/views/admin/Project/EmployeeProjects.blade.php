@@ -14,7 +14,7 @@
 @endsection
 
 @section('breadcrumb')
-    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">المشاريع</h1>
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3">المشاريع حسب الموظف</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -24,7 +24,8 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-gray-500">المشاريع</li>
+        <li class="breadcrumb-item text-gray-500">التقرير والاحصائيات</li>
+        <li class="breadcrumb-item text-gray-500">المشاريع حسب الموظف</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -57,7 +58,7 @@
                                             fill="black"/>
                                     </svg>
                                     </span>
-                                        <!--end::Svg Icon-->اختار الموظف
+                                        <!--end::Svg Icon-->اختر الموظف
                                     </button>
                                 </div>
 
@@ -379,7 +380,7 @@
 
                             <div class="mb-10">
                                 <label class="form-label fs-6 fw-bold">الموظفيين</label>
-                                <select name="user_id" class="form-select  form-control form-select-lg form-select-solid" data-placeholder="مراحل المشروع ..." data-allow-clear="true" data-hide-search="true">
+                                <select name="user_id" class="form-select  form-control form-select-lg form-select-solid" data-placeholder="اختر الموظف ..." data-allow-clear="true" data-hide-search="true">
                                     <option value="">اختر</option>
                                     @inject('Users','App\Models\User')
                                     @foreach($Users->where('jop_type',1)->get() as $User)

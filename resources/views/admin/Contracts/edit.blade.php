@@ -1162,8 +1162,8 @@
                                         <span class="required">رقـم الجـوال :</span>
                                     </label>
                                     <!--end::Label-->
-                                    <input type="number" required class="form-control form-control-solid" placeholder=""
-                                           value="@if($data->client) {{$data->client->phone}} @endif" name="phone"/>
+                                    <input type="number" required class="form-control form-control-solid"
+                                           value="@if($data->client){{$data->client->phone}}@endif" name="phone"/>
                                 </div>
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
