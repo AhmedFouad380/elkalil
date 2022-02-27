@@ -54,6 +54,10 @@ Route::get('/quest', function () {
 });
 Route::post('/quest', 'App\Http\Controllers\Front\PageController@store_quest')->name('create_quest.submit');
 
+Route::get('/quest2/{client_id}/{emp_id?}', [PageController::class, 'quest2']);
+Route::post('/quest2', 'App\Http\Controllers\Front\PageController@store_quest2')->name('create_quest2.submit');
+Route::get('success_msg', [PageController::class, 'success_msg']);
+
 Route::get('logout', [AuthController::class, 'logout']);
 
 Route::get('/table', function () {
@@ -239,9 +243,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('getMoney', [PageController::class, 'getMoney']);
 
 
-    Route::get('/quest2/{client_id}/{emp_id?}', [PageController::class, 'quest2']);
-    Route::post('/quest2', 'App\Http\Controllers\Front\PageController@store_quest2')->name('create_quest2.submit');
-    Route::get('success_msg', [PageController::class, 'success_msg']);
+    
 
 
     Route::get('/table', function () {
