@@ -41,19 +41,19 @@
                             <input type="hidden" name="id" value="{{$user->id}}" required>
                             <input type="text" name="forth" data-inputmask="'mask': '9', 'placeholder': ''"
                                    maxlength="1"
-                                   class="form-control form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
-                                   value=""/>
+                                   class="form-control inputs form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
+                                   value="" autofocus />
                             <input type="text" name="third" data-inputmask="'mask': '9', 'placeholder': ''"
                                    maxlength="1"
-                                   class="form-control form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
+                                   class="form-control inputs form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
                                    value=""/>
                             <input type="text" name="second" data-inputmask="'mask': '9', 'placeholder': ''"
                                    maxlength="1"
-                                   class="form-control form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
+                                   class="form-control inputs form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
                                    value=""/>
                             <input type="text" name="first" data-inputmask="'mask': '9', 'placeholder': ''"
                                    maxlength="1"
-                                   class="form-control form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
+                                   class="form-control inputs form-control-solid h-60px w-60px fs-2qx text-center border-primary border-hover mx-1 my-2"
                                    value=""/>
                         </div>
                         <!--begin::Input group-->
@@ -81,5 +81,10 @@
 
 @section('script')
     <script src="{{asset('admin/assets/js/custom/authentication/sign-in/general.js')}}"></script>
+    <script>
+        $(".inputs").keyup(function () {
+            $(this).next(".inputs").focus();
+        });
+    </script>
 @endsection
 
