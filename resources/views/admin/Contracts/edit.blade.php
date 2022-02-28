@@ -1407,7 +1407,9 @@
                                                 <i class="bi bi-plus-circle-fill fs-2x"></i>
                                             </button>
                                         </div>
-                                        @php
+                                    </div>
+
+                                    @php
                                             $incomes = \App\Models\Installments::where('project_id',$data->id)->get();
                                         @endphp
                                         @if($incomes->count() > 0)
@@ -1458,7 +1460,6 @@
                                                 </div>
                                             </div>
                                         @endif
-                                    </div>
                                     <!--end::Input-->
                                 </div>
 

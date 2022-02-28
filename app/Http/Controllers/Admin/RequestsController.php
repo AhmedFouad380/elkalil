@@ -161,6 +161,26 @@
                 $data->is_contract=1;
                 $data->view=0;
                 $data->save();
+                if(Project::where('client_id',$data->client_id)->count() == 1){
+
+                    $password = rand(111111,999999);
+                    $client = \App\Models\Client::find($request->client_id);
+                    $client->password= sha1($password);
+                    $client->save();
+                    $message = "عزيزي العميل ، نرحب بكم في شركة الخليل بامكانكم الان تحميل التطبيق (Alkhalil Clients)  الخاص بالعملاء من خلال متجر التطبيقات علما بان بيانات الدخول الخاصة بكم بحسابكم كالتالي :
+" . ' رقم الجوال : ' . $client->phone . ' ، ' . '   كلمة المرور : ' . $password ;
+                    $ch = curl_init();
+                    $url = "http://basic.unifonic.com/rest/SMS/messages";
+                    curl_setopt($ch, CURLOPT_URL,$url);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    // curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=pm@uramit.com&password=uram123&msg=".$message."&sender=Bus-exc.&to=".$client->phone."&encoding=UTF8"); // define what you want to post
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=su7G9tOZc6U0kPVnoeiJGHUDMKe8tp&Body=" . $message . "&SenderID=ALKHALIL&Recipient=" . $client->phone . "&encoding=UTF8&responseType=json"); // define what you want to post
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $output = curl_exec ($ch);
+                    curl_close ($ch);
+
+                }
+
                 Explan::create([
                     'title' => 'تم قبول المشروع',
                     'comments' => 'تم قبول المشروع',

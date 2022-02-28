@@ -144,7 +144,7 @@ class ProjectController extends Controller
 
 
     public function store(Request $request){
-         $this->validate(request(), [
+        $this->validate(request(), [
             'name' => 'required|string',
             'client_id' => 'required',
             'country' => 'required|',
@@ -158,101 +158,120 @@ class ProjectController extends Controller
 
         ]);
 
-            try {
-                $client = Client::find($request->client_id);
-                $project = new Project();
-                $project->name=$request->name;
-                $project->phone=$client->phone;
-                $project->email=$client->email;
-                $project->country=$request->country;
-                $project->state=$request->state;
-                $project->know_us='';
-                $project->project_type=$request->project_type;
-                $project->area=$request->area;
-                $project->is_customer=0;
-                $project->is_contract=1;
-                $project->is_accepted=1;
-                $project->confirm=1;
-                $project->is_created=1;
-                $project->address_type=$request->address_type;
-                $project->address_link=$request->address_link;
+        try {
+            $client = Client::find($request->client_id);
+            $project = new Project();
+            $project->name=$request->name;
+            $project->phone=$client->phone;
+            $project->email=$client->email;
+            $project->country=$request->country;
+            $project->state=$request->state;
+            $project->know_us='';
+            $project->project_type=$request->project_type;
+            $project->area=$request->area;
+            $project->is_customer=0;
+            $project->is_contract=1;
+            $project->is_accepted=1;
+            $project->confirm=1;
+            $project->is_created=1;
+            $project->address_type=$request->address_type;
+            $project->address_link=$request->address_link;
 
-                $project->client_id=$request->client_id;
-                $project->accept_date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
-                $project->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
-                $project->confirm_date=$request->confirm_date;
-                $project->lat=$request->lat;
-                $project->lng=$request->lng;
-                $project->client_id=$request->client_id;
-                $project->created_by=Auth::user()->id;
-                $project->save();
-                // other
-                $other = new ProjectOther;
-                $other->project_id=$project->id;
-                $other->save();
+            $project->client_id=$request->client_id;
+            $project->accept_date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
+            $project->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
+            $project->confirm_date=$request->confirm_date;
+            $project->lat=$request->lat;
+            $project->lng=$request->lng;
+            $project->client_id=$request->client_id;
+            $project->created_by=Auth::user()->id;
+            $project->save();
+            // other
+            $other = new ProjectOther;
+            $other->project_id=$project->id;
+            $other->save();
 
-                // projectPaid
-                $project_paid_data['project_id'] = $project->id;
-                $project_paid = ProjectPaid::create($project_paid_data);
+            // projectPaid
+            $project_paid_data['project_id'] = $project->id;
+            $project_paid = ProjectPaid::create($project_paid_data);
 
             //projectContract
-                $con = Contract::find($request->contract_id);
-                $contract = new ProjectContract();
-                $contract->title=$con->title;
-                $contract->project_id=$project->id;
-                $contract->price=$con->price;
-                $contract->template=$con->template;
-                $contract->color=$con->color;
-                $contract->contract_id=$con->id;
-                $contract->save();
+            $con = Contract::find($request->contract_id);
+            $contract = new ProjectContract();
+            $contract->title=$con->title;
+            $contract->project_id=$project->id;
+            $contract->price=$con->price;
+            $contract->template=$con->template;
+            $contract->color=$con->color;
+            $contract->contract_id=$con->id;
+            $contract->save();
 
 
 
-                // Create ProjectLevels
-                $StanderLevels = Level::where('contract_id',$request->contract_id)->get();
-                foreach($StanderLevels as $level){
-                    $ProjectLevels = New ProjectLevels();
-                    $ProjectLevels->title=$level->title;
-                    $ProjectLevels->percent=$level->percent;
-                    $ProjectLevels->contract_id=$level->contract_id;
-                    $ProjectLevels->project_id=$project->id;
-                    $ProjectLevels->project_contract_id=$contract->id;
-                    $ProjectLevels->level_id=$level->id;
-                    $ProjectLevels->sort=$level->sort;
-                    $ProjectLevels->progress_time=$level->progress_time;
-                    $ProjectLevels->save();
+            // Create ProjectLevels
+            $StanderLevels = Level::where('contract_id',$request->contract_id)->get();
+            foreach($StanderLevels as $level){
+                $ProjectLevels = New ProjectLevels();
+                $ProjectLevels->title=$level->title;
+                $ProjectLevels->percent=$level->percent;
+                $ProjectLevels->contract_id=$level->contract_id;
+                $ProjectLevels->project_id=$project->id;
+                $ProjectLevels->project_contract_id=$contract->id;
+                $ProjectLevels->level_id=$level->id;
+                $ProjectLevels->sort=$level->sort;
+                $ProjectLevels->progress_time=$level->progress_time;
+                $ProjectLevels->save();
 
-                    //Create LevelDetails
-                    $levelsDetails = LevelDetails::where('level_id',$level->id)->get();
-                    foreach($levelsDetails as $de){
-                        $ProjectLevelDetails = New ProjectLevelDetails();
-                        $ProjectLevelDetails->title=$de->title;
-                        $ProjectLevelDetails->project_id=$project->id;
-                        $ProjectLevelDetails->level_id=$ProjectLevels->id;
-                        $ProjectLevelDetails->percent=$de->percent;
+                //Create LevelDetails
+                $levelsDetails = LevelDetails::where('level_id',$level->id)->get();
+                foreach($levelsDetails as $de){
+                    $ProjectLevelDetails = New ProjectLevelDetails();
+                    $ProjectLevelDetails->title=$de->title;
+                    $ProjectLevelDetails->project_id=$project->id;
+                    $ProjectLevelDetails->level_id=$ProjectLevels->id;
+                    $ProjectLevelDetails->percent=$de->percent;
 //                        $ProjectLevelDetails->date=\Carbon\Carbon::now('Asia/Riyadh')->format('Y-m-d');
-                        $ProjectLevelDetails->client_view=$de->client_view;
-                        $ProjectLevelDetails->sort=$de->sort;
-                        $ProjectLevelDetails->question_type=$de->question_type;
-                        $ProjectLevelDetails->values=$de->values;
-                        $ProjectLevelDetails->is_pdf=$de->is_pdf;
-                        $ProjectLevelDetails->emp_id=0;
-                        $ProjectLevelDetails->save();
-                    }
-                    // chat permission
-                    $users = User::where('state',$request->state)->get();
-                    foreach($users as $user){
-                        $dataa = array('reciever_id'=>$user->id , 'type' => 0 ,'project_id'=> $project->id, 'level_id' => $ProjectLevels->id ,'is_read' => 1 );
-                        UserChatPermission::insert($dataa);
-                    }
-                    $UserChatPermission = array('level_id'=> $ProjectLevels->id , 'reciever_id' => $request->client_id ,'type' =>1  , 'project_id' => $project->id );
-                    UserChatPermission::insert($UserChatPermission);
-
+                    $ProjectLevelDetails->client_view=$de->client_view;
+                    $ProjectLevelDetails->sort=$de->sort;
+                    $ProjectLevelDetails->question_type=$de->question_type;
+                    $ProjectLevelDetails->values=$de->values;
+                    $ProjectLevelDetails->is_pdf=$de->is_pdf;
+                    $ProjectLevelDetails->emp_id=0;
+                    $ProjectLevelDetails->save();
                 }
+                // chat permission
+                $users = User::where('state',$request->state)->get();
+                foreach($users as $user){
+                    $dataa = array('reciever_id'=>$user->id , 'type' => 0 ,'project_id'=> $project->id, 'level_id' => $ProjectLevels->id ,'is_read' => 1 );
+                    UserChatPermission::insert($dataa);
+                }
+                $UserChatPermission = array('level_id'=> $ProjectLevels->id , 'reciever_id' => $request->client_id ,'type' =>1  , 'project_id' => $project->id );
+                UserChatPermission::insert($UserChatPermission);
 
-            } catch (Exception $e) {
-                return back()->with('message', 'Failed');
             }
+            if(Project::where('client_id',$request->client_id)->count() == 1){
+
+                $password = rand(111111,999999);
+                $client = Client::find($request->client_id);
+                $client->password= sha1($password);
+                $client->save();
+                $message = "عزيزي العميل ، نرحب بكم في شركة الخليل بامكانكم الان تحميل التطبيق (Alkhalil Clients)  الخاص بالعملاء من خلال متجر التطبيقات علما بان بيانات الدخول الخاصة بكم بحسابكم كالتالي :
+" . ' رقم الجوال : ' . $client->phone . ' ، ' . '   كلمة المرور : ' . $password ;
+                $ch = curl_init();
+                $url = "http://basic.unifonic.com/rest/SMS/messages";
+                curl_setopt($ch, CURLOPT_URL,$url);
+                curl_setopt($ch, CURLOPT_POST, true);
+                // curl_setopt($ch, CURLOPT_POSTFIELDS, "userid=pm@uramit.com&password=uram123&msg=".$message."&sender=Bus-exc.&to=".$client->phone."&encoding=UTF8"); // define what you want to post
+                curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=su7G9tOZc6U0kPVnoeiJGHUDMKe8tp&Body=" . $message . "&SenderID=ALKHALIL&Recipient=" . $client->phone . "&encoding=UTF8&responseType=json"); // define what you want to post
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $output = curl_exec ($ch);
+                curl_close ($ch);
+
+            }
+
+        } catch (Exception $e) {
+            return back()->with('message', 'Failed');
+        }
         return back()->with('message', 'Success');
 
 
@@ -270,7 +289,7 @@ class ProjectController extends Controller
             $levels = ProjectLevels::where('project_levels.project_id', $id)->
             Join('user_permission','project_levels.id','=','user_permission.level_id')
                 ->where('user_permission.emp_id', Auth::user()->id)->select('project_levels.*')
-            ->get();
+                ->get();
         }else {
             $levels = ProjectLevels::where('project_id', $id)->get();
         }
@@ -296,10 +315,10 @@ class ProjectController extends Controller
 
         }
         if(isset($request->level_id)){
-        $files->where('level_id',$request->level_id);
+            $files->where('level_id',$request->level_id);
         }
         if(isset($request->level_detail_id)){
-        $files->where('id',$request->level_detail_id);
+            $files->where('id',$request->level_detail_id);
         }
         $files = $files->get();
         return view('admin.Project.projectFiles',compact('data','id','files'));
@@ -378,58 +397,58 @@ class ProjectController extends Controller
         $d_explan = array(
             'title' => 'تم تعيين موظف للمشروع ',
             'comments' => 'تم تعيين موظف للمشروع ',
-        'date' => \Carbon\Carbon::now()->format('Y-m-d'),
-        'time' => \Carbon\Carbon::now()->format('H:i:s'),
-        'emp_id' => Auth::user()->id,
-        'emp_name' => Auth::user()->name,
-        'project_id' => $request->project_id
+            'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
+            'emp_id' => Auth::user()->id,
+            'emp_name' => Auth::user()->name,
+            'project_id' => $request->project_id
         );
         Explan::insert($d_explan);
 
 
-            // send fcm start
+        // send fcm start
         if($client->token_id) {
 
-        $token = $client->token_id; // push token
+            $token = $client->token_id; // push token
 
 
-        $title = $Project->name;
+            $title = $Project->name;
             $message = " تم تكليفك بالاعمال في المشروع   ";
 
-        $fields = array
-        (
-        'registration_ids' => [$token],
-        'data' => ['type' => '3'],
-        'notification' => array(
-        'priority' => 'high',
-        'body' => $message,
-        'title' => $title,
-        'sound' => 'default',
-        'icon' => 'icon'
-        )
-        );
-        $API_ACCESS_KEY = 'AAAA7MITCVM:APA91bFxG1YuBa-5G6nYPwrn4KFrbKjtilNv-dlm5yXKOLJiGtMgdLSTCjYIY1i3M6Nf4au0r6b2mEL_MjfkGb1-haRJa-zZr1laU5uffby_y2n63IMaVgrh5u63aQRJZMnpJg-SAO5V';
-        $headers = array
-        (
-        'Authorization: key=' . $API_ACCESS_KEY,
-        'Content-Type: application/json'
-        );
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-        $result = curl_exec($ch);
-        curl_close($ch);
+            $fields = array
+            (
+                'registration_ids' => [$token],
+                'data' => ['type' => '3'],
+                'notification' => array(
+                    'priority' => 'high',
+                    'body' => $message,
+                    'title' => $title,
+                    'sound' => 'default',
+                    'icon' => 'icon'
+                )
+            );
+            $API_ACCESS_KEY = 'AAAA7MITCVM:APA91bFxG1YuBa-5G6nYPwrn4KFrbKjtilNv-dlm5yXKOLJiGtMgdLSTCjYIY1i3M6Nf4au0r6b2mEL_MjfkGb1-haRJa-zZr1laU5uffby_y2n63IMaVgrh5u63aQRJZMnpJg-SAO5V';
+            $headers = array
+            (
+                'Authorization: key=' . $API_ACCESS_KEY,
+                'Content-Type: application/json'
+            );
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+            $result = curl_exec($ch);
+            curl_close($ch);
         }
         // send Fcm end
         return back()->with('message','Success');
 
 
 
-}
+    }
     public function AddGeneralSupervisor(Request $request){
 
 //        $this->validate(request(), [
@@ -441,22 +460,22 @@ class ProjectController extends Controller
         $client = User::find($request->emp_id);
         $levels = ProjectLevels::where('project_id',$request->project_id)->get();
         foreach($levels as $level){
-        if(UserPermission::where('emp_id',$request->emp_id)->where('level_id',$level->id)->count() == 0){
-        $data = new UserPermission();
-        $data->level_id=$level->id;
-        $data->project_id=$request->project_id;
-        $data->emp_id=$request->emp_id;
-        $data->user_type=1;
-        $data->save();
+            if(UserPermission::where('emp_id',$request->emp_id)->where('level_id',$level->id)->count() == 0){
+                $data = new UserPermission();
+                $data->level_id=$level->id;
+                $data->project_id=$request->project_id;
+                $data->emp_id=$request->emp_id;
+                $data->user_type=1;
+                $data->save();
 
-        $chat = new UserChatPermission();
-        $chat->reciever_id=$request->emp_id;
-        $chat->type=0;
-        $data->user_type=1;
-        $chat->level_id=$level->id;
-        $data->project_id=$request->project_id;
-        $data->save();
-        }
+                $chat = new UserChatPermission();
+                $chat->reciever_id=$request->emp_id;
+                $chat->type=0;
+                $data->user_type=1;
+                $chat->level_id=$level->id;
+                $data->project_id=$request->project_id;
+                $data->save();
+            }
         }
         $inbox = array(
             'title' => " تم تكليفك بالاعمال في المشروع   ",
@@ -527,7 +546,7 @@ class ProjectController extends Controller
         }
         // send Fcm end
         if($request->platform == 'web'){
-        return back()->with('message','Success');
+            return back()->with('message','Success');
         }else{
             $object = array('status'=>200 , 'msg'=>'success ','ar_msg'=>'تم بنجاح','data'=>$data);
             return response()->json($object);
@@ -547,8 +566,8 @@ class ProjectController extends Controller
         $Project = Project::find($request->project_id);
         $client = User::find($request->emp_id);
         try{
-         UserPermission::where('emp_id',$request->emp_id)->where('level_id',$request->level_id)->delete();
-         UserChatPermission::where('reciever_id',$request->emp_id)->where('level_id',$request->level_id)->delete();
+            UserPermission::where('emp_id',$request->emp_id)->where('level_id',$request->level_id)->delete();
+            UserChatPermission::where('reciever_id',$request->emp_id)->where('level_id',$request->level_id)->delete();
 
             $d_explan = array(
                 'title' => 'تم الغاء تكليف موظف للمشروع ',
