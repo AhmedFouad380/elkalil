@@ -348,12 +348,12 @@
         var msgList = document.getElementById("msg-list");
         msgList.scrollTop = msgList.scrollHeight;
 
-        $('#send').on("click , change",function(e){
+        $('#message').on("keydown",function(e){
             //do stuff here
             var message =$('#message').val()
             var level_id = {{$level->id}}
-                if(message){
-            var out = '<div class="d-flex justify-content-start mb-10">' +
+            if(message){
+                var out = '<div class="d-flex justify-content-start mb-10">' +
                     '                                        <div class="d-flex flex-column align-items-start">' +
                     '                                            <div class="d-flex align-items-center mb-2">' +
                     '                                                <div class="symbol symbol-35px symbol-circle">' +
@@ -367,21 +367,57 @@
                     '                                            <div class="p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">'+ message +'</div>' +
                     '                                        </div>' +
                     '                                    </div>'
-            $('#newChat').append(out);
-            $('#message').val('');
-            var msgList = document.getElementById("msg-list");
-            msgList.scrollTop = msgList.scrollHeight;
+                $('#newChat').append(out);
+                $('#message').val('');
+                var msgList = document.getElementById("msg-list");
+                msgList.scrollTop = msgList.scrollHeight;
 
-            $.ajax({
-                type: "GET",
-                url: "{{url('StoreChat')}}",
-                data: {"level_id":level_id , "message":message},
-                success: function (data) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('StoreChat')}}",
+                    data: {"level_id":level_id , "message":message},
+                    success: function (data) {
 
-                console.log(data);
-                }
+                        console.log(data);
+                    }
 
-            })
+                })
+            }
+        });
+        $('#send').on("click , change",function(e){
+            //do stuff here
+            var message =$('#message').val()
+            var level_id = {{$level->id}}
+            if(message){
+                var out = '<div class="d-flex justify-content-start mb-10">' +
+                    '                                        <div class="d-flex flex-column align-items-start">' +
+                    '                                            <div class="d-flex align-items-center mb-2">' +
+                    '                                                <div class="symbol symbol-35px symbol-circle">' +
+                    '                                                    <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-15.jpg')}}" />' +
+                    '                                                </div>' +
+                    '                                                <div class="ms-3">' +
+                    '                                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">{{Auth::user()->name}}</a>' +
+                    '                                                    <span class="text-muted fs-7 mb-1">{{\Carbon\Carbon::now()->diffForHumans()}}</span>' +
+                    '                                                </div>' +
+                    '                                            </div>' +
+                    '                                            <div class="p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start" data-kt-element="message-text">'+ message +'</div>' +
+                    '                                        </div>' +
+                    '                                    </div>'
+                $('#newChat').append(out);
+                $('#message').val('');
+                var msgList = document.getElementById("msg-list");
+                msgList.scrollTop = msgList.scrollHeight;
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('StoreChat')}}",
+                    data: {"level_id":level_id , "message":message},
+                    success: function (data) {
+
+                        console.log(data);
+                    }
+
+                })
             }
         });
 
