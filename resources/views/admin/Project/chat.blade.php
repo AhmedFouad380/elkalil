@@ -378,7 +378,7 @@
                 data: {"level_id":level_id , "message":message},
                 success: function (data) {
 
-
+                console.log(data);
                 }
 
             })

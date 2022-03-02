@@ -88,15 +88,7 @@
                             <th class="min-w-125px">{{$Project->projectPaid->paid}}</th>
                             <th class="min-w-125px">0</th>
                         </tr>
-                        <tr class="">
-                            <th class="min-w-125px">2</th>
-                            <th class="min-w-125px">{{$Project->confirm_date}}</th>
-                            <th class="min-w-125px">الدفعة المقدمة </th>
-                            <th class="min-w-125px">{{$Project->name}}</th>
-                            <th class="min-w-125px">{{$Project->client->name}}</th>
-                            <th class="min-w-125px">0</th>
-                            <th class="min-w-125px">{{$Project->projectPaid->paid_down}}</th>
-                        </tr>
+
                         @foreach($incomes as $key => $income)
                         <tr class="">
                             <th class="min-w-125px">{{$key + 3 }}</th>
@@ -118,7 +110,7 @@
                         <tr style="color:red!important;">
                             <td colspan="2" >اجمالي المدين : {{$Project->projectPaid->paid}}</td>
                             <td colspan="2" >اجمالي الدائن : {{$data->sum('amount') +  $Project->projectPaid->paid_down}} </td>
-                            <td colspan="2" >الرصيد المتبقى  : {{$Project->projectPaid->paid - ( $data->sum('amount')  +  $Project->projectPaid->paid_down ) }}</td>
+                            <td colspan="2" >اجمالي المتبقى  : {{$Project->projectPaid->paid -  $data->sum('amount')    }}</td>
                         </tr>
                         </tfoot>
                         @endif

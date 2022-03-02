@@ -467,14 +467,15 @@ class ProjectController extends Controller
                 $data->emp_id=$request->emp_id;
                 $data->user_type=1;
                 $data->save();
-
+            }
+            if(UserChatPermission::where('reciever_id',$request->emp_id)->where('level_id',$level->id)->count() == 0) {
                 $chat = new UserChatPermission();
-                $chat->reciever_id=$request->emp_id;
-                $chat->type=0;
-                $data->user_type=1;
-                $chat->level_id=$level->id;
-                $data->project_id=$request->project_id;
-                $data->save();
+                $chat->reciever_id = $request->emp_id;
+                $chat->type = 0;
+                $chat->user_type = 1;
+                $chat->level_id = $level->id;
+                $chat->project_id = $request->project_id;
+                $chat->save();
             }
         }
         $inbox = array(
@@ -558,7 +559,6 @@ class ProjectController extends Controller
     public function remove_assign_user(Request $request){
 
         $this->validate(request(), [
-            'level_id' => 'required',
             'project_id' => 'required',
             'emp_id' => 'required',
 
@@ -566,9 +566,14 @@ class ProjectController extends Controller
         $Project = Project::find($request->project_id);
         $client = User::find($request->emp_id);
         try{
+            if(isset($request->level_id)){
             UserPermission::where('emp_id',$request->emp_id)->where('level_id',$request->level_id)->delete();
             UserChatPermission::where('reciever_id',$request->emp_id)->where('level_id',$request->level_id)->delete();
+            }else{
+                UserPermission::where('emp_id',$request->emp_id)->where('project_id',$request->project_id)->delete();
+                UserChatPermission::where('reciever_id',$request->emp_id)->where('project_id',$request->project_id)->delete();
 
+            }
             $d_explan = array(
                 'title' => 'تم الغاء تكليف موظف للمشروع ',
                 'comments' => 'تم الغاء تكليف الموظف   '  . $client->name ,

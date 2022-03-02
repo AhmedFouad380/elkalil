@@ -124,11 +124,11 @@
 
                                 <div class="fv-row mb-7 row">
                                     <!--begin::Label-->
-                                    <label class="required fw-bold fs-6 mb-2 col-3">المشروع</label>
+                                    <label class="required fw-bold fs-6 mb-2 col-3">اختر المشروع</label>
                                     <!--end::Label-->
                                     <div class="col-6">
                                         <select name="project_id" id="project_id" class="form-select form-select-lg form-select-solid" data-control="select2"
-                                                 data-placeholder="اختـر..." data-allow-clear="false">
+                                                 data-placeholder="اختر المشروع..." data-allow-clear="false">
                                             <option value="">اختر المشروع</option>
                                             @foreach($projects as $project)
                                                 <option value="{{$project->id}}">{{$project->name}}</option>

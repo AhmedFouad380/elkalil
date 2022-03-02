@@ -8,6 +8,15 @@
 @endsection
 
 @section('style')
+    <style>
+        .delete-btn:hover {
+            text-decoration: underline;
+            text-decoration-color: red;
+            cursor: pointer;
+        }
+
+    </style>
+
 @endsection
 
 @section('breadcrumb')
@@ -345,7 +354,7 @@
                                     <br>
                                     <!--begin::Position-->
                                     @if(Auth::user()->jop_type != 1 )
-                                        <a class="delete-user" data-id="{{$level->id}}" data-emp_id="{{$emp->id}}" data-project="{{$data->id}}">     <div class="fw-bold text-danger text-danger-400 mb-6 "  > حذف الموظف  </div> </a>
+                                        <a class="delete-user" data-id="{{$level->id}}" data-emp_id="{{$emp->id}}" data-project="{{$data->id}}">     <div class="fw-bold delete-btn text-danger text-danger-400 mb-6 "  > حذف الموظف  </div> </a>
                                 @endif
                                 <!--end::Position-->
                                 </div>

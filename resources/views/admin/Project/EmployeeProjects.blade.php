@@ -260,6 +260,7 @@
                                                         <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
                                                             <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-2.jpg')}}" />
                                                         </div>
+
                                                     @endif
                                                 @endforeach
                                             @else

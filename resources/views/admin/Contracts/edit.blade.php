@@ -1396,35 +1396,58 @@
                                     <input type="hidden" name="id" value="{{$data->id}}">
 
                                 </div>
-                                <div class="d-flex flex-column fv-row mb-7 " id="questions" style="display: none">
-                                    <div class="row">
-                                        <!--begin::Label-->
-                                        <label> الدفعات</label>
-                                        <br>
-                                        <div class="col-3">
-                                            <button type="button" id="add-question"
-                                                    class="btn btn-light-primary me-3">
-                                                <i class="bi bi-plus-circle-fill fs-2x"></i>
-                                            </button>
+                                    <div class="d-flex flex-column fv-row mb-7 " id="questions" style="display: none">
+                                        <div class="row">
+                                            <!--begin::Label-->
+                                            <label> الدفعات</label>
+                                            <br>
+                                            <div class="col-3">
+                                                <button type="button" id="add-question"
+                                                        class="btn btn-light-primary me-3">
+                                                    <i class="bi bi-plus-circle-fill fs-2x"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    @php
-                                            $incomes = \App\Models\Installments::where('project_id',$data->id)->get();
-                                        @endphp
-                                        @if($incomes->count() > 0)
-                                            @foreach($incomes as $key => $income)
+                                        @php
+                                                $incomes = \App\Models\Installments::where('project_id',$data->id)->get();
+                                            @endphp
+                                            @if($incomes->count() > 0)
+                                                @foreach($incomes as $key => $income)
+                                                    <div class="row">
+                                                        <div class="col-1">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <input value="{{$income->amount}}" type="number"
+                                                                   name="values[]"
+                                                                   class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                                   placeholder="" required/>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <input value="{{$income->installment_date}}" type="date"
+                                                                   name="dates[]"
+                                                                   class="dates form-control col-6 form-control-solid mb-3 mb-lg-0"
+                                                                   placeholder="" required/>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <button type="button"
+                                                                    class="btn btn-light-danger me-3 delete_question">
+                                                                <i class="bi bi-trash-fill fs-2x fs-2x"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @else
                                                 <div class="row">
                                                     <div class="col-1">
                                                     </div>
                                                     <div class="col-3">
-                                                        <input value="{{$income->amount}}" type="number"
-                                                               name="values[]"
+                                                        <input type="number" value="0" name="values[]"
                                                                class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
                                                                placeholder="" required/>
                                                     </div>
                                                     <div class="col-5">
-                                                        <input value="{{$income->installment_date}}" type="date"
+                                                        <input value="" type="date"
                                                                name="dates[]"
                                                                class="dates form-control col-6 form-control-solid mb-3 mb-lg-0"
                                                                placeholder="" required/>
@@ -1436,32 +1459,9 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                            @endforeach
-                                        @else
-                                            <div class="row">
-                                                <div class="col-1">
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="number" value="0" name="values[]"
-                                                           class="values form-control col-6 form-control-solid mb-3 mb-lg-0"
-                                                           placeholder="" required/>
-                                                </div>
-                                                <div class="col-5">
-                                                    <input value="" type="date"
-                                                           name="dates[]"
-                                                           class="dates form-control col-6 form-control-solid mb-3 mb-lg-0"
-                                                           placeholder="" required/>
-                                                </div>
-                                                <div class="col-3">
-                                                    <button type="button"
-                                                            class="btn btn-light-danger me-3 delete_question">
-                                                        <i class="bi bi-trash-fill fs-2x fs-2x"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    <!--end::Input-->
-                                </div>
+                                            @endif
+                                        <!--end::Input-->
+                                    </div>
 
                                 <!--end::Input group-->
                                 <!--begin::Actions-->

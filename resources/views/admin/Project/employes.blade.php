@@ -8,6 +8,15 @@
 @endsection
 
 @section('style')
+
+    <style>
+        .delete-btn:hover {
+            text-decoration: underline;
+            text-decoration-color: red;
+            cursor: pointer;
+        }
+
+    </style>
 @endsection
 
 @section('breadcrumb')
@@ -137,12 +146,15 @@
                                             @if(isset($emp->image))
                                                 <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
                                                     <img alt="Pic" src="{{$emp-image}}" />
+
                                                 </div>
                                             @else
                                                 <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{$emp->name}}">
                                                     <img alt="Pic" src="{{ URL::asset('admin/assets/media/avatars/150-2.jpg')}}" />
+
                                                 </div>
                                             @endif
+
                                         @endforeach
                                     @else
                                         <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="">
@@ -232,7 +244,16 @@
                             <!--end::Avatar-->
                             <!--begin::Name-->
                             <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">{{$emp->name}}</a>
-                            <!--end::Name-->
+
+                            <br>
+                            @if(Auth::user()->jop_type != 1 )
+                                <a class="delete-user"  data-emp_id="{{$emp->id}}" data-project="{{$data->id}}">     <div class="fw-bold delete-btn text-danger text-danger-400 mb-6 "  > حذف الموظف  </div> </a>
+                            @elseif(\App\Models\UserPermission::where('emp_id',Auth::user()->id)->where('user_type',1)->where('project_id',$data->id)->first())
+                                <a class="delete-user"  data-emp_id="{{$emp->id}}" data-project="{{$data->id}}">     <div class="fw-bold delete-btn text-danger text-danger-400 mb-6 "  > حذف الموظف  </div> </a>
+
+                        @endif
+
+                        <!--end::Name-->
                             <!--begin::Position-->
 {{--                            <div class="fw-bold text-gray-400 mb-6">مبرمج مواقع</div>--}}
                             <!--end::Position-->
@@ -359,5 +380,62 @@
         </script>
 
     @endif
+<script>
+    $(".delete-user").on("click", function () {
+        var level_id =$(this).data('id')
+        var project_id =$(this).data('project')
+        var emp_id =$(this).data('emp_id')
+        if (emp_id) {
+            Swal.fire({
+                title: "هل انت متاكد من حذف الموظف",
+                text: "",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#f64e60",
+                confirmButtonText: "نعم",
+                cancelButtonText: "لا",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }).then(function (result) {
+                if (result.value) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        url: '{{url("remove_assign_user")}}',
+                        type: "get",
+                        data: {'project_id':project_id,'emp_id':emp_id},
+                        dataType: "JSON",
+                        success: function (data) {
+                            if (data.message == "Success") {
+                                Swal.fire("نجح", "تم الغاء ", "success");
+
+                                setTimeout(reload, 1000)
+                                function reload() {
+                                    location.reload();
+                                }
+                            } else {
+                                Swal.fire("عفوا! ", "حدث خطأ", "error");
+                                $('#kt_modal_confirmProject').modal('hide');
+
+                            }
+                        },
+                        fail: function (xhrerrorThrown) {
+                            Swal.fire("عفوا! ", "حدث خطأ", "error");
+                            $('#kt_modal_confirmProject').modal('hide');
+
+                        }
+                    });
+                    // result.dismiss can be 'cancel', 'overlay',
+                    // 'close', and 'timer'
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire("عفوا!", "تم الغاء العملية", "error");
+                    $('#kt_modal_confirmProject').modal('hide');
+
+
+                }
+            });
+        }
+    });
+
+</script>
 @endsection
 
