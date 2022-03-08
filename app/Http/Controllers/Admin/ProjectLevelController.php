@@ -64,7 +64,10 @@ class ProjectLevelController extends Controller
         $data = ProjectLevelDetails::find($request->id);
         $data->state = 0;
         $data->date = null;
+        $data->pdf=null;
+        $data->img=null;
         $data->save();
+
 
         $projectLevel = ProjectLevels::find($data->level_id);
         $projectLevel->progress=$projectLevel->progress - $data->percent;
@@ -331,8 +334,9 @@ class ProjectLevelController extends Controller
         $token = User::whereIn('id',$ids)->pluck('token_id')->ToArray();
 
         $project = Project::find($level->project_id);
+        if($data->type == 0){
         array_push($token, $project->client->token_id );
-
+        }
         if($data->file == null){
             $dataNotifaction = array('id'=> $data->id , 'sender_id' => $data->sender_id ,'sender_name'=> $data->sender_name , 'type' => $data->type , 'message' => $data->message , 'project_name' => $level->project->name ,'project_id' => $data->project_id ,'level_id'=> $data->level_id , 'level_name' => $level->title , 'file'=> '' , 'created_at'=> $data->created_at);
         }else{

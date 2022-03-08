@@ -63,7 +63,7 @@
                                 <!--begin::Input-->
                                 <input type="text" name="name"
                                        class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="الاسم" value="{{old('name')}}" required/>
+                                       placeholder="الاسم" value="" required/>
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->  <!--begin::Input group-->
@@ -74,8 +74,8 @@
                                 <!--begin::Input-->
                                 <input type="email" name="email"
                                        class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="البريد الالكتروني" value="{{old('email')}}"
-                                       />
+                                       placeholder="البريد الالكتروني" value=""
+                                />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -86,30 +86,30 @@
                                 <!--begin::Input-->
                                 <input type="tel" name="phone"
                                        class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="رقم الجوال" value="{{old('phone')}}" required/>
+                                       placeholder="966+++++++++" value="" required/>
                                 <!--end::Input-->
                             </div>
-{{--                            <div class="fv-row mb-7">--}}
-{{--                                <!--begin::Label-->--}}
-{{--                                <label class="required fw-bold fs-6 mb-2">كلمة المرور</label>--}}
-{{--                                <!--end::Label-->--}}
-{{--                                <!--begin::Input-->--}}
-{{--                                <input type="password" name="password"--}}
-{{--                                       class="form-control form-control-solid mb-3 mb-lg-0"--}}
-{{--                                       placeholder="كلمة المرور" value="" required/>--}}
-{{--                                <!--end::Input-->--}}
-{{--                            </div>--}}
-{{--                            <div class="fv-row mb-7">--}}
-{{--                                <!--begin::Label-->--}}
-{{--                                <label class="required fw-bold fs-6 mb-2">تأكيد كلمة المرور</label>--}}
-{{--                                <!--end::Label-->--}}
-{{--                                <!--begin::Input-->--}}
-{{--                                <input type="password" name="password_confirmation"--}}
-{{--                                       class="form-control form-control-solid mb-3 mb-lg-0"--}}
-{{--                                       placeholder="تأكيد كلمة المرور" value="" required/>--}}
-{{--                                <!--end::Input-->--}}
-{{--                            </div>--}}
-                            <!--end::Input group-->
+                        {{--                            <div class="fv-row mb-7">--}}
+                        {{--                                <!--begin::Label-->--}}
+                        {{--                                <label class="required fw-bold fs-6 mb-2">كلمة المرور</label>--}}
+                        {{--                                <!--end::Label-->--}}
+                        {{--                                <!--begin::Input-->--}}
+                        {{--                                <input type="password" name="password"--}}
+                        {{--                                       class="form-control form-control-solid mb-3 mb-lg-0"--}}
+                        {{--                                       placeholder="كلمة المرور" value="" required/>--}}
+                        {{--                                <!--end::Input-->--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="fv-row mb-7">--}}
+                        {{--                                <!--begin::Label-->--}}
+                        {{--                                <label class="required fw-bold fs-6 mb-2">تأكيد كلمة المرور</label>--}}
+                        {{--                                <!--end::Label-->--}}
+                        {{--                                <!--begin::Input-->--}}
+                        {{--                                <input type="password" name="password_confirmation"--}}
+                        {{--                                       class="form-control form-control-solid mb-3 mb-lg-0"--}}
+                        {{--                                       placeholder="تأكيد كلمة المرور" value="" required/>--}}
+                        {{--                                <!--end::Input-->--}}
+                        {{--                            </div>--}}
+                        <!--end::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
                                 <label class="required fw-bold fs-6 mb-2">العنوان</label>
@@ -136,15 +136,15 @@
                             </div>
                             <!--end::Input group-->
 
-                            <div class="fv-row mb-7">
-                                <label for="exampleFormControlInput1"
-                                       class="form-label">الفرع</label>
-                                <select class="form-control form-control-solid mb-3 mb-lg-0"
-                                        name="branche" aria-label="" required id="branche">
-                                    <option value="">اختر الفرع</option>
+                            <!--<div class="fv-row mb-7">-->
+                            <!--    <label for="exampleFormControlInput1"-->
+                            <!--           class="form-label">الفرع</label>-->
+                            <!--    <select class="form-control form-control-solid mb-3 mb-lg-0"-->
+                            <!--            name="branche" aria-label="" required id="branche">-->
+                            <!--        <option value="">اختر الفرع</option>-->
 
-                                </select>
-                            </div>
+                            <!--    </select>-->
+                            <!--</div>-->
                             <!--end::Input group-->
                             <div class="fv-row mb-7">
                                 <div

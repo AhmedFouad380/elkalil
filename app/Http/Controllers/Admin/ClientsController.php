@@ -65,6 +65,10 @@ class ClientsController extends Controller
             ->editColumn('branche', function ($row) {
                 return $row->getbranche->title;
             })
+            ->editColumn('state', function ($row) {
+                return $row->getstate->title;
+            })
+
             ->addColumn('actions', function ($row) {
                 $actions = ' <a href="' . url("client-edit/" . $row->id) . '" class="btn btn-active-light-info"><i class="bi bi-pencil-fill"></i> تعديل </a>';
                 return $actions;
@@ -87,8 +91,8 @@ class ClientsController extends Controller
         $data = $this->validate(request(), [
             'name' => 'required|string',
             'email' => 'nullable|email|unique:clients',
-            'phone' => 'required|unique:clients',
-            'branche' => 'required|exists:branche,id',
+            'phone' => 'required|unique:clients|digits:12',
+            // 'branche' => 'required|exists:branche,id',
             'state' => 'required|exists:state,id',
             'address' => 'required|string',
             'is_active' => 'nullable|string',
@@ -146,8 +150,8 @@ class ClientsController extends Controller
             'id' => 'required|exists:clients,id',
             'email' => 'nullable|email|unique:clients,email,' . $request->id,
             'password' => 'nullable|confirmed',
-            'phone' => 'required|unique:clients,phone,' . $request->id,
-            'branche' => 'required|exists:branche,id',
+            'phone' => 'required||digits:12|unique:clients,phone,' . $request->id,
+            // 'branche' => 'required|exists:branche,id',
             'state' => 'required|exists:state,id',
             'address' => 'required|string',
             'is_active' => 'nullable|string',
