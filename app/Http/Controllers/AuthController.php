@@ -12,10 +12,36 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+
+    public function registerEmployee(Request $request){
+        $data = $this->validate(request(), [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+            'phone' => 'required|unique:users|digits:12',
+            'state' => 'required|exists:state,id',
+            'address' => 'required|string',
+            'is_active' => 'nullable|string',
+
+        ]);
+
+        $data['is_active'] = 0;
+        $data['date'] = date("Y-m-d H:i:s");
+        $data['password'] = sha1($request->password);
+        $data['ref_code'] = rand(1111, 9999);
+        $data['firebase_type'] = 0;
+        $data['token_id'] = " ";
+        $data['msg'] = " ";
+
+
+        $user = User::create($data);
+
+        return back()->with('message','success');
+    }
     public function Login(Request $request)
     {
 
-        if ($user = User::where('phone', $request->phone)->where('password', sha1($request->password))->first()) {
+        if ($user = User::where('phone', $request->phone)->where('password', sha1($request->password))->where('is_active',1)->first()) {
             Auth::login($user);
             return redirect('/');
         } else {

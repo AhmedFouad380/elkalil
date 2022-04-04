@@ -35,6 +35,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
+Route::get('/register', function () {
+    return view('auth/register');
+})->name('register');
+
 Route::post('login', [AuthController::class, 'login']);
 
 Route::get('/forget-password', function () {
@@ -243,7 +247,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('getMoney', [PageController::class, 'getMoney']);
 
 
-    
+
 
 
     Route::get('/table', function () {
@@ -350,6 +354,10 @@ Route::group(['middleware' => ['admin']], function () {
 
 
 });
+Route::get('/register', function () {
+    return view('auth/register');
+})->name('register');
+Route::post('registerEmployee', [AuthController::class, 'registerEmployee']);
 
 Route::post('login', [AuthController::class, 'login']);
 Route::get('success_msg', [PageController::class, 'success_msg']);

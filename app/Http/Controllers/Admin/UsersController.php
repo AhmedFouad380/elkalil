@@ -43,7 +43,7 @@ class UsersController extends Controller
 
     public function datatable(Request $request)
     {
-        $data = User::orderBy('id', 'asc');
+        $data = User::orderBy('id', 'desc');
         if ($request->has('users_group') && $request->users_group != null && !empty($request->users_group)) {
             $data = $data->where('users_group', $request->users_group);
         }
@@ -82,8 +82,11 @@ class UsersController extends Controller
                     return '<div class="badge badge-light-success fw-bolder">مشروع محدد</div>';
                 } elseif ($row->jop_type == 2) {
                     return '<div class="badge badge-light-info fw-bolder"> فرع محدد</div>';
-                } else {
+                } else if($row->jop_type == 3){
                     return '<div class="badge badge-light-danger fw-bolder">كل الفروع</div>';
+
+                }else{
+                    return '<div class="badge badge-light-danger fw-bolder">لم يتم تحديد الصلاحية بعد</div>';
 
                 }
             })
